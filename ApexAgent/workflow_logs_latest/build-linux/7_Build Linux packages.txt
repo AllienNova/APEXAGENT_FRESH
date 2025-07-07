@@ -1,0 +1,56 @@
+2025-06-08T01:51:26.7632227Z ##[group]Run npm run build:linux
+2025-06-08T01:51:26.7632545Z [36;1mnpm run build:linux[0m
+2025-06-08T01:51:26.7683551Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:51:26.7683796Z env:
+2025-06-08T01:51:26.7683967Z   NODE_VERSION: 18
+2025-06-08T01:51:26.7684168Z   PYTHON_VERSION: 3.11
+2025-06-08T01:51:26.7684444Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:51:26.7684865Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:51:26.7685281Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:51:26.7685641Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:51:26.7685995Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:51:26.7686351Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:51:26.7686834Z   GH_TOKEN: ***
+2025-06-08T01:51:26.7687027Z ##[endgroup]
+2025-06-08T01:51:26.9068107Z 
+2025-06-08T01:51:26.9069064Z > aideon-ai-lite@1.0.0 build:linux
+2025-06-08T01:51:26.9069742Z > npm run package:linux
+2025-06-08T01:51:26.9069985Z 
+2025-06-08T01:51:27.0503654Z 
+2025-06-08T01:51:27.0506043Z > aideon-ai-lite@1.0.0 package:linux
+2025-06-08T01:51:27.0511538Z > electron-builder --linux
+2025-06-08T01:51:27.0511843Z 
+2025-06-08T01:51:27.6583766Z   • electron-builder  version=24.13.3 os=6.11.0-1014-azure
+2025-06-08T01:51:27.6589603Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T01:51:27.6593251Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:51:27.6595610Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:51:27.6646155Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T01:51:27.8775295Z   • packaging       platform=linux arch=x64 electron=28.3.3 appOutDir=dist/linux-unpacked
+2025-06-08T01:51:28.0708126Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-x64.zip size=102 MB parts=4
+2025-06-08T01:51:28.4955633Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-x64.zip duration=612ms
+2025-06-08T01:51:33.3233102Z   • building        target=AppImage arch=x64 file=dist/Aideon AI Lite-1.0.0.AppImage
+2025-06-08T01:51:33.6689654Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/appimage-12.0.1/appimage-12.0.1.7z size=1.6 MB parts=1
+2025-06-08T01:51:33.7961166Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/appimage-12.0.1/appimage-12.0.1.7z duration=407ms
+2025-06-08T01:51:48.4759406Z   • building        target=deb arch=x64 file=dist/aideon-ai-lite_1.0.0_amd64.deb
+2025-06-08T01:51:48.4785800Z   • adding autoupdate files for: deb. (Beta feature)  resourceDir=/home/runner/work/ApexAgent/ApexAgent/dist/linux-unpacked/resources
+2025-06-08T01:51:48.5245087Z   ⨯ Please specify author 'email' in the application package.json
+2025-06-08T01:51:48.5245900Z 
+2025-06-08T01:51:48.5246690Z See https://docs.npmjs.com/files/package.json#people-fields-author-contributors
+2025-06-08T01:51:48.5247828Z 
+2025-06-08T01:51:48.5248791Z It is required to set Linux .deb package maintainer. Or you can set maintainer in the custom linux options.
+2025-06-08T01:51:48.5251165Z (see https://www.electron.build/configuration/linux).
+2025-06-08T01:51:48.5252169Z   failedTask=build stackTrace=Error: Please specify author 'email' in the application package.json
+2025-06-08T01:51:48.5253740Z                                                                                                                                                                                                                                                                                                                           See https://docs.npmjs.com/files/package.json#people-fields-author-contributors
+2025-06-08T01:51:48.5255716Z                                                                                                                                                                                                                                                                                                                           It is required to set Linux .deb package maintainer. Or you can set maintainer in the custom linux options.
+2025-06-08T01:51:48.5256768Z (see https://www.electron.build/configuration/linux).
+2025-06-08T01:51:48.5258454Z                                                                                                                                                                                                                                                                                                                               at FpmTarget.computeFpmMetaInfoOptions (/home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/targets/FpmTarget.ts:94:13)
+2025-06-08T01:51:48.5260349Z     at FpmTarget.build (/home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/targets/FpmTarget.ts:165:25)
+2025-06-08T01:51:48.5261687Z     at /home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/platformPackager.ts:158:11
+2025-06-08T01:51:48.5262514Z     at async Promise.all (index 0)
+2025-06-08T01:51:48.5263549Z     at AsyncTaskManager.awaitTasks (/home/runner/work/ApexAgent/ApexAgent/node_modules/builder-util/src/asyncTaskManager.ts:65:25)
+2025-06-08T01:51:48.5264966Z     at Packager.doBuild (/home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/packager.ts:461:5)
+2025-06-08T01:51:48.5266213Z     at executeFinally (/home/runner/work/ApexAgent/ApexAgent/node_modules/builder-util/src/promise.ts:12:14)
+2025-06-08T01:51:48.5267498Z     at Packager._build (/home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/packager.ts:379:31)
+2025-06-08T01:51:48.5291545Z     at Packager.build (/home/runner/work/ApexAgent/ApexAgent/node_modules/app-builder-lib/src/packager.ts:340:12)
+2025-06-08T01:51:48.5292980Z     at executeFinally (/home/runner/work/ApexAgent/ApexAgent/node_modules/builder-util/src/promise.ts:12:14)
+2025-06-08T01:51:48.5495495Z ##[error]Process completed with exit code 1.

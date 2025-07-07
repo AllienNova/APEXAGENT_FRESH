@@ -1,0 +1,24 @@
+2025-06-08T01:50:00.2183330Z ##[group]Run npm install dmg-license --save-dev
+2025-06-08T01:50:00.2183760Z [36;1mnpm install dmg-license --save-dev[0m
+2025-06-08T01:50:00.2279020Z shell: /bin/bash -e {0}
+2025-06-08T01:50:00.2279390Z env:
+2025-06-08T01:50:00.2279620Z   NODE_VERSION: 18
+2025-06-08T01:50:00.2279810Z   PYTHON_VERSION: 3.11
+2025-06-08T01:50:00.2280150Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2280820Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:50:00.2281310Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2281750Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2282130Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2282420Z ##[endgroup]
+2025-06-08T01:50:01.0245380Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T01:50:01.0347300Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T01:50:01.0447720Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T01:50:01.0502310Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T01:50:01.0503190Z npm warn EBADENGINE }
+2025-06-08T01:50:01.1980420Z 
+2025-06-08T01:50:01.1980860Z up to date, audited 769 packages in 835ms
+2025-06-08T01:50:01.1981170Z 
+2025-06-08T01:50:01.1981420Z 90 packages are looking for funding
+2025-06-08T01:50:01.1981780Z   run `npm fund` for details
+2025-06-08T01:50:01.1987210Z 
+2025-06-08T01:50:01.1987370Z found 0 vulnerabilities

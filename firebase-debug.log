@@ -1,0 +1,9 @@
+[debug] [2025-06-09T16:44:44.595Z] ----------------------------------------------------------------------
+[debug] [2025-06-09T16:44:44.598Z] Command:       /home/ubuntu/.nvm/versions/node/v22.13.0/bin/node /home/ubuntu/.nvm/versions/node/v22.13.0/bin/firebase login --no-localhost
+[debug] [2025-06-09T16:44:44.598Z] CLI Version:   14.6.0
+[debug] [2025-06-09T16:44:44.598Z] Platform:      linux
+[debug] [2025-06-09T16:44:44.598Z] Node Version:  v22.13.0
+[debug] [2025-06-09T16:44:44.599Z] Time:          Mon Jun 09 2025 12:44:44 GMT-0400 (Eastern Daylight Time)
+[debug] [2025-06-09T16:44:44.599Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase CLI integrates with Gemini in Firebase API to provide assistant features. Learn more about using Gemini in Firebase and how we train our models: https://firebase.google.com/docs/gemini-in-firebase/set-up-gemini#required-permissions 

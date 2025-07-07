@@ -1,0 +1,26 @@
+2025-06-08T01:54:20.7545020Z ##[group]Run actions/setup-node@v4
+2025-06-08T01:54:20.7545220Z with:
+2025-06-08T01:54:20.7545360Z   node-version: 18
+2025-06-08T01:54:20.7545490Z   cache: npm
+2025-06-08T01:54:20.7545610Z   always-auth: false
+2025-06-08T01:54:20.7545760Z   check-latest: false
+2025-06-08T01:54:20.7546090Z   token: ***
+2025-06-08T01:54:20.7546220Z env:
+2025-06-08T01:54:20.7546330Z   NODE_VERSION: 18
+2025-06-08T01:54:20.7546470Z   PYTHON_VERSION: 3.11
+2025-06-08T01:54:20.7546620Z ##[endgroup]
+2025-06-08T01:54:20.8970120Z Found in cache @ /Users/runner/hostedtoolcache/node/18.20.8/arm64
+2025-06-08T01:54:20.8973270Z ##[group]Environment details
+2025-06-08T01:54:21.3082740Z node: v18.20.8
+2025-06-08T01:54:21.3236230Z npm: 10.8.2
+2025-06-08T01:54:21.3337000Z yarn: 1.22.22
+2025-06-08T01:54:21.3438480Z ##[endgroup]
+2025-06-08T01:54:21.3538280Z [command]/Users/runner/hostedtoolcache/node/18.20.8/arm64/bin/npm config get cache
+2025-06-08T01:54:21.4652230Z /Users/runner/.npm
+2025-06-08T01:54:21.7003870Z Cache hit for: node-cache-macOS-arm64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621
+2025-06-08T01:54:22.8710190Z Received 67568335 of 75956943 (89.0%), 64.4 MBs/sec
+2025-06-08T01:54:22.9843480Z Received 75956943 of 75956943 (100.0%), 65.0 MBs/sec
+2025-06-08T01:54:22.9849840Z Cache Size: ~72 MB (75956943 B)
+2025-06-08T01:54:22.9900840Z [command]/opt/homebrew/bin/gtar -xf /Users/runner/work/_temp/14997a7a-52d5-4420-aa97-df266b5c673a/cache.tzst -P -C /Users/runner/work/ApexAgent/ApexAgent --delay-directory-restore --use-compress-program unzstd
+2025-06-08T01:54:23.2801090Z Cache restored successfully
+2025-06-08T01:54:23.2813770Z Cache restored from key: node-cache-macOS-arm64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621

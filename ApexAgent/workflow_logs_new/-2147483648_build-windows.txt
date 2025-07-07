@@ -1,0 +1,8 @@
+2025-06-08T01:45:30.3507433Z ##[section]Starting: Prepare job build-windows
+2025-06-08T01:45:30.3509766Z Evaluating strategy
+2025-06-08T01:45:30.3514164Z Creating job '__default'
+2025-06-08T01:45:30.3516723Z Evaluating timeout
+2025-06-08T01:45:30.3516792Z Evaluating cancel timeout
+2025-06-08T01:45:30.3516819Z Evaluating continue on error
+2025-06-08T01:45:30.3516852Z Evaluating target
+2025-06-08T01:45:30.3518777Z ##[section]Finishing: Prepare job build-windows

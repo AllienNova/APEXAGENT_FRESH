@@ -1,0 +1,4 @@
+2025-06-08T01:57:03.7117342Z Post job cleanup.
+2025-06-08T01:57:03.9573660Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/ApexAgent/ApexAgent --files-from manifest.txt --use-compress-program zstdmt
+2025-06-08T01:57:05.2813500Z Sent 77593575 of 77593575 (100.0%), 74.0 MBs/sec
+2025-06-08T01:57:05.3869155Z Cache saved with the key: node-cache-Linux-x64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621

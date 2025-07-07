@@ -1,0 +1,34 @@
+{
+    "id": "async_demo_plugin",
+    "name": "Asynchronous Demo Plugin",
+    "version": "1.0.0",
+    "description": "A plugin demonstrating asynchronous actions, progress reporting, and cancellation.",
+    "main_module": "async_plugin_main.py",
+    "class_name": "AsyncDemoPlugin",
+    "default_enabled": true,
+    "actions": [
+        {
+            "name": "long_computation",
+            "description": "Simulates a long computation that reports progress and can be cancelled.",
+            "parameters_schema": {
+                "type": "object",
+                "properties": {
+                    "duration_seconds": {
+                        "type": "integer",
+                        "description": "The number of seconds the task should simulate running for.",
+                        "default": 5
+                    },
+                    "steps": {
+                        "type": "integer",
+                        "description": "The number of steps to divide the duration into for progress reporting.",
+                        "default": 5
+                    }
+                }
+            },
+            "returns_schema": {
+                "type": "string",
+                "description": "A message indicating the result of the computation."
+            }
+        }
+    ]
+}

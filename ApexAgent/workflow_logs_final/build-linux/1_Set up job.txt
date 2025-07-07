@@ -1,0 +1,48 @@
+2025-06-08T01:54:15.1027527Z Current runner version: '2.325.0'
+2025-06-08T01:54:15.1053311Z ##[group]Runner Image Provisioner
+2025-06-08T01:54:15.1054331Z Hosted Compute Agent
+2025-06-08T01:54:15.1054921Z Version: 20250508.323
+2025-06-08T01:54:15.1055619Z Commit: 81b259f29879f73b4213d199e42d8c3465dae986
+2025-06-08T01:54:15.1056316Z Build Date: 2025-05-08T19:40:08Z
+2025-06-08T01:54:15.1056911Z ##[endgroup]
+2025-06-08T01:54:15.1057594Z ##[group]Operating System
+2025-06-08T01:54:15.1058202Z Ubuntu
+2025-06-08T01:54:15.1058644Z 24.04.2
+2025-06-08T01:54:15.1059211Z LTS
+2025-06-08T01:54:15.1059705Z ##[endgroup]
+2025-06-08T01:54:15.1060304Z ##[group]Runner Image
+2025-06-08T01:54:15.1060905Z Image: ubuntu-24.04
+2025-06-08T01:54:15.1061415Z Version: 20250511.1.0
+2025-06-08T01:54:15.1062495Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250511.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-06-08T01:54:15.1063890Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250511.1
+2025-06-08T01:54:15.1065526Z ##[endgroup]
+2025-06-08T01:54:15.1066711Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:54:15.1068684Z Contents: read
+2025-06-08T01:54:15.1069324Z Metadata: read
+2025-06-08T01:54:15.1069884Z Packages: read
+2025-06-08T01:54:15.1070481Z ##[endgroup]
+2025-06-08T01:54:15.1073342Z Secret source: Actions
+2025-06-08T01:54:15.1074353Z Prepare workflow directory
+2025-06-08T01:54:15.1451517Z Prepare all required actions
+2025-06-08T01:54:15.1488610Z Getting action download info
+2025-06-08T01:54:15.3678838Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:54:15.3679830Z Version: 4.2.2
+2025-06-08T01:54:15.3680709Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:54:15.3681787Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:54:15.3682471Z ##[endgroup]
+2025-06-08T01:54:15.4598485Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:54:15.4599312Z Version: 4.4.0
+2025-06-08T01:54:15.4600084Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:54:15.4601042Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:54:15.4601746Z ##[endgroup]
+2025-06-08T01:54:15.6220527Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:54:15.6221395Z Version: 4.9.1
+2025-06-08T01:54:15.6222106Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:54:15.6223025Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:54:15.6223711Z ##[endgroup]
+2025-06-08T01:54:16.0061181Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:54:16.0062002Z Version: 4.6.2
+2025-06-08T01:54:16.0062703Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:54:16.0063601Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:54:16.0064672Z ##[endgroup]
+2025-06-08T01:54:16.2149402Z Complete job name: build-linux

@@ -1,0 +1,255 @@
+name: Test Cross-Platform Build Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: 'Test mode (full or quick)'
+        required: true
+        default: 'quick'
+        type: choice
+        options:
+          - quick
+          - full
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  test-windows-build:
+    runs-on: windows-latest
+    if: ${{ github.event.inputs.test_mode == 'full' || github.event.inputs.test_mode == 'quick' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Verify build configuration
+      run: |
+        echo "Verifying Windows build configuration..."
+        if (Test-Path "electron-builder.json") {
+          echo "electron-builder.json exists"
+        } else {
+          echo "electron-builder.json missing"
+          exit 1
+        }
+        if (Test-Path "assets/icons/win/icon.ico") {
+          echo "Windows icon exists"
+        } else {
+          echo "Windows icon missing"
+          exit 1
+        }
+    
+    - name: Test Windows build script
+      if: ${{ github.event.inputs.test_mode == 'quick' }}
+      run: |
+        echo "Testing Windows build script in quick mode..."
+        # Simulate build without actually creating installer
+        npm run build:win -- --dir
+    
+    - name: Full Windows build test
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      run: |
+        echo "Running full Windows build test..."
+        npm run build:win
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CSC_IDENTITY_AUTO_DISCOVERY: false
+    
+    - name: Upload Windows test artifacts
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-test-artifacts
+        path: |
+          dist/*.exe
+          dist/*.nsis.7z
+        retention-days: 7
+
+  test-macos-build:
+    runs-on: macos-latest
+    if: ${{ github.event.inputs.test_mode == 'full' || github.event.inputs.test_mode == 'quick' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install dmg-license (macOS specific)
+      run: npm install dmg-license --save-dev
+    
+    - name: Verify build configuration
+      run: |
+        echo "Verifying macOS build configuration..."
+        if [ -f "electron-builder.yml" ]; then
+          echo "electron-builder.yml exists"
+        else
+          echo "electron-builder.yml missing"
+          exit 1
+        fi
+        if [ -f "assets/icons/mac/icon.icns" ]; then
+          echo "macOS icon exists"
+        else
+          echo "macOS icon missing"
+          exit 1
+        fi
+    
+    - name: Test macOS build script
+      if: ${{ github.event.inputs.test_mode == 'quick' }}
+      run: |
+        echo "Testing macOS build script in quick mode..."
+        # Simulate build without actually creating installer
+        npm run build:mac -- --dir
+    
+    - name: Full macOS build test
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      run: |
+        echo "Running full macOS build test..."
+        npm run build:mac
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CSC_IDENTITY_AUTO_DISCOVERY: false
+    
+    - name: Upload macOS test artifacts
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-test-artifacts
+        path: |
+          dist/*.dmg
+          dist/*.zip
+        retention-days: 7
+
+  test-linux-build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.test_mode == 'full' || github.event.inputs.test_mode == 'quick' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2 libxkbcommon0 libxss1 libasound2
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Verify build configuration
+      run: |
+        echo "Verifying Linux build configuration..."
+        if [ -f "electron-builder.yml" ]; then
+          echo "electron-builder.yml exists"
+        else
+          echo "electron-builder.yml missing"
+          exit 1
+        fi
+        if [ -d "assets/icons/linux" ]; then
+          echo "Linux icons exist"
+        else
+          echo "Linux icons missing"
+          exit 1
+        fi
+    
+    - name: Test Linux build script
+      if: ${{ github.event.inputs.test_mode == 'quick' }}
+      run: |
+        echo "Testing Linux build script in quick mode..."
+        # Simulate build without actually creating installer
+        npm run build:linux -- --dir
+    
+    - name: Full Linux build test
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      run: |
+        echo "Running full Linux build test..."
+        npm run build:linux
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload Linux test artifacts
+      if: ${{ github.event.inputs.test_mode == 'full' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-test-artifacts
+        path: |
+          dist/*.AppImage
+          dist/*.deb
+        retention-days: 7
+
+  test-summary:
+    needs: [test-windows-build, test-macos-build, test-linux-build]
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Generate test summary
+      run: |
+        echo "Cross-Platform Build Workflow Test Summary" > summary.md
+        echo "=========================================" >> summary.md
+        echo "" >> summary.md
+        echo "Test mode: ${{ github.event.inputs.test_mode }}" >> summary.md
+        echo "" >> summary.md
+        echo "## Test Results" >> summary.md
+        echo "" >> summary.md
+        echo "- Windows build: ✅ Successful" >> summary.md
+        echo "- macOS build: ✅ Successful" >> summary.md
+        echo "- Linux build: ✅ Successful" >> summary.md
+        echo "" >> summary.md
+        echo "## Next Steps" >> summary.md
+        echo "" >> summary.md
+        echo "1. Review test artifacts (if full test mode was used)" >> summary.md
+        echo "2. Deploy the main workflow for production use" >> summary.md
+        echo "3. Set up required secrets for code signing" >> summary.md
+        cat summary.md
+    
+    - name: Upload test summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-summary
+        path: summary.md
+        retention-days: 7

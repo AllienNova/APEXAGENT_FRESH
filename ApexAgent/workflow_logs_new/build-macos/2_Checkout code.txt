@@ -1,0 +1,144 @@
+2025-06-08T01:45:38.2318730Z ##[group]Run actions/checkout@v4
+2025-06-08T01:45:38.2319330Z with:
+2025-06-08T01:45:38.2319640Z   fetch-depth: 0
+2025-06-08T01:45:38.2319960Z   repository: AllienNova/ApexAgent
+2025-06-08T01:45:38.2320500Z   token: ***
+2025-06-08T01:45:38.2320790Z   ssh-strict: true
+2025-06-08T01:45:38.2321080Z   ssh-user: git
+2025-06-08T01:45:38.2321380Z   persist-credentials: true
+2025-06-08T01:45:38.2321710Z   clean: true
+2025-06-08T01:45:38.2322010Z   sparse-checkout-cone-mode: true
+2025-06-08T01:45:38.2322360Z   fetch-tags: false
+2025-06-08T01:45:38.2322670Z   show-progress: true
+2025-06-08T01:45:38.2322970Z   lfs: false
+2025-06-08T01:45:38.2323250Z   submodules: false
+2025-06-08T01:45:38.2323560Z   set-safe-directory: true
+2025-06-08T01:45:38.2323990Z env:
+2025-06-08T01:45:38.2324270Z   NODE_VERSION: 18
+2025-06-08T01:45:38.2324560Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:38.2324870Z ##[endgroup]
+2025-06-08T01:45:38.5193670Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:45:38.5231190Z ##[group]Getting Git version info
+2025-06-08T01:45:38.5448260Z Working directory is '/Users/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:38.5748760Z [command]/opt/homebrew/bin/git version
+2025-06-08T01:45:38.6032480Z git version 2.49.0
+2025-06-08T01:45:38.6326470Z ##[endgroup]
+2025-06-08T01:45:38.6329880Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/38d0676b-c933-4101-9ba7-dbb085f232a2/.gitconfig'
+2025-06-08T01:45:38.6330900Z Temporarily overriding HOME='/Users/runner/work/_temp/38d0676b-c933-4101-9ba7-dbb085f232a2' before making global git config changes
+2025-06-08T01:45:38.6331830Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:45:38.6332670Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:38.6333750Z Deleting the contents of '/Users/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:38.6334470Z ##[group]Initializing the repository
+2025-06-08T01:45:38.6334980Z [command]/opt/homebrew/bin/git init /Users/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:38.6481060Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-06-08T01:45:38.6482230Z hint: is subject to change. To configure the initial branch name to use in all
+2025-06-08T01:45:38.6483270Z hint: of your new repositories, which will suppress this warning, call:
+2025-06-08T01:45:38.6483870Z hint:
+2025-06-08T01:45:38.6484350Z hint: 	git config --global init.defaultBranch <name>
+2025-06-08T01:45:38.6484890Z hint:
+2025-06-08T01:45:38.6485380Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-06-08T01:45:38.6486100Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-06-08T01:45:38.6486690Z hint:
+2025-06-08T01:45:38.6487140Z hint: 	git branch -m <name>
+2025-06-08T01:45:38.6488050Z Initialized empty Git repository in /Users/runner/work/ApexAgent/ApexAgent/.git/
+2025-06-08T01:45:38.6489640Z [command]/opt/homebrew/bin/git remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:38.6556910Z ##[endgroup]
+2025-06-08T01:45:38.6557510Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:45:38.6559660Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2025-06-08T01:45:38.6630760Z ##[endgroup]
+2025-06-08T01:45:38.6631320Z ##[group]Setting up auth
+2025-06-08T01:45:38.6635600Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:45:38.6699670Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:45:38.7828320Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:45:38.7867570Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:45:38.8369700Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-06-08T01:45:38.8430030Z ##[endgroup]
+2025-06-08T01:45:38.8430670Z ##[group]Fetching the repository
+2025-06-08T01:45:38.8435780Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6bc44e2bef6c601be80ba6cdc5bd9974091c084e:refs/remotes/pull/1/merge
+2025-06-08T01:45:42.0054460Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:42.0055440Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:45:42.0056380Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:45:42.0057170Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:45:42.0058060Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:45:42.0059510Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:45:42.0061770Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:45:42.0064060Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:45:42.0065890Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:45:42.0068680Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:45:42.0070210Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:45:42.0072530Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:45:42.0074600Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:45:42.0077760Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:45:42.0080710Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:45:42.0084410Z  * [new ref]           6bc44e2bef6c601be80ba6cdc5bd9974091c084e -> pull/1/merge
+2025-06-08T01:45:42.0160300Z ##[endgroup]
+2025-06-08T01:45:42.0160990Z ##[group]Determining the checkout info
+2025-06-08T01:45:42.0161640Z ##[endgroup]
+2025-06-08T01:45:42.0165140Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2025-06-08T01:45:42.0230170Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:45:42.0279590Z ##[group]Checking out the ref
+2025-06-08T01:45:42.0281400Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:45:43.1486840Z Updating files:  43% (10510/24378)
+2025-06-08T01:45:43.1663730Z Updating files:  44% (10727/24378)
+2025-06-08T01:45:43.1888930Z Updating files:  45% (10971/24378)
+2025-06-08T01:45:43.2077710Z Updating files:  46% (11214/24378)
+2025-06-08T01:45:43.2253130Z Updating files:  47% (11458/24378)
+2025-06-08T01:45:43.2441710Z Updating files:  48% (11702/24378)
+2025-06-08T01:45:43.2715010Z Updating files:  49% (11946/24378)
+2025-06-08T01:45:43.3045340Z Updating files:  50% (12189/24378)
+2025-06-08T01:45:43.3321920Z Updating files:  51% (12433/24378)
+2025-06-08T01:45:43.3705420Z Updating files:  52% (12677/24378)
+2025-06-08T01:45:43.3990190Z Updating files:  53% (12921/24378)
+2025-06-08T01:45:43.4271650Z Updating files:  54% (13165/24378)
+2025-06-08T01:45:43.4500610Z Updating files:  55% (13408/24378)
+2025-06-08T01:45:43.4790050Z Updating files:  56% (13652/24378)
+2025-06-08T01:45:43.5090300Z Updating files:  57% (13896/24378)
+2025-06-08T01:45:43.5336740Z Updating files:  58% (14140/24378)
+2025-06-08T01:45:43.5536850Z Updating files:  59% (14384/24378)
+2025-06-08T01:45:43.6214360Z Updating files:  60% (14627/24378)
+2025-06-08T01:45:43.6423640Z Updating files:  61% (14871/24378)
+2025-06-08T01:45:43.6739870Z Updating files:  62% (15115/24378)
+2025-06-08T01:45:43.6936130Z Updating files:  63% (15359/24378)
+2025-06-08T01:45:43.7439710Z Updating files:  64% (15602/24378)
+2025-06-08T01:45:43.7625020Z Updating files:  65% (15846/24378)
+2025-06-08T01:45:43.7791740Z Updating files:  66% (16090/24378)
+2025-06-08T01:45:43.7965950Z Updating files:  67% (16334/24378)
+2025-06-08T01:45:43.8192350Z Updating files:  68% (16578/24378)
+2025-06-08T01:45:43.8511330Z Updating files:  69% (16821/24378)
+2025-06-08T01:45:43.8688750Z Updating files:  70% (17065/24378)
+2025-06-08T01:45:43.8855620Z Updating files:  71% (17309/24378)
+2025-06-08T01:45:43.9030640Z Updating files:  72% (17553/24378)
+2025-06-08T01:45:43.9195690Z Updating files:  73% (17796/24378)
+2025-06-08T01:45:43.9356540Z Updating files:  74% (18040/24378)
+2025-06-08T01:45:43.9852570Z Updating files:  75% (18284/24378)
+2025-06-08T01:45:43.9973710Z Updating files:  76% (18528/24378)
+2025-06-08T01:45:44.0143210Z Updating files:  77% (18772/24378)
+2025-06-08T01:45:44.0335740Z Updating files:  78% (19015/24378)
+2025-06-08T01:45:44.0563130Z Updating files:  79% (19259/24378)
+2025-06-08T01:45:44.0592860Z Updating files:  79% (19489/24378)
+2025-06-08T01:45:44.0786310Z Updating files:  80% (19503/24378)
+2025-06-08T01:45:44.0958170Z Updating files:  81% (19747/24378)
+2025-06-08T01:45:44.1165270Z Updating files:  82% (19990/24378)
+2025-06-08T01:45:44.1414220Z Updating files:  83% (20234/24378)
+2025-06-08T01:45:44.1673870Z Updating files:  84% (20478/24378)
+2025-06-08T01:45:44.1878570Z Updating files:  85% (20722/24378)
+2025-06-08T01:45:44.2150050Z Updating files:  86% (20966/24378)
+2025-06-08T01:45:44.2672470Z Updating files:  87% (21209/24378)
+2025-06-08T01:45:44.3624700Z Updating files:  88% (21453/24378)
+2025-06-08T01:45:44.3810950Z Updating files:  89% (21697/24378)
+2025-06-08T01:45:44.4231080Z Updating files:  90% (21941/24378)
+2025-06-08T01:45:44.4406230Z Updating files:  91% (22184/24378)
+2025-06-08T01:45:44.4897400Z Updating files:  92% (22428/24378)
+2025-06-08T01:45:44.5115500Z Updating files:  93% (22672/24378)
+2025-06-08T01:45:44.5363780Z Updating files:  94% (22916/24378)
+2025-06-08T01:45:44.5696020Z Updating files:  95% (23160/24378)
+2025-06-08T01:45:44.5944480Z Updating files:  96% (23403/24378)
+2025-06-08T01:45:44.6239100Z Updating files:  97% (23647/24378)
+2025-06-08T01:45:44.6541960Z Updating files:  98% (23891/24378)
+2025-06-08T01:45:44.6889990Z Updating files:  99% (24135/24378)
+2025-06-08T01:45:44.6890880Z Updating files: 100% (24378/24378)
+2025-06-08T01:45:44.6891130Z Updating files: 100% (24378/24378), done.
+2025-06-08T01:45:44.7156940Z HEAD is now at 6bc44e2b Merge 81743423c8dbf9d3e86a0d8ef2367c46fd8459ab into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T01:45:44.7173330Z ##[endgroup]
+2025-06-08T01:45:44.7289770Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2025-06-08T01:45:44.7317780Z 6bc44e2bef6c601be80ba6cdc5bd9974091c084e
