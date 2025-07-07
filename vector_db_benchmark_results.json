@@ -1,0 +1,150 @@
+{
+  "insert_performance": {
+    "100": {
+      "elapsed_time": 0.18085360527038574,
+      "insert_rate": 552.9334062790437,
+      "documents_per_second": 552.9334062790437
+    },
+    "1000": {
+      "elapsed_time": 0.16872096061706543,
+      "insert_rate": 5926.945865781505,
+      "documents_per_second": 5926.945865781505
+    },
+    "10000": {
+      "elapsed_time": 0.2671825885772705,
+      "insert_rate": 37427.58857622173,
+      "documents_per_second": 37427.58857622173
+    }
+  },
+  "search_performance": {
+    "10": {
+      "elapsed_time": 0.03179574012756348,
+      "search_rate": 314.50753968551527,
+      "searches_per_second": 314.50753968551527
+    },
+    "100": {
+      "elapsed_time": 0.28545165061950684,
+      "search_rate": 350.32202400292,
+      "searches_per_second": 350.32202400292
+    },
+    "1000": {
+      "elapsed_time": 84.32598924636841,
+      "search_rate": 11.858740216831386,
+      "searches_per_second": 11.858740216831386
+    }
+  },
+  "multi_tenant_isolation": {
+    "isolation_verification": {
+      "tenant_1": {
+        "document_count": 200,
+        "expected_count": 100,
+        "isolation_verified": false
+      },
+      "tenant_2": {
+        "document_count": 200,
+        "expected_count": 100,
+        "isolation_verified": false
+      },
+      "tenant_3": {
+        "document_count": 200,
+        "expected_count": 100,
+        "isolation_verified": false
+      },
+      "tenant_4": {
+        "document_count": 200,
+        "expected_count": 100,
+        "isolation_verified": false
+      },
+      "tenant_5": {
+        "document_count": 200,
+        "expected_count": 100,
+        "isolation_verified": false
+      }
+    },
+    "cross_tenant_search": {
+      "tenant_1_to_tenant_2": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_2_to_tenant_3": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_3_to_tenant_4": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_4_to_tenant_5": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_5_to_tenant_1": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      }
+    }
+  },
+  "concurrent_operations": {
+    "2": {
+      "elapsed_time": 15.239166975021362,
+      "total_searches": 200,
+      "search_rate": 13.124076947763717,
+      "searches_per_second": 13.124076947763717
+    },
+    "4": {
+      "elapsed_time": 42.76515984535217,
+      "total_searches": 400,
+      "search_rate": 9.353408275486032,
+      "searches_per_second": 9.353408275486032
+    },
+    "8": {
+      "elapsed_time": 93.32882285118103,
+      "total_searches": 800,
+      "search_rate": 8.571842819400528,
+      "searches_per_second": 8.571842819400528
+    },
+    "16": {
+      "elapsed_time": 260.6392831802368,
+      "total_searches": 1600,
+      "search_rate": 6.13875230347979,
+      "searches_per_second": 6.13875230347979
+    }
+  },
+  "memory_usage": {
+    "1000": {
+      "initial_memory_bytes": 83202048,
+      "final_memory_bytes": 140656640,
+      "memory_increase_bytes": 57454592,
+      "memory_per_document_bytes": 57454.592
+    },
+    "10000": {
+      "initial_memory_bytes": 140656640,
+      "final_memory_bytes": 150278144,
+      "memory_increase_bytes": 9621504,
+      "memory_per_document_bytes": 962.1504
+    },
+    "100000": {
+      "initial_memory_bytes": 150278144,
+      "final_memory_bytes": 401588224,
+      "memory_increase_bytes": 251310080,
+      "memory_per_document_bytes": 2513.1008
+    }
+  },
+  "error_recovery": {
+    "retry_mechanism": {
+      "recovery_successful": false,
+      "elapsed_time": 0.016406774520874023
+    },
+    "transaction_integrity": {
+      "integrity_maintained": false,
+      "elapsed_time": 0.03522086143493652
+    }
+  },
+  "system_info": {
+    "cpu_count": 4,
+    "memory_total": 4133236736,
+    "platform": "linux",
+    "python_version": "3.11.0rc1 (main, Aug 12 2022, 10:02:14) [GCC 11.2.0]",
+    "timestamp": "2025-05-26T16:29:15.760376"
+  }
+}

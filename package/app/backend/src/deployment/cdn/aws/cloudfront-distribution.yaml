@@ -1,0 +1,342 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ApexAgent CloudFront CDN Distribution'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: production
+    AllowedValues:
+      - development
+      - staging
+      - production
+    Description: Environment name
+    
+  DomainName:
+    Type: String
+    Default: apexagent.example.com
+    Description: Domain name for the CDN distribution
+    
+  CertificateArn:
+    Type: String
+    Description: ARN of the SSL certificate in AWS Certificate Manager
+    
+  S3BucketName:
+    Type: String
+    Description: Name of the S3 bucket containing static assets
+    
+  OriginPath:
+    Type: String
+    Default: ''
+    Description: Optional path to prepend to requests
+    
+  PriceClass:
+    Type: String
+    Default: PriceClass_100
+    AllowedValues:
+      - PriceClass_100
+      - PriceClass_200
+      - PriceClass_All
+    Description: CloudFront price class
+    
+  DefaultTTL:
+    Type: Number
+    Default: 86400
+    Description: Default TTL for cached objects (in seconds)
+    
+  MinimumTTL:
+    Type: Number
+    Default: 0
+    Description: Minimum TTL for cached objects (in seconds)
+    
+  MaximumTTL:
+    Type: Number
+    Default: 31536000
+    Description: Maximum TTL for cached objects (in seconds)
+
+Resources:
+  CloudFrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub 'OAI for ${DomainName}'
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref DomainName
+          - !Sub 'www.${DomainName}'
+        Origins:
+          - DomainName: !Sub '${S3BucketName}.s3.amazonaws.com'
+            Id: S3Origin
+            OriginPath: !Ref OriginPath
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}'
+          - DomainName: !Sub 'api.${DomainName}'
+            Id: APIOrigin
+            CustomOriginConfig:
+              HTTPPort: 80
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols:
+                - TLSv1.2
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          Compress: true
+          DefaultTTL: !Ref DefaultTTL
+          MinTTL: !Ref MinimumTTL
+          MaxTTL: !Ref MaximumTTL
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+            Headers:
+              - Access-Control-Request-Headers
+              - Access-Control-Request-Method
+              - Origin
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+        CacheBehaviors:
+          - PathPattern: '/api/*'
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            CachedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+            DefaultTTL: 0
+            MinTTL: 0
+            MaxTTL: 0
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: all
+              Headers:
+                - Authorization
+                - Host
+                - Accept
+                - Accept-Language
+                - Accept-Encoding
+                - Origin
+                - Referer
+                - User-Agent
+                - Content-Type
+            TargetOriginId: APIOrigin
+            ViewerProtocolPolicy: https-only
+          - PathPattern: '/static/*'
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            CachedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+            DefaultTTL: 604800
+            MinTTL: 86400
+            MaxTTL: 31536000
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+          - PathPattern: '/images/*'
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            CachedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            Compress: true
+            DefaultTTL: 604800
+            MinTTL: 86400
+            MaxTTL: 31536000
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+            ErrorCachingMinTTL: 300
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+            ErrorCachingMinTTL: 300
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: http2
+        IPV6Enabled: true
+        PriceClass: !Ref PriceClass
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          MinimumProtocolVersion: TLSv1.2_2021
+          SslSupportMethod: sni-only
+        Logging:
+          Bucket: !Sub '${S3BucketName}-logs.s3.amazonaws.com'
+          IncludeCookies: false
+          Prefix: !Sub 'cdn-logs/${Environment}/'
+        WebACLId: !If [IsProduction, !Ref WAFWebACL, !Ref 'AWS::NoValue']
+
+  WAFWebACL:
+    Type: AWS::WAFv2::WebACL
+    Condition: IsProduction
+    Properties:
+      Name: !Sub 'ApexAgent-${Environment}-WAF'
+      Scope: CLOUDFRONT
+      DefaultAction:
+        Allow: {}
+      VisibilityConfig:
+        CloudWatchMetricsEnabled: true
+        MetricName: !Sub 'ApexAgent-${Environment}-WAF'
+        SampledRequestsEnabled: true
+      Rules:
+        - Name: AWSManagedRulesCommonRuleSet
+          Priority: 0
+          OverrideAction:
+            None: {}
+          VisibilityConfig:
+            CloudWatchMetricsEnabled: true
+            MetricName: AWSManagedRulesCommonRuleSet
+            SampledRequestsEnabled: true
+          Statement:
+            ManagedRuleGroupStatement:
+              VendorName: AWS
+              Name: AWSManagedRulesCommonRuleSet
+        - Name: RateLimitRule
+          Priority: 1
+          Action:
+            Block: {}
+          VisibilityConfig:
+            CloudWatchMetricsEnabled: true
+            MetricName: RateLimitRule
+            SampledRequestsEnabled: true
+          Statement:
+            RateBasedStatement:
+              Limit: 1000
+              AggregateKeyType: IP
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3BucketName
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource: !Sub 'arn:aws:s3:::${S3BucketName}/*'
+            Principal:
+              CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
+
+  LambdaEdgeFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Role: !GetAtt LambdaEdgeExecutionRole.Arn
+      Runtime: nodejs16.x
+      Code:
+        ZipFile: |
+          'use strict';
+          exports.handler = (event, context, callback) => {
+              const request = event.Records[0].cf.request;
+              const headers = request.headers;
+              
+              // Security headers for viewer response
+              if (event.Records[0].cf.config.eventType === 'viewer-response') {
+                  const response = event.Records[0].cf.response;
+                  response.headers['strict-transport-security'] = [{
+                      key: 'Strict-Transport-Security',
+                      value: 'max-age=31536000; includeSubdomains; preload'
+                  }];
+                  response.headers['x-content-type-options'] = [{
+                      key: 'X-Content-Type-Options',
+                      value: 'nosniff'
+                  }];
+                  response.headers['x-frame-options'] = [{
+                      key: 'X-Frame-Options',
+                      value: 'DENY'
+                  }];
+                  response.headers['x-xss-protection'] = [{
+                      key: 'X-XSS-Protection',
+                      value: '1; mode=block'
+                  }];
+                  response.headers['referrer-policy'] = [{
+                      key: 'Referrer-Policy',
+                      value: 'same-origin'
+                  }];
+                  callback(null, response);
+                  return;
+              }
+              
+              // URL normalization for viewer request
+              if (request.uri.endsWith('/')) {
+                  request.uri += 'index.html';
+              } else if (!request.uri.includes('.')) {
+                  request.uri += '/index.html';
+              }
+              
+              callback(null, request);
+          };
+      Description: Lambda@Edge function for ApexAgent CDN
+      MemorySize: 128
+      Timeout: 5
+      TracingConfig:
+        Mode: Active
+
+  LambdaEdgeExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - edgelambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+Conditions:
+  IsProduction: !Equals [!Ref Environment, 'production']
+
+Outputs:
+  CloudFrontDistributionId:
+    Description: ID of the CloudFront distribution
+    Value: !Ref CloudFrontDistribution
+    
+  CloudFrontDomainName:
+    Description: Domain name of the CloudFront distribution
+    Value: !GetAtt CloudFrontDistribution.DomainName
+    
+  CloudFrontDistributionURL:
+    Description: URL of the CloudFront distribution
+    Value: !Sub 'https://${CloudFrontDistribution.DomainName}'
+    
+  WebsiteURL:
+    Description: URL of the website
+    Value: !Sub 'https://${DomainName}'

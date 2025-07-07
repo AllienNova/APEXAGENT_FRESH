@@ -1,0 +1,224 @@
+<!-- Project Management Interface Wireframe -->
+<div class="project-management-interface">
+  <div class="panel-header border-b border-border p-4 flex items-center justify-between">
+    <h2 class="font-semibold">Project Management</h2>
+    <div class="flex items-center space-x-2">
+      <button class="flex items-center space-x-1 px-3 py-1 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
+        <span class="icon">+</span>
+        <span>New Project</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Import Project">
+        <span class="icon">📥</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Options">
+        <span class="icon">⋮</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="panel-content p-4">
+    <div class="mb-6">
+      <div class="flex items-center space-x-4 mb-4">
+        <div class="relative w-64">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">
+            <span class="icon">🔍</span>
+          </span>
+          <input 
+            type="text" 
+            placeholder="Search projects..." 
+            class="pl-10 pr-4 py-2 w-full rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          />
+        </div>
+        
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-muted-foreground">Sort by:</span>
+          <select class="px-3 py-2 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+            <option>Last Modified</option>
+            <option>Name</option>
+            <option>Size</option>
+            <option>Created Date</option>
+          </select>
+        </div>
+        
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-muted-foreground">View:</span>
+          <button class="p-1 rounded-md bg-primary text-primary-foreground">
+            <span class="icon">📋</span>
+          </button>
+          <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+            <span class="icon">📊</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-muted/50">
+            <tr>
+              <th class="text-left p-3 font-medium">Project Name</th>
+              <th class="text-left p-3 font-medium">Location</th>
+              <th class="text-left p-3 font-medium">Last Modified</th>
+              <th class="text-left p-3 font-medium">Size</th>
+              <th class="text-left p-3 font-medium">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border hover:bg-accent/30">
+              <td class="p-3">
+                <div class="flex items-center">
+                  <span class="icon mr-2">🌐</span>
+                  <span class="font-medium">Website Development</span>
+                </div>
+              </td>
+              <td class="p-3 text-muted-foreground">/home/user/projects/website_dev</td>
+              <td class="p-3 text-muted-foreground">Today, 10:45 AM</td>
+              <td class="p-3 text-muted-foreground">4.2 MB</td>
+              <td class="p-3">
+                <div class="flex space-x-2">
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Open">
+                    <span class="icon">📂</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Export">
+                    <span class="icon">📤</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="More">
+                    <span class="icon">⋮</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            
+            <tr class="border-t border-border hover:bg-accent/30">
+              <td class="p-3">
+                <div class="flex items-center">
+                  <span class="icon mr-2">📊</span>
+                  <span class="font-medium">Data Analysis Project</span>
+                </div>
+              </td>
+              <td class="p-3 text-muted-foreground">/home/user/projects/data_analysis</td>
+              <td class="p-3 text-muted-foreground">Yesterday, 3:22 PM</td>
+              <td class="p-3 text-muted-foreground">18.7 MB</td>
+              <td class="p-3">
+                <div class="flex space-x-2">
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Open">
+                    <span class="icon">📂</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Export">
+                    <span class="icon">📤</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="More">
+                    <span class="icon">⋮</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            
+            <tr class="border-t border-border hover:bg-accent/30">
+              <td class="p-3">
+                <div class="flex items-center">
+                  <span class="icon mr-2">📝</span>
+                  <span class="font-medium">Content Creation</span>
+                </div>
+              </td>
+              <td class="p-3 text-muted-foreground">/home/user/projects/content</td>
+              <td class="p-3 text-muted-foreground">May 18, 2025</td>
+              <td class="p-3 text-muted-foreground">2.3 MB</td>
+              <td class="p-3">
+                <div class="flex space-x-2">
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Open">
+                    <span class="icon">📂</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Export">
+                    <span class="icon">📤</span>
+                  </button>
+                  <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="More">
+                    <span class="icon">⋮</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-semibold">Project Storage Locations</h3>
+        <button class="text-xs text-primary hover:underline">Add Location</button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-card border border-border rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center">
+              <span class="icon mr-2">📂</span>
+              <span class="font-medium">Default Project Location</span>
+            </div>
+            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</span>
+          </div>
+          <div class="text-sm text-muted-foreground mb-3">/home/user/projects</div>
+          <div class="flex items-center justify-between text-xs text-muted-foreground">
+            <span>3 projects • 25.2 MB</span>
+            <span>120 GB free</span>
+          </div>
+        </div>
+        
+        <div class="bg-card border border-border rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center">
+              <span class="icon mr-2">💾</span>
+              <span class="font-medium">External Drive</span>
+            </div>
+            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">Not Connected</span>
+          </div>
+          <div class="text-sm text-muted-foreground mb-3">/media/user/external</div>
+          <div class="flex items-center justify-between text-xs text-muted-foreground">
+            <span>1 project • 1.2 GB</span>
+            <span>Not available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-semibold">Project Backups</h3>
+        <button class="text-xs text-primary hover:underline">Configure Backups</button>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg p-4">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="font-medium">Automatic Local Backups</div>
+            <div class="text-sm text-muted-foreground">Daily backups of all projects</div>
+          </div>
+          <div class="h-6 w-12 bg-primary rounded-full relative">
+            <div class="h-5 w-5 bg-white rounded-full absolute top-0.5 right-0.5"></div>
+          </div>
+        </div>
+        
+        <div class="text-sm mb-3">
+          <div class="flex items-center justify-between mb-1">
+            <span>Backup Location:</span>
+            <span class="font-medium">/home/user/backups</span>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span>Last Backup:</span>
+            <span class="font-medium">Today, 2:00 AM</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Next Backup:</span>
+            <span class="font-medium">Tomorrow, 2:00 AM</span>
+          </div>
+        </div>
+        
+        <div class="flex justify-end">
+          <button class="px-3 py-1 bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm">
+            Backup Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

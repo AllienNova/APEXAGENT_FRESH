@@ -1,0 +1,27 @@
+{
+  "dashboard_name": "Executive KPI Dashboard",
+  "description": "Key Performance Indicators for Executive Overview",
+  "elements": [
+    {
+      "type": "look",
+      "title": "Total Users Over Time",
+      "look_id": "user_activity.total_users_over_time"
+    },
+    {
+      "type": "look",
+      "title": "Model Performance - Average Latency",
+      "look_id": "model_performance.average_latency"
+    },
+    {
+      "type": "look",
+      "title": "Revenue by Model",
+      "look_id": "business_metrics.revenue_by_model"
+    },
+    {
+      "type": "look",
+      "title": "System Uptime",
+      "look_id": "system_metrics.system_uptime"
+    }
+  ]
+}
+

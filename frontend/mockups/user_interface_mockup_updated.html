@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - User Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-indigo-800">
+                <div class="flex items-center h-16 px-4 bg-indigo-900">
+                    <span class="text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <div class="px-4 py-2 bg-indigo-700">
+                        <p class="text-sm text-indigo-200 italic">Intelligence Everywhere, Limits Nowhere</p>
+                    </div>
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-white bg-indigo-700 rounded-md">
+                            <i class="fas fa-comment-dots mr-3"></i>
+                            Chat
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-folder-open mr-3"></i>
+                            Projects
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-file-alt mr-3"></i>
+                            Documents
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-robot mr-3"></i>
+                            Dr. TARDIS
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </nav>
+                    <div class="px-2 py-4 space-y-2">
+                        <div class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100">
+                            <i class="fas fa-user-circle mr-3"></i>
+                            <span>John Doe</span>
+                        </div>
+                        <div class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100">
+                            <i class="fas fa-credit-card mr-3"></i>
+                            <span>Pro Plan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-white shadow">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <button class="md:hidden px-4 text-gray-500 focus:outline-none">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <h1 class="text-xl font-semibold text-gray-900">Chat</h1>
+                            <span class="ml-4 text-sm text-gray-500 italic">Intelligence Everywhere, Limits Nowhere</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                            <div class="relative">
+                                <button class="flex items-center text-sm font-medium text-gray-700 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Horizontal tabs -->
+                    <div class="mt-2 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8">
+                            <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Chat
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Artifacts
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                LLM Orchestration
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Project Files
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Agent Monitoring
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div class="flex flex-col h-full">
+                    <!-- Chat history -->
+                    <div class="flex-1 overflow-y-auto mb-4 space-y-4">
+                        <!-- System message -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                <i class="fas fa-robot text-indigo-600"></i>
+                            </div>
+                            <div class="ml-3 bg-white p-4 rounded-lg shadow-sm max-w-3xl">
+                                <p class="text-gray-800">
+                                    Hello! I'm Aideon AI Lite, your intelligent assistant. How can I help you today?
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- User message -->
+                        <div class="flex items-start justify-end">
+                            <div class="mr-3 bg-indigo-600 p-4 rounded-lg shadow-sm max-w-3xl">
+                                <p class="text-white">
+                                    I need to create a comprehensive analysis of our Q2 sales data. Can you help me with that?
+                                </p>
+                            </div>
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-600"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- System message with thinking -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                <i class="fas fa-robot text-indigo-600"></i>
+                            </div>
+                            <div class="ml-3 space-y-3 max-w-3xl">
+                                <div class="bg-gray-100 p-3 rounded-lg shadow-sm">
+                                    <p class="text-sm text-gray-600 font-medium mb-1">Thinking...</p>
+                                    <p class="text-gray-700 text-sm">
+                                        To create a comprehensive sales analysis for Q2, I'll need to:
+                                        <br>1. Gather the Q2 sales data
+                                        <br>2. Analyze key metrics (revenue, growth, product performance)
+                                        <br>3. Create visualizations to highlight trends
+                                        <br>4. Compare with previous quarters and targets
+                                        <br>5. Generate actionable insights
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <p class="text-gray-800">
+                                        I'd be happy to help you create a comprehensive analysis of your Q2 sales data. To get started, I'll need access to your sales data. You can either:
+                                        <br><br>1. Upload your sales data files (CSV, Excel, etc.)
+                                        <br>2. Connect to your CRM or sales database
+                                        <br>3. Provide me with the location of the files if they're already in your project
+                                        <br><br>Which approach would you prefer?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- User message with file -->
+                        <div class="flex items-start justify-end">
+                            <div class="mr-3 bg-indigo-600 p-4 rounded-lg shadow-sm max-w-3xl">
+                                <p class="text-white mb-2">
+                                    Here's the Q2 sales data export from our CRM.
+                                </p>
+                                <div class="flex items-center bg-indigo-700 p-2 rounded">
+                                    <i class="fas fa-file-excel text-white mr-2"></i>
+                                    <span class="text-white text-sm">Q2_Sales_Data.xlsx</span>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-600"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- System message with progress -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                <i class="fas fa-robot text-indigo-600"></i>
+                            </div>
+                            <div class="ml-3 bg-white p-4 rounded-lg shadow-sm max-w-3xl">
+                                <p class="text-gray-800 mb-3">
+                                    Thanks for providing the data. I'm analyzing the Q2 sales information now. This should take about 2 minutes to complete.
+                                </p>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                                    <div class="bg-indigo-600 h-2.5 rounded-full w-3/4"></div>
+                                </div>
+                                <p class="text-xs text-gray-500">Processing: 75% complete</p>
+                            </div>
+                        </div>
+                        
+                        <!-- System message with results -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                <i class="fas fa-robot text-indigo-600"></i>
+                            </div>
+                            <div class="ml-3 bg-white p-4 rounded-lg shadow-sm max-w-3xl">
+                                <p class="text-gray-800 mb-4">
+                                    I've completed the analysis of your Q2 sales data. Here are the key findings:
+                                </p>
+                                
+                                <div class="mb-4">
+                                    <h3 class="font-medium text-gray-900 mb-2">Q2 Sales Summary</h3>
+                                    <div class="grid grid-cols-2 gap-4 mb-2">
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <p class="text-sm text-gray-500">Total Revenue</p>
+                                            <p class="text-lg font-semibold">$1,245,678</p>
+                                            <p class="text-xs text-green-600">↑ 12.3% vs Q1</p>
+                                        </div>
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <p class="text-sm text-gray-500">Units Sold</p>
+                                            <p class="text-lg font-semibold">8,432</p>
+                                            <p class="text-xs text-green-600">↑ 8.7% vs Q1</p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <p class="text-sm text-gray-500">Avg. Order Value</p>
+                                            <p class="text-lg font-semibold">$147.73</p>
+                                            <p class="text-xs text-green-600">↑ 3.2% vs Q1</p>
+                                        </div>
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <p class="text-sm text-gray-500">New Customers</p>
+                                            <p class="text-lg font-semibold">1,256</p>
+                                            <p class="text-xs text-red-600">↓ 2.1% vs Q1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h3 class="font-medium text-gray-900 mb-2">Top Performing Products</h3>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <div class="h-40 bg-gray-200 rounded flex items-center justify-center mb-2">
+                                            <span class="text-gray-500">Product Performance Chart</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">
+                                            Product A continues to be the top performer, accounting for 35% of total revenue.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h3 class="font-medium text-gray-900 mb-2">Regional Performance</h3>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <div class="h-40 bg-gray-200 rounded flex items-center justify-center mb-2">
+                                            <span class="text-gray-500">Regional Sales Map</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">
+                                            The Western region showed the strongest growth at 18.5%, while the Southern region underperformed with only 2.3% growth.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-medium text-gray-900 mb-2">Key Insights & Recommendations</h3>
+                                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                                        <li>The price increase on Product A did not negatively impact sales volume</li>
+                                        <li>Customer retention has improved, but new customer acquisition is down</li>
+                                        <li>The marketing campaign in the Western region shows strong ROI</li>
+                                        <li>Consider allocating more resources to the Southern region</li>
+                                        <li>Product C is underperforming and may need pricing adjustment</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="mt-4 pt-3 border-t border-gray-200 flex space-x-3">
+                                    <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-sm flex items-center">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Download Full Report
+                                    </button>
+                                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 text-sm flex items-center">
+                                        <i class="fas fa-share-alt mr-1"></i>
+                                        Share
+                                    </button>
+                                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 text-sm flex items-center">
+                                        <i class="fas fa-code mr-1"></i>
+                                        View Code
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Input area -->
+                    <div class="bg-white rounded-lg shadow-sm p-4">
+                        <div class="flex items-center">
+                            <button class="p-2 rounded-full text-gray-500 hover:bg-gray-100">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button class="p-2 rounded-full text-gray-500 hover:bg-gray-100">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <div class="flex-1 mx-2">
+                                <input type="text" placeholder="Type your message..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <button class="p-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between mt-2 px-2">
+                            <div class="text-xs text-gray-500">
+                                <span class="font-medium">GPT-4</span> • <span>Default</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    Change Model
+                                </button>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    Advanced Options
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Right sidebar - Artifacts -->
+        <div class="hidden lg:flex lg:flex-shrink-0">
+            <div class="flex flex-col w-80 border-l border-gray-200 bg-white">
+                <div class="flex items-center justify-between h-16 px-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Artifacts</h2>
+                    <button class="p-1 rounded-full text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex-1 overflow-y-auto p-4">
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-excel text-green-600 mr-2"></i>
+                                    <span class="text-sm font-medium">Q2_Sales_Data.xlsx</span>
+                                </div>
+                                <div class="text-xs text-gray-500">2 min ago</div>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Uploaded by you • 2.4 MB
+                            </div>
+                            <div class="flex mt-2">
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 mr-3">
+                                    Download
+                                </button>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-pdf text-red-600 mr-2"></i>
+                                    <span class="text-sm font-medium">Q2_Sales_Analysis.pdf</span>
+                                </div>
+                                <div class="text-xs text-gray-500">1 min ago</div>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Generated by Aideon • 1.8 MB
+                            </div>
+                            <div class="flex mt-2">
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 mr-3">
+                                    Download
+                                </button>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-code text-indigo-600 mr-2"></i>
+                                    <span class="text-sm font-medium">sales_analysis.py</span>
+                                </div>
+                                <div class="text-xs text-gray-500">1 min ago</div>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Generated by Aideon • 4.2 KB
+                            </div>
+                            <div class="flex mt-2">
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 mr-3">
+                                    Download
+                                </button>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-image text-purple-600 mr-2"></i>
+                                    <span class="text-sm font-medium">regional_performance.png</span>
+                                </div>
+                                <div class="text-xs text-gray-500">1 min ago</div>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Generated by Aideon • 245 KB
+                            </div>
+                            <div class="h-32 bg-gray-200 rounded mt-2 mb-2 flex items-center justify-center">
+                                <span class="text-gray-500 text-xs">Image Preview</span>
+                            </div>
+                            <div class="flex">
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800 mr-3">
+                                    Download
+                                </button>
+                                <button class="text-xs text-indigo-600 hover:text-indigo-800">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Background processing notification -->
+    <div class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg border border-indigo-200 w-80">
+        <div class="p-4">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center">
+                    <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-cog fa-spin text-indigo-600"></i>
+                    </div>
+                    <h3 class="font-medium">Background Processing</h3>
+                </div>
+                <div class="flex">
+                    <button class="p-1 text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="p-1 text-gray-400 hover:text-gray-500 ml-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                Aideon is continuing to work in the background on your sales data analysis.
+            </p>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                <div class="bg-indigo-600 h-2.5 rounded-full w-3/4"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500">
+                <span>Generating visualizations</span>
+                <span>75%</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

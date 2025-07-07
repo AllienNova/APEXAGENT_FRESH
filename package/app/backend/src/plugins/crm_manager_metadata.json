@@ -1,0 +1,68 @@
+{
+  "name": "CrmManager",
+  "version": "0.1.0",
+  "description": "Manages CRM data. Supports Salesforce, Zoho CRM, and Monday.com.",
+  "author": "ApexAgent Team",
+  "entry_point": "crm_manager.CrmManager",
+  "actions": [
+    {
+      "name": "create_lead",
+      "description": "Creates a new lead in the specified CRM service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service (e.g., \"salesforce\", \"zoho\", \"monday\")"},
+        {"name": "lead_data", "type": "object", "required": true, "description": "Object containing lead details (e.g., first_name, last_name, email, company, phone, status)"}
+      ],
+      "returns": {"type": "object", "properties": {"lead_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "get_lead",
+      "description": "Retrieves lead details from the CRM service by ID.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service"},
+        {"name": "lead_id", "type": "string", "required": true, "description": "ID of the lead to retrieve"}
+      ],
+      "returns": {"type": "object", "description": "Lead details object or null if not found"}
+    },
+    {
+      "name": "update_lead",
+      "description": "Updates an existing lead in the CRM service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service"},
+        {"name": "lead_id", "type": "string", "required": true, "description": "ID of the lead to update"},
+        {"name": "update_data", "type": "object", "required": true, "description": "Object containing fields to update"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "search_leads",
+      "description": "Searches for leads based on specified criteria.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service"},
+        {"name": "search_query", "type": "string", "required": true, "description": "Search query or criteria (e.g., email='test@example.com', company='Acme Corp')"},
+        {"name": "max_results", "type": "integer", "required": false, "description": "Maximum number of leads to return"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object"}, "description": "List of lead objects"}
+    },
+    {
+      "name": "create_contact",
+      "description": "Creates a new contact.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service"},
+        {"name": "contact_data", "type": "object", "required": true, "description": "Object containing contact details"}
+      ],
+      "returns": {"type": "object", "properties": {"contact_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "get_contact",
+      "description": "Retrieves contact details by ID.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "CRM service"},
+        {"name": "contact_id", "type": "string", "required": true, "description": "ID of the contact"}
+      ],
+      "returns": {"type": "object", "description": "Contact details object"}
+    }
+  ],
+  "required_api_keys": ["salesforce_api_key", "zoho_crm_api_key", "monday_com_api_key"],
+  "dependencies": []
+}
+
