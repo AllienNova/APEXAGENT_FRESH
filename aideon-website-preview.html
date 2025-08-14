@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Intelligence Everywhere, Limits Nowhere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-5px); }
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .pulse-glow { animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); } 50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); } }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 floating"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 floating" style="animation-delay: -3s;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Trust Indicators -->
+            <div class="flex justify-center gap-4 mb-8">
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full text-sm">
+                    🛡️ Privacy-First
+                </span>
+                <span class="px-3 py-1 bg-green-500/20 text-green-300 border border-green-500/30 rounded-full text-sm">
+                    ✅ Hybrid Processing
+                </span>
+                <span class="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full text-sm">
+                    🧠 Multi-Modal AI
+                </span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                Intelligence Everywhere,
+                <span class="gradient-text">Limits Nowhere</span>
+            </h1>
+            
+            <h2 class="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
+                Aideon AI Lite - The World's First Truly Hybrid Autonomous AI System
+            </h2>
+            
+            <p class="text-xl text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
+                Experience the perfect balance of privacy and power with our revolutionary hybrid AI system 
+                that seamlessly combines local PC processing with cloud intelligence. Complete privacy when you need it, 
+                unlimited power when you want it.
+            </p>
+
+            <!-- Feature Pills -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">Privacy-First Architecture</div>
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">Hybrid Local + Cloud Processing</div>
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">106+ Tool Integrations</div>
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">Computer Vision Capabilities</div>
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">IDE Integrations</div>
+                <div class="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">Multi-Modal Processing</div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 pulse-glow">
+                    📥 Download Now
+                </button>
+                <button class="border border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300">
+                    ▶️ Watch Demo
+                </button>
+            </div>
+
+            <!-- Real Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="p-6 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card">
+                    <div class="text-blue-400 text-4xl mb-3">🔧</div>
+                    <div class="text-2xl font-bold text-white mb-1">106+</div>
+                    <div class="text-sm text-gray-400">Tool Integrations</div>
+                </div>
+                <div class="p-6 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card">
+                    <div class="text-green-400 text-4xl mb-3">🧠</div>
+                    <div class="text-2xl font-bold text-white mb-1">30+</div>
+                    <div class="text-sm text-gray-400">AI Models</div>
+                </div>
+                <div class="p-6 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card">
+                    <div class="text-purple-400 text-4xl mb-3">💻</div>
+                    <div class="text-2xl font-bold text-white mb-1">5+</div>
+                    <div class="text-sm text-gray-400">IDE Support</div>
+                </div>
+                <div class="p-6 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card">
+                    <div class="text-cyan-400 text-4xl mb-3">👁️</div>
+                    <div class="text-2xl font-bold text-white mb-1">4</div>
+                    <div class="text-sm text-gray-400">Vision Features</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Actual Features Section -->
+    <section class="py-24 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full text-sm mb-4 inline-block">
+                    ✅ Core Features
+                </span>
+                
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Powerful Features
+                    <span class="gradient-text">Built for Real Work</span>
+                </h2>
+                
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Every feature in Aideon AI Lite is designed and implemented to solve real-world problems 
+                    with privacy, performance, and reliability at the core.
+                </p>
+            </div>
+
+            <!-- Core Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Complete Privacy -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-green-500/10 hover:border-green-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-green-400 to-emerald-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">🛡️</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Complete Privacy</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Local processing with no cloud dependencies when you need maximum privacy</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-3">✅</span>
+                            <span class="text-sm">Device-based AI models</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-3">✅</span>
+                            <span class="text-sm">No data transmission required</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-3">✅</span>
+                            <span class="text-sm">Offline capability</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-green-400 mr-3">✅</span>
+                            <span class="text-sm">Privacy-first architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hybrid Processing -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-blue-500/10 hover:border-blue-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">⚡</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Hybrid Processing</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Seamless switching between local and cloud processing for optimal performance</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-blue-400 mr-3">✅</span>
+                            <span class="text-sm">Smart processing location selection</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-blue-400 mr-3">✅</span>
+                            <span class="text-sm">Automatic optimization</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-blue-400 mr-3">✅</span>
+                            <span class="text-sm">Consistent user experience</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-blue-400 mr-3">✅</span>
+                            <span class="text-sm">Performance-based routing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bundled Models -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-purple-500/10 hover:border-purple-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-purple-400 to-pink-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">📦</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Bundled Models</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Pre-installed AI models ready for immediate offline use</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-purple-400 mr-3">✅</span>
+                            <span class="text-sm">30+ AI models included</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-purple-400 mr-3">✅</span>
+                            <span class="text-sm">Instant availability</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-purple-400 mr-3">✅</span>
+                            <span class="text-sm">No setup required</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-purple-400 mr-3">✅</span>
+                            <span class="text-sm">Regular model updates</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 106+ Tool Integrations -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-orange-500/10 hover:border-orange-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-orange-400 to-red-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">🔧</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">106+ Tool Integrations</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Cross-domain tool connectivity for comprehensive workflow automation</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-orange-400 mr-3">✅</span>
+                            <span class="text-sm">Software development tools</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-orange-400 mr-3">✅</span>
+                            <span class="text-sm">Business productivity suites</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-orange-400 mr-3">✅</span>
+                            <span class="text-sm">Creative design platforms</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-orange-400 mr-3">✅</span>
+                            <span class="text-sm">Industry-specific integrations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IDE Integrations -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-indigo-500/10 hover:border-indigo-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-indigo-400 to-purple-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">💻</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">IDE Integrations</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Native integration with popular development environments</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-indigo-400 mr-3">✅</span>
+                            <span class="text-sm">VS Code full integration</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-indigo-400 mr-3">✅</span>
+                            <span class="text-sm">JetBrains IDEs support</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-indigo-400 mr-3">✅</span>
+                            <span class="text-sm">Eclipse compatibility</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-indigo-400 mr-3">✅</span>
+                            <span class="text-sm">Sublime Text plugins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Vision -->
+                <div class="p-8 rounded-2xl backdrop-blur-sm border border-white/10 bg-white/5 feature-card hover:bg-cyan-500/10 hover:border-cyan-500/30">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 w-fit mb-6">
+                        <div class="w-8 h-8 text-white">👁️</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Computer Vision</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Advanced image analysis and optical character recognition capabilities</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-cyan-400 mr-3">✅</span>
+                            <span class="text-sm">Image analysis & object detection</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-cyan-400 mr-3">✅</span>
+                            <span class="text-sm">OCR with multi-language support</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-cyan-400 mr-3">✅</span>
+                            <span class="text-sm">Facial recognition features</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <span class="text-cyan-400 mr-3">✅</span>
+                            <span class="text-sm">Real-time camera integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool Integrations Section -->
+            <div class="mb-16">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        106+ Tool Integrations
+                    </h3>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Connect with the tools you already use across six major domains
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Software Development -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-blue-400 mr-3">🔧</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Software Development</h4>
+                                <div class="text-sm text-gray-400">25+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Git</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">GitHub</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">VS Code</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">JetBrains IDEs</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Docker</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Kubernetes</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Science -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-green-400 mr-3">📊</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Data Science</h4>
+                                <div class="text-sm text-gray-400">20+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Jupyter</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Pandas</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">NumPy</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Matplotlib</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Scikit-learn</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">TensorFlow</span>
+                        </div>
+                    </div>
+
+                    <!-- Business & Productivity -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-purple-400 mr-3">💼</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Business & Productivity</h4>
+                                <div class="text-sm text-gray-400">18+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Microsoft Office</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Google Workspace</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Slack</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Notion</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Trello</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Asana</span>
+                        </div>
+                    </div>
+
+                    <!-- Healthcare -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-red-400 mr-3">🏥</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Healthcare</h4>
+                                <div class="text-sm text-gray-400">15+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">EHR Systems</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Medical Databases</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">DICOM Viewers</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Clinical Analytics</span>
+                        </div>
+                    </div>
+
+                    <!-- Legal -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-yellow-400 mr-3">⚖️</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Legal</h4>
+                                <div class="text-sm text-gray-400">12+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Legal Research</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Document Management</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Contract Analysis</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Compliance Tools</span>
+                        </div>
+                    </div>
+
+                    <!-- Creative & Design -->
+                    <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 feature-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 text-pink-400 mr-3">🎨</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Creative & Design</h4>
+                                <div class="text-sm text-gray-400">16+ tools</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Adobe Creative Suite</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Figma</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Canva</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Sketch</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">Blender</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-xs text-gray-300">AutoCAD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Computer Vision Details -->
+            <div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 backdrop-blur-sm rounded-3xl p-12 border border-cyan-500/20">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">👁️</div>
+                    <h3 class="text-3xl font-bold text-white mb-4">
+                        Advanced Computer Vision
+                    </h3>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Powerful computer vision features that work locally on your device for maximum privacy and performance
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white/5 rounded-xl p-6">
+                        <h4 class="text-lg font-semibold text-white mb-2">Image Analysis</h4>
+                        <p class="text-gray-400 text-sm mb-4">Object detection, scene understanding, activity recognition</p>
+                        <div class="space-y-1">
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Object detection
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Scene understanding
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Activity recognition
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 rounded-xl p-6">
+                        <h4 class="text-lg font-semibold text-white mb-2">OCR Technology</h4>
+                        <p class="text-gray-400 text-sm mb-4">Multi-language text extraction with high accuracy</p>
+                        <div class="space-y-1">
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Multi-language support
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Handwriting recognition
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Document structure analysis
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 rounded-xl p-6">
+                        <h4 class="text-lg font-semibold text-white mb-2">Facial Recognition</h4>
+                        <p class="text-gray-400 text-sm mb-4">Privacy-preserving face detection and analysis</p>
+                        <div class="space-y-1">
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Face detection
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Landmark detection
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Expression analysis
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 rounded-xl p-6">
+                        <h4 class="text-lg font-semibold text-white mb-2">Camera Integration</h4>
+                        <p class="text-gray-400 text-sm mb-4">Real-time computer vision applications</p>
+                        <div class="space-y-1">
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>Real-time video analysis
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>AR capabilities
+                            </div>
+                            <div class="flex items-center text-xs text-gray-300">
+                                <span class="text-cyan-400 mr-2">→</span>QR/barcode scanning
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Ready to Experience Aideon AI Lite?</h3>
+            <p class="text-gray-400 mb-8">Join thousands of users already transforming their productivity with our hybrid AI system.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-semibold rounded-xl transition-all duration-300">
+                    Download Now
+                </button>
+                <button class="border border-white/30 text-white hover:bg-white/10 px-8 py-3 font-semibold rounded-xl transition-all duration-300">
+                    Learn More
+                </button>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/10 text-gray-500 text-sm">
+                © 2024 Aideon AI Lite. All rights reserved. | Privacy-First • Hybrid Processing • 106+ Integrations
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
