@@ -1,0 +1,93 @@
+{
+  "name": "aideon-ai-lite-desktop",
+  "version": "1.0.0",
+  "description": "Aideon AI Lite - The world's first truly hybrid autonomous AI system",
+  "main": "src/main/main.js",
+  "homepage": "./",
+  "author": {
+    "name": "Aideon AI",
+    "email": "support@aideonai.com",
+    "url": "https://aideonai.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:renderer\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:renderer": "cd ../web/frontend && npm start",
+    "build": "npm run build:renderer && npm run build:main",
+    "build:renderer": "cd ../web/frontend && npm run build",
+    "build:main": "webpack --config webpack.main.config.js",
+    "build:preload": "webpack --config webpack.preload.config.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux",
+    "postinstall": "electron-builder install-app-deps",
+    "test": "jest",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7",
+    "electron-store": "^8.1.0",
+    "electron-log": "^5.0.1",
+    "node-fetch": "^3.3.2",
+    "ws": "^8.14.2",
+    "sqlite3": "^5.1.6",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1",
+    "lodash": "^4.17.21",
+    "axios": "^1.6.2",
+    "form-data": "^4.0.0",
+    "mime-types": "^2.1.35",
+    "chokidar": "^3.5.3",
+    "node-machine-id": "^1.1.12",
+    "systeminformation": "^5.21.20"
+  },
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "babel-loader": "^9.1.3",
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.2.0",
+    "jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-node": "^11.1.0",
+    "cross-env": "^7.0.3"
+  },
+  "build": {
+    "extends": "./electron-builder.yml"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "automation",
+    "desktop",
+    "electron",
+    "hybrid",
+    "local",
+    "cloud",
+    "autonomous",
+    "agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AllienNova/APEXAGENT_FRESH.git",
+    "directory": "apps/desktop"
+  },
+  "bugs": {
+    "url": "https://github.com/AllienNova/APEXAGENT_FRESH/issues"
+  }
+}
+
