@@ -1,8 +1,8 @@
 import React from 'react';
-import AideonAdminApp from '../components/app/AideonAdminApp';
+import SimpleAdminApp from '../components/app/SimpleAdminApp';
 
 const AdminPage = () => {
-  return <AideonAdminApp />;
+  return <SimpleAdminApp />;
 };
 
 export default AdminPage;

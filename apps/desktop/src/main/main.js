@@ -1,4 +1,10 @@
 const { app, BrowserWindow, Menu, ipcMain, dialog, shell, screen, nativeTheme } = require('electron');
+
+// Enable headless mode for testing environments
+if (process.env.NODE_ENV === 'test' || !process.env.DISPLAY) {
+  app.disableHardwareAcceleration();
+}
+
 const { autoUpdater } = require('electron-updater');
 const Store = require('electron-store');
 const log = require('electron-log');
@@ -136,7 +142,7 @@ class AideonDesktopApp {
       height: windowHeight,
       minWidth: 1000,
       minHeight: 700,
-      show: false,
+      show: process.env.NODE_ENV !== 'test',
       icon: this.getAppIcon(),
       titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
       webPreferences: {
@@ -146,7 +152,8 @@ class AideonDesktopApp {
         preload: path.join(__dirname, '../preload/preload.js'),
         webSecurity: !this.isDevelopment,
         allowRunningInsecureContent: false,
-        experimentalFeatures: false
+        experimentalFeatures: false,
+        offscreen: process.env.NODE_ENV === 'test'
       }
     });
 

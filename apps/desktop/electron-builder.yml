@@ -1,0 +1,50 @@
+appId: com.aideonai.lite.desktop
+productName: Aideon AI Lite Desktop
+copyright: Copyright © 2024 Aideon AI
+directories:
+  output: dist
+  buildResources: assets
+files:
+  - "!**/.vscode/*"
+  - "!src/*"
+  - "!electron.vite.config.{js,ts,mjs,cjs}"
+  - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
+  - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
+  - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+asarUnpack:
+  - resources/**
+win:
+  executableName: AideonAILite
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  entitlementsInherit: assets/entitlements.mac.plist
+  extendInfo:
+    - NSCameraUsageDescription: This app needs access to camera
+    - NSMicrophoneUsageDescription: This app needs access to microphone
+    - NSDocumentsFolderUsageDescription: This app needs access to user documents
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: snap
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+  maintainer: support@aideonai.com
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: generic
+  url: https://example.com/auto-updates
+
