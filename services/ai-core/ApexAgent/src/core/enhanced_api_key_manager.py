@@ -69,6 +69,7 @@ class ProviderType(Enum):
     MISTRAL = "mistral"
     AZURE_OPENAI = "azure_openai"
     AWS_BEDROCK = "aws_bedrock"
+    TOGETHER_AI = "together_ai"
 
 class ModelCategory(Enum):
     """Enumeration of model categories."""
