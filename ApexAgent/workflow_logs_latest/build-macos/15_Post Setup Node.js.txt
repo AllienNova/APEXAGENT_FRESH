@@ -1,0 +1,6 @@
+2025-06-08T01:50:25.1762820Z Post job cleanup.
+2025-06-08T01:50:25.3064880Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/ApexAgent/ApexAgent --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+2025-06-08T01:50:26.9859590Z Sent 16384000 of 75956943 (21.6%), 15.6 MBs/sec
+2025-06-08T01:50:27.9865220Z Sent 66650112 of 75956943 (87.7%), 31.8 MBs/sec
+2025-06-08T01:50:28.6063780Z Sent 75956943 of 75956943 (100.0%), 27.6 MBs/sec
+2025-06-08T01:50:28.8442650Z Cache saved with the key: node-cache-macOS-arm64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621

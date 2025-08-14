@@ -1,0 +1,8 @@
+2025-06-08T01:40:42.7044228Z ##[section]Starting: Prepare job build-linux
+2025-06-08T01:40:42.7046522Z Evaluating strategy
+2025-06-08T01:40:42.7051336Z Creating job '__default'
+2025-06-08T01:40:42.7054074Z Evaluating timeout
+2025-06-08T01:40:42.7054152Z Evaluating cancel timeout
+2025-06-08T01:40:42.7054190Z Evaluating continue on error
+2025-06-08T01:40:42.7054222Z Evaluating target
+2025-06-08T01:40:42.7055873Z ##[section]Finishing: Prepare job build-linux

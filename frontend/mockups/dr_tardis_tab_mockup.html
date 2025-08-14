@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexAgent Dr. Tardis Tab</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --background: #ffffff;
+      --foreground: #0f172a;
+      --card: #f8fafc;
+      --card-foreground: #0f172a;
+      --border: #e2e8f0;
+      --input: #e2e8f0;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --accent: #f1f5f9;
+      --accent-foreground: #0f172a;
+      --tardis: #8b5cf6;
+      --tardis-hover: #7c3aed;
+    }
+    
+    .dark {
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --background: #0f172a;
+      --foreground: #f8fafc;
+      --card: #1e293b;
+      --card-foreground: #f8fafc;
+      --border: #334155;
+      --input: #334155;
+      --muted: #1e293b;
+      --muted-foreground: #94a3b8;
+      --accent: #1e293b;
+      --accent-foreground: #f8fafc;
+      --tardis: #a78bfa;
+      --tardis-hover: #8b5cf6;
+    }
+    
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    
+    .bg-card {
+      background-color: var(--card);
+      color: var(--card-foreground);
+    }
+    
+    .border-border {
+      border-color: var(--border);
+    }
+    
+    .text-muted-foreground {
+      color: var(--muted-foreground);
+    }
+    
+    .bg-primary {
+      background-color: var(--primary);
+    }
+    
+    .hover\:bg-primary-hover:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    .text-primary-foreground {
+      color: white;
+    }
+    
+    .bg-accent {
+      background-color: var(--accent);
+    }
+    
+    .bg-accent\/30 {
+      background-color: rgba(241, 245, 249, 0.3);
+    }
+    
+    .dark .bg-accent\/30 {
+      background-color: rgba(30, 41, 59, 0.3);
+    }
+    
+    .bg-tardis {
+      background-color: var(--tardis);
+    }
+    
+    .text-tardis {
+      color: var(--tardis);
+    }
+    
+    .border-tardis {
+      border-color: var(--tardis);
+    }
+    
+    .hover\:bg-tardis-hover:hover {
+      background-color: var(--tardis-hover);
+    }
+    
+    .tab-active {
+      border-bottom: 2px solid var(--tardis);
+      color: var(--tardis);
+    }
+    
+    .annotation {
+      position: absolute;
+      border: 2px dashed var(--tardis);
+      border-radius: 0.5rem;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .annotation-label {
+      position: absolute;
+      background-color: var(--tardis);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      z-index: 20;
+    }
+    
+    .timeline-item {
+      position: relative;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 1.5rem;
+      bottom: -0.5rem;
+      width: 1px;
+      background-color: var(--border);
+    }
+    
+    .timeline-item:last-child::before {
+      display: none;
+    }
+    
+    .tardis-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-64 border-r border-border bg-card hidden md:block">
+      <div class="p-4">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-white font-bold">A</div>
+          <span class="text-lg font-semibold">ApexAgent</span>
+        </div>
+      </div>
+      
+      <div class="px-3 py-2">
+        <h3 class="text-xs font-medium text-muted-foreground mb-2 px-2">PROJECTS</h3>
+        <div class="space-y-1">
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"></path><path d="M12 3v6"></path></svg>
+            Marketing Website
+          </button>
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M20 6v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"></path><path d="M2 8h2"></path><path d="M2 12h2"></path><path d="M2 16h2"></path></svg>
+            Data Analysis
+          </button>
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            Research Paper
+          </button>
+        </div>
+      </div>
+      
+      <div class="px-3 py-2">
+        <h3 class="text-xs font-medium text-muted-foreground mb-2 px-2">RECENT CONVERSATIONS</h3>
+        <div class="space-y-1">
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Homepage Design
+          </button>
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            CSS Animations
+          </button>
+          <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Responsive Layout
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Top Navigation -->
+      <header class="h-14 border-b border-border flex items-center justify-between px-4">
+        <div class="flex items-center md:hidden">
+          <button class="p-2 rounded-md hover:bg-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <button class="p-2 rounded-md hover:bg-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button class="p-2 rounded-md hover:bg-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </button>
+          <button class="p-2 rounded-md hover:bg-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+          </button>
+        </div>
+      </header>
+      
+      <!-- Horizontal Tabs -->
+      <div class="border-b border-border">
+        <div class="flex overflow-x-auto">
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Chat</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Artifacts</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"></path><path d="M2 8h2"></path><path d="M2 12h2"></path><path d="M2 16h2"></path></svg>
+            <span>Project Files</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+            <span>LLM Orchestration</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+            <span>Agent Monitoring</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M16.24 16.24l2.83 2.83"></path><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M4.93 19.07l2.83-2.83"></path><path d="M16.24 7.76l2.83-2.83"></path></svg>
+            <span>LLM Performance</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>
+            <span>Plugins</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2 tab-active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tardis"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+            <span>Dr. Tardis</span>
+          </button>
+          <button class="px-4 py-2 text-sm font-medium flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Settings</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Dr. Tardis Interface -->
+      <div class="flex-1 overflow-auto">
+        <div class="flex h-full">
+          <!-- Main Content Area -->
+          <div class="flex-1 flex flex-col">
+            <!-- Dr. Tardis Header -->
+            <div class="border-b border-border p-4 flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-full bg-tardis flex items-center justify-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                </div>
+                <div>
+                  <h2 class="font-semibold">Dr. Tardis</h2>
+                  <div class="text-xs text-muted-foreground">Interactive System Interpreter</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <button class="p-2 rounded-md hover:bg-accent text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"></path><path d="M12 21v-4"></path><path d="M3 12h4"></path><path d="M21 12h-4"></path><path d="m18.364 5.636-2.828 2.828"></path><path d="m5.636 18.364 2.828-2.828"></path><path d="m5.636 5.636 2.828 2.828"></path><path d="m18.364 18.364-2.828-2.828"></path></svg>
+                </button>
+                <button class="p-2 rounded-md hover:bg-accent text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.7 2.8L21 8"></path><path d="M21 3v5h-5"></path></svg>
+                </button>
+                <button class="p-2 rounded-md hover:bg-accent text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Dr. Tardis Content -->
+            <div class="flex-1 flex flex-col md:flex-row">
+              <!-- Conversation Area -->
+              <div class="w-full md:w-1/2 border-r border-border flex flex-col">
+                <div class="flex-1 p-4 overflow-auto space-y-6">
+                  <!-- System Message -->
+                  <div class="flex items-start space-x-3">
+                    <div class="h-8 w-8 rounded-full bg-tardis flex items-center justify-center text-white flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                    </div>
+                    <div class="bg-accent/30 rounded-lg p-3 text-sm">
+                      <p>Hello! I'm Dr. Tardis, your interactive system interpreter. I can help explain what's happening in your project, show you how the agent is working, and answer any questions about the system.</p>
+                      <p class="mt-2">What would you like to know about your current project?</p>
+                    </div>
+                  </div>
+                  
+                  <!-- User Message -->
+                  <div class="flex items-start space-x-3 justify-end">
+                    <div class="bg-primary/10 rounded-lg p-3 text-sm">
+                      <p>Can you explain how the wireframe for our marketing website was created?</p>
+                    </div>
+                    <div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+                    </div>
+                  </div>
+                  
+                  <!-- Dr. Tardis Response -->
+                  <div class="flex items-start space-x-3">
+                    <div class="h-8 w-8 rounded-full bg-tardis flex items-center justify-center text-white flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                    </div>
+                    <div class="bg-accent/30 rounded-lg p-3 text-sm">
+                      <p>I'd be happy to explain the wireframe creation process! The agent followed these key steps:</p>
+                      
+                      <ol class="mt-2 space-y-1 pl-5 list-decimal">
+                        <li>Analyzed your requirements for a responsive marketing website</li>
+                        <li>Researched current design trends for similar websites</li>
+                        <li>Created a layout structure using HTML and CSS</li>
+                        <li>Applied your brand colors and typography</li>
+                        <li>Added responsive breakpoints for mobile devices</li>
+                      </ol>
+                      
+                      <p class="mt-2">I've highlighted the key components in the visualization panel. You can see how the agent made decisions about layout and component placement based on your requirements.</p>
+                      
+                      <p class="mt-2">Would you like me to explain any specific part of the process in more detail?</p>
+                    </div>
+                  </div>
+                  
+                  <!-- User Message -->
+                  <div class="flex items-start space-x-3 justify-end">
+                    <div class="bg-primary/10 rounded-lg p-3 text-sm">
+                      <p>How did the agent decide on the layout structure?</p>
+                    </div>
+                    <div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+                    </div>
+                  </div>
+                  
+                  <!-- Dr. Tardis Response -->
+                  <div class="flex items-start space-x-3">
+                    <div class="h-8 w-8 rounded-full bg-tardis flex items-center justify-center text-white flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                    </div>
+                    <div class="bg-accent/30 rounded-lg p-3 text-sm">
+                      <p>Great question! The agent made several key decisions about the layout structure:</p>
+                      
+                      <p class="mt-2">1. <strong>Information Architecture Analysis:</strong> First, the agent analyzed your content requirements and identified key sections needed: hero section, features, testimonials, pricing, and contact form.</p>
+                      
+                      <p class="mt-2">2. <strong>User Flow Optimization:</strong> The agent arranged these sections in a logical flow to guide visitors toward conversion actions. I've highlighted this flow in the visualization panel.</p>
+                      
+                      <p class="mt-2">3. <strong>Competitive Research:</strong> The agent examined 12 similar marketing websites to identify effective patterns. The most successful layouts used a Z-pattern for visual hierarchy, which the agent adopted.</p>
+                      
+                      <p class="mt-2">4. <strong>Responsive Considerations:</strong> The agent used a 12-column grid system that adapts to different screen sizes. Notice how elements reflow on smaller screens.</p>
+                      
+                      <p class="mt-2">I've updated the annotations to show these decision points. You can see the agent's thought process in the timeline panel on the right.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="border-t border-border p-4">
+                  <div class="relative">
+                    <input 
+                      type="text" 
+                      placeholder="Ask Dr. Tardis about your project..." 
+                      class="w-full px-4 py-2 pr-10 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-tardis/50"
+                    />
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-tardis">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Visualization Area -->
+              <div class="w-full md:w-1/2 flex flex-col">
+                <div class="flex-1 p-4 overflow-auto relative">
+                  <!-- Wireframe Visualization -->
+                  <div class="bg-card rounded-lg border border-border p-4 mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="font-medium">Marketing Website Wireframe</h3>
+                      <div class="flex space-x-2">
+                        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                        </button>
+                        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <!-- Wireframe Content -->
+                    <div class="relative border border-border rounded-md bg-background p-2 h-80">
+                      <!-- Header -->
+                      <div class="h-10 border-b border-border flex items-center justify-between px-2 mb-2">
+                        <div class="w-20 h-6 bg-accent rounded"></div>
+                        <div class="flex space-x-2">
+                          <div class="w-12 h-4 bg-accent rounded"></div>
+                          <div class="w-12 h-4 bg-accent rounded"></div>
+                          <div class="w-12 h-4 bg-accent rounded"></div>
+                        </div>
+                      </div>
+                      
+                      <!-- Hero Section -->
+                      <div class="h-32 border border-border rounded-md mb-2 p-2 flex">
+                        <div class="w-1/2 flex flex-col justify-center space-y-2 pr-2">
+                          <div class="w-3/4 h-6 bg-accent rounded"></div>
+                          <div class="w-full h-4 bg-accent rounded"></div>
+                          <div class="w-full h-4 bg-accent rounded"></div>
+                          <div class="w-1/2 h-8 bg-tardis rounded"></div>
+                        </div>
+                        <div class="w-1/2 bg-accent/50 rounded-md"></div>
+                      </div>
+                      
+                      <!-- Features Section -->
+                      <div class="h-24 border border-border rounded-md mb-2 p-2">
+                        <div class="w-1/3 h-4 bg-accent rounded mb-2 mx-auto"></div>
+                        <div class="flex space-x-2">
+                          <div class="flex-1 h-16 bg-accent/30 rounded-md p-1">
+                            <div class="w-8 h-8 bg-accent rounded-md mb-1 mx-auto"></div>
+                            <div class="w-full h-3 bg-accent rounded"></div>
+                          </div>
+                          <div class="flex-1 h-16 bg-accent/30 rounded-md p-1">
+                            <div class="w-8 h-8 bg-accent rounded-md mb-1 mx-auto"></div>
+                            <div class="w-full h-3 bg-accent rounded"></div>
+                          </div>
+                          <div class="flex-1 h-16 bg-accent/30 rounded-md p-1">
+                            <div class="w-8 h-8 bg-accent rounded-md mb-1 mx-auto"></div>
+                            <div class="w-full h-3 bg-accent rounded"></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Annotations -->
+                      <div class="annotation" style="top: 50px; left: 20px; width: 180px; height: 100px;"></div>
+                      <div class="annotation-label" style="top: 40px; left: 20px;">Hero Section (Z-Pattern)</div>
+                      
+                      <div class="annotation" style="top: 160px; left: 100px; width: 240px; height: 70px;"></div>
+                      <div class="annotation-label" style="top: 150px; left: 100px;">Feature Grid (Responsive)</div>
+                      
+                      <div class="annotation tardis-pulse" style="top: 90px; left: 210px; width: 40px; height: 30px;"></div>
+                      <div class="annotation-label" style="top: 80px; left: 210px;">Call-to-Action</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Agent Decision Process -->
+                  <div class="bg-card rounded-lg border border-border p-4">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="font-medium">Agent Decision Process</h3>
+                      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.7 2.8L21 8"></path><path d="M21 3v5h-5"></path></svg>
+                      </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                      <div class="flex items-center space-x-2">
+                        <div class="w-full bg-accent/30 h-2 rounded-full overflow-hidden">
+                          <div class="bg-tardis h-full" style="width: 75%"></div>
+                        </div>
+                        <span class="text-xs text-muted-foreground whitespace-nowrap">75% Complete</span>
+                      </div>
+                      
+                      <!-- Timeline -->
+                      <div class="space-y-4">
+                        <div class="timeline-item pl-8 relative">
+                          <div class="absolute left-0 top-0 h-6 w-6 rounded-full bg-tardis flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          </div>
+                          <div>
+                            <div class="text-sm font-medium">Requirements Analysis</div>
+                            <div class="text-xs text-muted-foreground">10:15 AM</div>
+                            <p class="text-xs mt-1">Analyzed marketing website requirements and identified key sections needed.</p>
+                          </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 relative">
+                          <div class="absolute left-0 top-0 h-6 w-6 rounded-full bg-tardis flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          </div>
+                          <div>
+                            <div class="text-sm font-medium">Competitive Research</div>
+                            <div class="text-xs text-muted-foreground">10:22 AM</div>
+                            <p class="text-xs mt-1">Examined 12 similar websites to identify effective layout patterns.</p>
+                          </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 relative">
+                          <div class="absolute left-0 top-0 h-6 w-6 rounded-full bg-tardis flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          </div>
+                          <div>
+                            <div class="text-sm font-medium">Layout Structure</div>
+                            <div class="text-xs text-muted-foreground">10:35 AM</div>
+                            <p class="text-xs mt-1">Created responsive grid system with Z-pattern for visual hierarchy.</p>
+                          </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 relative">
+                          <div class="absolute left-0 top-0 h-6 w-6 rounded-full bg-tardis flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
+                          </div>
+                          <div>
+                            <div class="text-sm font-medium">Styling Application</div>
+                            <div class="text-xs text-muted-foreground">10:48 AM</div>
+                            <p class="text-xs mt-1">Applying brand colors and typography to wireframe elements...</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Knowledge Explorer (Right Panel) -->
+          <div class="w-64 border-l border-border hidden lg:block">
+            <div class="p-4 border-b border-border">
+              <h3 class="font-medium text-sm">Knowledge Explorer</h3>
+              <p class="text-xs text-muted-foreground">Related concepts and information</p>
+            </div>
+            
+            <div class="p-4 space-y-4">
+              <div>
+                <h4 class="text-xs font-medium text-muted-foreground mb-2">RELATED CONCEPTS</h4>
+                <div class="space-y-1">
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-tardis mr-2"></span>
+                    Responsive Design
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-tardis mr-2"></span>
+                    Z-Pattern Layout
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-tardis mr-2"></span>
+                    Visual Hierarchy
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-tardis mr-2"></span>
+                    Grid Systems
+                  </button>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-medium text-muted-foreground mb-2">PROJECT MEMORY</h4>
+                <div class="space-y-1">
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    Brand Guidelines
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    Requirements Doc
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md bg-accent/30 text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-tardis"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    Wireframe v1
+                  </button>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-medium text-muted-foreground mb-2">RELATED CONVERSATIONS</h4>
+                <div class="space-y-1">
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    Initial Requirements
+                  </button>
+                  <button class="w-full text-left px-2 py-1.5 rounded-md hover:bg-accent text-sm flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    Brand Discussion
+                  </button>
+                </div>
+              </div>
+              
+              <div class="pt-4">
+                <button class="w-full px-3 py-2 bg-tardis text-white rounded-md hover:bg-tardis-hover text-sm flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>
+                  Share Screen
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

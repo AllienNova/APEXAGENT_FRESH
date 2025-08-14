@@ -1,0 +1,37 @@
+2025-06-08T01:55:01.1609181Z ##[group]Run npm run build:linux
+2025-06-08T01:55:01.1609659Z [36;1mnpm run build:linux[0m
+2025-06-08T01:55:01.1662624Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:55:01.1662878Z env:
+2025-06-08T01:55:01.1663053Z   NODE_VERSION: 18
+2025-06-08T01:55:01.1663264Z   PYTHON_VERSION: 3.11
+2025-06-08T01:55:01.1663552Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:55:01.1663980Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:55:01.1664671Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:55:01.1665045Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:55:01.1665429Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:55:01.1665794Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:55:01.1666288Z   GH_TOKEN: ***
+2025-06-08T01:55:01.1666488Z ##[endgroup]
+2025-06-08T01:55:01.3060151Z 
+2025-06-08T01:55:01.3060734Z > aideon-ai-lite@1.0.0 build:linux
+2025-06-08T01:55:01.3061340Z > npm run package:linux
+2025-06-08T01:55:01.3061594Z 
+2025-06-08T01:55:01.4473727Z 
+2025-06-08T01:55:01.4475435Z > aideon-ai-lite@1.0.0 package:linux
+2025-06-08T01:55:01.4483167Z > electron-builder --linux
+2025-06-08T01:55:01.4483497Z 
+2025-06-08T01:55:02.0219152Z   • electron-builder  version=24.13.3 os=6.11.0-1014-azure
+2025-06-08T01:55:02.0228249Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T01:55:02.0231010Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:55:02.0234768Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:55:02.0284291Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T01:55:02.2478861Z   • packaging       platform=linux arch=x64 electron=28.3.3 appOutDir=dist/linux-unpacked
+2025-06-08T01:55:02.3442374Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-x64.zip size=102 MB parts=4
+2025-06-08T01:55:02.6962968Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-linux-x64.zip duration=443ms
+2025-06-08T01:55:06.7817545Z   • building        target=AppImage arch=x64 file=dist/Aideon AI Lite-1.0.0.AppImage
+2025-06-08T01:55:07.0152755Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/appimage-12.0.1/appimage-12.0.1.7z size=1.6 MB parts=1
+2025-06-08T01:55:07.1008812Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/appimage-12.0.1/appimage-12.0.1.7z duration=256ms
+2025-06-08T01:55:21.6259896Z   • building        target=deb arch=x64 file=dist/aideon-ai-lite_1.0.0_amd64.deb
+2025-06-08T01:55:21.6291679Z   • adding autoupdate files for: deb. (Beta feature)  resourceDir=/home/runner/work/ApexAgent/ApexAgent/dist/linux-unpacked/resources
+2025-06-08T01:55:21.7716590Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/fpm-1.9.3-2.3.1-linux-x86_64/fpm-1.9.3-2.3.1-linux-x86_64.7z size=5.0 MB parts=1
+2025-06-08T01:55:21.8587026Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/fpm-1.9.3-2.3.1-linux-x86_64/fpm-1.9.3-2.3.1-linux-x86_64.7z duration=220ms

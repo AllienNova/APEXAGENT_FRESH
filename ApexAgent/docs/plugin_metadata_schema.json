@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApexAgent Plugin Metadata",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "main_file": {
+      "type": "string"
+    },
+    "main_class": {
+      "type": "string"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parameters_schema": {
+            "type": "object"
+          },
+          "returns_schema": {
+            "type": "object"
+          },
+          "returns_stream": {
+            "type": "boolean"
+          },
+          "stream_metadata": {
+            "type": "object",
+            "properties": {
+              "content_type": {
+                "type": "string"
+              },
+              "supports_transformation": {
+                "type": "boolean"
+              },
+              "supports_composition": {
+                "type": "boolean"
+              },
+              "supports_persistence": {
+                "type": "boolean"
+              },
+              "estimated_size": {
+                "type": "integer"
+              },
+              "additional_info": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "description"
+        ]
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "plugins": {
+          "type": "object",
+          "description": "Plugin dependencies with version constraints",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Version constraint using semver format (e.g., '>=1.0.0', '~1.2.3', '^2.0.0')"
+          }
+        },
+        "libraries": {
+          "type": "object",
+          "description": "Python library dependencies with version constraints",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Version constraint using pip format (e.g., '>=1.0.0', '~=1.2.3', '==2.0.0')"
+          }
+        },
+        "optional": {
+          "type": "object",
+          "description": "Optional dependencies that enhance functionality but aren't required",
+          "properties": {
+            "plugins": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "libraries": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "checksum": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha512"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ]
+    },
+    "signature": {
+      "type": "object"
+    },
+    "default_enabled": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "version",
+    "description",
+    "author",
+    "main_file",
+    "main_class",
+    "actions"
+  ]
+}

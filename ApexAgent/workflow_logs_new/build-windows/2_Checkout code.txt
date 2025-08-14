@@ -1,0 +1,178 @@
+2025-06-08T01:45:39.3931231Z ##[group]Run actions/checkout@v4
+2025-06-08T01:45:39.3932742Z with:
+2025-06-08T01:45:39.3933478Z   fetch-depth: 0
+2025-06-08T01:45:39.3934298Z   repository: AllienNova/ApexAgent
+2025-06-08T01:45:39.3935634Z   token: ***
+2025-06-08T01:45:39.3936369Z   ssh-strict: true
+2025-06-08T01:45:39.3937107Z   ssh-user: git
+2025-06-08T01:45:39.3937891Z   persist-credentials: true
+2025-06-08T01:45:39.3938733Z   clean: true
+2025-06-08T01:45:39.3939511Z   sparse-checkout-cone-mode: true
+2025-06-08T01:45:39.3940441Z   fetch-tags: false
+2025-06-08T01:45:39.3941229Z   show-progress: true
+2025-06-08T01:45:39.3942029Z   lfs: false
+2025-06-08T01:45:39.3942748Z   submodules: false
+2025-06-08T01:45:39.3943537Z   set-safe-directory: true
+2025-06-08T01:45:39.3944577Z env:
+2025-06-08T01:45:39.3945268Z   NODE_VERSION: 18
+2025-06-08T01:45:39.3946030Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:39.3949071Z ##[endgroup]
+2025-06-08T01:45:40.6940484Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:45:40.6949038Z ##[group]Getting Git version info
+2025-06-08T01:45:40.6950507Z Working directory is 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T01:45:40.6951902Z [command]"C:\Program Files\Git\bin\git.exe" version
+2025-06-08T01:45:40.6968048Z git version 2.49.0.windows.1
+2025-06-08T01:45:40.6970164Z ##[endgroup]
+2025-06-08T01:45:40.6976032Z Temporarily overriding HOME='C:\a\_temp\f5aa623f-bedd-4a34-aa5d-e0fc892cd7d4' before making global git config changes
+2025-06-08T01:45:40.6977395Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:45:40.6978650Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\ApexAgent\ApexAgent
+2025-06-08T01:45:40.6980583Z Deleting the contents of 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T01:45:40.6981601Z ##[group]Initializing the repository
+2025-06-08T01:45:40.6982343Z [command]"C:\Program Files\Git\bin\git.exe" init C:\a\ApexAgent\ApexAgent
+2025-06-08T01:45:40.6983219Z Initialized empty Git repository in C:/a/ApexAgent/ApexAgent/.git/
+2025-06-08T01:45:40.6984932Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:40.6987126Z ##[endgroup]
+2025-06-08T01:45:40.6995361Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:45:40.6996241Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2025-06-08T01:45:40.6997962Z ##[endgroup]
+2025-06-08T01:45:40.6998722Z ##[group]Setting up auth
+2025-06-08T01:45:40.6999622Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:45:40.7116178Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-06-08T01:45:42.1146377Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:45:42.1209796Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-06-08T01:45:42.5952664Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-06-08T01:45:42.6234804Z ##[endgroup]
+2025-06-08T01:45:42.6239291Z ##[group]Fetching the repository
+2025-06-08T01:45:42.6263537Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6bc44e2bef6c601be80ba6cdc5bd9974091c084e:refs/remotes/pull/1/merge
+2025-06-08T01:45:47.2491089Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:47.2497479Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:45:47.2498993Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:45:47.2518529Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:45:47.2521695Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:45:47.2523376Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:45:47.2550355Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:45:47.2576677Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:45:47.2597373Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:45:47.2598825Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:45:47.2601470Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:45:47.2602661Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:45:47.2629027Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:45:47.2630209Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:45:47.2631200Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:45:47.2641361Z  * [new ref]           6bc44e2bef6c601be80ba6cdc5bd9974091c084e -> pull/1/merge
+2025-06-08T01:45:47.2777212Z ##[endgroup]
+2025-06-08T01:45:47.2777831Z ##[group]Determining the checkout info
+2025-06-08T01:45:47.2783523Z ##[endgroup]
+2025-06-08T01:45:47.2825679Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2025-06-08T01:45:47.3421369Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:45:47.3690271Z ##[group]Checking out the ref
+2025-06-08T01:45:47.3733304Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:45:48.4899054Z Updating files:   3% (939/24378)
+2025-06-08T01:45:48.9864450Z Updating files:   4% (976/24378)
+2025-06-08T01:45:49.4341255Z Updating files:   5% (1219/24378)
+2025-06-08T01:45:49.5616172Z Updating files:   5% (1401/24378)
+2025-06-08T01:45:50.4374688Z Updating files:   6% (1463/24378)
+2025-06-08T01:45:50.4403880Z Updating files:   7% (1707/24378)
+2025-06-08T01:45:50.9597819Z Updating files:   7% (1708/24378)
+2025-06-08T01:45:51.4387014Z Updating files:   8% (1951/24378)
+2025-06-08T01:45:51.7388933Z Updating files:   8% (2142/24378)
+2025-06-08T01:45:52.8871294Z Updating files:   9% (2195/24378)
+2025-06-08T01:45:53.4483178Z Updating files:   9% (2316/24378)
+2025-06-08T01:45:53.8779583Z Updating files:   9% (2410/24378)
+2025-06-08T01:45:54.4469746Z Updating files:  10% (2438/24378)
+2025-06-08T01:45:55.1645618Z Updating files:  10% (2550/24378)
+2025-06-08T01:45:56.2781448Z Updating files:  11% (2682/24378)
+2025-06-08T01:45:56.4947744Z Updating files:  11% (2696/24378)
+2025-06-08T01:45:57.4755560Z Updating files:  11% (2730/24378)
+2025-06-08T01:45:57.5051063Z Updating files:  11% (2921/24378)
+2025-06-08T01:45:58.4655741Z Updating files:  12% (2926/24378)
+2025-06-08T01:45:58.7648873Z Updating files:  12% (3123/24378)
+2025-06-08T01:45:59.4804163Z Updating files:  13% (3170/24378)
+2025-06-08T01:46:00.4989725Z Updating files:  13% (3254/24378)
+2025-06-08T01:46:01.7788258Z Updating files:  13% (3328/24378)
+2025-06-08T01:46:01.7789053Z Updating files:  14% (3413/24378)
+2025-06-08T01:46:01.9146981Z Updating files:  14% (3451/24378)
+2025-06-08T01:46:01.9168382Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslint-recommended-raw.d.ts: Filename too long
+2025-06-08T01:46:01.9178398Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslint-recommended-raw.d.ts.map: Filename too long
+2025-06-08T01:46:01.9449167Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/disable-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9458085Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/disable-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9467221Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/disable-type-checked.js: Filename too long
+2025-06-08T01:46:01.9474743Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/eslint-recommended.d.ts: Filename too long
+2025-06-08T01:46:01.9477932Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/eslint-recommended.d.ts.map: Filename too long
+2025-06-08T01:46:01.9481453Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/eslint-recommended.js: Filename too long
+2025-06-08T01:46:01.9485056Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9488610Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9492157Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9495651Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9499130Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9503032Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended-type-checked.js: Filename too long
+2025-06-08T01:46:01.9508428Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/recommended.d.ts.map: Filename too long
+2025-06-08T01:46:01.9515763Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9523289Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9529349Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9535178Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9540995Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9546813Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/strict-type-checked.js: Filename too long
+2025-06-08T01:46:01.9552670Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9558647Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9564606Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9570357Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9576192Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9582261Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic-type-checked.js: Filename too long
+2025-06-08T01:46:01.9588136Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/eslintrc/stylistic.d.ts.map: Filename too long
+2025-06-08T01:46:01.9740458Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/disable-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9744575Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/disable-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9748160Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/disable-type-checked.js: Filename too long
+2025-06-08T01:46:01.9751642Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/eslint-recommended.d.ts: Filename too long
+2025-06-08T01:46:01.9755039Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/eslint-recommended.d.ts.map: Filename too long
+2025-06-08T01:46:01.9779295Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9786771Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9794546Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9798113Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9801625Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9806063Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/recommended-type-checked.js: Filename too long
+2025-06-08T01:46:01.9809471Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9812903Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9816643Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9820389Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9827785Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9832501Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/strict-type-checked.js: Filename too long
+2025-06-08T01:46:01.9872986Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked-only.d.ts: Filename too long
+2025-06-08T01:46:01.9880440Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked-only.d.ts.map: Filename too long
+2025-06-08T01:46:01.9886714Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked-only.js: Filename too long
+2025-06-08T01:46:01.9893764Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked.d.ts: Filename too long
+2025-06-08T01:46:01.9901009Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked.d.ts.map: Filename too long
+2025-06-08T01:46:01.9906616Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/stylistic-type-checked.js: Filename too long
+2025-06-08T01:46:02.0150692Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/adjacent-overload-signatures.d.ts: Filename too long
+2025-06-08T01:46:02.0158386Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/adjacent-overload-signatures.d.ts.map: Filename too long
+2025-06-08T01:46:02.0163817Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/adjacent-overload-signatures.js: Filename too long
+2025-06-08T01:46:02.0350211Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/class-literal-property-style.d.ts: Filename too long
+2025-06-08T01:46:02.0355042Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/class-literal-property-style.d.ts.map: Filename too long
+2025-06-08T01:46:02.0358513Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/class-literal-property-style.js: Filename too long
+2025-06-08T01:46:02.0361863Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/class-methods-use-this.d.ts.map: Filename too long
+2025-06-08T01:46:02.0404757Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-generic-constructors.d.ts: Filename too long
+2025-06-08T01:46:02.0412012Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-generic-constructors.d.ts.map: Filename too long
+2025-06-08T01:46:02.0422779Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-generic-constructors.js: Filename too long
+2025-06-08T01:46:02.0426768Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-indexed-object-style.d.ts: Filename too long
+2025-06-08T01:46:02.0429853Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-indexed-object-style.d.ts.map: Filename too long
+2025-06-08T01:46:02.0433152Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-indexed-object-style.js: Filename too long
+2025-06-08T01:46:02.0436623Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-assertions.d.ts: Filename too long
+2025-06-08T01:46:02.0440181Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-assertions.d.ts.map: Filename too long
+2025-06-08T01:46:02.0452517Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-assertions.js: Filename too long
+2025-06-08T01:46:02.0459141Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-definitions.d.ts: Filename too long
+2025-06-08T01:46:02.0473835Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-definitions.d.ts.map: Filename too long
+2025-06-08T01:46:02.0480875Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-definitions.js: Filename too long
+2025-06-08T01:46:02.0487918Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-exports.d.ts.map: Filename too long
+2025-06-08T01:46:02.0494682Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/consistent-type-imports.d.ts.map: Filename too long
+2025-06-08T01:46:02.0697028Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-function-return-type.d.ts: Filename too long
+2025-06-08T01:46:02.0704936Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-function-return-type.d.ts.map: Filename too long
+2025-06-08T01:46:02.0711457Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-function-return-type.js: Filename too long
+2025-06-08T01:46:02.0717001Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-member-accessibility.d.ts: Filename too long
+2025-06-08T01:46:02.0723818Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-member-accessibility.d.ts.map: Filename too long
+2025-06-08T01:46:02.0730630Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-member-accessibility.js: Filename too long
+2025-06-08T01:46:02.0737783Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-module-boundary-types.d.ts: Filename too long
+2025-06-08T01:46:02.0741113Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-module-boundary-types.d.ts.map: Filename too long
+2025-06-08T01:46:02.0744138Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/explicit-module-boundary-types.js: Filename too long
+2025-06-08T01:46:02.0962357Z ##[error]error: unable to create file frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/method-signature-style.d.ts.map: Filename too long
+2025-06-08T01:46:02.1008365Z ##[error]fatal: cannot create directory at 'frontend/node_modules/.pnpm/@typescript-eslint+eslint-plugin@8.32.1_@typescript-eslint+parser@8.32.1_eslint@9.27.0__7ae9bc7e057920ef5fb390bef9f68370/node_modules/@typescript-eslint/eslint-plugin/dist/rules/naming-convention-utils': Filename too long
+2025-06-08T01:46:02.1112930Z ##[error]The process 'C:\Program Files\Git\bin\git.exe' failed with exit code 128

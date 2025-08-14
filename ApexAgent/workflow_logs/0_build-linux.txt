@@ -1,0 +1,295 @@
+2025-06-08T01:40:43.1678766Z Requested labels: ubuntu-latest
+2025-06-08T01:40:43.1679093Z Job defined at: AllienNova/ApexAgent/.github/workflows/build-release.yml@refs/pull/1/merge
+2025-06-08T01:40:43.1679212Z Waiting for a runner to pick up this job...
+2025-06-08T01:40:44.5163118Z Job is waiting for a hosted runner to come online.
+2025-06-08T01:40:49.3391629Z Job is about to start running on the hosted runner: GitHub Actions 160 (hosted)
+2025-06-08T01:40:52.0504302Z Current runner version: '2.325.0'
+2025-06-08T01:40:52.0530961Z ##[group]Runner Image Provisioner
+2025-06-08T01:40:52.0532005Z Hosted Compute Agent
+2025-06-08T01:40:52.0532646Z Version: 20250508.323
+2025-06-08T01:40:52.0533319Z Commit: 81b259f29879f73b4213d199e42d8c3465dae986
+2025-06-08T01:40:52.0534159Z Build Date: 2025-05-08T19:40:08Z
+2025-06-08T01:40:52.0534850Z ##[endgroup]
+2025-06-08T01:40:52.0535457Z ##[group]Operating System
+2025-06-08T01:40:52.0536368Z Ubuntu
+2025-06-08T01:40:52.0536924Z 24.04.2
+2025-06-08T01:40:52.0537417Z LTS
+2025-06-08T01:40:52.0538033Z ##[endgroup]
+2025-06-08T01:40:52.0538640Z ##[group]Runner Image
+2025-06-08T01:40:52.0539318Z Image: ubuntu-24.04
+2025-06-08T01:40:52.0539927Z Version: 20250511.1.0
+2025-06-08T01:40:52.0541120Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250511.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-06-08T01:40:52.0542890Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250511.1
+2025-06-08T01:40:52.0544044Z ##[endgroup]
+2025-06-08T01:40:52.0545384Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:40:52.0547712Z Contents: read
+2025-06-08T01:40:52.0548453Z Metadata: read
+2025-06-08T01:40:52.0549095Z Packages: read
+2025-06-08T01:40:52.0549677Z ##[endgroup]
+2025-06-08T01:40:52.0552674Z Secret source: Actions
+2025-06-08T01:40:52.0553568Z Prepare workflow directory
+2025-06-08T01:40:52.0937435Z Prepare all required actions
+2025-06-08T01:40:52.0975065Z Getting action download info
+2025-06-08T01:40:52.3690142Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:40:52.3691157Z Version: 4.2.2
+2025-06-08T01:40:52.3692496Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:40:52.3693778Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:40:52.3694529Z ##[endgroup]
+2025-06-08T01:40:52.4800127Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:40:52.4800970Z Version: 4.4.0
+2025-06-08T01:40:52.4801723Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:40:52.4802712Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:40:52.4803468Z ##[endgroup]
+2025-06-08T01:40:52.5814628Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:40:52.5815494Z Version: 4.9.1
+2025-06-08T01:40:52.5816560Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:40:52.5817577Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:40:52.5818288Z ##[endgroup]
+2025-06-08T01:40:52.9482618Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:40:52.9483472Z Version: 4.6.2
+2025-06-08T01:40:52.9484225Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:40:52.9485216Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:40:52.9486175Z ##[endgroup]
+2025-06-08T01:40:53.1547935Z Complete job name: build-linux
+2025-06-08T01:40:53.2277441Z ##[group]Run actions/checkout@v4
+2025-06-08T01:40:53.2278382Z with:
+2025-06-08T01:40:53.2278844Z   fetch-depth: 0
+2025-06-08T01:40:53.2279345Z   repository: AllienNova/ApexAgent
+2025-06-08T01:40:53.2280098Z   token: ***
+2025-06-08T01:40:53.2280550Z   ssh-strict: true
+2025-06-08T01:40:53.2281009Z   ssh-user: git
+2025-06-08T01:40:53.2281479Z   persist-credentials: true
+2025-06-08T01:40:53.2282009Z   clean: true
+2025-06-08T01:40:53.2282473Z   sparse-checkout-cone-mode: true
+2025-06-08T01:40:53.2283036Z   fetch-tags: false
+2025-06-08T01:40:53.2283502Z   show-progress: true
+2025-06-08T01:40:53.2283980Z   lfs: false
+2025-06-08T01:40:53.2284403Z   submodules: false
+2025-06-08T01:40:53.2284870Z   set-safe-directory: true
+2025-06-08T01:40:53.2285952Z env:
+2025-06-08T01:40:53.2286408Z   NODE_VERSION: 18
+2025-06-08T01:40:53.2286892Z   PYTHON_VERSION: 3.11
+2025-06-08T01:40:53.2287370Z ##[endgroup]
+2025-06-08T01:40:53.3463770Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:40:53.3467361Z ##[group]Getting Git version info
+2025-06-08T01:40:53.3468732Z Working directory is '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:40:53.3562457Z [command]/usr/bin/git version
+2025-06-08T01:40:53.3563949Z git version 2.49.0
+2025-06-08T01:40:53.3588246Z ##[endgroup]
+2025-06-08T01:40:53.3606391Z Temporarily overriding HOME='/home/runner/work/_temp/dc028bee-5bdc-4c78-a67d-c0bf4e7d7ff2' before making global git config changes
+2025-06-08T01:40:53.3610046Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:40:53.3613597Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:40:53.3653778Z Deleting the contents of '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:40:53.3658658Z ##[group]Initializing the repository
+2025-06-08T01:40:53.3663423Z [command]/usr/bin/git init /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:40:53.3768952Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-06-08T01:40:53.3770570Z hint: is subject to change. To configure the initial branch name to use in all
+2025-06-08T01:40:53.3771601Z hint: of your new repositories, which will suppress this warning, call:
+2025-06-08T01:40:53.3772360Z hint:
+2025-06-08T01:40:53.3772899Z hint: 	git config --global init.defaultBranch <name>
+2025-06-08T01:40:53.3773542Z hint:
+2025-06-08T01:40:53.3774161Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-06-08T01:40:53.3775154Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-06-08T01:40:53.3776286Z hint:
+2025-06-08T01:40:53.3776778Z hint: 	git branch -m <name>
+2025-06-08T01:40:53.3796338Z Initialized empty Git repository in /home/runner/work/ApexAgent/ApexAgent/.git/
+2025-06-08T01:40:53.3800119Z [command]/usr/bin/git remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:40:53.3845367Z ##[endgroup]
+2025-06-08T01:40:53.3847453Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:40:53.3851870Z [command]/usr/bin/git config --local gc.auto 0
+2025-06-08T01:40:53.3888668Z ##[endgroup]
+2025-06-08T01:40:53.3890183Z ##[group]Setting up auth
+2025-06-08T01:40:53.3892037Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:40:53.3925122Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:40:53.4374062Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:40:53.4397948Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:40:53.4625212Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-06-08T01:40:53.4669202Z ##[endgroup]
+2025-06-08T01:40:53.4672144Z ##[group]Fetching the repository
+2025-06-08T01:40:53.4680703Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +e1f9bde9b6746d91768317f5ba8925e8f8a72f6d:refs/remotes/pull/1/merge
+2025-06-08T01:40:57.2199443Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:40:57.2208062Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:40:57.2209135Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:40:57.2210222Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:40:57.2211439Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:40:57.2212771Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:40:57.2214398Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:40:57.2217781Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:40:57.2220058Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:40:57.2221286Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:40:57.2224607Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:40:57.2233794Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:40:57.2234881Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:40:57.2235963Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:40:57.2239837Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:40:57.2241314Z  * [new ref]           e1f9bde9b6746d91768317f5ba8925e8f8a72f6d -> pull/1/merge
+2025-06-08T01:40:57.2278907Z ##[endgroup]
+2025-06-08T01:40:57.2280843Z ##[group]Determining the checkout info
+2025-06-08T01:40:57.2283128Z ##[endgroup]
+2025-06-08T01:40:57.2289288Z [command]/usr/bin/git sparse-checkout disable
+2025-06-08T01:40:57.2337985Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:40:57.2367235Z ##[group]Checking out the ref
+2025-06-08T01:40:57.2371819Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:40:58.2642442Z Updating files:  69% (17026/24378)
+2025-06-08T01:40:58.2758820Z Updating files:  70% (17065/24378)
+2025-06-08T01:40:58.2863632Z Updating files:  71% (17309/24378)
+2025-06-08T01:40:58.2966523Z Updating files:  72% (17553/24378)
+2025-06-08T01:40:58.3067199Z Updating files:  73% (17796/24378)
+2025-06-08T01:40:58.3169646Z Updating files:  74% (18040/24378)
+2025-06-08T01:40:58.3517979Z Updating files:  75% (18284/24378)
+2025-06-08T01:40:58.3603052Z Updating files:  76% (18528/24378)
+2025-06-08T01:40:58.3731837Z Updating files:  77% (18772/24378)
+2025-06-08T01:40:58.3896067Z Updating files:  78% (19015/24378)
+2025-06-08T01:40:58.4172124Z Updating files:  79% (19259/24378)
+2025-06-08T01:40:58.4356807Z Updating files:  80% (19503/24378)
+2025-06-08T01:40:58.4465513Z Updating files:  81% (19747/24378)
+2025-06-08T01:40:58.4663043Z Updating files:  82% (19990/24378)
+2025-06-08T01:40:58.4944252Z Updating files:  83% (20234/24378)
+2025-06-08T01:40:58.5211720Z Updating files:  84% (20478/24378)
+2025-06-08T01:40:58.5349273Z Updating files:  85% (20722/24378)
+2025-06-08T01:40:58.5642948Z Updating files:  86% (20966/24378)
+2025-06-08T01:40:58.5911208Z Updating files:  87% (21209/24378)
+2025-06-08T01:40:58.6636563Z Updating files:  88% (21453/24378)
+2025-06-08T01:40:58.6725428Z Updating files:  89% (21697/24378)
+2025-06-08T01:40:58.6901967Z Updating files:  90% (21941/24378)
+2025-06-08T01:40:58.7002226Z Updating files:  91% (22184/24378)
+2025-06-08T01:40:58.7113534Z Updating files:  92% (22428/24378)
+2025-06-08T01:40:58.7233467Z Updating files:  93% (22672/24378)
+2025-06-08T01:40:58.7418304Z Updating files:  94% (22916/24378)
+2025-06-08T01:40:58.7646343Z Updating files:  95% (23160/24378)
+2025-06-08T01:40:58.7820340Z Updating files:  96% (23403/24378)
+2025-06-08T01:40:58.8057753Z Updating files:  97% (23647/24378)
+2025-06-08T01:40:58.8293991Z Updating files:  98% (23891/24378)
+2025-06-08T01:40:58.8617298Z Updating files:  99% (24135/24378)
+2025-06-08T01:40:58.8618090Z Updating files: 100% (24378/24378)
+2025-06-08T01:40:58.8618789Z Updating files: 100% (24378/24378), done.
+2025-06-08T01:40:58.8944757Z Note: switching to 'refs/remotes/pull/1/merge'.
+2025-06-08T01:40:58.8949240Z 
+2025-06-08T01:40:58.8952820Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-06-08T01:40:58.8957358Z changes and commit them, and you can discard any commits you make in this
+2025-06-08T01:40:58.8958683Z state without impacting any branches by switching back to a branch.
+2025-06-08T01:40:58.8986364Z 
+2025-06-08T01:40:58.8987102Z If you want to create a new branch to retain commits you create, you may
+2025-06-08T01:40:58.8988120Z do so (now or later) by using -c with the switch command. Example:
+2025-06-08T01:40:58.8988731Z 
+2025-06-08T01:40:58.8989060Z   git switch -c <new-branch-name>
+2025-06-08T01:40:58.8989379Z 
+2025-06-08T01:40:58.8989545Z Or undo this operation with:
+2025-06-08T01:40:58.8989855Z 
+2025-06-08T01:40:58.8990058Z   git switch -
+2025-06-08T01:40:58.8990274Z 
+2025-06-08T01:40:58.8990630Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-06-08T01:40:58.8991148Z 
+2025-06-08T01:40:58.8991715Z HEAD is now at e1f9bde9 Merge 7517b04d283a732ef9276d3814129b15d07f138e into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T01:40:58.9022994Z ##[endgroup]
+2025-06-08T01:40:58.9090547Z [command]/usr/bin/git log -1 --format=%H
+2025-06-08T01:40:58.9122455Z e1f9bde9b6746d91768317f5ba8925e8f8a72f6d
+2025-06-08T01:40:58.9362349Z ##[group]Run actions/setup-node@v4
+2025-06-08T01:40:58.9362641Z with:
+2025-06-08T01:40:58.9362843Z   node-version: 18
+2025-06-08T01:40:58.9363043Z   cache: npm
+2025-06-08T01:40:58.9363231Z   always-auth: false
+2025-06-08T01:40:58.9363435Z   check-latest: false
+2025-06-08T01:40:58.9363757Z   token: ***
+2025-06-08T01:40:58.9363946Z env:
+2025-06-08T01:40:58.9364121Z   NODE_VERSION: 18
+2025-06-08T01:40:58.9364333Z   PYTHON_VERSION: 3.11
+2025-06-08T01:40:58.9364538Z ##[endgroup]
+2025-06-08T01:40:59.1163658Z Found in cache @ /opt/hostedtoolcache/node/18.20.8/x64
+2025-06-08T01:40:59.1169246Z ##[group]Environment details
+2025-06-08T01:40:59.6326726Z node: v18.20.8
+2025-06-08T01:40:59.6327383Z npm: 10.8.2
+2025-06-08T01:40:59.6327814Z yarn: 1.22.22
+2025-06-08T01:40:59.6329328Z ##[endgroup]
+2025-06-08T01:40:59.6357039Z [command]/opt/hostedtoolcache/node/18.20.8/x64/bin/npm config get cache
+2025-06-08T01:40:59.8425908Z /home/runner/.npm
+2025-06-08T01:41:00.1298868Z npm cache is not found
+2025-06-08T01:41:00.1461285Z ##[group]Run actions/setup-python@v4
+2025-06-08T01:41:00.1461579Z with:
+2025-06-08T01:41:00.1461768Z   python-version: 3.11
+2025-06-08T01:41:00.1461986Z   check-latest: false
+2025-06-08T01:41:00.1462294Z   token: ***
+2025-06-08T01:41:00.1462499Z   update-environment: true
+2025-06-08T01:41:00.1462740Z   allow-prereleases: false
+2025-06-08T01:41:00.1462944Z env:
+2025-06-08T01:41:00.1463115Z   NODE_VERSION: 18
+2025-06-08T01:41:00.1463309Z   PYTHON_VERSION: 3.11
+2025-06-08T01:41:00.1463509Z ##[endgroup]
+2025-06-08T01:41:00.3162187Z ##[group]Installed versions
+2025-06-08T01:41:00.3277354Z Successfully set up CPython (3.11.12)
+2025-06-08T01:41:00.3278235Z ##[endgroup]
+2025-06-08T01:41:00.3376898Z ##[group]Run sudo apt-get update
+2025-06-08T01:41:00.3377238Z [36;1msudo apt-get update[0m
+2025-06-08T01:41:00.3377729Z [36;1msudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2 libxkbcommon0 libxss1 libasound2[0m
+2025-06-08T01:41:00.3653213Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:41:00.3653489Z env:
+2025-06-08T01:41:00.3653679Z   NODE_VERSION: 18
+2025-06-08T01:41:00.3653898Z   PYTHON_VERSION: 3.11
+2025-06-08T01:41:00.3654202Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3654673Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:41:00.3655137Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3655541Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3656227Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3656634Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:41:00.3657029Z ##[endgroup]
+2025-06-08T01:41:00.5517514Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2025-06-08T01:41:00.6117681Z Get:3 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+2025-06-08T01:41:00.6514476Z Get:4 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2025-06-08T01:41:00.6559746Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2025-06-08T01:41:00.6573125Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2025-06-08T01:41:00.6654506Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2025-06-08T01:41:00.6774385Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2025-06-08T01:41:00.8164227Z Get:8 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [1377 B]
+2025-06-08T01:41:00.8987218Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [33.7 kB]
+2025-06-08T01:41:00.9007978Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [20.9 kB]
+2025-06-08T01:41:00.9040030Z Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [8426 B]
+2025-06-08T01:41:01.0637505Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1113 kB]
+2025-06-08T01:41:01.0964054Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [237 kB]
+2025-06-08T01:41:01.1124015Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [161 kB]
+2025-06-08T01:41:01.1173431Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1078 kB]
+2025-06-08T01:41:01.1407268Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [274 kB]
+2025-06-08T01:41:01.1441006Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [376 kB]
+2025-06-08T01:41:01.1545420Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1172 kB]
+2025-06-08T01:41:01.1706760Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [243 kB]
+2025-06-08T01:41:01.1731497Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+2025-06-08T01:41:01.1762629Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+2025-06-08T01:41:01.2240645Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [39.2 kB]
+2025-06-08T01:41:01.2281335Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7092 B]
+2025-06-08T01:41:01.2372402Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [27.1 kB]
+2025-06-08T01:41:01.2379317Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [16.4 kB]
+2025-06-08T01:41:01.2385280Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+2025-06-08T01:41:01.2391412Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+2025-06-08T01:41:01.2432441Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [864 kB]
+2025-06-08T01:41:01.2565431Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [159 kB]
+2025-06-08T01:41:01.2610979Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.6 kB]
+2025-06-08T01:41:01.2661807Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [846 kB]
+2025-06-08T01:41:01.2764666Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [185 kB]
+2025-06-08T01:41:01.2823248Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.2 kB]
+2025-06-08T01:41:01.2868500Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1138 kB]
+2025-06-08T01:41:01.3014333Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [236 kB]
+2025-06-08T01:41:01.3472323Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+2025-06-08T01:41:01.3485065Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+2025-06-08T01:41:05.8853981Z Fetched 8699 kB in 2s (5347 kB/s)
+2025-06-08T01:41:06.5864797Z Reading package lists...
+2025-06-08T01:41:06.6192756Z Reading package lists...
+2025-06-08T01:41:06.7727407Z Building dependency tree...
+2025-06-08T01:41:06.7735771Z Reading state information...
+2025-06-08T01:41:06.7864239Z Package libasound2 is a virtual package provided by:
+2025-06-08T01:41:06.7865260Z   liboss4-salsa-asound2 4.2-build2020-1ubuntu3
+2025-06-08T01:41:06.7867099Z   libasound2t64 1.2.11-1build2 (= 1.2.11-1build2)
+2025-06-08T01:41:06.7867459Z 
+2025-06-08T01:41:06.7892343Z E: Package 'libasound2' has no installation candidate
+2025-06-08T01:41:06.7925158Z ##[error]Process completed with exit code 100.
+2025-06-08T01:41:06.8035976Z Post job cleanup.
+2025-06-08T01:41:06.8992229Z [command]/usr/bin/git version
+2025-06-08T01:41:06.9042800Z git version 2.49.0
+2025-06-08T01:41:06.9106750Z Temporarily overriding HOME='/home/runner/work/_temp/58d17bc7-3ed8-425e-8434-339606c814fb' before making global git config changes
+2025-06-08T01:41:06.9109515Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:41:06.9124071Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:41:06.9161739Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:41:06.9199065Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:41:06.9481141Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:41:06.9504772Z http.https://github.com/.extraheader
+2025-06-08T01:41:06.9519497Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-06-08T01:41:06.9554491Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:41:06.9915453Z Cleaning up orphan processes

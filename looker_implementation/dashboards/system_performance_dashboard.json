@@ -1,0 +1,27 @@
+{
+  "dashboard_name": "System Performance Dashboard",
+  "description": "Technical Metrics and Infrastructure Monitoring",
+  "elements": [
+    {
+      "type": "look",
+      "title": "Server CPU Utilization",
+      "look_id": "system_metrics.server_cpu_utilization"
+    },
+    {
+      "type": "look",
+      "title": "Database Query Performance",
+      "look_id": "system_metrics.database_query_performance"
+    },
+    {
+      "type": "look",
+      "title": "Network Latency",
+      "look_id": "system_metrics.network_latency"
+    },
+    {
+      "type": "look",
+      "title": "Disk I/O",
+      "look_id": "system_metrics.disk_io"
+    }
+  ]
+}
+

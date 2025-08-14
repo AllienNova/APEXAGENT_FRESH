@@ -1,0 +1,27 @@
+{
+  "dashboard_name": "Operational Monitoring Dashboard",
+  "description": "System Health, Performance Metrics, and Real-time Monitoring",
+  "elements": [
+    {
+      "type": "look",
+      "title": "API Latency by Endpoint",
+      "look_id": "system_metrics.api_latency_by_endpoint"
+    },
+    {
+      "type": "look",
+      "title": "Error Rates by Service",
+      "look_id": "system_metrics.error_rates_by_service"
+    },
+    {
+      "type": "look",
+      "title": "Resource Utilization (CPU, Memory)",
+      "look_id": "system_metrics.resource_utilization"
+    },
+    {
+      "type": "look",
+      "title": "Active Users",
+      "look_id": "user_activity.active_users"
+    }
+  ]
+}
+

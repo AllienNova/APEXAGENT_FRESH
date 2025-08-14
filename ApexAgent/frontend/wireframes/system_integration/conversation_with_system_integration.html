@@ -1,0 +1,323 @@
+<!-- Conversation Interface with System Integration Wireframe -->
+<div class="conversation-interface-with-system-integration flex h-screen">
+  <!-- Left Sidebar: File System Navigation -->
+  <div class="file-system-sidebar w-64 border-r border-border bg-card overflow-hidden flex flex-col">
+    <div class="panel-header border-b border-border p-3 flex items-center justify-between">
+      <h2 class="font-semibold text-sm">File System</h2>
+      <div class="flex items-center space-x-1">
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="New Folder">
+          <span class="icon">📁+</span>
+        </button>
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Refresh">
+          <span class="icon">🔄</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="location-bar flex items-center bg-background rounded-md border border-input p-2 m-2">
+      <span class="icon mr-2">📂</span>
+      <input type="text" value="/home/user/projects/website_dev" class="bg-transparent flex-1 text-xs focus:outline-none" />
+    </div>
+    
+    <div class="directory-tree flex-1 overflow-auto p-2">
+      <!-- Directory tree structure similar to file_system_panel.html -->
+      <div class="tree-item">
+        <div class="flex items-center p-1.5 hover:bg-accent rounded-md cursor-pointer text-xs">
+          <span class="icon mr-2">📂</span>
+          <span>Home</span>
+        </div>
+        
+        <div class="pl-4">
+          <div class="tree-item">
+            <div class="flex items-center p-1.5 hover:bg-accent rounded-md cursor-pointer text-xs">
+              <span class="icon mr-2">📂</span>
+              <span>Documents</span>
+            </div>
+          </div>
+          
+          <div class="tree-item">
+            <div class="flex items-center p-1.5 hover:bg-accent rounded-md cursor-pointer bg-accent text-xs">
+              <span class="icon mr-2">📂</span>
+              <span>Projects</span>
+            </div>
+            
+            <div class="pl-4">
+              <div class="tree-item">
+                <div class="flex items-center p-1.5 hover:bg-accent rounded-md cursor-pointer text-xs">
+                  <span class="icon mr-2">📂</span>
+                  <span>website_dev</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Conversation Area -->
+  <div class="conversation-area flex-1 flex flex-col overflow-hidden">
+    <div class="conversation-header border-b border-border p-3">
+      <div class="flex justify-between items-center">
+        <h1 class="text-lg font-semibold">Website Development</h1>
+        <div class="flex items-center space-x-2 text-xs text-muted-foreground">
+          <span>Project: /home/user/projects/website_dev</span>
+          <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+            <span class="icon">📂</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="message-thread flex-1 overflow-y-auto p-4 space-y-6">
+      <!-- User Message -->
+      <div class="message flex justify-end">
+        <div class="flex flex-row-reverse max-w-3xl">
+          <div class="flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center ml-3 bg-primary text-primary-foreground">
+            U
+          </div>
+          
+          <div class="message-bubble rounded-lg p-3 bg-primary text-primary-foreground rounded-tr-none">
+            <div class="message-header flex justify-between mb-1">
+              <span class="text-xs font-medium">You</span>
+              <span class="text-xs opacity-70">10:30 AM</span>
+            </div>
+            
+            <div class="message-content">
+              <p class="text-sm">I need help creating a responsive website for my small business. It should have a home page, about us, services, and contact sections.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Agent Message with System Actions -->
+      <div class="message flex justify-start">
+        <div class="flex flex-row max-w-3xl">
+          <div class="flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center mr-3 bg-muted text-muted-foreground">
+            A
+          </div>
+          
+          <div class="message-bubble rounded-lg p-3 bg-card border border-border rounded-tl-none">
+            <div class="message-header flex justify-between mb-1">
+              <span class="text-xs font-medium">ApexAgent</span>
+              <span class="text-xs opacity-70">10:31 AM</span>
+            </div>
+            
+            <div class="message-content">
+              <p class="text-sm mb-3">I'll help you create a responsive website for your small business. Let's start by setting up a project structure.</p>
+              
+              <!-- System Action Indicator -->
+              <div class="system-action bg-muted/30 rounded-md p-2 mb-3 text-xs">
+                <div class="flex items-center text-muted-foreground mb-1">
+                  <span class="icon mr-1">💻</span>
+                  <span>Shell Command:</span>
+                </div>
+                <code class="block bg-background p-1.5 rounded">mkdir -p /home/user/projects/website_dev</code>
+              </div>
+              
+              <p class="text-sm mb-3">Now I'll create the basic HTML structure for your website with the sections you requested.</p>
+              
+              <!-- System Action Indicator -->
+              <div class="system-action bg-muted/30 rounded-md p-2 mb-3 text-xs">
+                <div class="flex items-center text-muted-foreground mb-1">
+                  <span class="icon mr-1">📝</span>
+                  <span>File Created: <a href="#" class="text-primary hover:underline">/home/user/projects/website_dev/index.html</a></span>
+                </div>
+              </div>
+              
+              <div class="code-block mt-3 rounded-md overflow-hidden border border-border">
+                <div class="code-header bg-muted px-3 py-1.5 flex justify-between items-center">
+                  <span class="text-xs font-medium">HTML</span>
+                  <button class="text-xs hover:bg-background p-1 rounded">Copy</button>
+                </div>
+                <pre class="bg-background p-3 overflow-x-auto text-xs">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Your Business Name&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Navigation --&gt;
+  &lt;nav&gt;
+    &lt;div class="logo"&gt;Your Logo&lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#about"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#services"&gt;Services&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+              </div>
+            </div>
+            
+            <div class="message-actions flex space-x-2 mt-3 justify-end">
+              <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                <span class="icon">👍</span>
+              </button>
+              <button class="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                <span class="icon">👎</span>
+              </button>
+              <button class="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-accent text-muted-foreground text-xs">
+                <span class="icon">🔄</span>
+                <span>Regenerate</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Agent Action Indicator -->
+      <div class="agent-action flex items-center p-3 rounded-md bg-accent/30 max-w-md">
+        <div class="action-icon h-8 w-8 rounded-full bg-accent flex items-center justify-center mr-3">
+          🌐
+        </div>
+        <div class="flex-1">
+          <div class="text-sm mb-1">Creating CSS file for responsive styling</div>
+          <div class="h-1.5 bg-muted rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full animate-pulse" style="width: 75%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="input-area border-t border-border p-3">
+      <div class="flex items-end space-x-2">
+        <div class="input-toolbar flex space-x-1 mb-2">
+          <button class="p-1.5 rounded-md hover:bg-accent text-muted-foreground" title="Attach files">
+            <span class="icon">📎</span>
+          </button>
+          <button class="p-1.5 rounded-md hover:bg-accent text-muted-foreground" title="Search">
+            <span class="icon">🔍</span>
+          </button>
+          <button class="p-1.5 rounded-md hover:bg-accent text-muted-foreground" title="Voice input">
+            <span class="icon">🎤</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="flex items-end space-x-2">
+        <div class="flex-1 bg-background rounded-md border border-input">
+          <textarea
+            placeholder="Message ApexAgent..."
+            class="w-full p-3 bg-transparent resize-none focus:outline-none min-h-[60px] text-sm"
+            rows={2}
+          ></textarea>
+        </div>
+        
+        <button class="p-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90">
+          <span class="icon">📤</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Right Sidebar: System Activity Monitor -->
+  <div class="system-activity-sidebar w-80 border-l border-border bg-card overflow-hidden flex flex-col">
+    <div class="panel-header border-b border-border p-3 flex items-center justify-between">
+      <h2 class="font-semibold text-sm">System Activity</h2>
+      <div class="flex items-center space-x-1">
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Refresh">
+          <span class="icon">🔄</span>
+        </button>
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Options">
+          <span class="icon">⋮</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="panel-tabs border-b border-border">
+      <div class="flex">
+        <button class="px-3 py-1.5 text-xs font-medium border-b-2 border-primary">Real-time</button>
+        <button class="px-3 py-1.5 text-xs font-medium text-muted-foreground">Resources</button>
+        <button class="px-3 py-1.5 text-xs font-medium text-muted-foreground">Permissions</button>
+      </div>
+    </div>
+    
+    <div class="activity-list flex-1 overflow-auto">
+      <!-- Condensed version of system_activity_monitor.html -->
+      <div class="activity-item border-b border-border p-2 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+            <span class="text-blue-600 text-xs">📁</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-xs">File Created</span>
+              <span class="text-xs text-muted-foreground">10:42 AM</span>
+            </div>
+            <p class="text-xs text-muted-foreground mt-0.5 truncate">/home/user/projects/website_dev/index.html</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="activity-item border-b border-border p-2 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-6 w-6 rounded-full bg-amber-100 flex items-center justify-center mr-2 flex-shrink-0">
+            <span class="text-amber-600 text-xs">💻</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-xs">Shell Command</span>
+              <span class="text-xs text-muted-foreground">10:41 AM</span>
+            </div>
+            <p class="text-xs text-muted-foreground mt-0.5 truncate">mkdir -p /home/user/projects/website_dev</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="activity-item border-b border-border p-2 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center mr-2 flex-shrink-0">
+            <span class="text-purple-600 text-xs">🌐</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-xs">API Request</span>
+              <span class="text-xs text-muted-foreground">10:40 AM</span>
+            </div>
+            <p class="text-xs text-muted-foreground mt-0.5 truncate">GET https://api.example.com/templates</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Resource Usage Summary -->
+    <div class="resource-summary border-t border-border p-3 space-y-2">
+      <h3 class="text-xs font-semibold">Resource Usage</h3>
+      
+      <div>
+        <div class="flex items-center justify-between text-xs mb-0.5">
+          <span class="text-muted-foreground">CPU</span>
+          <span>32%</span>
+        </div>
+        <div class="h-1.5 bg-muted rounded-full overflow-hidden">
+          <div class="h-full bg-blue-500 rounded-full" style="width: 32%"></div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex items-center justify-between text-xs mb-0.5">
+          <span class="text-muted-foreground">Memory</span>
+          <span>4.2 GB / 16 GB</span>
+        </div>
+        <div class="h-1.5 bg-muted rounded-full overflow-hidden">
+          <div class="h-full bg-purple-500 rounded-full" style="width: 26%"></div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex items-center justify-between text-xs mb-0.5">
+          <span class="text-muted-foreground">Disk</span>
+          <span>392 GB / 512 GB</span>
+        </div>
+        <div class="h-1.5 bg-muted rounded-full overflow-hidden">
+          <div class="h-full bg-green-500 rounded-full" style="width: 76%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apexagent
+  namespace: apexagent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apexagent
+  template:
+    metadata:
+      labels:
+        app: apexagent
+    spec:
+      containers:
+      - name: apexagent
+        image: gcr.io/PROJECT_ID/apexagent:VERSION
+        ports:
+        - containerPort: 8000
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: apexagent-secrets
+              key: database-url
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: apexagent-secrets
+              key: redis-url
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apexagent
+  namespace: apexagent
+spec:
+  selector:
+    app: apexagent
+  ports:
+  - port: 80
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: apexagent
+  namespace: apexagent
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: apexagent
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: apexagent-certificate
+  namespace: apexagent
+spec:
+  domains:
+  - apexagent.example.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apexagent-ingress
+  namespace: apexagent
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: apexagent-ip
+    networking.gke.io/managed-certificates: apexagent-certificate
+    kubernetes.io/ingress.class: "gce"
+spec:
+  rules:
+  - host: apexagent.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: apexagent
+            port:
+              number: 80

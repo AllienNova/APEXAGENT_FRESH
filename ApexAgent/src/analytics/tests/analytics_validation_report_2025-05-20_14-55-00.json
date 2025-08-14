@@ -1,0 +1,150 @@
+{
+  "functionality": {
+    "category": "functionality",
+    "tests": [
+      {
+        "name": "usage_tracking",
+        "description": "Track resource usage",
+        "status": "FAIL",
+        "details": "Error: 'NoneType' object has no attribute 'store_metric'"
+      },
+      {
+        "name": "performance_tracking",
+        "description": "Track performance metrics",
+        "status": "PASS",
+        "details": "Generated performance ID: a751fd7c-7e5f-4f8e-b493-4b07ad95cc39"
+      },
+      {
+        "name": "business_metrics",
+        "description": "Track business metrics",
+        "status": "PASS",
+        "details": "Generated metric ID: 59dc0bbd-8b5d-49c0-a957-84dc6852463e"
+      },
+      {
+        "name": "event_recording",
+        "description": "Record application events",
+        "status": "PASS",
+        "details": "Generated event ID: 522b3b59-0c1a-466d-94fc-faee41ea73a7"
+      },
+      {
+        "name": "dashboard_generation",
+        "description": "Generate analytics dashboards",
+        "status": "PASS",
+        "details": "Dashboard contains 0 widgets"
+      },
+      {
+        "name": "report_generation",
+        "description": "Generate analytics reports",
+        "status": "PASS",
+        "details": "Report contains 0 sections"
+      }
+    ],
+    "passed": 5,
+    "total": 6,
+    "success_rate": 0.8333333333333334
+  },
+  "performance": {
+    "category": "performance",
+    "tests": [
+      {
+        "name": "usage_tracking_performance",
+        "description": "Measure performance of usage tracking",
+        "status": "FAIL",
+        "details": "Error: Invalid user: perf_user_0"
+      },
+      {
+        "name": "event_search_performance",
+        "description": "Measure performance of event search",
+        "status": "FAIL",
+        "details": "Error: 'dict' object has no attribute 'timestamp'"
+      },
+      {
+        "name": "dashboard_generation_performance",
+        "description": "Measure performance of dashboard generation",
+        "status": "FAIL",
+        "details": "Error: User test_user does not have access to dashboard system_performance"
+      }
+    ],
+    "passed": 0,
+    "total": 3,
+    "success_rate": 0.0
+  },
+  "security": {
+    "category": "security",
+    "tests": [
+      {
+        "name": "authentication_integration",
+        "description": "Verify authentication integration",
+        "status": "PASS",
+        "details": "Authentication correctly rejected invalid user"
+      },
+      {
+        "name": "authorization_integration",
+        "description": "Verify authorization integration",
+        "status": "PASS",
+        "details": "Authorization correctly rejected unauthorized access"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration",
+        "status": "FAIL",
+        "details": "Error: 'dict' object has no attribute 'event_type'"
+      }
+    ],
+    "passed": 2,
+    "total": 3,
+    "success_rate": 0.6666666666666666
+  },
+  "integration": {
+    "category": "integration",
+    "tests": [
+      {
+        "name": "subscription_integration",
+        "description": "Verify subscription system integration",
+        "status": "FAIL",
+        "details": "Error: SubscriptionIntegration.get_subscription_analytics() got an unexpected keyword argument 'user_id'"
+      },
+      {
+        "name": "llm_integration",
+        "description": "Verify LLM providers integration",
+        "status": "FAIL",
+        "details": "Error: LLMIntegration.get_usage_analytics() got an unexpected keyword argument 'provider_id'"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration for sensitive data",
+        "status": "FAIL",
+        "details": "Error: 'dict' object has no attribute 'event_type'"
+      }
+    ],
+    "passed": 0,
+    "total": 3,
+    "success_rate": 0.0
+  },
+  "data_quality": {
+    "category": "data_quality",
+    "tests": [
+      {
+        "name": "data_consistency",
+        "description": "Verify data consistency between recording and retrieval",
+        "status": "FAIL",
+        "details": "Error: 'NoneType' object has no attribute 'store_metric'"
+      },
+      {
+        "name": "data_aggregation",
+        "description": "Verify correct data aggregation",
+        "status": "PASS",
+        "details": "Data correctly aggregated"
+      }
+    ],
+    "passed": 1,
+    "total": 2,
+    "success_rate": 0.5
+  },
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 8,
+    "success_rate": 0.47058823529411764,
+    "status": "FAIL"
+  }
+}

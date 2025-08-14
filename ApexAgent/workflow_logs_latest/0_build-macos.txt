@@ -1,0 +1,377 @@
+2025-06-08T01:49:36.6554857Z Requested labels: macos-latest
+2025-06-08T01:49:36.6555138Z Job defined at: AllienNova/ApexAgent/.github/workflows/build-release.yml@refs/pull/1/merge
+2025-06-08T01:49:36.6555214Z Waiting for a runner to pick up this job...
+2025-06-08T01:49:37.0712127Z Job is waiting for a hosted runner to come online.
+2025-06-08T01:49:40.6997607Z Job is about to start running on the hosted runner: GitHub Actions 56 (hosted)
+2025-06-08T01:49:42.5016380Z Current runner version: '2.325.0'
+2025-06-08T01:49:42.5033810Z ##[group]Operating System
+2025-06-08T01:49:42.5034290Z macOS
+2025-06-08T01:49:42.5034580Z 14.7.6
+2025-06-08T01:49:42.5034860Z 23H626
+2025-06-08T01:49:42.5035160Z ##[endgroup]
+2025-06-08T01:49:42.5035460Z ##[group]Runner Image
+2025-06-08T01:49:42.5035810Z Image: macos-14-arm64
+2025-06-08T01:49:42.5036150Z Version: 20250602.1561
+2025-06-08T01:49:42.5036810Z Included Software: https://github.com/actions/runner-images/blob/macos-14-arm64/20250602.1561/images/macos/macos-14-arm64-Readme.md
+2025-06-08T01:49:42.5037740Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-14-arm64%2F20250602.1561
+2025-06-08T01:49:42.5038330Z ##[endgroup]
+2025-06-08T01:49:42.5038650Z ##[group]Runner Image Provisioner
+2025-06-08T01:49:42.5039050Z 2.0.437.1+b8a73daf41ec39b19236c1d542c9f2348c5b7c2d
+2025-06-08T01:49:42.5039440Z ##[endgroup]
+2025-06-08T01:49:42.5040100Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:49:42.5041090Z Contents: read
+2025-06-08T01:49:42.5041430Z Metadata: read
+2025-06-08T01:49:42.5041740Z Packages: read
+2025-06-08T01:49:42.5042070Z ##[endgroup]
+2025-06-08T01:49:42.5043970Z Secret source: Actions
+2025-06-08T01:49:42.5044390Z Prepare workflow directory
+2025-06-08T01:49:42.5275350Z Prepare all required actions
+2025-06-08T01:49:42.5300740Z Getting action download info
+2025-06-08T01:49:42.8191980Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:49:42.8194070Z Version: 4.2.2
+2025-06-08T01:49:42.8196130Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:49:42.8198710Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:49:42.8200310Z ##[endgroup]
+2025-06-08T01:49:43.1712040Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:49:43.1712680Z Version: 4.4.0
+2025-06-08T01:49:43.1713180Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:49:43.1713960Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:49:43.1714520Z ##[endgroup]
+2025-06-08T01:49:43.2762620Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:49:43.2763180Z Version: 4.9.1
+2025-06-08T01:49:43.2763650Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:49:43.2764270Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:49:43.2764690Z ##[endgroup]
+2025-06-08T01:49:43.6356560Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:49:43.6357100Z Version: 4.6.2
+2025-06-08T01:49:43.6357640Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:49:43.6358310Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:49:43.6358850Z ##[endgroup]
+2025-06-08T01:49:43.7704250Z Complete job name: build-macos
+2025-06-08T01:49:43.8064920Z ##[group]Run actions/checkout@v4
+2025-06-08T01:49:43.8066560Z with:
+2025-06-08T01:49:43.8067100Z   fetch-depth: 0
+2025-06-08T01:49:43.8067610Z   repository: AllienNova/ApexAgent
+2025-06-08T01:49:43.8068410Z   token: ***
+2025-06-08T01:49:43.8068900Z   ssh-strict: true
+2025-06-08T01:49:43.8069210Z   ssh-user: git
+2025-06-08T01:49:43.8069510Z   persist-credentials: true
+2025-06-08T01:49:43.8069830Z   clean: true
+2025-06-08T01:49:43.8070130Z   sparse-checkout-cone-mode: true
+2025-06-08T01:49:43.8070480Z   fetch-tags: false
+2025-06-08T01:49:43.8070780Z   show-progress: true
+2025-06-08T01:49:43.8071070Z   lfs: false
+2025-06-08T01:49:43.8071350Z   submodules: false
+2025-06-08T01:49:43.8071640Z   set-safe-directory: true
+2025-06-08T01:49:43.8072200Z env:
+2025-06-08T01:49:43.8072480Z   NODE_VERSION: 18
+2025-06-08T01:49:43.8072770Z   PYTHON_VERSION: 3.11
+2025-06-08T01:49:43.8073060Z ##[endgroup]
+2025-06-08T01:49:44.0527970Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:49:44.0529150Z ##[group]Getting Git version info
+2025-06-08T01:49:44.0529680Z Working directory is '/Users/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:49:44.0531220Z [command]/opt/homebrew/bin/git version
+2025-06-08T01:49:44.0762930Z git version 2.49.0
+2025-06-08T01:49:44.0785900Z ##[endgroup]
+2025-06-08T01:49:44.0791690Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/451240b6-851d-4e0f-bd43-f330f78cfcb3/.gitconfig'
+2025-06-08T01:49:44.0798240Z Temporarily overriding HOME='/Users/runner/work/_temp/451240b6-851d-4e0f-bd43-f330f78cfcb3' before making global git config changes
+2025-06-08T01:49:44.0799420Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:49:44.0802330Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:49:44.0883310Z Deleting the contents of '/Users/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:49:44.0885590Z ##[group]Initializing the repository
+2025-06-08T01:49:44.0890180Z [command]/opt/homebrew/bin/git init /Users/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:49:44.1059380Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-06-08T01:49:44.1060330Z hint: is subject to change. To configure the initial branch name to use in all
+2025-06-08T01:49:44.1061170Z hint: of your new repositories, which will suppress this warning, call:
+2025-06-08T01:49:44.1061780Z hint:
+2025-06-08T01:49:44.1062140Z hint: 	git config --global init.defaultBranch <name>
+2025-06-08T01:49:44.1062540Z hint:
+2025-06-08T01:49:44.1062960Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-06-08T01:49:44.1063580Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-06-08T01:49:44.1064060Z hint:
+2025-06-08T01:49:44.1064350Z hint: 	git branch -m <name>
+2025-06-08T01:49:44.1064830Z Initialized empty Git repository in /Users/runner/work/ApexAgent/ApexAgent/.git/
+2025-06-08T01:49:44.1067430Z [command]/opt/homebrew/bin/git remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:49:44.1116150Z ##[endgroup]
+2025-06-08T01:49:44.1116690Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:49:44.1118780Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2025-06-08T01:49:44.1155370Z ##[endgroup]
+2025-06-08T01:49:44.1155900Z ##[group]Setting up auth
+2025-06-08T01:49:44.1159280Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:49:44.1194920Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:49:44.2344780Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:49:44.2666390Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:49:44.2998580Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-06-08T01:49:44.3066420Z ##[endgroup]
+2025-06-08T01:49:44.3067080Z ##[group]Fetching the repository
+2025-06-08T01:49:44.3072410Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +7e2b03deff032c90a9439354d93f0089bc8ba52d:refs/remotes/pull/1/merge
+2025-06-08T01:49:46.7426390Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:49:46.7427740Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:49:46.7442570Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:49:46.7445140Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:49:46.7446880Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:49:46.7449430Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:49:46.7451660Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:49:46.7454370Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:49:46.7458410Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:49:46.7460340Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:49:46.7462100Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:49:46.7463870Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:49:46.7465720Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:49:46.7468820Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:49:46.7471380Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:49:46.7474950Z  * [new ref]           7e2b03deff032c90a9439354d93f0089bc8ba52d -> pull/1/merge
+2025-06-08T01:49:46.7545570Z ##[endgroup]
+2025-06-08T01:49:46.7547740Z ##[group]Determining the checkout info
+2025-06-08T01:49:46.7548760Z ##[endgroup]
+2025-06-08T01:49:46.7549700Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2025-06-08T01:49:46.7618000Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:49:46.7670090Z ##[group]Checking out the ref
+2025-06-08T01:49:46.7671910Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:49:47.9623280Z Updating files:  46% (11288/24378)
+2025-06-08T01:49:47.9825510Z Updating files:  47% (11458/24378)
+2025-06-08T01:49:48.0026180Z Updating files:  48% (11702/24378)
+2025-06-08T01:49:48.0161840Z Updating files:  49% (11946/24378)
+2025-06-08T01:49:48.0531020Z Updating files:  50% (12189/24378)
+2025-06-08T01:49:48.0828880Z Updating files:  51% (12433/24378)
+2025-06-08T01:49:48.1105300Z Updating files:  52% (12677/24378)
+2025-06-08T01:49:48.1329180Z Updating files:  53% (12921/24378)
+2025-06-08T01:49:48.1576190Z Updating files:  54% (13165/24378)
+2025-06-08T01:49:48.1778290Z Updating files:  55% (13408/24378)
+2025-06-08T01:49:48.2008150Z Updating files:  56% (13652/24378)
+2025-06-08T01:49:48.2362600Z Updating files:  57% (13896/24378)
+2025-06-08T01:49:48.2673200Z Updating files:  58% (14140/24378)
+2025-06-08T01:49:48.2917310Z Updating files:  59% (14384/24378)
+2025-06-08T01:49:48.3155480Z Updating files:  60% (14627/24378)
+2025-06-08T01:49:48.3384440Z Updating files:  61% (14871/24378)
+2025-06-08T01:49:48.3670540Z Updating files:  62% (15115/24378)
+2025-06-08T01:49:48.3853920Z Updating files:  63% (15359/24378)
+2025-06-08T01:49:48.4029030Z Updating files:  64% (15602/24378)
+2025-06-08T01:49:48.4638560Z Updating files:  65% (15846/24378)
+2025-06-08T01:49:48.4855890Z Updating files:  66% (16090/24378)
+2025-06-08T01:49:48.5048240Z Updating files:  67% (16334/24378)
+2025-06-08T01:49:48.5245770Z Updating files:  68% (16578/24378)
+2025-06-08T01:49:48.5431870Z Updating files:  69% (16821/24378)
+2025-06-08T01:49:48.5601240Z Updating files:  70% (17065/24378)
+2025-06-08T01:49:48.5772500Z Updating files:  71% (17309/24378)
+2025-06-08T01:49:48.5940390Z Updating files:  72% (17553/24378)
+2025-06-08T01:49:48.6114370Z Updating files:  73% (17796/24378)
+2025-06-08T01:49:48.6279490Z Updating files:  74% (18040/24378)
+2025-06-08T01:49:48.6759030Z Updating files:  75% (18284/24378)
+2025-06-08T01:49:48.6889940Z Updating files:  76% (18528/24378)
+2025-06-08T01:49:48.7073270Z Updating files:  77% (18772/24378)
+2025-06-08T01:49:48.7242120Z Updating files:  78% (19015/24378)
+2025-06-08T01:49:48.7519670Z Updating files:  79% (19259/24378)
+2025-06-08T01:49:48.7744410Z Updating files:  80% (19503/24378)
+2025-06-08T01:49:48.7926080Z Updating files:  81% (19747/24378)
+2025-06-08T01:49:48.7960900Z Updating files:  82% (19990/24378)
+2025-06-08T01:49:48.8136930Z Updating files:  82% (20033/24378)
+2025-06-08T01:49:48.8395000Z Updating files:  83% (20234/24378)
+2025-06-08T01:49:48.8695640Z Updating files:  84% (20478/24378)
+2025-06-08T01:49:48.8920980Z Updating files:  85% (20722/24378)
+2025-06-08T01:49:48.9208140Z Updating files:  86% (20966/24378)
+2025-06-08T01:49:48.9520190Z Updating files:  87% (21209/24378)
+2025-06-08T01:49:49.0158010Z Updating files:  88% (21453/24378)
+2025-06-08T01:49:49.0325390Z Updating files:  89% (21697/24378)
+2025-06-08T01:49:49.0579380Z Updating files:  90% (21941/24378)
+2025-06-08T01:49:49.0749500Z Updating files:  91% (22184/24378)
+2025-06-08T01:49:49.0928800Z Updating files:  92% (22428/24378)
+2025-06-08T01:49:49.1295370Z Updating files:  93% (22672/24378)
+2025-06-08T01:49:49.1469170Z Updating files:  94% (22916/24378)
+2025-06-08T01:49:49.1770460Z Updating files:  95% (23160/24378)
+2025-06-08T01:49:49.2073010Z Updating files:  96% (23403/24378)
+2025-06-08T01:49:49.2781880Z Updating files:  97% (23647/24378)
+2025-06-08T01:49:49.3184870Z Updating files:  98% (23891/24378)
+2025-06-08T01:49:49.3587490Z Updating files:  99% (24135/24378)
+2025-06-08T01:49:49.3688560Z Updating files: 100% (24378/24378)
+2025-06-08T01:49:49.3789620Z Updating files: 100% (24378/24378), done.
+2025-06-08T01:49:49.3890940Z HEAD is now at 7e2b03de Merge aa15c3300a79b82bdfd2c72a7c2dd3a496e18760 into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T01:49:49.4151200Z ##[endgroup]
+2025-06-08T01:49:49.4454410Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2025-06-08T01:49:49.4483330Z 7e2b03deff032c90a9439354d93f0089bc8ba52d
+2025-06-08T01:49:49.4581380Z ##[group]Run actions/setup-node@v4
+2025-06-08T01:49:49.4581580Z with:
+2025-06-08T01:49:49.4581700Z   node-version: 18
+2025-06-08T01:49:49.4581820Z   cache: npm
+2025-06-08T01:49:49.4581950Z   always-auth: false
+2025-06-08T01:49:49.4582270Z   check-latest: false
+2025-06-08T01:49:49.4582610Z   token: ***
+2025-06-08T01:49:49.4582750Z env:
+2025-06-08T01:49:49.4582870Z   NODE_VERSION: 18
+2025-06-08T01:49:49.4583020Z   PYTHON_VERSION: 3.11
+2025-06-08T01:49:49.4583170Z ##[endgroup]
+2025-06-08T01:49:49.5784920Z Found in cache @ /Users/runner/hostedtoolcache/node/18.20.8/arm64
+2025-06-08T01:49:49.5788660Z ##[group]Environment details
+2025-06-08T01:49:49.9772150Z node: v18.20.8
+2025-06-08T01:49:49.9888360Z npm: 10.8.2
+2025-06-08T01:49:49.9989350Z yarn: 1.22.22
+2025-06-08T01:49:50.0090920Z ##[endgroup]
+2025-06-08T01:49:50.0202570Z [command]/Users/runner/hostedtoolcache/node/18.20.8/arm64/bin/npm config get cache
+2025-06-08T01:49:50.1097600Z /Users/runner/.npm
+2025-06-08T01:49:50.3860780Z npm cache is not found
+2025-06-08T01:49:50.3937150Z ##[group]Run actions/setup-python@v4
+2025-06-08T01:49:50.3937370Z with:
+2025-06-08T01:49:50.3937500Z   python-version: 3.11
+2025-06-08T01:49:50.3937640Z   check-latest: false
+2025-06-08T01:49:50.3937860Z   token: ***
+2025-06-08T01:49:50.3938040Z   update-environment: true
+2025-06-08T01:49:50.3938200Z   allow-prereleases: false
+2025-06-08T01:49:50.3938350Z env:
+2025-06-08T01:49:50.3938460Z   NODE_VERSION: 18
+2025-06-08T01:49:50.3938610Z   PYTHON_VERSION: 3.11
+2025-06-08T01:49:50.3938760Z ##[endgroup]
+2025-06-08T01:49:50.5503440Z ##[group]Installed versions
+2025-06-08T01:49:50.5965440Z Successfully set up CPython (3.11.9)
+2025-06-08T01:49:50.5965820Z ##[endgroup]
+2025-06-08T01:49:50.6013390Z ##[group]Run npm ci
+2025-06-08T01:49:50.6013640Z [36;1mnpm ci[0m
+2025-06-08T01:49:50.6091500Z shell: /bin/bash -e {0}
+2025-06-08T01:49:50.6091690Z env:
+2025-06-08T01:49:50.6091840Z   NODE_VERSION: 18
+2025-06-08T01:49:50.6092000Z   PYTHON_VERSION: 3.11
+2025-06-08T01:49:50.6092250Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:49:50.6092680Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:49:50.6093060Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:49:50.6093930Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:49:50.6094450Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:49:50.6094720Z ##[endgroup]
+2025-06-08T01:49:51.2655600Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T01:49:51.2757540Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T01:49:51.2875420Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T01:49:51.2980210Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T01:49:51.3082300Z npm warn EBADENGINE }
+2025-06-08T01:49:52.6834580Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2025-06-08T01:49:52.8951470Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-06-08T01:49:53.0566160Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-06-08T01:49:53.5623500Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-06-08T01:50:00.1766360Z 
+2025-06-08T01:50:00.1870560Z added 768 packages, and audited 769 packages in 9s
+2025-06-08T01:50:00.1973580Z 
+2025-06-08T01:50:00.2075170Z 90 packages are looking for funding
+2025-06-08T01:50:00.2113860Z   run `npm fund` for details
+2025-06-08T01:50:00.2114390Z 
+2025-06-08T01:50:00.2114850Z found 0 vulnerabilities
+2025-06-08T01:50:00.2183350Z ##[group]Run npm install dmg-license --save-dev
+2025-06-08T01:50:00.2183760Z [36;1mnpm install dmg-license --save-dev[0m
+2025-06-08T01:50:00.2279040Z shell: /bin/bash -e {0}
+2025-06-08T01:50:00.2279390Z env:
+2025-06-08T01:50:00.2279630Z   NODE_VERSION: 18
+2025-06-08T01:50:00.2279810Z   PYTHON_VERSION: 3.11
+2025-06-08T01:50:00.2280160Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2280820Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:50:00.2281320Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2281750Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2282130Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:00.2282430Z ##[endgroup]
+2025-06-08T01:50:01.0245430Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T01:50:01.0347530Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T01:50:01.0447770Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T01:50:01.0502340Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T01:50:01.0503190Z npm warn EBADENGINE }
+2025-06-08T01:50:01.1980450Z 
+2025-06-08T01:50:01.1980860Z up to date, audited 769 packages in 835ms
+2025-06-08T01:50:01.1981170Z 
+2025-06-08T01:50:01.1981420Z 90 packages are looking for funding
+2025-06-08T01:50:01.1981780Z   run `npm fund` for details
+2025-06-08T01:50:01.1987220Z 
+2025-06-08T01:50:01.1987380Z found 0 vulnerabilities
+2025-06-08T01:50:01.2052490Z ##[group]Run npm run build:mac
+2025-06-08T01:50:01.2052880Z [36;1mnpm run build:mac[0m
+2025-06-08T01:50:01.2098200Z shell: /bin/bash -e {0}
+2025-06-08T01:50:01.2098430Z env:
+2025-06-08T01:50:01.2098630Z   NODE_VERSION: 18
+2025-06-08T01:50:01.2098830Z   PYTHON_VERSION: 3.11
+2025-06-08T01:50:01.2099120Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2099680Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:50:01.2100130Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2100590Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2100950Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2101480Z   GH_TOKEN: ***
+2025-06-08T01:50:01.2102030Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+2025-06-08T01:50:01.2102270Z ##[endgroup]
+2025-06-08T01:50:01.3611030Z 
+2025-06-08T01:50:01.3712550Z > aideon-ai-lite@1.0.0 build:mac
+2025-06-08T01:50:01.3789010Z > npm run package:mac
+2025-06-08T01:50:01.3790150Z 
+2025-06-08T01:50:01.4837100Z 
+2025-06-08T01:50:01.4837590Z > aideon-ai-lite@1.0.0 package:mac
+2025-06-08T01:50:01.4838030Z > electron-builder --mac
+2025-06-08T01:50:01.4838150Z 
+2025-06-08T01:50:01.8902100Z   • electron-builder  version=24.13.3 os=23.6.0
+2025-06-08T01:50:01.8904660Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T01:50:01.8905870Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:50:01.8907050Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:50:01.8938890Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T01:50:02.1103870Z   • packaging       platform=darwin arch=arm64 electron=28.3.3 appOutDir=dist/mac-arm64
+2025-06-08T01:50:02.6579480Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-darwin-arm64.zip size=95 MB parts=6
+2025-06-08T01:50:03.3549700Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-darwin-arm64.zip duration=1.237s
+2025-06-08T01:50:06.0923010Z   • Current build is a part of pull request, code signing will be skipped.
+2025-06-08T01:50:06.0943530Z Set env CSC_FOR_PULL_REQUEST to true to force code signing.
+2025-06-08T01:50:06.0944680Z There are serious security concerns with CSC_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:50:06.0958710Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:50:06.0961700Z   • building        target=DMG arch=arm64 file=dist/Aideon AI Lite-1.0.0-arm64.dmg
+2025-06-08T01:50:06.0963430Z   • Detected arm64 process, HFS+ is unavailable. Creating dmg with APFS - supports Mac OSX 10.12+
+2025-06-08T01:50:20.1481880Z   • building block map  blockMapFile=dist/Aideon AI Lite-1.0.0-arm64.dmg.blockmap
+2025-06-08T01:50:21.0701590Z ##[group]Run actions/upload-artifact@v4
+2025-06-08T01:50:21.0701960Z with:
+2025-06-08T01:50:21.0702260Z   name: macos-installer
+2025-06-08T01:50:21.0702520Z   path: dist/*.dmg
+dist/*.zip
+
+2025-06-08T01:50:21.0702890Z   retention-days: 30
+2025-06-08T01:50:21.0703200Z   if-no-files-found: warn
+2025-06-08T01:50:21.0703500Z   compression-level: 6
+2025-06-08T01:50:21.0703860Z   overwrite: false
+2025-06-08T01:50:21.0704350Z   include-hidden-files: false
+2025-06-08T01:50:21.0704710Z env:
+2025-06-08T01:50:21.0704980Z   NODE_VERSION: 18
+2025-06-08T01:50:21.0705220Z   PYTHON_VERSION: 3.11
+2025-06-08T01:50:21.0705660Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:21.0706240Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:50:21.0706900Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:21.0707470Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:21.0708260Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:21.0708660Z ##[endgroup]
+2025-06-08T01:50:21.3611650Z With the provided path, there will be 4 files uploaded
+2025-06-08T01:50:21.3614540Z Artifact name is valid!
+2025-06-08T01:50:21.3616090Z Root directory input is valid!
+2025-06-08T01:50:21.7057500Z Beginning upload of artifact content to blob storage
+2025-06-08T01:50:22.8063190Z Uploaded bytes 8388608
+2025-06-08T01:50:23.0426660Z Uploaded bytes 16777216
+2025-06-08T01:50:23.0848240Z Uploaded bytes 25165824
+2025-06-08T01:50:23.3405150Z Uploaded bytes 33554432
+2025-06-08T01:50:23.3513060Z Uploaded bytes 41943040
+2025-06-08T01:50:23.5109380Z Uploaded bytes 50331648
+2025-06-08T01:50:23.5973260Z Uploaded bytes 58720256
+2025-06-08T01:50:23.8595240Z Uploaded bytes 67108864
+2025-06-08T01:50:24.0067260Z Uploaded bytes 75497472
+2025-06-08T01:50:24.1881880Z Uploaded bytes 83886080
+2025-06-08T01:50:24.4400220Z Uploaded bytes 92274688
+2025-06-08T01:50:24.8160950Z Uploaded bytes 99785339
+2025-06-08T01:50:24.8880070Z Finished uploading artifact content to blob storage!
+2025-06-08T01:50:24.8881840Z SHA256 digest of uploaded artifact zip is ea6b7fee5688cf699d4e10d5effe82524413d1ba642f576010843532f9da8320
+2025-06-08T01:50:24.8882860Z Finalizing artifact upload
+2025-06-08T01:50:25.0342580Z Artifact macos-installer.zip successfully finalized. Artifact ID 3282489150
+2025-06-08T01:50:25.0343700Z Artifact macos-installer has been successfully uploaded! Final size is 99785339 bytes. Artifact ID is 3282489150
+2025-06-08T01:50:25.0350420Z Artifact download URL: https://github.com/AllienNova/ApexAgent/actions/runs/15513710177/artifacts/3282489150
+2025-06-08T01:50:25.0475790Z Post job cleanup.
+2025-06-08T01:50:25.1762830Z Post job cleanup.
+2025-06-08T01:50:25.3064940Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/ApexAgent/ApexAgent --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+2025-06-08T01:50:26.9859620Z Sent 16384000 of 75956943 (21.6%), 15.6 MBs/sec
+2025-06-08T01:50:27.9865240Z Sent 66650112 of 75956943 (87.7%), 31.8 MBs/sec
+2025-06-08T01:50:28.6063810Z Sent 75956943 of 75956943 (100.0%), 27.6 MBs/sec
+2025-06-08T01:50:28.8442680Z Cache saved with the key: node-cache-macOS-arm64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621
+2025-06-08T01:50:28.8523770Z Post job cleanup.
+2025-06-08T01:50:28.9321700Z [command]/opt/homebrew/bin/git version
+2025-06-08T01:50:28.9461160Z git version 2.49.0
+2025-06-08T01:50:28.9484580Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/4ef142cc-e3db-45f0-ad1b-fae8ba372d82/.gitconfig'
+2025-06-08T01:50:28.9490400Z Temporarily overriding HOME='/Users/runner/work/_temp/4ef142cc-e3db-45f0-ad1b-fae8ba372d82' before making global git config changes
+2025-06-08T01:50:28.9491140Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:50:28.9493850Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:50:28.9556420Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:50:28.9593600Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:50:29.0172460Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:50:29.0221380Z http.https://github.com/.extraheader
+2025-06-08T01:50:29.0288320Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-06-08T01:50:29.0289770Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:50:29.0839230Z Cleaning up orphan processes

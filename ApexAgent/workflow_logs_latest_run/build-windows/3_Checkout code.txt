@@ -1,0 +1,271 @@
+2025-06-08T02:00:41.0008486Z ##[group]Run actions/checkout@v4
+2025-06-08T02:00:41.0008892Z with:
+2025-06-08T02:00:41.0009099Z   fetch-depth: 0
+2025-06-08T02:00:41.0009335Z   repository: AllienNova/ApexAgent
+2025-06-08T02:00:41.0009746Z   token: ***
+2025-06-08T02:00:41.0009961Z   ssh-strict: true
+2025-06-08T02:00:41.0010177Z   ssh-user: git
+2025-06-08T02:00:41.0010396Z   persist-credentials: true
+2025-06-08T02:00:41.0010630Z   clean: true
+2025-06-08T02:00:41.0010848Z   sparse-checkout-cone-mode: true
+2025-06-08T02:00:41.0013008Z   fetch-tags: false
+2025-06-08T02:00:41.0013284Z   show-progress: true
+2025-06-08T02:00:41.0013547Z   lfs: false
+2025-06-08T02:00:41.0013742Z   submodules: false
+2025-06-08T02:00:41.0013965Z   set-safe-directory: true
+2025-06-08T02:00:41.0014232Z env:
+2025-06-08T02:00:41.0014424Z   NODE_VERSION: 18
+2025-06-08T02:00:41.0014634Z   PYTHON_VERSION: 3.11
+2025-06-08T02:00:41.0014841Z ##[endgroup]
+2025-06-08T02:00:41.1755505Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T02:00:41.1758977Z ##[group]Getting Git version info
+2025-06-08T02:00:41.1760372Z Working directory is 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T02:00:41.2788252Z [command]"C:\Program Files\Git\bin\git.exe" version
+2025-06-08T02:00:41.3011251Z git version 2.49.0.windows.1
+2025-06-08T02:00:41.3138205Z ##[endgroup]
+2025-06-08T02:00:41.3158705Z Temporarily overriding HOME='C:\a\_temp\5a305402-b38b-49cb-9e67-e0e2138e0045' before making global git config changes
+2025-06-08T02:00:41.3160213Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T02:00:41.3168981Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\ApexAgent\ApexAgent
+2025-06-08T02:00:41.3369267Z Deleting the contents of 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T02:00:41.3375216Z ##[group]Initializing the repository
+2025-06-08T02:00:41.3385063Z [command]"C:\Program Files\Git\bin\git.exe" init C:\a\ApexAgent\ApexAgent
+2025-06-08T02:00:41.4098309Z Initialized empty Git repository in C:/a/ApexAgent/ApexAgent/.git/
+2025-06-08T02:00:41.4146669Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T02:00:41.4673580Z ##[endgroup]
+2025-06-08T02:00:41.4674492Z ##[group]Disabling automatic garbage collection
+2025-06-08T02:00:41.4684408Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2025-06-08T02:00:41.4928065Z ##[endgroup]
+2025-06-08T02:00:41.4928911Z ##[group]Setting up auth
+2025-06-08T02:00:41.4943030Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T02:00:41.5177765Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-06-08T02:00:42.6681208Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T02:00:42.6921561Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-06-08T02:00:43.1549896Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-06-08T02:00:43.1784921Z ##[endgroup]
+2025-06-08T02:00:43.1785912Z ##[group]Fetching the repository
+2025-06-08T02:00:43.1805589Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +0d5351708dd7a9b47204c61aa9a258a9537cfebb:refs/remotes/pull/1/merge
+2025-06-08T02:00:48.5020239Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T02:00:48.5021586Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T02:00:48.5024917Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T02:00:48.5031073Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T02:00:48.5032268Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T02:00:48.5033514Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T02:00:48.5035726Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T02:00:48.5036627Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T02:00:48.5037600Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T02:00:48.5038793Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T02:00:48.5040265Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T02:00:48.5041187Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T02:00:48.5064626Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T02:00:48.5070860Z  * [new branch]        main                                     -> origin/main
+2025-06-08T02:00:48.5072390Z  * [new branch]        master                                   -> origin/master
+2025-06-08T02:00:48.5097753Z  * [new ref]           0d5351708dd7a9b47204c61aa9a258a9537cfebb -> pull/1/merge
+2025-06-08T02:00:48.5394426Z ##[endgroup]
+2025-06-08T02:00:48.5464927Z ##[group]Determining the checkout info
+2025-06-08T02:00:48.5480706Z ##[endgroup]
+2025-06-08T02:00:48.5487534Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2025-06-08T02:00:48.5899952Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-06-08T02:00:48.6125410Z ##[group]Checking out the ref
+2025-06-08T02:00:48.6138292Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T02:00:50.3508263Z Updating files:   4% (995/24378)
+2025-06-08T02:00:50.6833484Z Updating files:   5% (1219/24378)
+2025-06-08T02:00:51.0447604Z Updating files:   5% (1321/24378)
+2025-06-08T02:00:51.7127656Z Updating files:   6% (1463/24378)
+2025-06-08T02:00:52.0751348Z Updating files:   6% (1596/24378)
+2025-06-08T02:00:52.5809418Z Updating files:   7% (1707/24378)
+2025-06-08T02:00:52.6939722Z Updating files:   8% (1951/24378)
+2025-06-08T02:00:53.7024191Z Updating files:   8% (1979/24378)
+2025-06-08T02:00:53.7536423Z Updating files:   8% (2188/24378)
+2025-06-08T02:00:54.6973416Z Updating files:   9% (2195/24378)
+2025-06-08T02:00:54.7629304Z Updating files:   9% (2425/24378)
+2025-06-08T02:00:55.9536049Z Updating files:  10% (2438/24378)
+2025-06-08T02:00:56.7053724Z Updating files:  10% (2545/24378)
+2025-06-08T02:00:56.9734850Z Updating files:  10% (2623/24378)
+2025-06-08T02:00:58.0723001Z Updating files:  11% (2682/24378)
+2025-06-08T02:00:58.6989288Z Updating files:  11% (2732/24378)
+2025-06-08T02:00:59.0404089Z Updating files:  11% (2852/24378)
+2025-06-08T02:00:59.7101780Z Updating files:  12% (2926/24378)
+2025-06-08T02:01:00.2442573Z Updating files:  12% (3070/24378)
+2025-06-08T02:01:00.7086709Z Updating files:  13% (3170/24378)
+2025-06-08T02:01:01.7447072Z Updating files:  13% (3233/24378)
+2025-06-08T02:01:02.4231847Z Updating files:  13% (3328/24378)
+2025-06-08T02:01:02.9744220Z Updating files:  14% (3413/24378)
+2025-06-08T02:01:03.4753949Z Updating files:  14% (3451/24378)
+2025-06-08T02:01:03.6737189Z Updating files:  15% (3657/24378)
+2025-06-08T02:01:03.7057958Z Updating files:  16% (3901/24378)
+2025-06-08T02:01:04.4528839Z Updating files:  16% (3918/24378)
+2025-06-08T02:01:04.7061469Z Updating files:  17% (4145/24378)
+2025-06-08T02:01:04.9151636Z Updating files:  17% (4312/24378)
+2025-06-08T02:01:05.8811664Z Updating files:  18% (4389/24378)
+2025-06-08T02:01:06.6179470Z Updating files:  18% (4498/24378)
+2025-06-08T02:01:06.7079328Z Updating files:  19% (4632/24378)
+2025-06-08T02:01:07.0802796Z Updating files:  19% (4693/24378)
+2025-06-08T02:01:07.7119123Z Updating files:  20% (4876/24378)
+2025-06-08T02:01:08.0694895Z Updating files:  20% (5037/24378)
+2025-06-08T02:01:09.3954728Z Updating files:  21% (5120/24378)
+2025-06-08T02:01:09.3955625Z Updating files:  21% (5230/24378)
+2025-06-08T02:01:10.3984370Z Updating files:  22% (5364/24378)
+2025-06-08T02:01:10.4340113Z Updating files:  22% (5445/24378)
+2025-06-08T02:01:10.7139529Z Updating files:  23% (5607/24378)
+2025-06-08T02:01:11.0317887Z Updating files:  23% (5736/24378)
+2025-06-08T02:01:11.7154510Z Updating files:  24% (5851/24378)
+2025-06-08T02:01:12.4019066Z Updating files:  24% (6056/24378)
+2025-06-08T02:01:13.1706050Z Updating files:  25% (6095/24378)
+2025-06-08T02:01:13.5537115Z Updating files:  25% (6233/24378)
+2025-06-08T02:01:13.7388497Z Updating files:  26% (6339/24378)
+2025-06-08T02:01:14.8070758Z Updating files:  26% (6409/24378)
+2025-06-08T02:01:15.7405572Z Updating files:  26% (6503/24378)
+2025-06-08T02:01:15.7926924Z Updating files:  26% (6579/24378)
+2025-06-08T02:01:16.7338340Z Updating files:  27% (6583/24378)
+2025-06-08T02:01:17.4845562Z Updating files:  27% (6717/24378)
+2025-06-08T02:01:17.7360670Z Updating files:  28% (6826/24378)
+2025-06-08T02:01:18.0026061Z Updating files:  28% (6877/24378)
+2025-06-08T02:01:18.1852085Z Updating files:  29% (7070/24378)
+2025-06-08T02:01:18.8370551Z Updating files:  30% (7314/24378)
+2025-06-08T02:01:18.8657221Z Updating files:  30% (7505/24378)
+2025-06-08T02:01:18.9991583Z Updating files:  31% (7558/24378)
+2025-06-08T02:01:19.1988817Z Updating files:  32% (7801/24378)
+2025-06-08T02:01:19.4262372Z Updating files:  33% (8045/24378)
+2025-06-08T02:01:19.5360347Z Updating files:  34% (8289/24378)
+2025-06-08T02:01:19.6774531Z Updating files:  35% (8533/24378)
+2025-06-08T02:01:19.7597856Z Updating files:  36% (8777/24378)
+2025-06-08T02:01:20.8416485Z Updating files:  36% (8853/24378)
+2025-06-08T02:01:20.8686433Z Updating files:  36% (9001/24378)
+2025-06-08T02:01:21.7324129Z Updating files:  37% (9020/24378)
+2025-06-08T02:01:22.5815343Z Updating files:  37% (9208/24378)
+2025-06-08T02:01:22.7527158Z Updating files:  38% (9264/24378)
+2025-06-08T02:01:23.1841683Z Updating files:  38% (9292/24378)
+2025-06-08T02:01:23.6217833Z Updating files:  39% (9508/24378)
+2025-06-08T02:01:23.7415870Z Updating files:  40% (9752/24378)
+2025-06-08T02:01:24.1116072Z Updating files:  40% (9810/24378)
+2025-06-08T02:01:24.7372874Z Updating files:  41% (9995/24378)
+2025-06-08T02:01:24.7677395Z Updating files:  41% (10227/24378)
+2025-06-08T02:01:25.1511449Z Updating files:  42% (10239/24378)
+2025-06-08T02:01:25.6319709Z Updating files:  43% (10483/24378)
+2025-06-08T02:01:25.7491409Z Updating files:  44% (10727/24378)
+2025-06-08T02:01:25.9888517Z Updating files:  44% (10802/24378)
+2025-06-08T02:01:26.3373289Z Updating files:  45% (10971/24378)
+2025-06-08T02:01:26.6944922Z Updating files:  46% (11214/24378)
+2025-06-08T02:01:26.7394720Z Updating files:  47% (11458/24378)
+2025-06-08T02:01:27.3849814Z Updating files:  47% (11492/24378)
+2025-06-08T02:01:27.7183867Z Updating files:  48% (11702/24378)
+2025-06-08T02:01:27.7412487Z Updating files:  49% (11946/24378)
+2025-06-08T02:01:28.6879516Z Updating files:  49% (11962/24378)
+2025-06-08T02:01:28.8204912Z Updating files:  50% (12189/24378)
+2025-06-08T02:01:29.7477656Z Updating files:  50% (12227/24378)
+2025-06-08T02:01:29.7657897Z Updating files:  50% (12418/24378)
+2025-06-08T02:01:30.7749629Z Updating files:  51% (12433/24378)
+2025-06-08T02:01:30.9090553Z Updating files:  51% (12611/24378)
+2025-06-08T02:01:31.7568269Z Updating files:  52% (12677/24378)
+2025-06-08T02:01:32.5290182Z Updating files:  52% (12824/24378)
+2025-06-08T02:01:32.7534946Z Updating files:  53% (12921/24378)
+2025-06-08T02:01:32.9586381Z Updating files:  53% (13057/24378)
+2025-06-08T02:01:33.8774331Z Updating files:  54% (13165/24378)
+2025-06-08T02:01:34.1140072Z Updating files:  54% (13346/24378)
+2025-06-08T02:01:34.7841394Z Updating files:  55% (13408/24378)
+2025-06-08T02:01:35.2752653Z Updating files:  55% (13570/24378)
+2025-06-08T02:01:35.7855389Z Updating files:  56% (13652/24378)
+2025-06-08T02:01:36.7960182Z Updating files:  56% (13767/24378)
+2025-06-08T02:01:36.8583298Z Updating files:  56% (13889/24378)
+2025-06-08T02:01:37.7980168Z Updating files:  57% (13896/24378)
+2025-06-08T02:01:38.2055181Z Updating files:  57% (14039/24378)
+2025-06-08T02:01:38.5233484Z Updating files:  58% (14140/24378)
+2025-06-08T02:01:38.7782585Z Updating files:  59% (14384/24378)
+2025-06-08T02:01:38.8631112Z Updating files:  59% (14564/24378)
+2025-06-08T02:01:39.4309182Z Updating files:  60% (14627/24378)
+2025-06-08T02:01:39.7877289Z Updating files:  61% (14871/24378)
+2025-06-08T02:01:40.3668105Z Updating files:  62% (15115/24378)
+2025-06-08T02:01:40.7475779Z Updating files:  63% (15359/24378)
+2025-06-08T02:01:40.7922767Z Updating files:  64% (15602/24378)
+2025-06-08T02:01:41.0478316Z Updating files:  64% (15634/24378)
+2025-06-08T02:01:41.3481440Z Updating files:  65% (15846/24378)
+2025-06-08T02:01:41.6453315Z Updating files:  66% (16090/24378)
+2025-06-08T02:01:41.7912009Z Updating files:  67% (16334/24378)
+2025-06-08T02:01:42.1506242Z Updating files:  67% (16454/24378)
+2025-06-08T02:01:42.4682028Z Updating files:  68% (16578/24378)
+2025-06-08T02:01:42.7827157Z Updating files:  69% (16821/24378)
+2025-06-08T02:01:42.7903202Z Updating files:  70% (17065/24378)
+2025-06-08T02:01:43.1219767Z Updating files:  70% (17068/24378)
+2025-06-08T02:01:43.8107563Z Updating files:  71% (17309/24378)
+2025-06-08T02:01:43.8163539Z Updating files:  71% (17549/24378)
+2025-06-08T02:01:44.1189494Z Updating files:  72% (17553/24378)
+2025-06-08T02:01:44.4284888Z Updating files:  73% (17796/24378)
+2025-06-08T02:01:44.7921298Z Updating files:  74% (18040/24378)
+2025-06-08T02:01:44.8028106Z Updating files:  74% (18276/24378)
+2025-06-08T02:01:45.6802608Z Updating files:  75% (18284/24378)
+2025-06-08T02:01:45.8237556Z Updating files:  76% (18528/24378)
+2025-06-08T02:01:46.7976973Z Updating files:  76% (18547/24378)
+2025-06-08T02:01:47.8096960Z Updating files:  76% (18614/24378)
+2025-06-08T02:01:48.9030978Z Updating files:  76% (18682/24378)
+2025-06-08T02:01:49.0916222Z Updating files:  76% (18757/24378)
+2025-06-08T02:01:49.8152037Z Updating files:  77% (18772/24378)
+2025-06-08T02:01:50.8176989Z Updating files:  77% (18897/24378)
+2025-06-08T02:01:51.0997016Z Updating files:  77% (18981/24378)
+2025-06-08T02:01:51.8263068Z Updating files:  78% (19015/24378)
+2025-06-08T02:01:52.4701734Z Updating files:  78% (19107/24378)
+2025-06-08T02:01:52.8154521Z Updating files:  79% (19259/24378)
+2025-06-08T02:01:54.0832722Z Updating files:  79% (19317/24378)
+2025-06-08T02:01:54.1677094Z Updating files:  79% (19480/24378)
+2025-06-08T02:01:54.6929584Z Updating files:  80% (19503/24378)
+2025-06-08T02:01:54.8173395Z Updating files:  81% (19747/24378)
+2025-06-08T02:01:56.2733449Z Updating files:  81% (19761/24378)
+2025-06-08T02:01:56.2936090Z Updating files:  81% (19976/24378)
+2025-06-08T02:01:56.8203129Z Updating files:  82% (19990/24378)
+2025-06-08T02:01:57.8197891Z Updating files:  82% (20082/24378)
+2025-06-08T02:01:58.0056587Z Updating files:  82% (20174/24378)
+2025-06-08T02:01:58.8296528Z Updating files:  83% (20234/24378)
+2025-06-08T02:01:58.9003823Z Updating files:  83% (20469/24378)
+2025-06-08T02:01:59.8244398Z Updating files:  84% (20478/24378)
+2025-06-08T02:02:00.4867068Z Updating files:  84% (20594/24378)
+2025-06-08T02:02:00.8342280Z Updating files:  85% (20722/24378)
+2025-06-08T02:02:01.6569526Z Updating files:  85% (20787/24378)
+2025-06-08T02:02:01.8315703Z Updating files:  86% (20966/24378)
+2025-06-08T02:02:02.6341082Z Updating files:  86% (21010/24378)
+2025-06-08T02:02:02.8248813Z Updating files:  87% (21209/24378)
+2025-06-08T02:02:03.7209366Z Updating files:  87% (21260/24378)
+2025-06-08T02:02:03.9727592Z Updating files:  88% (21453/24378)
+2025-06-08T02:02:04.6246323Z Updating files:  88% (21512/24378)
+2025-06-08T02:02:04.8341110Z Updating files:  89% (21697/24378)
+2025-06-08T02:02:05.7740394Z Updating files:  89% (21776/24378)
+2025-06-08T02:02:05.8337145Z Updating files:  90% (21941/24378)
+2025-06-08T02:02:06.5290440Z Updating files:  90% (21961/24378)
+2025-06-08T02:02:06.8503388Z Updating files:  91% (22184/24378)
+2025-06-08T02:02:07.2933419Z Updating files:  91% (22216/24378)
+2025-06-08T02:02:07.7892332Z Updating files:  92% (22428/24378)
+2025-06-08T02:02:07.8502741Z Updating files:  93% (22672/24378)
+2025-06-08T02:02:08.3955011Z Updating files:  93% (22695/24378)
+2025-06-08T02:02:08.8521861Z Updating files:  94% (22916/24378)
+2025-06-08T02:02:09.4245232Z Updating files:  94% (23087/24378)
+2025-06-08T02:02:09.8452743Z Updating files:  95% (23160/24378)
+2025-06-08T02:02:10.3225154Z Updating files:  95% (23281/24378)
+2025-06-08T02:02:10.8462327Z Updating files:  96% (23403/24378)
+2025-06-08T02:02:11.3424894Z Updating files:  96% (23494/24378)
+2025-06-08T02:02:11.8505955Z Updating files:  97% (23647/24378)
+2025-06-08T02:02:12.2409500Z Updating files:  97% (23775/24378)
+2025-06-08T02:02:12.8602317Z Updating files:  98% (23891/24378)
+2025-06-08T02:02:13.7232391Z Updating files:  98% (23948/24378)
+2025-06-08T02:02:13.8513760Z Updating files:  99% (24135/24378)
+2025-06-08T02:02:14.3934305Z Updating files:  99% (24171/24378)
+2025-06-08T02:02:14.3935477Z Updating files: 100% (24378/24378)
+2025-06-08T02:02:14.3935891Z Updating files: 100% (24378/24378), done.
+2025-06-08T02:02:14.4419423Z Note: switching to 'refs/remotes/pull/1/merge'.
+2025-06-08T02:02:14.4420091Z 
+2025-06-08T02:02:14.4421368Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-06-08T02:02:14.4423194Z changes and commit them, and you can discard any commits you make in this
+2025-06-08T02:02:14.4424078Z state without impacting any branches by switching back to a branch.
+2025-06-08T02:02:14.4424650Z 
+2025-06-08T02:02:14.4425035Z If you want to create a new branch to retain commits you create, you may
+2025-06-08T02:02:14.4425750Z do so (now or later) by using -c with the switch command. Example:
+2025-06-08T02:02:14.4426237Z 
+2025-06-08T02:02:14.4426491Z   git switch -c <new-branch-name>
+2025-06-08T02:02:14.4426875Z 
+2025-06-08T02:02:14.4427116Z Or undo this operation with:
+2025-06-08T02:02:14.4427467Z 
+2025-06-08T02:02:14.4427675Z   git switch -
+2025-06-08T02:02:14.4427951Z 
+2025-06-08T02:02:14.4428335Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-06-08T02:02:14.4428872Z 
+2025-06-08T02:02:14.4429501Z HEAD is now at 0d535170 Merge 5729a672b7db3ea98e11e7889385aa6c4095a2ef into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T02:02:14.4518560Z ##[endgroup]
+2025-06-08T02:02:14.4781560Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2025-06-08T02:02:14.4979951Z 0d5351708dd7a9b47204c61aa9a258a9537cfebb

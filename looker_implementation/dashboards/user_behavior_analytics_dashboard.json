@@ -1,0 +1,27 @@
+{
+  "dashboard_name": "User Behavior Analytics Dashboard",
+  "description": "Understanding User Engagement and Usage Patterns",
+  "elements": [
+    {
+      "type": "look",
+      "title": "User Engagement Over Time",
+      "look_id": "user_activity.user_engagement_over_time"
+    },
+    {
+      "type": "look",
+      "title": "Feature Usage by User Segment",
+      "look_id": "user_activity.feature_usage_by_user_segment"
+    },
+    {
+      "type": "look",
+      "title": "Conversion Funnel Analysis",
+      "look_id": "user_activity.conversion_funnel_analysis"
+    },
+    {
+      "type": "look",
+      "title": "Retention Cohorts",
+      "look_id": "user_activity.retention_cohorts"
+    }
+  ]
+}
+

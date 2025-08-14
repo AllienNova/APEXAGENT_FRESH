@@ -1,0 +1,35 @@
+{
+    "id": "example_stream_plugin",
+    "name": "Example Streaming Plugin",
+    "version": "1.0.0",
+    "description": "A plugin demonstrating stream-based output capabilities.",
+    "author": "ApexAgent Team",
+    "entry_point": "example_stream_plugin.ExampleStreamPlugin",
+    "actions": [
+        {
+            "name": "generate_numbers_stream",
+            "description": "Streams a sequence of numbers with a delay.",
+            "parameters_schema": {
+                "type": "object",
+                "properties": {
+                    "count": {"type": "integer", "description": "Number of items to stream.", "default": 5},
+                    "delay": {"type": "number", "description": "Delay in seconds between items.", "default": 0.5}
+                }
+            },
+            "returns_stream": true
+        },
+        {
+            "name": "echo_message",
+            "description": "Returns a simple echo message (non-streaming).",
+            "parameters_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string", "description": "Message to echo."}
+                },
+                "required": ["message"]
+            },
+            "returns_stream": false
+        }
+    ],
+    "default_enabled": true
+}

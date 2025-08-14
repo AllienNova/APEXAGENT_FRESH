@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Cloud Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bg-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7e22ce 100%);
+        }
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .region-card {
+            transition: all 0.3s ease;
+        }
+        .region-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-gray-800">
+                <div class="flex items-center h-16 px-4 bg-gray-900 border-b border-gray-700">
+                    <span class="text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <div class="px-4 py-2 bg-gray-700">
+                        <p class="text-sm text-gray-400 italic">Intelligence Everywhere, Limits Nowhere</p>
+                    </div>
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            Global Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-white bg-indigo-600">
+                            <i class="fas fa-cloud mr-3"></i>
+                            Cloud Resources
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-heartbeat mr-3"></i>
+                            System Health
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-users-cog mr-3"></i>
+                            User Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-shield-alt mr-3"></i>
+                            Security & Compliance
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-key mr-3"></i>
+                            API Key Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-robot mr-3"></i>
+                            Agent Orchestration
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-memory mr-3"></i>
+                            Memory Systems
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-file-invoice-dollar mr-3"></i>
+                            Billing & Subscriptions
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-cogs mr-3"></i>
+                            System Configuration
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-gray-800 shadow-md border-b border-gray-700">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <h1 class="text-xl font-semibold text-white">Cloud Resources</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-600 text-white">
+                                SUPER ADMIN
+                            </span>
+                            <button class="p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <div class="relative">
+                                <button class="flex items-center text-sm font-medium text-gray-300 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=Admin" alt="Admin avatar" />
+                                    <span class="ml-2 hidden md:inline">Admin User</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-900">
+                <!-- Resource Summary -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                <i class="fas fa-server text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Total Servers</p>
+                                <p class="text-2xl font-bold text-white">1,520</p>
+                                <p class="text-xs text-green-400">+12% from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                                <i class="fas fa-microchip text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">CPU Cores</p>
+                                <p class="text-2xl font-bold text-white">128,000</p>
+                                <p class="text-xs text-green-400">72% utilization</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                                <i class="fas fa-memory text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Total Memory</p>
+                                <p class="text-2xl font-bold text-white">512 TB</p>
+                                <p class="text-xs text-yellow-400">81% utilization</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                                <i class="fas fa-hdd text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Storage</p>
+                                <p class="text-2xl font-bold text-white">25 PB</p>
+                                <p class="text-xs text-green-400">65% utilization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource Distribution -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">Resource Distribution by Region</h3>
+                        <div class="h-64">
+                            <canvas id="resourceDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">Resource Utilization Trends</h3>
+                        <div class="h-64">
+                            <canvas id="utilizationTrendsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regional Details -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-white">Regional Details</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700">
+                                <i class="fas fa-plus mr-1"></i> Add Region
+                            </button>
+                            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                <i class="fas fa-sync-alt mr-1"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="region-card bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-white">US-East</h4>
+                                <span class="px-2 py-1 bg-green-600 text-xs rounded-full text-white">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Servers</span>
+                                        <span class="text-white">450</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">CPU</span>
+                                        <span class="text-white">38,400 cores</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Memory</span>
+                                        <span class="text-white">153.6 TB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Storage</span>
+                                        <span class="text-white">7.5 PB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                            </div>
+                        </div>
+                        <div class="region-card bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-white">US-West</h4>
+                                <span class="px-2 py-1 bg-green-600 text-xs rounded-full text-white">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Servers</span>
+                                        <span class="text-white">380</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">CPU</span>
+                                        <span class="text-white">32,000 cores</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Memory</span>
+                                        <span class="text-white">128 TB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Storage</span>
+                                        <span class="text-white">6.3 PB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                            </div>
+                        </div>
+                        <div class="region-card bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-white">EU-Central</h4>
+                                <span class="px-2 py-1 bg-green-600 text-xs rounded-full text-white">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Servers</span>
+                                        <span class="text-white">320</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">CPU</span>
+                                        <span class="text-white">25,600 cores</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 72%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Memory</span>
+                                        <span class="text-white">102.4 TB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 82%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Storage</span>
+                                        <span class="text-white">5.1 PB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                            </div>
+                        </div>
+                        <div class="region-card bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-white">Asia-Pacific</h4>
+                                <span class="px-2 py-1 bg-green-600 text-xs rounded-full text-white">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Servers</span>
+                                        <span class="text-white">250</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">CPU</span>
+                                        <span class="text-white">20,000 cores</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Memory</span>
+                                        <span class="text-white">80 TB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Storage</span>
+                                        <span class="text-white">4 PB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 62%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                            </div>
+                        </div>
+                        <div class="region-card bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-white">South America</h4>
+                                <span class="px-2 py-1 bg-green-600 text-xs rounded-full text-white">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Servers</span>
+                                        <span class="text-white">120</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">CPU</span>
+                                        <span class="text-white">12,000 cores</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Memory</span>
+                                        <span class="text-white">48 TB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 72%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-400">Storage</span>
+                                        <span class="text-white">2.1 PB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 58%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                            </div>
+                        </div>
+                        <div class="region-card bg-gray-700 p-4 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center">
+                            <button class="text-gray-400 hover:text-white flex flex-col items-center">
+                                <i class="fas fa-plus-circle text-2xl mb-2"></i>
+                                <span class="text-sm">Add New Region</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Auto-scaling Configuration -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <h3 class="text-lg font-semibold text-white mb-4">Auto-scaling Configuration</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-md font-medium text-white mb-3">Global Settings</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-1">Auto-scaling Mode</label>
+                                    <select class="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                        <option>Predictive (AI-based)</option>
+                                        <option>Reactive (Threshold-based)</option>
+                                        <option>Scheduled (Time-based)</option>
+                                        <option>Manual</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-1">Scale-up Threshold</label>
+                                    <div class="flex items-center">
+                                        <input type="range" min="50" max="95" value="80" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                                        <span class="ml-2 text-white">80%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-1">Scale-down Threshold</label>
+                                    <div class="flex items-center">
+                                        <input type="range" min="10" max="50" value="30" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                                        <span class="ml-2 text-white">30%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-1">Cooldown Period</label>
+                                    <div class="flex items-center">
+                                        <input type="number" value="300" class="w-24 bg-gray-700 border border-gray-600 rounded-md py-1 px-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                        <span class="ml-2 text-gray-400">seconds</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-md font-medium text-white mb-3">Regional Overrides</h4>
+                            <div class="bg-gray-700 rounded-md p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <label class="text-sm font-medium text-white">US-East (High Priority)</label>
+                                    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                        <input type="checkbox" name="toggle" id="toggle-1" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked />
+                                        <label for="toggle-1" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-600 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-xs text-gray-400 mb-1">Scale-up Threshold</label>
+                                        <div class="flex items-center">
+                                            <input type="range" min="50" max="95" value="70" class="w-full h-1.5 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                                            <span class="ml-2 text-sm text-white">70%</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-400 mb-1">Max Instances</label>
+                                        <div class="flex items-center">
+                                            <input type="number" value="600" class="w-20 bg-gray-600 border border-gray-500 rounded-md py-1 px-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <button class="text-sm text-indigo-400 hover:text-indigo-300">
+                                    <i class="fas fa-plus-circle mr-1"></i> Add Regional Override
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button class="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600">
+                            Reset to Defaults
+                        </button>
+                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                            Save Configuration
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cost Management -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-white">Cost Management</h3>
+                        <div>
+                            <select class="bg-gray-700 border border-gray-600 rounded-md py-1 px-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option>Last 30 Days</option>
+                                <option>Last Quarter</option>
+                                <option>Year to Date</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <div class="h-64">
+                                <canvas id="costTrendsChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="bg-gray-700 p-4 rounded-lg mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="font-medium text-white">Cost Breakdown</h4>
+                                    <span class="text-sm text-gray-400">$1,245,680 total</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-400">Compute (72%)</span>
+                                            <span class="text-white">$896,889</span>
+                                        </div>
+                                        <div class="w-full bg-gray-600 rounded-full h-2">
+                                            <div class="bg-indigo-500 h-2 rounded-full" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-400">Storage (18%)</span>
+                                            <span class="text-white">$224,222</span>
+                                        </div>
+                                        <div class="w-full bg-gray-600 rounded-full h-2">
+                                            <div class="bg-green-500 h-2 rounded-full" style="width: 18%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-400">Network (8%)</span>
+                                            <span class="text-white">$99,654</span>
+                                        </div>
+                                        <div class="w-full bg-gray-600 rounded-full h-2">
+                                            <div class="bg-blue-500 h-2 rounded-full" style="width: 8%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-400">Other (2%)</span>
+                                            <span class="text-white">$24,915</span>
+                                        </div>
+                                        <div class="w-full bg-gray-600 rounded-full h-2">
+                                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 2%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-white mb-3">Cost Optimization Recommendations</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-lightbulb text-yellow-400 mt-1 mr-2"></i>
+                                        <span class="text-gray-300">Rightsize 45 underutilized instances in US-East to save $32,450/month</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-lightbulb text-yellow-400 mt-1 mr-2"></i>
+                                        <span class="text-gray-300">Move 2.3 PB of cold storage to archive tier to save $18,200/month</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-lightbulb text-yellow-400 mt-1 mr-2"></i>
+                                        <span class="text-gray-300">Purchase reserved instances for stable workloads to save $124,500/year</span>
+                                    </li>
+                                </ul>
+                                <div class="mt-3">
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">View All Recommendations</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for charts
+        const resourceDistributionData = {
+            labels: ['US-East', 'US-West', 'EU-Central', 'Asia-Pacific', 'South America'],
+            datasets: [
+                {
+                    label: 'Servers',
+                    data: [450, 380, 320, 250, 120],
+                    backgroundColor: 'rgba(79, 70, 229, 0.7)',
+                    borderColor: 'rgba(79, 70, 229, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'CPU (thousands)',
+                    data: [38.4, 32, 25.6, 20, 12],
+                    backgroundColor: 'rgba(52, 211, 153, 0.7)',
+                    borderColor: 'rgba(52, 211, 153, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Memory (TB)',
+                    data: [153.6, 128, 102.4, 80, 48],
+                    backgroundColor: 'rgba(251, 191, 36, 0.7)',
+                    borderColor: 'rgba(251, 191, 36, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const utilizationTrendsData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'CPU Utilization',
+                    data: [65, 68, 70, 72, 75, 78, 80, 82, 79, 76, 74, 72],
+                    borderColor: 'rgba(52, 211, 153, 1)',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Memory Utilization',
+                    data: [72, 75, 78, 80, 83, 85, 87, 89, 86, 84, 81, 81],
+                    borderColor: 'rgba(251, 191, 36, 1)',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Storage Utilization',
+                    data: [50, 52, 55, 58, 60, 62, 63, 65, 66, 67, 68, 65],
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    tension: 0.3,
+                    fill: false
+                }
+            ]
+        };
+
+        const costTrendsData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Monthly Cost ($K)',
+                    data: [980, 1020, 1050, 1100, 1150, 1180, 1210, 1240, 1260, 1280, 1290, 1245],
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    borderColor: 'rgba(79, 70, 229, 1)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        };
+
+        // Chart configurations
+        const resourceConfig = {
+            type: 'bar',
+            data: resourceDistributionData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: true, ticks: { color: '#9CA3AF' } }, 
+                    x: { ticks: { color: '#9CA3AF' } } 
+                },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+
+        const utilizationConfig = {
+            type: 'line',
+            data: utilizationTrendsData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: true, max: 100, ticks: { color: '#9CA3AF' } }, 
+                    x: { ticks: { color: '#9CA3AF' } } 
+                },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+
+        const costConfig = {
+            type: 'line',
+            data: costTrendsData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: false, ticks: { color: '#9CA3AF' } }, 
+                    x: { ticks: { color: '#9CA3AF' } } 
+                },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+
+        // Render charts
+        window.onload = function() {
+            new Chart(document.getElementById('resourceDistributionChart'), resourceConfig);
+            new Chart(document.getElementById('utilizationTrendsChart'), utilizationConfig);
+            new Chart(document.getElementById('costTrendsChart'), costConfig);
+        };
+    </script>
+</body>
+</html>

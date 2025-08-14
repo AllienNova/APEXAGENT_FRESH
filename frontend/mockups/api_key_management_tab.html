@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - API Key Management</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --gray-dark: #334155;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 255px;
+            background-color: #1e293b;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .slogan {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 5px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--gray-light);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary);
+        }
+        
+        .nav-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .badge {
+            background-color: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .table th {
+            font-weight: 500;
+            color: var(--gray-light);
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .status-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .status-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--gray-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: white;
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab:hover:not(.active) {
+            color: white;
+            border-bottom-color: var(--gray);
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #334155;
+            background-color: #1e293b;
+            color: white;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background-color: #334155;
+            color: white;
+            margin-right: 5px;
+        }
+        
+        .api-key-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        
+        .api-key-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .api-key-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .api-key-name {
+            font-weight: 500;
+        }
+        
+        .api-key-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .api-key-detail {
+            font-size: 13px;
+            color: var(--gray-light);
+        }
+        
+        .api-key-value {
+            font-family: monospace;
+            background-color: #0f172a;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .api-key-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .api-key-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .api-key-stat {
+            flex: 1;
+        }
+        
+        .api-key-stat-label {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-bottom: 5px;
+        }
+        
+        .api-key-stat-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .fallback-config {
+            margin-top: 20px;
+        }
+        
+        .fallback-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .fallback-option input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            Aideon AI Lite
+            <div class="slogan">Intelligence Everywhere, Limits Nowhere</div>
+        </div>
+        <a href="#" class="nav-item">
+            <span class="nav-number">1</span>
+            Global Dashboard
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">2</span>
+            Cloud Resources
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">3</span>
+            System Health
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">4</span>
+            User Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">5</span>
+            Security & Compliance
+        </a>
+        <a href="#" class="nav-item active">
+            <span class="nav-number">6</span>
+            API Key Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">7</span>
+            Agent Orchestration
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">8</span>
+            Memory Systems
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">9</span>
+            Billing & Subscriptions
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">10</span>
+            System Configuration
+        </a>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="page-title">API Key Management</div>
+            <div class="user-menu">
+                <div class="badge">SUPER ADMIN</div>
+                <div class="user-avatar">U</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">System API Keys</div>
+            <div class="tab">User API Keys</div>
+            <div class="tab">Enterprise Policies</div>
+            <div class="tab">Usage Analytics</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">System API Keys Overview</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Export Keys</button>
+                    <button class="btn btn-primary">Add New Key</button>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search API keys...">
+            </div>
+            
+            <div class="api-key-card">
+                <div class="api-key-header">
+                    <div class="api-key-name">OpenAI GPT-4 Turbo</div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="api-key-details">
+                    <div class="api-key-detail">Service: OpenAI</div>
+                    <div class="api-key-detail">Model: GPT-4 Turbo</div>
+                    <div class="api-key-detail">Last Used: 2 minutes ago</div>
+                    <div class="api-key-detail">Created: May 15, 2025</div>
+                </div>
+                <div class="api-key-value">
+                    sk-••••••••••••••••••••••••••••••••••••••••••••••
+                    <button class="btn btn-outline">Show</button>
+                </div>
+                <div class="api-key-stats">
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Monthly Usage</div>
+                        <div class="api-key-stat-value">$12,487.32</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Requests (24h)</div>
+                        <div class="api-key-stat-value">247,892</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Avg. Response Time</div>
+                        <div class="api-key-stat-value">1.2s</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Error Rate</div>
+                        <div class="api-key-stat-value">0.03%</div>
+                    </div>
+                </div>
+                <div class="api-key-actions">
+                    <button class="btn btn-outline">Rotate Key</button>
+                    <button class="btn btn-outline">Disable</button>
+                </div>
+            </div>
+            
+            <div class="api-key-card">
+                <div class="api-key-header">
+                    <div class="api-key-name">Anthropic Claude 3 Opus</div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="api-key-details">
+                    <div class="api-key-detail">Service: Anthropic</div>
+                    <div class="api-key-detail">Model: Claude 3 Opus</div>
+                    <div class="api-key-detail">Last Used: 5 minutes ago</div>
+                    <div class="api-key-detail">Created: April 28, 2025</div>
+                </div>
+                <div class="api-key-value">
+                    sk_ant-••••••••••••••••••••••••••••••••••••••••••
+                    <button class="btn btn-outline">Show</button>
+                </div>
+                <div class="api-key-stats">
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Monthly Usage</div>
+                        <div class="api-key-stat-value">$9,872.15</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Requests (24h)</div>
+                        <div class="api-key-stat-value">198,456</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Avg. Response Time</div>
+                        <div class="api-key-stat-value">1.5s</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Error Rate</div>
+                        <div class="api-key-stat-value">0.02%</div>
+                    </div>
+                </div>
+                <div class="api-key-actions">
+                    <button class="btn btn-outline">Rotate Key</button>
+                    <button class="btn btn-outline">Disable</button>
+                </div>
+            </div>
+            
+            <div class="api-key-card">
+                <div class="api-key-header">
+                    <div class="api-key-name">Midjourney API</div>
+                    <div class="status status-warning">Expiring Soon</div>
+                </div>
+                <div class="api-key-details">
+                    <div class="api-key-detail">Service: Midjourney</div>
+                    <div class="api-key-detail">Model: v6</div>
+                    <div class="api-key-detail">Last Used: 17 minutes ago</div>
+                    <div class="api-key-detail">Created: March 12, 2025</div>
+                </div>
+                <div class="api-key-value">
+                    mid_••••••••••••••••••••••••••••••••••••••••••••
+                    <button class="btn btn-outline">Show</button>
+                </div>
+                <div class="api-key-stats">
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Monthly Usage</div>
+                        <div class="api-key-stat-value">$5,432.87</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Requests (24h)</div>
+                        <div class="api-key-stat-value">42,187</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Avg. Response Time</div>
+                        <div class="api-key-stat-value">3.7s</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Error Rate</div>
+                        <div class="api-key-stat-value">0.08%</div>
+                    </div>
+                </div>
+                <div class="api-key-actions">
+                    <button class="btn btn-primary">Renew Key</button>
+                    <button class="btn btn-outline">Disable</button>
+                </div>
+            </div>
+            
+            <div class="api-key-card">
+                <div class="api-key-header">
+                    <div class="api-key-name">Google Gemini Pro</div>
+                    <div class="status status-error">Rate Limited</div>
+                </div>
+                <div class="api-key-details">
+                    <div class="api-key-detail">Service: Google AI</div>
+                    <div class="api-key-detail">Model: Gemini Pro</div>
+                    <div class="api-key-detail">Last Used: 3 minutes ago</div>
+                    <div class="api-key-detail">Created: May 2, 2025</div>
+                </div>
+                <div class="api-key-value">
+                    AIza••••••••••••••••••••••••••••••••••••••••••••
+                    <button class="btn btn-outline">Show</button>
+                </div>
+                <div class="api-key-stats">
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Monthly Usage</div>
+                        <div class="api-key-stat-value">$7,921.45</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Requests (24h)</div>
+                        <div class="api-key-stat-value">312,754</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Avg. Response Time</div>
+                        <div class="api-key-stat-value">0.9s</div>
+                    </div>
+                    <div class="api-key-stat">
+                        <div class="api-key-stat-label">Error Rate</div>
+                        <div class="api-key-stat-value">2.14%</div>
+                    </div>
+                </div>
+                <div class="api-key-actions">
+                    <button class="btn btn-primary">Increase Quota</button>
+                    <button class="btn btn-outline">Rotate Key</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Fallback Configuration</div>
+            </div>
+            
+            <div class="fallback-config">
+                <h4>Primary Fallback Policy</h4>
+                <div class="fallback-option">
+                    <input type="radio" id="fallback1" name="fallback" checked>
+                    <label for="fallback1">Cascade to next available service in same category</label>
+                </div>
+                <div class="fallback-option">
+                    <input type="radio" id="fallback2" name="fallback">
+                    <label for="fallback2">Use backup API keys when primary is unavailable</label>
+                </div>
+                <div class="fallback-option">
+                    <input type="radio" id="fallback3" name="fallback">
+                    <label for="fallback3">Fail request with graceful degradation</label>
+                </div>
+                
+                <h4>Rate Limit Handling</h4>
+                <div class="fallback-option">
+                    <input type="radio" id="rate1" name="rate" checked>
+                    <label for="rate1">Auto-distribute load across multiple keys</label>
+                </div>
+                <div class="fallback-option">
+                    <input type="radio" id="rate2" name="rate">
+                    <label for="rate2">Queue requests and process when rate limit resets</label>
+                </div>
+                <div class="fallback-option">
+                    <input type="radio" id="rate3" name="rate">
+                    <label for="rate3">Prioritize requests based on user tier</label>
+                </div>
+                
+                <div class="card-actions" style="margin-top: 20px;">
+                    <button class="btn btn-primary">Save Configuration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+2025-06-08T02:02:19.5248718Z ##[group]Run npm ci
+2025-06-08T02:02:19.5249052Z [36;1mnpm ci[0m
+2025-06-08T02:02:19.5320673Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:02:19.5320980Z env:
+2025-06-08T02:02:19.5321150Z   NODE_VERSION: 18
+2025-06-08T02:02:19.5321340Z   PYTHON_VERSION: 3.11
+2025-06-08T02:02:19.5321601Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5322010Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+2025-06-08T02:02:19.5322395Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5322744Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5323105Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5323377Z ##[endgroup]
+2025-06-08T02:02:22.0027421Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T02:02:22.0028268Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T02:02:22.0033020Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T02:02:22.0034102Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T02:02:22.0037184Z npm warn EBADENGINE }
+2025-06-08T02:02:54.7926878Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-06-08T02:02:56.7983393Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2025-06-08T02:03:10.3380332Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-06-08T02:03:34.1230106Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-06-08T02:04:41.9561888Z 
+2025-06-08T02:04:41.9564704Z added 751 packages, and audited 752 packages in 2m
+2025-06-08T02:04:41.9565497Z 
+2025-06-08T02:04:41.9566913Z 89 packages are looking for funding
+2025-06-08T02:04:41.9568474Z   run `npm fund` for details
+2025-06-08T02:04:41.9576091Z 
+2025-06-08T02:04:41.9576454Z found 0 vulnerabilities

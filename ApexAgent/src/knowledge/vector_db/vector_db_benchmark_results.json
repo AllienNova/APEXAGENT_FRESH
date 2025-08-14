@@ -1,0 +1,150 @@
+{
+  "insert_performance": {
+    "100": {
+      "elapsed_time": 0.003106355667114258,
+      "insert_rate": 32192.063857548546,
+      "documents_per_second": 32192.063857548546
+    },
+    "1000": {
+      "elapsed_time": 0.021321535110473633,
+      "insert_rate": 46900.93817441769,
+      "documents_per_second": 46900.93817441769
+    },
+    "10000": {
+      "elapsed_time": 0.2610511779785156,
+      "insert_rate": 38306.66491312671,
+      "documents_per_second": 38306.66491312671
+    }
+  },
+  "search_performance": {
+    "10": {
+      "elapsed_time": 0.021221160888671875,
+      "search_rate": 471.22775480855654,
+      "searches_per_second": 471.22775480855654
+    },
+    "100": {
+      "elapsed_time": 0.18233728408813477,
+      "search_rate": 548.4341861298311,
+      "searches_per_second": 548.4341861298311
+    },
+    "1000": {
+      "elapsed_time": 19.954180240631104,
+      "search_rate": 50.11481243232332,
+      "searches_per_second": 50.11481243232332
+    }
+  },
+  "multi_tenant_isolation": {
+    "isolation_verification": {
+      "tenant_1": {
+        "document_count": 100,
+        "expected_count": 100,
+        "isolation_verified": true
+      },
+      "tenant_2": {
+        "document_count": 100,
+        "expected_count": 100,
+        "isolation_verified": true
+      },
+      "tenant_3": {
+        "document_count": 100,
+        "expected_count": 100,
+        "isolation_verified": true
+      },
+      "tenant_4": {
+        "document_count": 100,
+        "expected_count": 100,
+        "isolation_verified": true
+      },
+      "tenant_5": {
+        "document_count": 100,
+        "expected_count": 100,
+        "isolation_verified": true
+      }
+    },
+    "cross_tenant_search": {
+      "tenant_1_to_tenant_2": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_2_to_tenant_3": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_3_to_tenant_4": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_4_to_tenant_5": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      },
+      "tenant_5_to_tenant_1": {
+        "cross_tenant_access": true,
+        "isolation_enforced": false
+      }
+    }
+  },
+  "concurrent_operations": {
+    "2": {
+      "elapsed_time": 4.8122875690460205,
+      "total_searches": 200,
+      "search_rate": 41.560276091241086,
+      "searches_per_second": 41.560276091241086
+    },
+    "4": {
+      "elapsed_time": 5.258602619171143,
+      "total_searches": 400,
+      "search_rate": 76.06583515965458,
+      "searches_per_second": 76.06583515965458
+    },
+    "8": {
+      "elapsed_time": 12.012622117996216,
+      "total_searches": 800,
+      "search_rate": 66.59661746967907,
+      "searches_per_second": 66.59661746967907
+    },
+    "16": {
+      "elapsed_time": 18.985851287841797,
+      "total_searches": 1600,
+      "search_rate": 84.27328202157634,
+      "searches_per_second": 84.27328202157634
+    }
+  },
+  "memory_usage": {
+    "1000": {
+      "initial_memory_bytes": 80592896,
+      "final_memory_bytes": 80592896,
+      "memory_increase_bytes": 0,
+      "memory_per_document_bytes": 0.0
+    },
+    "10000": {
+      "initial_memory_bytes": 80592896,
+      "final_memory_bytes": 101679104,
+      "memory_increase_bytes": 21086208,
+      "memory_per_document_bytes": 2108.6208
+    },
+    "100000": {
+      "initial_memory_bytes": 101679104,
+      "final_memory_bytes": 342306816,
+      "memory_increase_bytes": 240627712,
+      "memory_per_document_bytes": 2406.27712
+    }
+  },
+  "error_recovery": {
+    "retry_mechanism": {
+      "recovery_successful": false,
+      "elapsed_time": 0.03121662139892578
+    },
+    "transaction_integrity": {
+      "integrity_maintained": true,
+      "elapsed_time": 0.050821781158447266
+    }
+  },
+  "system_info": {
+    "cpu_count": 4,
+    "memory_total": 4133236736,
+    "platform": "linux",
+    "python_version": "3.11.0rc1 (main, Aug 12 2022, 10:02:14) [GCC 11.2.0]",
+    "timestamp": "2025-05-26T16:28:30.586413"
+  }
+}

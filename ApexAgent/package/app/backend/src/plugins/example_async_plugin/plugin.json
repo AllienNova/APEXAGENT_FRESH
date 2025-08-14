@@ -1,0 +1,46 @@
+{
+  "id": "example_async_plugin",
+  "name": "Example Asynchronous Plugin",
+  "version": "1.0.0",
+  "description": "A sample plugin demonstrating asynchronous actions and progress reporting.",
+  "author": "ApexAgent Team",
+  "entry_point": "example_async_plugin.ExampleAsyncPlugin",
+  "actions": [
+    {
+      "name": "long_running_task",
+      "description": "Simulates a long-running task that reports progress asynchronously.",
+      "parameters_schema": {
+        "type": "object",
+        "properties": {
+          "duration_seconds": {
+            "type": "integer",
+            "description": "The total duration for the simulated task in seconds.",
+            "default": 5
+          },
+          "steps": {
+            "type": "integer",
+            "description": "The number of progress steps to report.",
+            "default": 10
+          }
+        }
+      },
+      "returns_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "dependencies": [],
+  "default_enabled": true,
+  "checksum": {
+    "algorithm": "sha256",
+    "value": "" 
+  }
+}

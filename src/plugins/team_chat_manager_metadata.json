@@ -1,0 +1,54 @@
+{
+  "name": "TeamChatManager",
+  "version": "0.1.0",
+  "description": "Manages team communication via chat platforms. Supports Slack and Microsoft Teams.",
+  "author": "ApexAgent Team",
+  "entry_point": "team_chat_manager.TeamChatManager",
+  "actions": [
+    {
+      "name": "send_message",
+      "description": "Sends a message to a specified channel or user on the chat platform.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Chat service (e.g., \"slack\", \"msteams\")"},
+        {"name": "channel_id", "type": "string", "required": true, "description": "ID of the channel or user to send the message to"},
+        {"name": "message_text", "type": "string", "required": true, "description": "The text content of the message"},
+        {"name": "is_direct_message", "type": "boolean", "required": false, "default": false, "description": "Set to true if sending a direct message to a user_id"}
+      ],
+      "returns": {"type": "object", "properties": {"message_id": {"type": "string"}, "timestamp": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "list_channels",
+      "description": "Lists available public channels on the chat platform.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Chat service"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object", "properties": {"id":{"type":"string"}, "name":{"type":"string"}}}, "description": "List of channel objects"}
+    },
+    {
+      "name": "get_channel_history",
+      "description": "Retrieves message history from a specified channel.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Chat service"},
+        {"name": "channel_id", "type": "string", "required": true, "description": "ID of the channel"},
+        {"name": "limit", "type": "integer", "required": false, "default": 100, "description": "Maximum number of messages to retrieve"},
+        {"name": "latest_timestamp", "type": "string", "required": false, "description": "Retrieve messages up to this timestamp (exclusive)"},
+        {"name": "oldest_timestamp", "type": "string", "required": false, "description": "Retrieve messages from this timestamp (inclusive)"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object"}, "description": "List of message objects"}
+    },
+    {
+      "name": "upload_file_to_channel",
+      "description": "Uploads a file to a specified channel.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Chat service"},
+        {"name": "channel_id", "type": "string", "required": true, "description": "ID of the channel to upload the file to"},
+        {"name": "local_file_path", "type": "string", "required": true, "description": "Absolute path of the local file to upload"},
+        {"name": "initial_comment", "type": "string", "required": false, "description": "Optional comment to accompany the file"}
+      ],
+      "returns": {"type": "object", "properties": {"file_id": {"type": "string"}, "status": {"type": "string"}}}
+    }
+  ],
+  "required_api_keys": ["slack_bot_token", "msteams_bot_framework_appid", "msteams_bot_framework_password"],
+  "dependencies": []
+}
+

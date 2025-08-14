@@ -1,0 +1,48 @@
+2025-06-08T01:54:14.5491562Z Current runner version: '2.325.0'
+2025-06-08T01:54:14.5768277Z ##[group]Runner Image Provisioner
+2025-06-08T01:54:14.5769497Z Hosted Compute Agent
+2025-06-08T01:54:14.5770283Z Version: 20250508.323
+2025-06-08T01:54:14.5771208Z Commit: 81b259f29879f73b4213d199e42d8c3465dae986
+2025-06-08T01:54:14.5772242Z Build Date: 2025-05-08T19:40:08Z
+2025-06-08T01:54:14.5773123Z ##[endgroup]
+2025-06-08T01:54:14.5773863Z ##[group]Operating System
+2025-06-08T01:54:14.5774712Z Microsoft Windows Server 2022
+2025-06-08T01:54:14.5775576Z 10.0.20348
+2025-06-08T01:54:14.5776256Z Datacenter
+2025-06-08T01:54:14.5776941Z ##[endgroup]
+2025-06-08T01:54:14.5777722Z ##[group]Runner Image
+2025-06-08T01:54:14.5778547Z Image: windows-2022
+2025-06-08T01:54:14.5779354Z Version: 20250511.1.0
+2025-06-08T01:54:14.5781101Z Included Software: https://github.com/actions/runner-images/blob/win22/20250511.1/images/windows/Windows2022-Readme.md
+2025-06-08T01:54:14.5783588Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20250511.1
+2025-06-08T01:54:14.5785688Z ##[endgroup]
+2025-06-08T01:54:14.5787434Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:54:14.5789800Z Contents: read
+2025-06-08T01:54:14.5790578Z Metadata: read
+2025-06-08T01:54:14.5791324Z Packages: read
+2025-06-08T01:54:14.5792129Z ##[endgroup]
+2025-06-08T01:54:14.5796150Z Secret source: Actions
+2025-06-08T01:54:14.5797189Z Prepare workflow directory
+2025-06-08T01:54:14.6303535Z Prepare all required actions
+2025-06-08T01:54:14.6358388Z Getting action download info
+2025-06-08T01:54:14.9086311Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:54:14.9087332Z Version: 4.2.2
+2025-06-08T01:54:14.9088194Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:54:14.9089209Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:54:14.9089879Z ##[endgroup]
+2025-06-08T01:54:15.1545682Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:54:15.1546438Z Version: 4.4.0
+2025-06-08T01:54:15.1547047Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:54:15.1547858Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:54:15.1548419Z ##[endgroup]
+2025-06-08T01:54:15.5454772Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:54:15.5455590Z Version: 4.9.1
+2025-06-08T01:54:15.5456250Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:54:15.5457173Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:54:15.5457802Z ##[endgroup]
+2025-06-08T01:54:16.2810982Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:54:16.2812380Z Version: 4.6.2
+2025-06-08T01:54:16.2813549Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:54:16.2815073Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:54:16.2816179Z ##[endgroup]
+2025-06-08T01:54:16.9914245Z Complete job name: build-windows

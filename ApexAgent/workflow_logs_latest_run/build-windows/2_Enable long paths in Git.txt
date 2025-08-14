@@ -1,0 +1,7 @@
+2025-06-08T02:00:34.7246915Z ##[group]Run git config --system core.longpaths true
+2025-06-08T02:00:34.7248841Z [36;1mgit config --system core.longpaths true[0m
+2025-06-08T02:00:34.7491855Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:00:34.7493530Z env:
+2025-06-08T02:00:34.7494227Z   NODE_VERSION: 18
+2025-06-08T02:00:34.7494997Z   PYTHON_VERSION: 3.11
+2025-06-08T02:00:34.7495798Z ##[endgroup]

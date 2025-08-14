@@ -1,0 +1,150 @@
+<!-- System Activity Monitor Wireframe -->
+<div class="system-activity-monitor">
+  <div class="panel-header border-b border-border p-4 flex items-center justify-between">
+    <h2 class="font-semibold">System Activity Monitor</h2>
+    <div class="flex items-center space-x-2">
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Refresh">
+        <span class="icon">🔄</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Clear Log">
+        <span class="icon">🧹</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Options">
+        <span class="icon">⋮</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="panel-tabs border-b border-border">
+    <div class="flex">
+      <button class="px-4 py-2 text-sm font-medium border-b-2 border-primary">All Activities</button>
+      <button class="px-4 py-2 text-sm font-medium text-muted-foreground">File Operations</button>
+      <button class="px-4 py-2 text-sm font-medium text-muted-foreground">Shell Commands</button>
+      <button class="px-4 py-2 text-sm font-medium text-muted-foreground">Network</button>
+    </div>
+  </div>
+  
+  <div class="panel-content p-0 overflow-auto h-96">
+    <div class="activity-list">
+      <!-- File Operation Activity -->
+      <div class="activity-item border-b border-border p-3 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+            <span class="text-blue-600">📁</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-sm">File Created</span>
+              <span class="text-xs text-muted-foreground">10:42 AM</span>
+            </div>
+            <p class="text-sm text-muted-foreground mt-1">Created file: /home/user/projects/website_dev/index.html</p>
+            <div class="mt-2 flex items-center">
+              <button class="text-xs text-primary hover:underline mr-3">View File</button>
+              <button class="text-xs text-primary hover:underline mr-3">Show in Folder</button>
+              <button class="text-xs text-muted-foreground hover:underline">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Shell Command Activity -->
+      <div class="activity-item border-b border-border p-3 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center mr-3 flex-shrink-0">
+            <span class="text-amber-600">💻</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-sm">Shell Command Executed</span>
+              <span class="text-xs text-muted-foreground">10:41 AM</span>
+            </div>
+            <p class="text-sm text-muted-foreground mt-1">$ mkdir -p /home/user/projects/website_dev</p>
+            <div class="mt-2 flex items-center">
+              <button class="text-xs text-primary hover:underline mr-3">Copy Command</button>
+              <button class="text-xs text-primary hover:underline mr-3">View Output</button>
+              <button class="text-xs text-muted-foreground hover:underline">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Network Activity -->
+      <div class="activity-item border-b border-border p-3 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3 flex-shrink-0">
+            <span class="text-purple-600">🌐</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-sm">API Request</span>
+              <span class="text-xs text-muted-foreground">10:40 AM</span>
+            </div>
+            <p class="text-sm text-muted-foreground mt-1">GET https://api.example.com/templates</p>
+            <div class="mt-2 flex items-center">
+              <button class="text-xs text-primary hover:underline mr-3">View Response</button>
+              <button class="text-xs text-primary hover:underline mr-3">Copy URL</button>
+              <button class="text-xs text-muted-foreground hover:underline">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- File Modification Activity -->
+      <div class="activity-item border-b border-border p-3 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-8 w-8 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+            <span class="text-green-600">📝</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-sm">File Modified</span>
+              <span class="text-xs text-muted-foreground">10:38 AM</span>
+            </div>
+            <p class="text-sm text-muted-foreground mt-1">Modified file: /home/user/projects/data_analysis/report.md</p>
+            <div class="mt-2 flex items-center">
+              <button class="text-xs text-primary hover:underline mr-3">View Changes</button>
+              <button class="text-xs text-primary hover:underline mr-3">Show in Folder</button>
+              <button class="text-xs text-muted-foreground hover:underline">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Process Activity -->
+      <div class="activity-item border-b border-border p-3 hover:bg-accent/30">
+        <div class="flex items-start">
+          <div class="activity-icon h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
+            <span class="text-red-600">⚙️</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-sm">Process Started</span>
+              <span class="text-xs text-muted-foreground">10:35 AM</span>
+            </div>
+            <p class="text-sm text-muted-foreground mt-1">Started process: python data_processor.py</p>
+            <div class="mt-2 flex items-center">
+              <button class="text-xs text-primary hover:underline mr-3">View Process</button>
+              <button class="text-xs text-primary hover:underline mr-3">Terminate</button>
+              <button class="text-xs text-muted-foreground hover:underline">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel-footer border-t border-border p-3">
+    <div class="flex items-center justify-between">
+      <div class="text-xs text-muted-foreground">Showing 5 of 127 activities</div>
+      <div class="flex items-center space-x-2">
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Previous Page">
+          <span class="icon">◀</span>
+        </button>
+        <span class="text-xs">Page 1 of 26</span>
+        <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Next Page">
+          <span class="icon">▶</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

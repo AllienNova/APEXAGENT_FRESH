@@ -1,0 +1,92 @@
+system:
+  name: Aideon AI Lite
+  version: 1.0.0
+  description: Intelligence Everywhere, Limits Nowhere
+  logLevel: info
+  dataDir: ./data
+  tempDir: ./temp
+  maxConcurrency: 4
+agents:
+  planner:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.2
+    maxTokens: 4096
+  execution:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.5
+    maxTokens: 8192
+  verification:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.3
+    maxTokens: 4096
+  security:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.1
+    maxTokens: 4096
+  optimization:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.4
+    maxTokens: 4096
+  learning:
+    enabled: true
+    model: gpt-4-turbo
+    temperature: 0.6
+    maxTokens: 8192
+memory:
+  persistencePath: ./data/memory
+  autoSave: true
+  autoSaveInterval: 60000
+  maxHistoryLength: 1000
+tasks:
+  maxConcurrentTasks: 5
+  taskTimeout: 300000
+  retryLimit: 3
+tools:
+  toolsPath: ./tools
+  customToolsPath: ./custom_tools
+api:
+  enabled: true
+  port: 3000
+  host: localhost
+  cors:
+    enabled: true
+    origin: '*'
+  rateLimit:
+    enabled: true
+    windowMs: 60000
+    max: 100
+security:
+  encryption:
+    enabled: true
+    algorithm: aes-256-gcm
+  authentication:
+    enabled: true
+    method: jwt
+    tokenExpiration: 24h
+  permissions:
+    enabled: true
+    defaultPolicy: deny
+ui:
+  enabled: true
+  port: 8080
+  host: localhost
+  theme: dark
+logging:
+  console:
+    enabled: true
+    level: info
+    format: pretty
+  file:
+    enabled: true
+    level: debug
+    path: ./logs
+    maxSize: 10m
+    maxFiles: 5
+telemetry:
+  enabled: false
+  anonymized: true

@@ -1,0 +1,58 @@
+{
+  "name": "DocumentProcessor",
+  "version": "0.1.0",
+  "description": "Handles advanced document processing tasks. Supports .docx, .pptx, and .pdf files.",
+  "author": "ApexAgent Team",
+  "entry_point": "document_processor.DocumentProcessor",
+  "actions": [
+    {
+      "name": "create_docx_from_text",
+      "description": "Creates a new .docx Word document from the provided text content.",
+      "parameters": [
+        {"name": "text_content", "type": "string", "required": true, "description": "The text to be included in the document"},
+        {"name": "save_path", "type": "string", "required": true, "description": "Absolute path (including filename.docx) to save the generated document"},
+        {"name": "title", "type": "string", "required": false, "description": "Optional title for the document"}
+      ],
+      "returns": {"type": "object", "properties": {"file_path": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "append_to_docx",
+      "description": "Appends text or other elements to an existing .docx document.",
+      "parameters": [
+        {"name": "file_path", "type": "string", "required": true, "description": "Absolute path to the existing .docx file"},
+        {"name": "content_to_append", "type": "string", "required": true, "description": "Text content to append"}
+        
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "create_pptx_from_slides_data",
+      "description": "Creates a new .pptx PowerPoint presentation from structured slide data.",
+      "parameters": [
+        {"name": "slides_data", "type": "array", "items": {"type": "object", "properties": {"title":{"type":"string"}, "content":{"type":"string"}, "layout_type":{"type":"string"}}}, "required": true, "description": "Array of slide objects, each defining title, content, and layout"},
+        {"name": "save_path", "type": "string", "required": true, "description": "Absolute path (including filename.pptx) to save the presentation"}
+      ],
+      "returns": {"type": "object", "properties": {"file_path": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "extract_text_from_pdf",
+      "description": "Extracts text content from a .pdf file.",
+      "parameters": [
+        {"name": "pdf_file_path", "type": "string", "required": true, "description": "Absolute path to the .pdf file"}
+      ],
+      "returns": {"type": "object", "properties": {"text_content": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "convert_docx_to_pdf",
+      "description": "Converts a .docx file to .pdf format.",
+      "parameters": [
+        {"name": "docx_file_path", "type": "string", "required": true, "description": "Absolute path to the .docx file"},
+        {"name": "pdf_save_path", "type": "string", "required": true, "description": "Absolute path (including filename.pdf) to save the converted PDF"}
+      ],
+      "returns": {"type": "object", "properties": {"pdf_file_path": {"type": "string"}, "status": {"type": "string"}}}
+    }
+  ],
+  "required_api_keys": [],
+  "dependencies": ["python-docx", "python-pptx", "pypdf2", "pdfkit"] 
+}
+

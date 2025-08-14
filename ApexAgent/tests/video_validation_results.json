@@ -1,0 +1,265 @@
+{
+  "success": false,
+  "results": [],
+  "total_tests": 23,
+  "passed_tests": 9,
+  "failed_tests": 14,
+  "success_rate": 0.391304347826087,
+  "components": {
+    "VideoProcessor": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": true,
+          "duration": 0.501115083694458,
+          "error": null,
+          "details": {
+            "initialization_success": true,
+            "state_valid": true,
+            "state": "idle",
+            "width": 640,
+            "height": 480,
+            "fps": 30
+          }
+        },
+        {
+          "test_name": "capture_frames",
+          "success": true,
+          "duration": 1.0183730125427246,
+          "error": null,
+          "details": {
+            "start_success": true,
+            "stop_success": true,
+            "frame_valid": true,
+            "frame_shape": "(480, 640, 3)"
+          }
+        },
+        {
+          "test_name": "save_frame",
+          "success": true,
+          "duration": 0.6249401569366455,
+          "error": null,
+          "details": {
+            "save_success": true,
+            "file_exists": true,
+            "file_size": 77826
+          }
+        },
+        {
+          "test_name": "save_video",
+          "success": true,
+          "duration": 0.6970782279968262,
+          "error": null,
+          "details": {
+            "save_success": true,
+            "file_exists": true,
+            "file_size": 197058
+          }
+        }
+      ]
+    },
+    "VisualTroubleshooter": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": false,
+          "duration": 7.43865966796875e-05,
+          "error": "'VisualTroubleshooter' object has no attribute 'models_loaded'",
+          "details": {}
+        },
+        {
+          "test_name": "analyze_image",
+          "success": false,
+          "duration": 0.0003256797790527344,
+          "error": "'VisualTroubleshooter' object has no attribute 'analyze_image'",
+          "details": {}
+        },
+        {
+          "test_name": "generate_diagnostics",
+          "success": false,
+          "duration": 0.0002071857452392578,
+          "error": "'VisualTroubleshooter' object has no attribute 'generate_diagnostics'",
+          "details": {}
+        }
+      ]
+    },
+    "EnhancedVisualTroubleshooter": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": false,
+          "duration": 4.935264587402344e-05,
+          "error": "'EnhancedVisualTroubleshooter' object has no attribute 'models_loaded'",
+          "details": {}
+        },
+        {
+          "test_name": "advanced_analysis",
+          "success": false,
+          "duration": 0.00016021728515625,
+          "error": "'EnhancedVisualTroubleshooter' object has no attribute 'analyze_image_advanced'",
+          "details": {}
+        },
+        {
+          "test_name": "historical_comparison",
+          "success": false,
+          "duration": 0.00041675567626953125,
+          "error": "'EnhancedVisualTroubleshooter' object has no attribute 'compare_historical'",
+          "details": {}
+        }
+      ]
+    },
+    "ScreenSharing": {
+      "total": 3,
+      "passed": 1,
+      "failed": 2,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": true,
+          "duration": 5.0067901611328125e-06,
+          "error": null,
+          "details": {
+            "initialized": true,
+            "width": 1280,
+            "height": 720,
+            "fps": 15
+          }
+        },
+        {
+          "test_name": "capture_screen",
+          "success": false,
+          "duration": 2.7418136596679688e-05,
+          "error": "'ScreenSharing' object has no attribute 'start'",
+          "details": {}
+        },
+        {
+          "test_name": "annotate_screen",
+          "success": false,
+          "duration": 0.0001857280731201172,
+          "error": "'ScreenSharing' object has no attribute 'annotate'",
+          "details": {}
+        }
+      ]
+    },
+    "AnnotationTools": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": true,
+          "duration": 7.867813110351562e-06,
+          "error": null,
+          "details": {
+            "initialized": true,
+            "styles": [
+              "standard",
+              "highlighted",
+              "technical",
+              "instructional",
+              "animated"
+            ]
+          }
+        },
+        {
+          "test_name": "create_annotation",
+          "success": true,
+          "duration": 0.007904767990112305,
+          "error": null,
+          "details": {
+            "annotation_valid": true,
+            "annotated_shape": "(480, 640, 3)"
+          }
+        },
+        {
+          "test_name": "create_sequence",
+          "success": true,
+          "duration": 0.00037741661071777344,
+          "error": null,
+          "details": {
+            "sequence_valid": true,
+            "sequence_length": 1
+          }
+        }
+      ]
+    },
+    "VisualAidsManager": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": false,
+          "duration": 5.125999450683594e-05,
+          "error": "'VisualAidsManager' object has no attribute 'templates'",
+          "details": {}
+        },
+        {
+          "test_name": "create_procedure",
+          "success": false,
+          "duration": 4.887580871582031e-05,
+          "error": "'VisualAidsManager' object has no attribute 'create_procedure'",
+          "details": {}
+        },
+        {
+          "test_name": "generate_visual_aid",
+          "success": false,
+          "duration": 0.0001773834228515625,
+          "error": "'VisualAidsManager' object has no attribute 'generate_visual_aid'",
+          "details": {}
+        }
+      ]
+    },
+    "VideoIntegration": {
+      "total": 4,
+      "passed": 1,
+      "failed": 3,
+      "tests": [
+        {
+          "test_name": "initialize",
+          "success": false,
+          "duration": 7.510185241699219e-05,
+          "error": "'VideoIntegration' object has no attribute 'visual_troubleshooter'",
+          "details": {}
+        },
+        {
+          "test_name": "camera_analysis",
+          "success": true,
+          "duration": 1.503481149673462,
+          "error": null,
+          "details": {
+            "analysis_valid": true,
+            "analysis_keys": [
+              "error"
+            ]
+          }
+        },
+        {
+          "test_name": "screen_sharing",
+          "success": false,
+          "duration": 0.5009396076202393,
+          "error": "'VideoIntegration' object has no attribute 'get_screen'",
+          "details": {}
+        },
+        {
+          "test_name": "event_handling",
+          "success": false,
+          "duration": 5.793571472167969e-05,
+          "error": "'VideoIntegration' object has no attribute 'register_event_handler'",
+          "details": {}
+        }
+      ]
+    }
+  }
+}

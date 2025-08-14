@@ -1,0 +1,37 @@
+2025-06-08T01:50:01.2052480Z ##[group]Run npm run build:mac
+2025-06-08T01:50:01.2052880Z [36;1mnpm run build:mac[0m
+2025-06-08T01:50:01.2098200Z shell: /bin/bash -e {0}
+2025-06-08T01:50:01.2098430Z env:
+2025-06-08T01:50:01.2098630Z   NODE_VERSION: 18
+2025-06-08T01:50:01.2098830Z   PYTHON_VERSION: 3.11
+2025-06-08T01:50:01.2099110Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2099680Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:50:01.2100130Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2100580Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2100950Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:50:01.2101480Z   GH_TOKEN: ***
+2025-06-08T01:50:01.2102030Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+2025-06-08T01:50:01.2102260Z ##[endgroup]
+2025-06-08T01:50:01.3610950Z 
+2025-06-08T01:50:01.3712350Z > aideon-ai-lite@1.0.0 build:mac
+2025-06-08T01:50:01.3788990Z > npm run package:mac
+2025-06-08T01:50:01.3790140Z 
+2025-06-08T01:50:01.4837060Z 
+2025-06-08T01:50:01.4837590Z > aideon-ai-lite@1.0.0 package:mac
+2025-06-08T01:50:01.4838020Z > electron-builder --mac
+2025-06-08T01:50:01.4838150Z 
+2025-06-08T01:50:01.8902070Z   • electron-builder  version=24.13.3 os=23.6.0
+2025-06-08T01:50:01.8904650Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T01:50:01.8905860Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:50:01.8907050Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:50:01.8938870Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T01:50:02.1103850Z   • packaging       platform=darwin arch=arm64 electron=28.3.3 appOutDir=dist/mac-arm64
+2025-06-08T01:50:02.6579440Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-darwin-arm64.zip size=95 MB parts=6
+2025-06-08T01:50:03.3549670Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-darwin-arm64.zip duration=1.237s
+2025-06-08T01:50:06.0922910Z   • Current build is a part of pull request, code signing will be skipped.
+2025-06-08T01:50:06.0943510Z Set env CSC_FOR_PULL_REQUEST to true to force code signing.
+2025-06-08T01:50:06.0944680Z There are serious security concerns with CSC_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T01:50:06.0958650Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T01:50:06.0961690Z   • building        target=DMG arch=arm64 file=dist/Aideon AI Lite-1.0.0-arm64.dmg
+2025-06-08T01:50:06.0963430Z   • Detected arm64 process, HFS+ is unavailable. Creating dmg with APFS - supports Mac OSX 10.12+
+2025-06-08T01:50:20.1481840Z   • building block map  blockMapFile=dist/Aideon AI Lite-1.0.0-arm64.dmg.blockmap

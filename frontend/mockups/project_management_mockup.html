@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Project Management Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-indigo-800">
+                <div class="flex items-center h-16 px-4 bg-indigo-900">
+                    <img src="https://via.placeholder.com/40x40/4F46E5/FFFFFF?text=AI" alt="Aideon AI Logo" class="h-10 w-10 rounded-md">
+                    <span class="ml-3 text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-comment-dots mr-3"></i>
+                            Chat
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-white bg-indigo-700 rounded-md">
+                            <i class="fas fa-folder-open mr-3"></i>
+                            Projects
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-file-alt mr-3"></i>
+                            Documents
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-robot mr-3"></i>
+                            Dr. TARDIS
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </nav>
+                    <div class="px-2 py-4 space-y-2">
+                        <div class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100">
+                            <i class="fas fa-user-circle mr-3"></i>
+                            <span>John Doe</span>
+                        </div>
+                        <div class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100">
+                            <i class="fas fa-credit-card mr-3"></i>
+                            <span>Pro Plan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-white shadow">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <button class="md:hidden px-4 text-gray-500 focus:outline-none">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <h1 class="text-xl font-semibold text-gray-900">Projects</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                            <div class="relative">
+                                <button class="flex items-center text-sm font-medium text-gray-700 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Horizontal tabs -->
+                    <div class="mt-2 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8">
+                            <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                All Projects
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Active
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Archived
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Shared with Me
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div class="mb-6 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <input type="text" placeholder="Search projects..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <div class="absolute left-3 top-2.5 text-gray-400">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <select class="pl-3 pr-8 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option>All Categories</option>
+                                <option>Data Analysis</option>
+                                <option>Development</option>
+                                <option>Research</option>
+                                <option>Content Creation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        New Project
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project card - Active -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-green-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Q2 Sales Analysis</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Active</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Comprehensive analysis of Q2 sales data with visualizations and recommendations.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Updated 2 hours ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project card - In Progress -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-indigo-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Marketing Campaign</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-indigo-100 text-indigo-800">In Progress</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Summer product launch campaign with social media content and email sequences.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Updated 1 day ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-indigo-400 hover:text-indigo-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project card - Planning -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-yellow-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Product Roadmap</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Planning</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Strategic product roadmap for Q3 and Q4 with feature prioritization.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Created 3 days ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project card - Completed -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-gray-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Website Redesign</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">Completed</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Complete website redesign with new branding and improved user experience.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Completed 1 week ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project card - Draft -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-purple-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">AI Integration</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">Draft</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Integration of advanced AI capabilities into the customer support platform.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Created 2 days ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project card - On Hold -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="h-2 bg-red-500"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Mobile App</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">On Hold</span>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600">Native mobile application development for iOS and Android platforms.</p>
+                            <div class="mt-4 flex items-center text-xs text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>Updated 2 weeks ago</span>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <img class="h-6 w-6 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User avatar">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Details Modal (would be hidden by default in a real implementation) -->
+                <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+                    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+                        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <h2 class="text-xl font-semibold text-gray-900">Q2 Sales Analysis</h2>
+                                <span class="ml-3 px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Active</span>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex-1 overflow-y-auto p-6">
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-2">
+                                    <div class="mb-6">
+                                        <h3 class="text-lg font-medium text-gray-900 mb-2">Description</h3>
+                                        <p class="text-gray-600">
+                                            Comprehensive analysis of Q2 sales data with visualizations and recommendations. This project aims to identify key trends, compare performance against targets, and provide actionable insights for the sales and marketing teams.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="mb-6">
+                                        <h3 class="text-lg font-medium text-gray-900 mb-2">Tasks</h3>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center">
+                                                <input type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-600 line-through">Data collection and cleaning</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-600 line-through">Initial data analysis</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-600 line-through">Create basic visualizations</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="checkbox" class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-800">Generate advanced insights</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="checkbox" class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-800">Prepare final report</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="checkbox" class="h-4 w-4 text-indigo-600 rounded" />
+                                                <span class="ml-2 text-gray-800">Present findings to stakeholders</span>
+                                            </div>
+                                        </div>
+                                        <button class="mt-2 text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                                            <i class="fas fa-plus mr-1"></i>
+                                            Add Task
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="mb-6">
+                                        <h3 class="text-lg font-medium text-gray-900 mb-2">Conversations</h3>
+                                        <div class="space-y-4">
+                                            <div class="flex">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                                <div class="ml-3">
+                                                    <div class="flex items-center">
+                                                        <span class="font-medium text-gray-900">John Doe</span>
+                                                        <span class="ml-2 text-xs text-gray-500">2 hours ago</span>
+                                                    </div>
+                                                    <p class="text-gray-600">
+                                                        I've completed the initial analysis. The Western region is showing strong growth, but we need to look into the Southern region's performance.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex">
+                                                <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                                    <i class="fas fa-robot text-indigo-600"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <div class="flex items-center">
+                                                        <span class="font-medium text-gray-900">Aideon AI</span>
+                                                        <span class="ml-2 text-xs text-gray-500">1 hour ago</span>
+                                                    </div>
+                                                    <p class="text-gray-600">
+                                                        I've analyzed the Southern region data and found that Product C is underperforming significantly. This appears to be the main factor in the region's low growth rate.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-4 flex">
+                                            <input type="text" placeholder="Add a comment..." class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                            <button class="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                                                Send
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-span-1">
+                                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                                        <h3 class="text-sm font-medium text-gray-900 mb-2">Project Details</h3>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <p class="text-xs text-gray-500">Created by</p>
+                                                <div class="flex items-center">
+                                                    <img class="h-6 w-6 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                                    <span class="ml-2 text-sm text-gray-800">John Doe</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500">Created on</p>
+                                                <p class="text-sm text-gray-800">June 5, 2025</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500">Last updated</p>
+                                                <p class="text-sm text-gray-800">2 hours ago</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500">Category</p>
+                                                <p class="text-sm text-gray-800">Data Analysis</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                                        <h3 class="text-sm font-medium text-gray-900 mb-2">Team Members</h3>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <img class="h-6 w-6 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                                    <span class="ml-2 text-sm text-gray-800">John Doe</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">Owner</span>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <img class="h-6 w-6 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                                    <span class="ml-2 text-sm text-gray-800">Jane Smith</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">Editor</span>
+                                            </div>
+                                        </div>
+                                        <button class="mt-3 text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                                            <i class="fas fa-plus mr-1"></i>
+                                            Add Member
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                        <h3 class="text-sm font-medium text-gray-900 mb-2">Files</h3>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-file-excel text-green-600 mr-2"></i>
+                                                    <span class="text-sm text-gray-800">Q2_Sales_Data.xlsx</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">2.4 MB</span>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-file-pdf text-red-600 mr-2"></i>
+                                                    <span class="text-sm text-gray-800">Q2_Sales_Analysis.pdf</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">1.8 MB</span>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-file-code text-indigo-600 mr-2"></i>
+                                                    <span class="text-sm text-gray-800">sales_analysis.py</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">4.2 KB</span>
+                                            </div>
+                                        </div>
+                                        <button class="mt-3 text-sm text-indigo-600 hover:text-indigo-800 flex items-center">
+                                            <i class="fas fa-upload mr-1"></i>
+                                            Upload File
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end items-center p-6 border-t border-gray-200 bg-gray-50">
+                            <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 mr-3">
+                                Close
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!-- Dashboard Wireframe -->
+<div class="app-container">
+  <!-- Left Sidebar Navigation (Same as in conversation interface) -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="/assets/logo.svg" alt="ApexAgent Logo" />
+      <h1>ApexAgent</h1>
+    </div>
+    
+    <nav class="main-nav">
+      <button class="new-chat-btn">
+        <span class="icon">+</span>
+        <span>New Conversation</span>
+      </button>
+      
+      <div class="conversations-list">
+        <div class="list-header">
+          <h2>Recent Conversations</h2>
+          <button class="icon-btn">
+            <span class="icon">⋮</span>
+          </button>
+        </div>
+        
+        <ul>
+          <li class="conversation-item">
+            <span class="icon">💬</span>
+            <span class="title">Website Development</span>
+          </li>
+          <li class="conversation-item">
+            <span class="icon">💬</span>
+            <span class="title">Data Analysis Project</span>
+          </li>
+          <li class="conversation-item">
+            <span class="icon">💬</span>
+            <span class="title">Email Automation</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="plugins-section">
+        <div class="list-header">
+          <h2>Active Plugins</h2>
+          <button class="icon-btn">
+            <span class="icon">⚙️</span>
+          </button>
+        </div>
+        
+        <ul>
+          <li class="plugin-item">
+            <span class="icon">🌐</span>
+            <span class="title">Web Browser</span>
+          </li>
+          <li class="plugin-item">
+            <span class="icon">📁</span>
+            <span class="title">File Manager</span>
+          </li>
+          <li class="plugin-item">
+            <span class="icon">📊</span>
+            <span class="title">Data Analyzer</span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="user-section">
+      <div class="user-profile">
+        <img src="/assets/avatar.png" alt="User Avatar" />
+        <span>John Doe</span>
+      </div>
+      <button class="icon-btn">
+        <span class="icon">⚙️</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Dashboard Content Area -->
+  <main class="dashboard-content">
+    <header class="dashboard-header">
+      <h1>Dashboard</h1>
+      <div class="header-actions">
+        <div class="search-bar">
+          <span class="icon">🔍</span>
+          <input type="text" placeholder="Search across conversations and files..." />
+        </div>
+        <button class="action-btn">
+          <span class="icon">⚙️</span>
+          <span>Settings</span>
+        </button>
+        <button class="action-btn">
+          <span class="icon">?</span>
+          <span>Help</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Activity Summary Section -->
+      <section class="dashboard-section activity-summary">
+        <div class="section-header">
+          <h2>Activity Summary</h2>
+          <span class="date-range">Last 7 days</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Conversations</div>
+            <div class="stat-trend positive">
+              <span class="icon">↑</span>
+              <span>20%</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">48</div>
+            <div class="stat-label">Tasks Completed</div>
+            <div class="stat-trend positive">
+              <span class="icon">↑</span>
+              <span>15%</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">8.2</div>
+            <div class="stat-label">Avg. Response Time (s)</div>
+            <div class="stat-trend negative">
+              <span class="icon">↓</span>
+              <span>5%</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">94%</div>
+            <div class="stat-label">Task Success Rate</div>
+            <div class="stat-trend positive">
+              <span class="icon">↑</span>
+              <span>2%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activity Section -->
+      <section class="dashboard-section recent-activity">
+        <div class="section-header">
+          <h2>Recent Activity</h2>
+          <button class="view-all-btn">View All</button>
+        </div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="icon">💬</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-title">Website Development</div>
+              <div class="activity-description">Generated responsive HTML template</div>
+              <div class="activity-time">30 minutes ago</div>
+            </div>
+            <button class="icon-btn">
+              <span class="icon">→</span>
+            </button>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="icon">📊</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-title">Data Analysis Project</div>
+              <div class="activity-description">Processed sales data and created visualization</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+            <button class="icon-btn">
+              <span class="icon">→</span>
+            </button>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="icon">📁</span>
+            </div>
+            <div class="activity-details">
+              <div class="activity-title">File Management</div>
+              <div class="activity-description">Organized project files into categories</div>
+              <div class="activity-time">Yesterday</div>
+            </div>
+            <button class="icon-btn">
+              <span class="icon">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resource Usage Section -->
+      <section class="dashboard-section resource-usage">
+        <div class="section-header">
+          <h2>Resource Usage</h2>
+          <div class="dropdown">
+            <span>This Month</span>
+            <span class="icon">▼</span>
+          </div>
+        </div>
+        <div class="usage-charts">
+          <div class="usage-chart">
+            <div class="chart-header">
+              <h3>API Calls</h3>
+              <div class="usage-summary">
+                <span class="used">1,245</span>
+                <span class="separator">/</span>
+                <span class="total">5,000</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 25%"></div>
+            </div>
+          </div>
+          <div class="usage-chart">
+            <div class="chart-header">
+              <h3>Storage</h3>
+              <div class="usage-summary">
+                <span class="used">2.4 GB</span>
+                <span class="separator">/</span>
+                <span class="total">10 GB</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 24%"></div>
+            </div>
+          </div>
+          <div class="usage-chart">
+            <div class="chart-header">
+              <h3>Processing Time</h3>
+              <div class="usage-summary">
+                <span class="used">45 min</span>
+                <span class="separator">/</span>
+                <span class="total">180 min</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 25%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions Section -->
+      <section class="dashboard-section quick-actions">
+        <div class="section-header">
+          <h2>Quick Actions</h2>
+        </div>
+        <div class="actions-grid">
+          <button class="action-card">
+            <span class="icon">💬</span>
+            <span class="label">New Conversation</span>
+          </button>
+          <button class="action-card">
+            <span class="icon">📊</span>
+            <span class="label">Data Analysis</span>
+          </button>
+          <button class="action-card">
+            <span class="icon">🌐</span>
+            <span class="label">Web Search</span>
+          </button>
+          <button class="action-card">
+            <span class="icon">📝</span>
+            <span class="label">Content Creation</span>
+          </button>
+          <button class="action-card">
+            <span class="icon">📁</span>
+            <span class="label">File Management</span>
+          </button>
+          <button class="action-card">
+            <span class="icon">⚙️</span>
+            <span class="label">Configure Plugins</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Recent Files Section -->
+      <section class="dashboard-section recent-files">
+        <div class="section-header">
+          <h2>Recent Files</h2>
+          <button class="view-all-btn">View All</button>
+        </div>
+        <div class="files-list">
+          <div class="file-item">
+            <div class="file-icon">
+              <span class="icon">📄</span>
+            </div>
+            <div class="file-details">
+              <div class="file-name">website_requirements.txt</div>
+              <div class="file-meta">Text Document • 24 KB</div>
+              <div class="file-time">Modified 30 minutes ago</div>
+            </div>
+            <div class="file-actions">
+              <button class="icon-btn">
+                <span class="icon">👁️</span>
+              </button>
+              <button class="icon-btn">
+                <span class="icon">⬇️</span>
+              </button>
+            </div>
+          </div>
+          <div class="file-item">
+            <div class="file-icon">
+              <span class="icon">🖼️</span>
+            </div>
+            <div class="file-details">
+              <div class="file-name">logo.png</div>
+              <div class="file-meta">Image • 156 KB</div>
+              <div class="file-time">Modified 2 hours ago</div>
+            </div>
+            <div class="file-actions">
+              <button class="icon-btn">
+                <span class="icon">👁️</span>
+              </button>
+              <button class="icon-btn">
+                <span class="icon">⬇️</span>
+              </button>
+            </div>
+          </div>
+          <div class="file-item">
+            <div class="file-icon">
+              <span class="icon">📊</span>
+            </div>
+            <div class="file-details">
+              <div class="file-name">sales_analysis.xlsx</div>
+              <div class="file-meta">Spreadsheet • 1.2 MB</div>
+              <div class="file-time">Modified Yesterday</div>
+            </div>
+            <div class="file-actions">
+              <button class="icon-btn">
+                <span class="icon">👁️</span>
+              </button>
+              <button class="icon-btn">
+                <span class="icon">⬇️</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Right Sidebar - System Status -->
+  <aside class="system-status">
+    <div class="panel-header">
+      <h2>System Status</h2>
+      <button class="icon-btn">
+        <span class="icon">⟳</span>
+      </button>
+    </div>
+    
+    <div class="panel-content">
+      <div class="status-section">
+        <h3>Active LLM</h3>
+        <div class="llm-status">
+          <div class="status-icon active">
+            <span class="icon">🧠</span>
+          </div>
+          <div class="status-details">
+            <div class="status-name">GPT-4o</div>
+            <div class="status-meta">OpenAI • Response time: 1.2s</div>
+          </div>
+          <button class="icon-btn">
+            <span class="icon">⚙️</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="status-section">
+        <h3>Plugin Health</h3>
+        <div class="plugin-health-list">
+          <div class="health-item">
+            <div class="health-icon healthy">
+              <span class="icon">✓</span>
+            </div>
+            <div class="health-details">
+              <div class="health-name">Web Browser</div>
+              <div class="health-meta">Running • v2.3.1</div>
+            </div>
+          </div>
+          <div class="health-item">
+            <div class="health-icon healthy">
+              <span class="icon">✓</span>
+            </div>
+            <div class="health-details">
+              <div class="health-name">File Manager</div>
+              <div class="health-meta">Running • v1.8.0</div>
+            </div>
+          </div>
+          <div class="health-item">
+            <div class="health-icon warning">
+              <span class="icon">!</span>
+            </div>
+            <div class="health-details">
+              <div class="health-name">Data Analyzer</div>
+              <div class="health-meta">Update available • v3.2.4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="status-section">
+        <h3>Subscription</h3>
+        <div class="subscription-status">
+          <div class="subscription-details">
+            <div class="subscription-plan">Professional Plan</div>
+            <div class="subscription-meta">Renews on June 20, 2025</div>
+          </div>
+          <button class="upgrade-btn">Upgrade</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>

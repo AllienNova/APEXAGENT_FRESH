@@ -1,0 +1,150 @@
+{
+  "functionality": {
+    "category": "functionality",
+    "tests": [
+      {
+        "name": "usage_tracking",
+        "description": "Track resource usage",
+        "status": "PASS",
+        "details": "Generated usage ID: d25b0da8-a83a-4e59-a5d7-0bd760a6ec7f"
+      },
+      {
+        "name": "performance_tracking",
+        "description": "Track performance metrics",
+        "status": "PASS",
+        "details": "Generated performance ID: 589c842a-6736-4fec-b313-4373e8629fac"
+      },
+      {
+        "name": "business_metrics",
+        "description": "Track business metrics",
+        "status": "PASS",
+        "details": "Generated metric ID: 764d6fc1-0432-4e80-9436-7f83aa795c51"
+      },
+      {
+        "name": "event_recording",
+        "description": "Record application events",
+        "status": "PASS",
+        "details": "Generated event ID: 7c2980cf-a619-4529-9e75-dff98bce72e9"
+      },
+      {
+        "name": "dashboard_generation",
+        "description": "Generate analytics dashboards",
+        "status": "PASS",
+        "details": "Dashboard contains 0 widgets"
+      },
+      {
+        "name": "report_generation",
+        "description": "Generate analytics reports",
+        "status": "PASS",
+        "details": "Report contains 0 sections"
+      }
+    ],
+    "passed": 6,
+    "total": 6,
+    "success_rate": 1.0
+  },
+  "performance": {
+    "category": "performance",
+    "tests": [
+      {
+        "name": "usage_tracking_performance",
+        "description": "Measure performance of usage tracking",
+        "status": "PASS",
+        "details": "Average duration: 0.000018s for 100 operations"
+      },
+      {
+        "name": "event_search_performance",
+        "description": "Measure performance of event search",
+        "status": "PASS",
+        "details": "Duration: 0.000005s for searching events"
+      },
+      {
+        "name": "dashboard_generation_performance",
+        "description": "Measure performance of dashboard generation",
+        "status": "PASS",
+        "details": "Duration: 0.000047s for generating dashboard"
+      }
+    ],
+    "passed": 3,
+    "total": 3,
+    "success_rate": 1.0
+  },
+  "security": {
+    "category": "security",
+    "tests": [
+      {
+        "name": "authentication_integration",
+        "description": "Verify authentication integration",
+        "status": "PASS",
+        "details": "Authentication correctly rejected invalid user"
+      },
+      {
+        "name": "authorization_integration",
+        "description": "Verify authorization integration",
+        "status": "PASS",
+        "details": "Authorization correctly rejected unauthorized access"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration",
+        "status": "FAIL",
+        "details": "PII data not properly protected"
+      }
+    ],
+    "passed": 2,
+    "total": 3,
+    "success_rate": 0.6666666666666666
+  },
+  "integration": {
+    "category": "integration",
+    "tests": [
+      {
+        "name": "subscription_integration",
+        "description": "Verify subscription system integration",
+        "status": "PASS",
+        "details": "Retrieved analytics for premium tier with 0 metrics"
+      },
+      {
+        "name": "llm_integration",
+        "description": "Verify LLM providers integration",
+        "status": "PASS",
+        "details": "Retrieved analytics for LLM models with 2 models"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration for sensitive data",
+        "status": "FAIL",
+        "details": "Sensitive payment data not properly protected"
+      }
+    ],
+    "passed": 2,
+    "total": 3,
+    "success_rate": 0.6666666666666666
+  },
+  "data_quality": {
+    "category": "data_quality",
+    "tests": [
+      {
+        "name": "data_consistency",
+        "description": "Verify data consistency between recording and retrieval",
+        "status": "PASS",
+        "details": "Recorded usage correctly reflected in trends"
+      },
+      {
+        "name": "data_aggregation",
+        "description": "Verify correct data aggregation",
+        "status": "PASS",
+        "details": "Data correctly aggregated"
+      }
+    ],
+    "passed": 2,
+    "total": 2,
+    "success_rate": 1.0
+  },
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 15,
+    "success_rate": 0.8823529411764706,
+    "status": "FAIL"
+  }
+}

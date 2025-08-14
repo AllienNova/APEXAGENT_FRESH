@@ -1,0 +1,94 @@
+{
+  "name": "GitIntegrationPlugin",
+  "version": "0.1.0",
+  "description": "Provides comprehensive Git integration for repository management, including cloning, committing, branching, and interacting with remotes.",
+  "author": "ApexAgent Team",
+  "entry_point": "git_integration_plugin.GitIntegrationPlugin",
+  "actions": [
+    {
+      "name": "clone_repository",
+      "description": "Clones a Git repository from a given URL to a local path.",
+      "parameters": [
+        {"name": "repository_url", "type": "string", "required": true, "description": "The URL of the Git repository to clone."},
+        {"name": "local_path", "type": "string", "required": true, "description": "The local directory path to clone the repository into."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}, "repo_path": {"type": "string"}}}
+    },
+    {
+      "name": "get_status",
+      "description": "Gets the status of a local Git repository.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."}
+      ],
+      "returns": {"type": "object", "properties": {"status_text": {"type": "string"}, "is_dirty": {"type": "boolean"}, "current_branch": {"type": "string"}, "untracked_files": {"type": "array", "items": {"type": "string"}}}}
+    },
+    {
+      "name": "add_files",
+      "description": "Adds specified files to the staging area in a local Git repository. Use ['.'] to add all changes.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "files", "type": "array", "items": {"type": "string"}, "required": true, "description": "A list of file paths to add, relative to the repository root, or ['.'] to add all."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}}}
+    },
+    {
+      "name": "commit_changes",
+      "description": "Commits staged changes in a local Git repository with a given message.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "message", "type": "string", "required": true, "description": "The commit message."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}, "commit_sha": {"type": "string"}}}
+    },
+    {
+      "name": "push_changes",
+      "description": "Pushes committed changes from a local branch to a remote repository.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "remote_name", "type": "string", "required": false, "default": "origin", "description": "The name of the remote repository (e.g., 'origin')."},
+        {"name": "branch_name", "type": "string", "required": false, "description": "The name of the local branch to push. Defaults to the current branch."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}}}
+    },
+    {
+      "name": "pull_changes",
+      "description": "Pulls changes from a remote repository into the current local branch.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "remote_name", "type": "string", "required": false, "default": "origin", "description": "The name of the remote repository (e.g., 'origin')."},
+        {"name": "branch_name", "type": "string", "required": false, "description": "The name of the remote branch to pull. Defaults to the current branch's tracking branch."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}}}
+    },
+    {
+      "name": "create_branch",
+      "description": "Creates a new branch in a local Git repository.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "branch_name", "type": "string", "required": true, "description": "The name for the new branch."},
+        {"name": "checkout", "type": "boolean", "required": false, "default": false, "description": "If true, checkout the new branch after creation."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}}}
+    },
+    {
+      "name": "checkout_branch",
+      "description": "Checks out an existing branch in a local Git repository.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."},
+        {"name": "branch_name", "type": "string", "required": true, "description": "The name of the branch to checkout."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "message": {"type": "string"}}}
+    },
+    {
+      "name": "list_branches",
+      "description": "Lists all local branches in a Git repository.",
+      "parameters": [
+        {"name": "local_path", "type": "string", "required": true, "description": "The path to the local Git repository."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "branches": {"type": "array", "items": {"type": "string"}}}}
+    }
+  ],
+  "required_api_keys": [],
+  "dependencies": ["GitPython"]
+}
+

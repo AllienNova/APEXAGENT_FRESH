@@ -1,0 +1,52 @@
+{
+  "name": "aideon-lite-ai-firebase",
+  "version": "1.0.0",
+  "description": "Aideon Lite AI - Firebase Edition: The world's first hybrid autonomous AI system",
+  "main": "functions/lib/index.js",
+  "scripts": {
+    "dev": "./deploy.sh emulator",
+    "build": "./deploy.sh build",
+    "deploy": "./deploy.sh deploy",
+    "validate": "./deploy.sh validate",
+    "security": "./deploy.sh security",
+    "optimize": "./deploy.sh optimize",
+    "backup": "./deploy.sh backup",
+    "test": "cd functions && npm test",
+    "lint": "cd functions && npm run lint",
+    "setup": "npm install && cd functions && npm install",
+    "clean": "rm -rf functions/lib functions/node_modules node_modules",
+    "logs": "firebase functions:log",
+    "shell": "firebase functions:shell"
+  },
+  "keywords": [
+    "ai",
+    "artificial-intelligence",
+    "firebase",
+    "hybrid-ai",
+    "autonomous-ai",
+    "cloud-functions",
+    "firestore",
+    "pwa",
+    "progressive-web-app"
+  ],
+  "author": "Aideon AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/aideon-lite-ai-firebase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/aideon-lite-ai-firebase/issues"
+  },
+  "homepage": "https://github.com/your-username/aideon-lite-ai-firebase#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "firebase-tools": "^13.0.0"
+  },
+  "dependencies": {},
+  "private": false
+}
+

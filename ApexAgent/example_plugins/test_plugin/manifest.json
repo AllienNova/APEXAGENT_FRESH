@@ -1,0 +1,17 @@
+{
+  "id": "test_plugin",
+  "name": "Test Plugin",
+  "version": "1.0.0",
+  "description": "A simple test plugin for unit testing",
+  "author": "ApexAgent Team",
+  "main": "test_plugin.py",
+  "dependencies": {
+    "plugins": {},
+    "libraries": {}
+  },
+  "permissions": [
+    "read_files",
+    "write_files",
+    "network_access"
+  ]
+}

@@ -1,0 +1,20 @@
+2025-06-08T01:47:05.5675097Z ##[group]Run npm run build:linux
+2025-06-08T01:47:05.5675423Z [36;1mnpm run build:linux[0m
+2025-06-08T01:47:05.5726463Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:47:05.5726717Z env:
+2025-06-08T01:47:05.5726891Z   NODE_VERSION: 18
+2025-06-08T01:47:05.5727096Z   PYTHON_VERSION: 3.11
+2025-06-08T01:47:05.5727387Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5727807Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:47:05.5728208Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5728559Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5728937Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5729307Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:47:05.5729794Z   GH_TOKEN: ***
+2025-06-08T01:47:05.5730207Z ##[endgroup]
+2025-06-08T01:47:05.7226054Z npm error Missing script: "build:linux"
+2025-06-08T01:47:05.7237562Z npm error
+2025-06-08T01:47:05.7238191Z npm error To see a list of scripts, run:
+2025-06-08T01:47:05.7238757Z npm error   npm run
+2025-06-08T01:47:05.7245755Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-06-08T01_47_05_648Z-debug-0.log
+2025-06-08T01:47:05.7299731Z ##[error]Process completed with exit code 1.

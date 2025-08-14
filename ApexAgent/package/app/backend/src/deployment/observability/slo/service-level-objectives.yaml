@@ -1,0 +1,47 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceLevelObjective
+metadata:
+  name: api-availability
+  namespace: observability
+spec:
+  description: "API Availability SLO - 99.9% of requests should be successful"
+  indicator:
+    ratio:
+      errors:
+        metric: http_requests_total{status=~"5.."}
+      total:
+        metric: http_requests_total
+  objectives:
+    - displayName: "99.9% Availability"
+      value: 99.9
+      window: 30d
+  alerting:
+    pageAlert:
+      thresholdsFactor: 14.4
+      alertAfterMinutes: 5
+    ticketAlert:
+      thresholdsFactor: 3
+      alertAfterMinutes: 10
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceLevelObjective
+metadata:
+  name: api-latency
+  namespace: observability
+spec:
+  description: "API Latency SLO - 95% of requests should complete within 300ms"
+  indicator:
+    latency:
+      metric: http_request_duration_seconds_bucket
+      latencyTarget: 0.3
+  objectives:
+    - displayName: "95% of requests < 300ms"
+      value: 95
+      window: 30d
+  alerting:
+    pageAlert:
+      thresholdsFactor: 14.4
+      alertAfterMinutes: 5
+    ticketAlert:
+      thresholdsFactor: 3
+      alertAfterMinutes: 10

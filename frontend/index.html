@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon Lite AI - Production Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0E27;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #B0BEC5;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #252B4A;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+        }
+
+        .credit-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1A1F3A;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #34405A;
+        }
+
+        .credit-balance {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .credit-usage {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6B73FF;
+            font-size: 0.8rem;
+        }
+
+        .credit-icon {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .status-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.hybrid {
+            background: #6B73FF;
+        }
+
+        .status-indicator.optimal {
+            background: #2ECC71;
+        }
+
+        .status-indicator.secure {
+            background: #F39C12;
+        }
+
+        .status-indicator.protected {
+            background: #E74C3C;
+        }
+
+        .mode-details, .performance-comparison, .privacy-details {
+            font-size: 0.75rem;
+            color: #B0BEC5;
+            margin-left: 0.25rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 0 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .tab-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-item:hover {
+            background: #252B4A;
+            color: #6B73FF;
+        }
+
+        .tab-item.active {
+            color: #6B73FF;
+            border-bottom-color: #6B73FF;
+            background: #252B4A;
+        }
+
+        .tab-notification {
+            background: #E74C3C;
+            color: white;
+            border-radius: 10px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Content Area */
+        .content-area {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 140px);
+            background: #1A1F3A;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: calc(100vh - 140px);
+        }
+
+        .sidebar {
+            background: #252B4A;
+            border-right: 1px solid #34405A;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #B0BEC5;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #B0BEC5;
+        }
+
+        .nav-item:hover {
+            background: #1A1F3A;
+            color: #6B73FF;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            color: #FFFFFF;
+        }
+
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .welcome-header {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-header p {
+            font-size: 1.1rem;
+            color: #B0BEC5;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #252B4A;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-card.performance {
+            border-left-color: #2ECC71;
+        }
+
+        .metric-card.security {
+            border-left-color: #3498DB;
+        }
+
+        .metric-card.processing {
+            border-left-color: #F39C12;
+        }
+
+        .metric-card.savings {
+            border-left-color: #E74C3C;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        .metric-icon {
+            font-size: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-description {
+            color: #B0BEC5;
+            font-size: 0.9rem;
+        }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .activity-card, .health-card {
+            background: #252B4A;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #34405A;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .activity-icon.success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ECC71;
+        }
+
+        .activity-icon.info {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498DB;
+        }
+
+        .activity-icon.warning {
+            background: rgba(243, 156, 18, 0.2);
+            color: #F39C12;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #B0BEC5;
+        }
+
+        .health-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .health-metric:last-child {
+            margin-bottom: 0;
+        }
+
+        .health-label {
+            font-weight: 500;
+        }
+
+        .health-value {
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .health-bar {
+            width: 100%;
+            height: 6px;
+            background: #34405A;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .health-fill.cpu {
+            background: #2ECC71;
+            width: 15%;
+        }
+
+        .health-fill.memory {
+            background: #3498DB;
+            width: 13%;
+        }
+
+        .health-fill.storage {
+            background: #F39C12;
+            width: 52%;
+        }
+
+        .health-fill.network {
+            background: #2ECC71;
+            width: 100%;
+        }
+
+        /* Security Tab Styles */
+        .security-command-center {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: calc(100vh - 140px);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+        }
+
+        .security-sidebar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 20px;
+        }
+
+        .security-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .security-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .security-nav-menu {
+            list-style: none;
+        }
+
+        .security-nav-item {
+            margin-bottom: 8px;
+        }
+
+        .security-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #b0b0b0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .security-nav-link:hover, .security-nav-link.active {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            transform: translateX(4px);
+        }
+
+        .security-nav-icon {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .security-main-content {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .security-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .threat-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-secure {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .ai-brain {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .upgrade-banner {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 0, 0, 0.2));
+            border: 1px solid rgba(255, 165, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upgrade-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffa500;
+            margin-bottom: 10px;
+        }
+
+        .upgrade-description {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .upgrade-btn {
+            background: linear-gradient(45deg, #ffa500, #ff6b00);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 165, 0, 0.3);
+        }
+
+        .security-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .security-dashboard-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .security-dashboard-card:hover {
+            border-color: rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+        }
+
+        .security-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .security-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00ffff;
+        }
+
+        .security-card-icon {
+            font-size: 24px;
+            color: #00ffff;
+        }
+
+        .security-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .security-metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .security-metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 5px;
+        }
+
+        .security-metric-label {
+            font-size: 12px;
+            color: #b0b0b0;
+            text-transform: uppercase;
+        }
+
+        .ai-analysis {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ai-analysis-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .ai-analysis-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00ffff;
+            margin-left: 12px;
+        }
+
+        .analysis-content {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .analysis-section {
+            margin-bottom: 15px;
+        }
+
+        .analysis-section h4 {
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .analysis-section p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .confidence-meter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            width: 96%;
+            background: linear-gradient(90deg, #ff0000, #ffa500, #00ff00);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tool-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tool-icon {
+            font-size: 32px;
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .tool-description {
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+        .premium-feature {
+            opacity: 0.6;
+        }
+
+        .premium-feature::after {
+            content: "🔒 PREMIUM";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #ffa500, #ff6b00);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .real-time-logs {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .logs-content {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .log-timestamp {
+            color: #888;
+        }
+
+        .log-level-info {
+            color: #00ff00;
+            font-weight: 600;
+        }
+
+        .log-level-warning {
+            color: #ffa500;
+            font-weight: 600;
+        }
+
+        .log-level-critical {
+            color: #ff0000;
+            font-weight: 600;
+        }
+
+        .log-level-system {
+            color: #00ffff;
+            font-weight: 600;
+        }
+
+        .log-message {
+            color: #e0e0e0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container, .security-command-center {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar, .security-sidebar {
+                display: none;
+            }
+            
+            .metrics-grid, .security-dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">A</div>
+                <div class="brand-info">
+                    <h1>Aideon Lite AI</h1>
+                    <div class="tagline">The World's First Hybrid Autonomous AI System</div>
+                </div>
+            </div>
+            
+            <div class="credit-info">
+                <div class="credit-balance">
+                    <div class="credit-icon">✨</div>
+                    <span>2,847 Credits</span>
+                </div>
+                <div class="credit-usage">
+                    <span>($0.42 used today)</span>
+                </div>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-group">
+                    <div class="status-indicator hybrid"></div>
+                    <span>Hybrid Processing</span>
+                    <span class="mode-details">67% Local, 33% Cloud</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator optimal"></div>
+                    <span>System Optimal</span>
+                    <span class="performance-comparison">2.3x Faster</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator protected"></div>
+                    <span>AI Guardian</span>
+                    <span class="privacy-details">1,247 Threats Blocked</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="tab-container">
+            <div class="tab-item active" data-tab="dashboard">📊 Dashboard</div>
+            <div class="tab-item" data-tab="chat">💬 Chat</div>
+            <div class="tab-item" data-tab="projects">📁 Projects</div>
+            <div class="tab-item" data-tab="artifacts">🎨 Artifacts <span class="tab-notification">12</span></div>
+            <div class="tab-item" data-tab="files">🗂️ Files</div>
+            <div class="tab-item" data-tab="agents">🤖 Agents</div>
+            <div class="tab-item" data-tab="security">🛡️ Security</div>
+            <div class="tab-item" data-tab="analytics">📈 Analytics</div>
+            <div class="tab-item" data-tab="settings">⚙️ Settings</div>
+            <div class="tab-item" data-tab="tardis">👨‍⚕️ Dr. TARDIS</div>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="content-area" id="content-area">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-item');
+            const contentArea = document.getElementById('content-area');
+
+            function loadTabContent(tabName) {
+                let content = '';
+
+                if (tabName === 'dashboard') {
+                    content = `
+                        <div class="dashboard-container">
+                            <div class="sidebar">
+                                <div class="sidebar-section">
+                                    <div class="section-title">CORE FEATURES</div>
+                                    <div class="nav-item active">
+                                        <span class="nav-icon">📊</span>
+                                        <span>Dashboard</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">💬</span>
+                                        <span>AI Chat</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🤖</span>
+                                        <span>Multi-Agents</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">👨‍⚕️</span>
+                                        <span>Dr. TARDIS</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="sidebar-section">
+                                    <div class="section-title">SECURITY & TOOLS</div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🛡️</span>
+                                        <span>Security Center</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🔧</span>
+                                        <span>AI Tools PRO</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📈</span>
+                                        <span>Analytics PRO</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="sidebar-section">
+                                    <div class="section-title">SYSTEM</div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">⚙️</span>
+                                        <span>Settings</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">❓</span>
+                                        <span>Help & Support</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="main-content">
+                                <div class="welcome-header">
+                                    <h1>Welcome to Aideon Lite AI</h1>
+                                    <p>The world's first hybrid autonomous AI system</p>
+                                </div>
+                                
+                                <div class="metrics-grid">
+                                    <div class="metric-card performance">
+                                        <div class="metric-header">
+                                            <div class="metric-title">🎯 AI Performance</div>
+                                            <div class="metric-icon">📈</div>
+                                        </div>
+                                        <div class="metric-value" style="color: #2ECC71;">98.7%</div>
+                                        <div class="metric-description">System Efficiency</div>
+                                    </div>
+                                    
+                                    <div class="metric-card security">
+                                        <div class="metric-header">
+                                            <div class="metric-title">🛡️ Security Status</div>
+                                            <div class="metric-icon">🔒</div>
+                                        </div>
+                                        <div class="metric-value" style="color: #3498DB;">1,247</div>
+                                        <div class="metric-description">Threats Blocked Today</div>
+                                    </div>
+                                    
+                                    <div class="metric-card processing">
+                                        <div class="metric-header">
+                                            <div class="metric-title">⚡ Hybrid Processing</div>
+                                            <div class="metric-icon">🔄</div>
+                                        </div>
+                                        <div class="metric-value" style="color: #F39C12;">2.3x</div>
+                                        <div class="metric-description">Faster than Cloud-Only</div>
+                                    </div>
+                                    
+                                    <div class="metric-card savings">
+                                        <div class="metric-header">
+                                            <div class="metric-title">💰 Cost Savings</div>
+                                            <div class="metric-icon">💵</div>
+                                        </div>
+                                        <div class="metric-value" style="color: #E74C3C;">45%</div>
+                                        <div class="metric-description">vs Cloud-Only Solutions</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bottom-section">
+                                    <div class="activity-card">
+                                        <div class="card-title">Recent Activity</div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon success">✓</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">Security scan completed</div>
+                                                <div class="activity-time">2 minutes ago</div>
+                                            </div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon info">🔄</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">AI model updated</div>
+                                                <div class="activity-time">15 minutes ago</div>
+                                            </div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon warning">📁</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">New project created</div>
+                                                <div class="activity-time">1 hour ago</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="health-card">
+                                        <div class="card-title">System Health</div>
+                                        <div class="health-metric">
+                                            <div class="health-label">CPU Usage</div>
+                                            <div class="health-value">15%</div>
+                                        </div>
+                                        <div class="health-bar">
+                                            <div class="health-fill cpu"></div>
+                                        </div>
+                                        
+                                        <div class="health-metric">
+                                            <div class="health-label">Memory</div>
+                                            <div class="health-value">2.1GB / 16GB</div>
+                                        </div>
+                                        <div class="health-bar">
+                                            <div class="health-fill memory"></div>
+                                        </div>
+                                        
+                                        <div class="health-metric">
+                                            <div class="health-label">Storage</div>
+                                            <div class="health-value">847GB Free</div>
+                                        </div>
+                                        <div class="health-bar">
+                                            <div class="health-fill storage"></div>
+                                        </div>
+                                        
+                                        <div class="health-metric">
+                                            <div class="health-label">Network</div>
+                                            <div class="health-value">Optimal</div>
+                                        </div>
+                                        <div class="health-bar">
+                                            <div class="health-fill network"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'security') {
+                    content = `
+                        <div class="security-command-center">
+                            <nav class="security-sidebar">
+                                <div class="security-logo">
+                                    <div class="security-logo-icon">A</div>
+                                    <div>
+                                        <div style="font-weight: bold; font-size: 16px;">Aideon AI</div>
+                                        <div style="font-size: 12px; color: #888;">Cybersecurity Command</div>
+                                    </div>
+                                </div>
+                                
+                                <ul class="security-nav-menu">
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link active" onclick="showSecuritySection('dashboard')">
+                                            <span class="security-nav-icon">🛡️</span>
+                                            <span>Security Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('ai-analysis')">
+                                            <span class="security-nav-icon">🧠</span>
+                                            <span>AI Analysis</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('threat-hunting')">
+                                            <span class="security-nav-icon">🎯</span>
+                                            <span>Threat Hunting</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('tools')">
+                                            <span class="security-nav-icon">🔧</span>
+                                            <span>Security Tools</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('forensics')">
+                                            <span class="security-nav-icon">🔍</span>
+                                            <span>Digital Forensics</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('compliance')">
+                                            <span class="security-nav-icon">📋</span>
+                                            <span>Compliance</span>
+                                        </a>
+                                    </li>
+                                    <li class="security-nav-item">
+                                        <a href="#" class="security-nav-link" onclick="showSecuritySection('settings')">
+                                            <span class="security-nav-icon">⚙️</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                            <main class="security-main-content">
+                                <header class="security-header">
+                                    <div class="threat-status">
+                                        <div class="status-secure">
+                                            <span>🛡️</span>
+                                            <span>SECURE</span>
+                                        </div>
+                                        <div style="color: #b0b0b0; font-size: 14px;">
+                                            Last scan: 2 minutes ago | Next scan: 58 seconds
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="ai-status">
+                                        <div class="ai-brain">🧠</div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #00ffff;">AI Guardian Active</div>
+                                            <div style="font-size: 12px; color: #888;">Advanced Threat Detection</div>
+                                        </div>
+                                    </div>
+                                </header>
+
+                                <div id="security-dashboard-section">
+                                    <div class="upgrade-banner">
+                                        <div class="upgrade-title">🚀 Upgrade to Aideon Pro Security</div>
+                                        <div class="upgrade-description">Unlock advanced threat hunting, AI-powered forensics, and enterprise compliance tools</div>
+                                        <button class="upgrade-btn">Upgrade Now - $49/month</button>
+                                    </div>
+
+                                    <div class="security-dashboard-grid">
+                                        <div class="security-dashboard-card">
+                                            <div class="security-card-header">
+                                                <h3 class="security-card-title">Threat Detection</h3>
+                                                <span class="security-card-icon">🎯</span>
+                                            </div>
+                                            <div class="security-metric-grid">
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">0</div>
+                                                    <div class="security-metric-label">Active Threats</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">1,247</div>
+                                                    <div class="security-metric-label">Threats Blocked</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">98.7%</div>
+                                                    <div class="security-metric-label">Success Rate</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">2.3s</div>
+                                                    <div class="security-metric-label">Avg Response</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="security-dashboard-card">
+                                            <div class="security-card-header">
+                                                <h3 class="security-card-title">Network Security</h3>
+                                                <span class="security-card-icon">🌐</span>
+                                            </div>
+                                            <div class="security-metric-grid">
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">23</div>
+                                                    <div class="security-metric-label">Active Connections</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">4.7GB</div>
+                                                    <div class="security-metric-label">Data Scanned</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">100%</div>
+                                                    <div class="security-metric-label">Firewall Status</div>
+                                                </div>
+                                                <div class="security-metric">
+                                                    <div class="security-metric-value">847</div>
+                                                    <div class="security-metric-label">Rules Active</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-analysis">
+                                        <div class="ai-analysis-header">
+                                            <div class="ai-brain">🧠</div>
+                                            <h3 class="ai-analysis-title">AI Security Analysis</h3>
+                                        </div>
+                                        <div class="analysis-content">
+                                            <div class="analysis-section">
+                                                <h4>Current Threat Assessment</h4>
+                                                <p>System is operating under normal security parameters. No active threats detected. All security protocols are functioning optimally with 98.7% efficiency rating.</p>
+                                            </div>
+                                            <div class="analysis-section">
+                                                <h4>Predictive Analysis</h4>
+                                                <p>Based on current patterns, the probability of a security incident in the next 24 hours is 0.3%. Recommended actions: Continue monitoring, no immediate intervention required.</p>
+                                            </div>
+                                            <div class="confidence-meter">
+                                                <span style="color: #00ffff; font-size: 14px; font-weight: 600;">Confidence Level:</span>
+                                                <div class="confidence-bar">
+                                                    <div class="confidence-fill"></div>
+                                                </div>
+                                                <span style="color: #00ff00; font-weight: 600;">96%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 30px;">
+                                        <h3 style="color: #00ffff; margin-bottom: 20px; font-size: 20px; font-weight: 600;">Security Tools</h3>
+                                        <div class="tools-grid">
+                                            <div class="tool-card">
+                                                <div class="tool-icon">🔍</div>
+                                                <div class="tool-name">Vulnerability Scanner</div>
+                                                <div class="tool-description">Scan for security vulnerabilities</div>
+                                            </div>
+                                            <div class="tool-card premium-feature">
+                                                <div class="tool-icon">🎯</div>
+                                                <div class="tool-name">Threat Hunter</div>
+                                                <div class="tool-description">Advanced threat hunting</div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">🔥</div>
+                                                <div class="tool-name">Firewall Manager</div>
+                                                <div class="tool-description">Configure firewall rules</div>
+                                            </div>
+                                            <div class="tool-card premium-feature">
+                                                <div class="tool-icon">🕵️</div>
+                                                <div class="tool-name">Digital Forensics</div>
+                                                <div class="tool-description">Investigate security incidents</div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">📊</div>
+                                                <div class="tool-name">Security Reports</div>
+                                                <div class="tool-description">Generate security reports</div>
+                                            </div>
+                                            <div class="tool-card premium-feature">
+                                                <div class="tool-icon">📋</div>
+                                                <div class="tool-name">Compliance Monitor</div>
+                                                <div class="tool-description">Track compliance status</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="real-time-logs">
+                                        <h3 style="color: #00ffff; margin-bottom: 15px; font-size: 18px; font-weight: 600;">Real-Time Security Logs</h3>
+                                        <div class="logs-content">
+                                            <div class="log-entry">
+                                                <span class="log-timestamp">14:32:15</span>
+                                                <span class="log-level-info">[INFO]</span>
+                                                <span class="log-message">System scan initiated - All systems operational</span>
+                                            </div>
+                                            <div class="log-entry">
+                                                <span class="log-timestamp">14:32:18</span>
+                                                <span class="log-level-warning">[WARN]</span>
+                                                <span class="log-message">Unusual traffic pattern detected from IP 192.168.1.101</span>
+                                            </div>
+                                            <div class="log-entry">
+                                                <span class="log-timestamp">14:32:20</span>
+                                                <span class="log-level-critical">[CRITICAL]</span>
+                                                <span class="log-message">Malicious payload detected and blocked - Threat neutralized</span>
+                                            </div>
+                                            <div class="log-entry">
+                                                <span class="log-timestamp">14:32:22</span>
+                                                <span class="log-level-info">[INFO]</span>
+                                                <span class="log-message">Threat neutralized successfully - Security protocols updated</span>
+                                            </div>
+                                            <div class="log-entry">
+                                                <span class="log-timestamp">14:32:25</span>
+                                                <span class="log-level-system">[SYSTEM]</span>
+                                                <span class="log-message">AI Guardian learning from incident - Threat database updated</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="security-ai-analysis-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">AI Analysis Center</h2>
+                                    <p style="color: #b0b0b0;">Advanced AI-powered security analysis tools and insights.</p>
+                                </div>
+
+                                <div id="security-threat-hunting-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">Threat Hunting</h2>
+                                    <p style="color: #b0b0b0;">Proactive threat hunting and advanced persistent threat detection.</p>
+                                </div>
+
+                                <div id="security-tools-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">Security Tools</h2>
+                                    <p style="color: #b0b0b0;">Comprehensive security tools and utilities.</p>
+                                </div>
+
+                                <div id="security-forensics-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">Digital Forensics</h2>
+                                    <p style="color: #b0b0b0;">Digital forensics and incident investigation tools.</p>
+                                </div>
+
+                                <div id="security-compliance-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">Compliance</h2>
+                                    <p style="color: #b0b0b0;">Compliance monitoring and regulatory requirements.</p>
+                                </div>
+
+                                <div id="security-settings-section" style="display: none;">
+                                    <h2 style="color: #00ffff; margin-bottom: 20px;">Security Settings</h2>
+                                    <p style="color: #b0b0b0;">Configure security settings and preferences.</p>
+                                </div>
+                            </main>
+                        </div>
+                    `;
+                } else {
+                    content = `<div style="padding: 2rem;"><h1>${tabName.charAt(0).toUpperCase() + tabName.slice(1)}</h1><p>Content for ${tabName} goes here.</p></div>`;
+                }
+
+                contentArea.innerHTML = content;
+            }
+
+            function showSecuritySection(sectionName) {
+                // Hide all sections
+                const sections = ['dashboard', 'ai-analysis', 'threat-hunting', 'tools', 'forensics', 'compliance', 'settings'];
+                sections.forEach(section => {
+                    const element = document.getElementById('security-' + section + '-section');
+                    if (element) element.style.display = 'none';
+                });
+                
+                // Show selected section
+                const selectedSection = document.getElementById('security-' + sectionName + '-section');
+                if (selectedSection) selectedSection.style.display = 'block';
+                
+                // Update navigation active state
+                document.querySelectorAll('.security-nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector('[onclick="showSecuritySection(\\''+sectionName+'\\')"]');
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+
+            // Make showSecuritySection globally available
+            window.showSecuritySection = showSecuritySection;
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabName = tab.getAttribute('data-tab');
+                    loadTabContent(tabName);
+                });
+            });
+
+            // Load the default tab content
+            loadTabContent('dashboard');
+        });
+    </script>
+</body>
+</html>
+

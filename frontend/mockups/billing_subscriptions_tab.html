@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Billing & Subscriptions</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --gray-dark: #334155;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 255px;
+            background-color: #1e293b;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .slogan {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 5px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--gray-light);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary);
+        }
+        
+        .nav-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .badge {
+            background-color: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .table th {
+            font-weight: 500;
+            color: var(--gray-light);
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .status-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .status-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--gray-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: white;
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab:hover:not(.active) {
+            color: white;
+            border-bottom-color: var(--gray);
+        }
+        
+        .subscription-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        
+        .subscription-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .subscription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .subscription-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .subscription-price {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .subscription-price-period {
+            font-size: 14px;
+            color: var(--gray-light);
+        }
+        
+        .subscription-features {
+            margin: 15px 0;
+        }
+        
+        .subscription-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .subscription-feature-icon {
+            color: var(--success);
+            margin-right: 8px;
+        }
+        
+        .subscription-cta {
+            margin-top: 20px;
+        }
+        
+        .revenue-chart {
+            height: 300px;
+            background-color: #0f172a;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 40px;
+            width: 30px;
+            background-color: var(--primary);
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .chart-bar-1 {
+            height: 120px;
+            left: 50px;
+        }
+        
+        .chart-bar-2 {
+            height: 150px;
+            left: 100px;
+        }
+        
+        .chart-bar-3 {
+            height: 180px;
+            left: 150px;
+        }
+        
+        .chart-bar-4 {
+            height: 210px;
+            left: 200px;
+        }
+        
+        .chart-bar-5 {
+            height: 190px;
+            left: 250px;
+        }
+        
+        .chart-bar-6 {
+            height: 230px;
+            left: 300px;
+        }
+        
+        .chart-x-axis {
+            position: absolute;
+            bottom: 20px;
+            left: 50px;
+            right: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .chart-x-label {
+            font-size: 12px;
+            color: var(--gray-light);
+        }
+        
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .invoice-item:last-child {
+            border-bottom: none;
+        }
+        
+        .invoice-item-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .invoice-item-id {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .invoice-item-date {
+            font-size: 12px;
+            color: var(--gray-light);
+        }
+        
+        .invoice-item-amount {
+            font-weight: 600;
+        }
+        
+        .invoice-item-status {
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .credit-usage {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .credit-usage-label {
+            width: 120px;
+            font-size: 14px;
+        }
+        
+        .credit-usage-bar {
+            flex: 1;
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+        
+        .credit-usage-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .credit-usage-value {
+            width: 80px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            Aideon AI Lite
+            <div class="slogan">Intelligence Everywhere, Limits Nowhere</div>
+        </div>
+        <a href="#" class="nav-item">
+            <span class="nav-number">1</span>
+            Global Dashboard
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">2</span>
+            Cloud Resources
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">3</span>
+            System Health
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">4</span>
+            User Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">5</span>
+            Security & Compliance
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">6</span>
+            API Key Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">7</span>
+            Agent Orchestration
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">8</span>
+            Memory Systems
+        </a>
+        <a href="#" class="nav-item active">
+            <span class="nav-number">9</span>
+            Billing & Subscriptions
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">10</span>
+            System Configuration
+        </a>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="page-title">Billing & Subscriptions</div>
+            <div class="user-menu">
+                <div class="badge">SUPER ADMIN</div>
+                <div class="user-avatar">U</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">Subscription Plans</div>
+            <div class="tab">Revenue Analytics</div>
+            <div class="tab">User Billing</div>
+            <div class="tab">Credit Management</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Subscription Overview</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Export Report</button>
+                    <button class="btn btn-primary">Create New Plan</button>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">Total Subscribers</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">487,291</div>
+                    <div style="color: var(--success);">+12,487 this month</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Monthly Revenue</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">$4.8M</div>
+                    <div style="color: var(--success);">+18.7% vs. last month</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Avg. Revenue Per User</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">$78.42</div>
+                    <div style="color: var(--success);">+$4.87 vs. last month</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Churn Rate</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">1.2%</div>
+                    <div style="color: var(--success);">-0.3% vs. last month</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Subscription Plans</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Filter</button>
+                    <button class="btn btn-outline">Refresh</button>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-name">Basic</div>
+                        <div class="status status-active">Active</div>
+                    </div>
+                    <div class="subscription-price">
+                        $24.99 <span class="subscription-price-period">/month</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--gray-light);">$19.99 with own API keys</div>
+                    <div class="subscription-features">
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            5,000 credits per month
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Access to GPT-4 and Claude 3
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            10 GB storage
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Email support
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 14px; margin-bottom: 5px;">Active Subscribers</div>
+                        <div style="font-size: 18px; font-weight: 600;">248,721</div>
+                    </div>
+                    <div class="subscription-cta">
+                        <button class="btn btn-outline">Edit Plan</button>
+                    </div>
+                </div>
+                
+                <div class="subscription-card" style="border-color: var(--primary);">
+                    <div class="subscription-header">
+                        <div class="subscription-name">Pro</div>
+                        <div class="status status-active">Active</div>
+                    </div>
+                    <div class="subscription-price">
+                        $89.99 <span class="subscription-price-period">/month</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--gray-light);">$49.99 with own API keys</div>
+                    <div class="subscription-features">
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            20,000 credits per month
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Access to all AI models
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            50 GB storage
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Priority support
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 14px; margin-bottom: 5px;">Active Subscribers</div>
+                        <div style="font-size: 18px; font-weight: 600;">187,482</div>
+                    </div>
+                    <div class="subscription-cta">
+                        <button class="btn btn-outline">Edit Plan</button>
+                    </div>
+                </div>
+                
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-name">Expert</div>
+                        <div class="status status-active">Active</div>
+                    </div>
+                    <div class="subscription-price">
+                        $149.99 <span class="subscription-price-period">/month</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--gray-light);">$99.99 with own API keys</div>
+                    <div class="subscription-features">
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            50,000 credits per month
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Access to all AI models
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            200 GB storage
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            24/7 dedicated support
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 14px; margin-bottom: 5px;">Active Subscribers</div>
+                        <div style="font-size: 18px; font-weight: 600;">42,487</div>
+                    </div>
+                    <div class="subscription-cta">
+                        <button class="btn btn-outline">Edit Plan</button>
+                    </div>
+                </div>
+                
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-name">Enterprise</div>
+                        <div class="status status-active">Active</div>
+                    </div>
+                    <div class="subscription-price">
+                        Custom <span class="subscription-price-period">pricing</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--gray-light);">Contact sales for details</div>
+                    <div class="subscription-features">
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Unlimited credits
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Access to all AI models
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Unlimited storage
+                        </div>
+                        <div class="subscription-feature">
+                            <span class="subscription-feature-icon">✓</span>
+                            Dedicated account manager
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div style="font-size: 14px; margin-bottom: 5px;">Active Subscribers</div>
+                        <div style="font-size: 18px; font-weight: 600;">8,601</div>
+                    </div>
+                    <div class="subscription-cta">
+                        <button class="btn btn-outline">Edit Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Revenue Analytics</div>
+            </div>
+            
+            <div class="revenue-chart">
+                <div class="chart-bar chart-bar-1"></div>
+                <div class="chart-bar chart-bar-2"></div>
+                <div class="chart-bar chart-bar-3"></div>
+                <div class="chart-bar chart-bar-4"></div>
+                <div class="chart-bar chart-bar-5"></div>
+                <div class="chart-bar chart-bar-6"></div>
+                
+                <div class="chart-x-axis">
+                    <div class="chart-x-label">Jan</div>
+                    <div class="chart-x-label">Feb</div>
+                    <div class="chart-x-label">Mar</div>
+                    <div class="chart-x-label">Apr</div>
+                    <div class="chart-x-label">May</div>
+                    <div class="chart-x-label">Jun</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="font-weight: 600; margin-bottom: 10px;">Revenue Breakdown</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Subscribers</th>
+                            <th>Revenue</th>
+                            <th>Growth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic</td>
+                            <td>248,721</td>
+                            <td>$5.4M</td>
+                            <td style="color: var(--success);">+12.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Pro</td>
+                            <td>187,482</td>
+                            <td>$14.8M</td>
+                            <td style="color: var(--success);">+18.7%</td>
+                        </tr>
+                        <tr>
+                            <td>Expert</td>
+                            <td>42,487</td>
+                            <td>$5.7M</td>
+                            <td style="color: var(--success);">+24.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>8,601</td>
+                            <td>$12.4M</td>
+                            <td style="color: var(--success);">+32.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Recent Invoices</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">View All</button>
+                </div>
+            </div>
+            
+            <div>
+                <div class="invoice-item">
+                    <div class="invoice-item-details">
+                        <div class="invoice-item-id">INV-2025-06-08-12487</div>
+                        <div class="invoice-item-date">June 8, 2025</div>
+                    </div>
+                    <div>
+                        <div class="invoice-item-amount">$24,872.00</div>
+                        <div class="invoice-item-status" style="color: var(--success);">Paid</div>
+                    </div>
+                </div>
+                
+                <div class="invoice-item">
+                    <div class="invoice-item-details">
+                        <div class="invoice-item-id">INV-2025-06-07-12486</div>
+                        <div class="invoice-item-date">June 7, 2025</div>
+                    </div>
+                    <div>
+                        <div class="invoice-item-amount">$18,742.00</div>
+                        <div class="invoice-item-status" style="color: var(--success);">Paid</div>
+                    </div>
+                </div>
+                
+                <div class="invoice-item">
+                    <div class="invoice-item-details">
+                        <div class="invoice-item-id">INV-2025-06-06-12485</div>
+                        <div class="invoice-item-date">June 6, 2025</div>
+                    </div>
+                    <div>
+                        <div class="invoice-item-amount">$32,487.00</div>
+                        <div class="invoice-item-status" style="color: var(--warning);">Pending</div>
+                    </div>
+                </div>
+                
+                <div class="invoice-item">
+                    <div class="invoice-item-details">
+                        <div class="invoice-item-id">INV-2025-06-05-12484</div>
+                        <div class="invoice-item-date">June 5, 2025</div>
+                    </div>
+                    <div>
+                        <div class="invoice-item-amount">$14,872.00</div>
+                        <div class="invoice-item-status" style="color: var(--success);">Paid</div>
+                    </div>
+                </div>
+                
+                <div class="invoice-item">
+                    <div class="invoice-item-details">
+                        <div class="invoice-item-id">INV-2025-06-04-12483</div>
+                        <div class="invoice-item-date">June 4, 2025</div>
+                    </div>
+                    <div>
+                        <div class="invoice-item-amount">$28,742.00</div>
+                        <div class="invoice-item-status" style="color: var(--success);">Paid</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Credit Usage</div>
+            </div>
+            
+            <div>
+                <div class="credit-usage">
+                    <div class="credit-usage-label">OpenAI</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 78%; background-color: var(--primary);"></div>
+                    </div>
+                    <div class="credit-usage-value">78% (3.9M)</div>
+                </div>
+                
+                <div class="credit-usage">
+                    <div class="credit-usage-label">Anthropic</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 62%; background-color: var(--secondary);"></div>
+                    </div>
+                    <div class="credit-usage-value">62% (3.1M)</div>
+                </div>
+                
+                <div class="credit-usage">
+                    <div class="credit-usage-label">Google AI</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 45%; background-color: var(--info);"></div>
+                    </div>
+                    <div class="credit-usage-value">45% (2.2M)</div>
+                </div>
+                
+                <div class="credit-usage">
+                    <div class="credit-usage-label">Midjourney</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 32%; background-color: var(--success);"></div>
+                    </div>
+                    <div class="credit-usage-value">32% (1.6M)</div>
+                </div>
+                
+                <div class="credit-usage">
+                    <div class="credit-usage-label">Stability AI</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 24%; background-color: var(--warning);"></div>
+                    </div>
+                    <div class="credit-usage-value">24% (1.2M)</div>
+                </div>
+                
+                <div class="credit-usage">
+                    <div class="credit-usage-label">Other</div>
+                    <div class="credit-usage-bar">
+                        <div class="credit-usage-fill" style="width: 18%; background-color: var(--gray);"></div>
+                    </div>
+                    <div class="credit-usage-value">18% (0.9M)</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button class="btn btn-primary">Adjust Credit Allocation</button>
+                <button class="btn btn-outline" style="margin-left: 10px;">Purchase Additional Credits</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

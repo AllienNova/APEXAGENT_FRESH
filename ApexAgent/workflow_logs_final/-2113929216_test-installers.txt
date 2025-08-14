@@ -1,0 +1,5 @@
+2025-06-08T01:57:07.0255108Z ##[section]Starting: Prepare job test-installers
+2025-06-08T01:57:07.0305516Z Evaluating strategy
+2025-06-08T01:57:07.0311929Z Creating job '__default'
+2025-06-08T01:57:07.0314854Z Skip evaluating job properties
+2025-06-08T01:57:07.0316351Z ##[section]Finishing: Prepare job test-installers
