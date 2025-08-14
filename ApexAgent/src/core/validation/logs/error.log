@@ -1,0 +1,3 @@
+{"category":"core","level":"error","message":"Failed to initialize Aideon AI Lite","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"validation:framework","level":"error","message":"Validation failed: toolManager.getAllTools is not a function","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"error","message":"IDE integration validation failed: Cannot read properties of undefined (reading 'getAllIntegrations')","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}

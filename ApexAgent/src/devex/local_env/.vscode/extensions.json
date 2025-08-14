@@ -1,0 +1,17 @@
+{
+  "name": "ApexAgent",
+  "version": "1.0.0",
+  "description": "VSCode extension recommendations for ApexAgent development",
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "orta.vscode-jest",
+    "eamodio.gitlens",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "christian-kohler.path-intellisense",
+    "ms-vscode-remote.remote-containers"
+  ]
+}

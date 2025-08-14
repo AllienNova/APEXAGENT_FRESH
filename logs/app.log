@@ -1,0 +1,65 @@
+2025-08-13 11:03:53,270 - __main__ - INFO - Redis connection established
+2025-08-13 11:03:53,284 - root - INFO - Performance monitor initialized
+2025-08-13 11:03:53,285 - root - INFO - Monitoring system initialized successfully
+2025-08-13 11:03:53,308 - __main__ - ERROR - Database initialization failed: (sqlite3.OperationalError) no such column: user.password_hash
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.created_at AS user_created_at, user.last_login AS user_last_login, user.is_active AS user_is_active, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('admin', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-13 11:03:53,308 - __main__ - INFO - Starting ApexAgent Optimized Backend Server...
+2025-08-13 11:03:53,308 - __main__ - INFO - Redis connection established
+2025-08-13 11:03:53,309 - __main__ - INFO - Database initialized
+2025-08-13 11:03:53,309 - __main__ - INFO - Enterprise features enabled
+2025-08-13 11:04:09,386 - __main__ - INFO - Redis connection established
+2025-08-13 11:04:09,401 - root - INFO - Performance monitor initialized
+2025-08-13 11:04:09,403 - root - INFO - Monitoring system initialized successfully
+2025-08-13 11:04:09,423 - __main__ - ERROR - Database initialization failed: (sqlite3.OperationalError) no such column: user.password_hash
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.created_at AS user_created_at, user.last_login AS user_last_login, user.is_active AS user_is_active, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('admin', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-13 11:04:09,424 - __main__ - INFO - Starting ApexAgent Optimized Backend Server...
+2025-08-13 11:04:09,424 - __main__ - INFO - Redis connection established
+2025-08-13 11:04:09,424 - __main__ - INFO - Database initialized
+2025-08-13 11:04:09,424 - __main__ - INFO - Enterprise features enabled
+2025-08-13 11:04:09,434 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://169.254.0.21:5001
+2025-08-13 11:04:09,434 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-13 11:04:09,435 - werkzeug - INFO -  * Restarting with stat
+2025-08-13 11:04:09,867 - __main__ - INFO - Redis connection established
+2025-08-13 11:04:09,880 - root - INFO - Performance monitor initialized
+2025-08-13 11:04:09,881 - root - INFO - Monitoring system initialized successfully
+2025-08-13 11:04:09,901 - __main__ - ERROR - Database initialization failed: (sqlite3.OperationalError) no such column: user.password_hash
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.created_at AS user_created_at, user.last_login AS user_last_login, user.is_active AS user_is_active, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('admin', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-13 11:04:09,902 - __main__ - INFO - Starting ApexAgent Optimized Backend Server...
+2025-08-13 11:04:09,902 - __main__ - INFO - Redis connection established
+2025-08-13 11:04:09,902 - __main__ - INFO - Database initialized
+2025-08-13 11:04:09,902 - __main__ - INFO - Enterprise features enabled
+2025-08-13 11:04:09,910 - werkzeug - WARNING -  * Debugger is active!
+2025-08-13 11:04:09,911 - werkzeug - INFO -  * Debugger PIN: 855-551-738
+2025-08-13 11:05:14,610 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET / HTTP/1.1" 200 -
+2025-08-13 11:05:14,638 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET /optimized.js HTTP/1.1" 200 -
+2025-08-13 11:05:14,641 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET /enterprise.js HTTP/1.1" 200 -
+2025-08-13 11:05:14,695 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET /sw.js HTTP/1.1" 200 -
+2025-08-13 11:05:14,709 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET /favicon.ico HTTP/1.1" 200 -
+2025-08-13 11:05:14,729 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "GET /index.html HTTP/1.1" 200 -
+2025-08-13 11:05:14,733 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "[36mGET / HTTP/1.1[0m" 304 -
+2025-08-13 11:05:14,734 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "[36mGET /optimized.js HTTP/1.1[0m" 304 -
+2025-08-13 11:05:14,739 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:14] "[36mGET /enterprise.js HTTP/1.1[0m" 304 -
+2025-08-13 11:05:44,313 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:44] "[36mGET /sw.js HTTP/1.1[0m" 304 -
+2025-08-13 11:05:49,868 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:49] "[35m[1mGET /health HTTP/1.1[0m" 503 -
+2025-08-13 11:05:49,917 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:49] "[35m[1mGET /health HTTP/1.1[0m" 503 -
+2025-08-13 11:05:51,524 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:51] "[36mGET /sw.js HTTP/1.1[0m" 304 -
+2025-08-13 11:05:54,944 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:54] "GET /metrics HTTP/1.1" 200 -
+2025-08-13 11:05:56,562 - werkzeug - INFO - 127.0.0.1 - - [13/Aug/2025 11:05:56] "[36mGET /sw.js HTTP/1.1[0m" 304 -
