@@ -1,0 +1,140 @@
+2025-06-08T01:45:39.0811616Z ##[group]Run actions/checkout@v4
+2025-06-08T01:45:39.0813151Z with:
+2025-06-08T01:45:39.0813940Z   fetch-depth: 0
+2025-06-08T01:45:39.0814753Z   repository: AllienNova/ApexAgent
+2025-06-08T01:45:39.0815974Z   token: ***
+2025-06-08T01:45:39.0816763Z   ssh-strict: true
+2025-06-08T01:45:39.0817606Z   ssh-user: git
+2025-06-08T01:45:39.0818452Z   persist-credentials: true
+2025-06-08T01:45:39.0819391Z   clean: true
+2025-06-08T01:45:39.0820445Z   sparse-checkout-cone-mode: true
+2025-06-08T01:45:39.0821504Z   fetch-tags: false
+2025-06-08T01:45:39.0822340Z   show-progress: true
+2025-06-08T01:45:39.0823181Z   lfs: false
+2025-06-08T01:45:39.0823919Z   submodules: false
+2025-06-08T01:45:39.0824777Z   set-safe-directory: true
+2025-06-08T01:45:39.0826022Z env:
+2025-06-08T01:45:39.0826793Z   NODE_VERSION: 18
+2025-06-08T01:45:39.0827613Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:39.0828436Z ##[endgroup]
+2025-06-08T01:45:39.2528328Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:45:39.2531547Z ##[group]Getting Git version info
+2025-06-08T01:45:39.2532942Z Working directory is '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:39.2534824Z [command]/usr/bin/git version
+2025-06-08T01:45:39.2573667Z git version 2.49.0
+2025-06-08T01:45:39.2577730Z ##[endgroup]
+2025-06-08T01:45:39.2588572Z Temporarily overriding HOME='/home/runner/work/_temp/b8cc8d0b-ebf2-4a19-b878-b6df922b934f' before making global git config changes
+2025-06-08T01:45:39.2595716Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:45:39.2597899Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:39.2645148Z Deleting the contents of '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:39.2649669Z ##[group]Initializing the repository
+2025-06-08T01:45:39.2655220Z [command]/usr/bin/git init /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:39.2761251Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-06-08T01:45:39.2764316Z hint: is subject to change. To configure the initial branch name to use in all
+2025-06-08T01:45:39.2766549Z hint: of your new repositories, which will suppress this warning, call:
+2025-06-08T01:45:39.2768268Z hint:
+2025-06-08T01:45:39.2769231Z hint: 	git config --global init.defaultBranch <name>
+2025-06-08T01:45:39.2770430Z hint:
+2025-06-08T01:45:39.2771434Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-06-08T01:45:39.2773093Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-06-08T01:45:39.2774391Z hint:
+2025-06-08T01:45:39.2775070Z hint: 	git branch -m <name>
+2025-06-08T01:45:39.2776318Z Initialized empty Git repository in /home/runner/work/ApexAgent/ApexAgent/.git/
+2025-06-08T01:45:39.2781310Z [command]/usr/bin/git remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:39.2812064Z ##[endgroup]
+2025-06-08T01:45:39.2814571Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:45:39.2816483Z [command]/usr/bin/git config --local gc.auto 0
+2025-06-08T01:45:39.2851442Z ##[endgroup]
+2025-06-08T01:45:39.2852840Z ##[group]Setting up auth
+2025-06-08T01:45:39.2882516Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:45:39.2899596Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:45:39.3183163Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:45:39.3215038Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:45:39.3443526Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-06-08T01:45:39.3485350Z ##[endgroup]
+2025-06-08T01:45:39.3488425Z ##[group]Fetching the repository
+2025-06-08T01:45:39.3496663Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6bc44e2bef6c601be80ba6cdc5bd9974091c084e:refs/remotes/pull/1/merge
+2025-06-08T01:45:42.8776073Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:42.8778699Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:45:42.8788379Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:45:42.8789708Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:45:42.8791260Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:45:42.8792702Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:45:42.8794462Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:45:42.8809769Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:45:42.8811283Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:45:42.8812758Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:45:42.8814048Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:45:42.8815209Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:45:42.8816180Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:45:42.8817167Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:45:42.8818145Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:45:42.8819365Z  * [new ref]           6bc44e2bef6c601be80ba6cdc5bd9974091c084e -> pull/1/merge
+2025-06-08T01:45:42.9019397Z ##[endgroup]
+2025-06-08T01:45:42.9020571Z ##[group]Determining the checkout info
+2025-06-08T01:45:42.9021578Z ##[endgroup]
+2025-06-08T01:45:42.9028823Z [command]/usr/bin/git sparse-checkout disable
+2025-06-08T01:45:42.9075039Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:45:42.9116110Z ##[group]Checking out the ref
+2025-06-08T01:45:42.9123730Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:45:43.9390926Z Updating files:  62% (15322/24378)
+2025-06-08T01:45:43.9537155Z Updating files:  63% (15359/24378)
+2025-06-08T01:45:43.9650548Z Updating files:  64% (15602/24378)
+2025-06-08T01:45:43.9759433Z Updating files:  65% (15846/24378)
+2025-06-08T01:45:43.9865605Z Updating files:  66% (16090/24378)
+2025-06-08T01:45:44.0004356Z Updating files:  67% (16334/24378)
+2025-06-08T01:45:44.0125670Z Updating files:  68% (16578/24378)
+2025-06-08T01:45:44.0256127Z Updating files:  69% (16821/24378)
+2025-06-08T01:45:44.0359003Z Updating files:  70% (17065/24378)
+2025-06-08T01:45:44.0462523Z Updating files:  71% (17309/24378)
+2025-06-08T01:45:44.0570200Z Updating files:  72% (17553/24378)
+2025-06-08T01:45:44.0684546Z Updating files:  73% (17796/24378)
+2025-06-08T01:45:44.0786138Z Updating files:  74% (18040/24378)
+2025-06-08T01:45:44.1125395Z Updating files:  75% (18284/24378)
+2025-06-08T01:45:44.1201541Z Updating files:  76% (18528/24378)
+2025-06-08T01:45:44.1334487Z Updating files:  77% (18772/24378)
+2025-06-08T01:45:44.1525830Z Updating files:  78% (19015/24378)
+2025-06-08T01:45:44.1810990Z Updating files:  79% (19259/24378)
+2025-06-08T01:45:44.2011386Z Updating files:  80% (19503/24378)
+2025-06-08T01:45:44.2118114Z Updating files:  81% (19747/24378)
+2025-06-08T01:45:44.2289382Z Updating files:  82% (19990/24378)
+2025-06-08T01:45:44.2498721Z Updating files:  83% (20234/24378)
+2025-06-08T01:45:44.2712054Z Updating files:  84% (20478/24378)
+2025-06-08T01:45:44.2859311Z Updating files:  85% (20722/24378)
+2025-06-08T01:45:44.3109799Z Updating files:  86% (20966/24378)
+2025-06-08T01:45:44.3368881Z Updating files:  87% (21209/24378)
+2025-06-08T01:45:44.4042611Z Updating files:  88% (21453/24378)
+2025-06-08T01:45:44.4135057Z Updating files:  89% (21697/24378)
+2025-06-08T01:45:44.4316706Z Updating files:  90% (21941/24378)
+2025-06-08T01:45:44.4420116Z Updating files:  91% (22184/24378)
+2025-06-08T01:45:44.4550564Z Updating files:  92% (22428/24378)
+2025-06-08T01:45:44.4680553Z Updating files:  93% (22672/24378)
+2025-06-08T01:45:44.4860733Z Updating files:  94% (22916/24378)
+2025-06-08T01:45:44.5099434Z Updating files:  95% (23160/24378)
+2025-06-08T01:45:44.5278094Z Updating files:  96% (23403/24378)
+2025-06-08T01:45:44.5518413Z Updating files:  97% (23647/24378)
+2025-06-08T01:45:44.5751665Z Updating files:  98% (23891/24378)
+2025-06-08T01:45:44.6075974Z Updating files:  99% (24135/24378)
+2025-06-08T01:45:44.6082746Z Updating files: 100% (24378/24378)
+2025-06-08T01:45:44.6083231Z Updating files: 100% (24378/24378), done.
+2025-06-08T01:45:44.6382901Z Note: switching to 'refs/remotes/pull/1/merge'.
+2025-06-08T01:45:44.6384669Z 
+2025-06-08T01:45:44.6385259Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-06-08T01:45:44.6386311Z changes and commit them, and you can discard any commits you make in this
+2025-06-08T01:45:44.6387267Z state without impacting any branches by switching back to a branch.
+2025-06-08T01:45:44.6387911Z 
+2025-06-08T01:45:44.6388483Z If you want to create a new branch to retain commits you create, you may
+2025-06-08T01:45:44.6389354Z do so (now or later) by using -c with the switch command. Example:
+2025-06-08T01:45:44.6390213Z 
+2025-06-08T01:45:44.6390579Z   git switch -c <new-branch-name>
+2025-06-08T01:45:44.6391074Z 
+2025-06-08T01:45:44.6391394Z Or undo this operation with:
+2025-06-08T01:45:44.6391863Z 
+2025-06-08T01:45:44.6396032Z   git switch -
+2025-06-08T01:45:44.6396250Z 
+2025-06-08T01:45:44.6396592Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-06-08T01:45:44.6397109Z 
+2025-06-08T01:45:44.6397679Z HEAD is now at 6bc44e2b Merge 81743423c8dbf9d3e86a0d8ef2367c46fd8459ab into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T01:45:44.6459536Z ##[endgroup]
+2025-06-08T01:45:44.6517791Z [command]/usr/bin/git log -1 --format=%H
+2025-06-08T01:45:44.6541542Z 6bc44e2bef6c601be80ba6cdc5bd9974091c084e

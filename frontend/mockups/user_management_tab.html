@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bg-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7e22ce 100%);
+        }
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .user-card {
+            transition: all 0.3s ease;
+        }
+        .user-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-gray-800">
+                <div class="flex items-center h-16 px-4 bg-gray-900 border-b border-gray-700">
+                    <span class="text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <div class="px-4 py-2 bg-gray-700">
+                        <p class="text-sm text-gray-400 italic">Intelligence Everywhere, Limits Nowhere</p>
+                    </div>
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            Global Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-cloud mr-3"></i>
+                            Cloud Resources
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-heartbeat mr-3"></i>
+                            System Health
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-white bg-indigo-600">
+                            <i class="fas fa-users-cog mr-3"></i>
+                            User Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-shield-alt mr-3"></i>
+                            Security & Compliance
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-key mr-3"></i>
+                            API Key Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-robot mr-3"></i>
+                            Agent Orchestration
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-memory mr-3"></i>
+                            Memory Systems
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-file-invoice-dollar mr-3"></i>
+                            Billing & Subscriptions
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-cogs mr-3"></i>
+                            System Configuration
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-gray-800 shadow-md border-b border-gray-700">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <h1 class="text-xl font-semibold text-white">User Management</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-600 text-white">
+                                SUPER ADMIN
+                            </span>
+                            <button class="p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <div class="relative">
+                                <button class="flex items-center text-sm font-medium text-gray-300 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=Admin" alt="Admin avatar" />
+                                    <span class="ml-2 hidden md:inline">Admin User</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-900">
+                <!-- User Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                <i class="fas fa-users text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Total Users</p>
+                                <p class="text-2xl font-bold text-white">12,458,732</p>
+                                <p class="text-xs text-green-400">+8.3% from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                                <i class="fas fa-user-check text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Active Users</p>
+                                <p class="text-2xl font-bold text-white">8,245,619</p>
+                                <p class="text-xs text-green-400">66.2% of total users</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                                <i class="fas fa-building text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Enterprise Accounts</p>
+                                <p class="text-2xl font-bold text-white">1,247</p>
+                                <p class="text-xs text-green-400">+12.5% from last month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                                <i class="fas fa-user-plus text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">New Users Today</p>
+                                <p class="text-2xl font-bold text-white">24,873</p>
+                                <p class="text-xs text-green-400">+5.2% from yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Growth & Distribution -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">User Growth Trend</h3>
+                        <div class="h-64">
+                            <canvas id="userGrowthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">User Distribution by Plan</h3>
+                        <div class="h-64">
+                            <canvas id="userDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Tools -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-white">User Management Tools</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700">
+                                <i class="fas fa-user-plus mr-1"></i> Add New User
+                            </button>
+                            <button class="px-4 py-2 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                <i class="fas fa-file-export mr-1"></i> Export Users
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-2">
+                                    <i class="fas fa-user-shield text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">Role Management</h4>
+                                    <p class="text-xs text-gray-400">Manage user roles and permissions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-green-500 rounded-md p-2">
+                                    <i class="fas fa-users-cog text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">Bulk Operations</h4>
+                                    <p class="text-xs text-gray-400">Perform actions on multiple users</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-blue-500 rounded-md p-2">
+                                    <i class="fas fa-user-tag text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">User Segmentation</h4>
+                                    <p class="text-xs text-gray-400">Create and manage user segments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-yellow-500 rounded-md p-2">
+                                    <i class="fas fa-user-clock text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">Activity Monitoring</h4>
+                                    <p class="text-xs text-gray-400">Track user activity and sessions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-red-500 rounded-md p-2">
+                                    <i class="fas fa-user-lock text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">Access Control</h4>
+                                    <p class="text-xs text-gray-400">Manage access policies and restrictions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-purple-500 rounded-md p-2">
+                                    <i class="fas fa-user-edit text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-white">Profile Management</h4>
+                                    <p class="text-xs text-gray-400">Edit user profiles and settings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Search and Filter -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-lg font-semibold text-white mb-4 md:mb-0">User Directory</h3>
+                        <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+                            <div class="relative">
+                                <input type="text" placeholder="Search users..." class="w-full md:w-64 bg-gray-700 border border-gray-600 rounded-md py-2 px-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <select class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">All Plans</option>
+                                    <option value="basic">Basic</option>
+                                    <option value="pro">Pro</option>
+                                    <option value="expert">Expert</option>
+                                    <option value="enterprise">Enterprise</option>
+                                </select>
+                                <select class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">All Status</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="suspended">Suspended</option>
+                                </select>
+                                <button class="px-3 py-2 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User List -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Plan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Last Active</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Projects</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">API Usage</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr class="user-card hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=JD" alt="User avatar">
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">John Doe</div>
+                                                <div class="text-sm text-gray-400">john.doe@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-purple-600 text-white">Enterprise</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-600 text-white">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">5 minutes ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">42</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-1">45% (4,500/10,000)</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                        <button class="text-indigo-400 hover:text-indigo-300 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-indigo-400 hover:text-indigo-300">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="user-card hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=JS" alt="User avatar">
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">Jane Smith</div>
+                                                <div class="text-sm text-gray-400">jane.smith@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-600 text-white">Pro</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-600 text-white">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">2 hours ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">18</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-1">78% (3,900/5,000)</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                        <button class="text-indigo-400 hover:text-indigo-300 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-indigo-400 hover:text-indigo-300">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="user-card hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=RJ" alt="User avatar">
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">Robert Johnson</div>
+                                                <div class="text-sm text-gray-400">robert.j@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-indigo-600 text-white">Expert</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-600 text-white">Inactive</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">3 days ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">7</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 22%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-1">22% (1,760/8,000)</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                        <button class="text-indigo-400 hover:text-indigo-300 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-indigo-400 hover:text-indigo-300">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="user-card hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=EW" alt="User avatar">
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">Emily Wilson</div>
+                                                <div class="text-sm text-gray-400">emily.w@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-600 text-white">Basic</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-600 text-white">Suspended</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">2 weeks ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">3</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 98%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-1">98% (2,450/2,500)</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                        <button class="text-indigo-400 hover:text-indigo-300 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-indigo-400 hover:text-indigo-300">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="user-card hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=MC" alt="User avatar">
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">Michael Chen</div>
+                                                <div class="text-sm text-gray-400">michael.c@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-purple-600 text-white">Enterprise</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-600 text-white">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Just now</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">56</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 32%"></div>
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-1">32% (3,200/10,000)</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                        <button class="text-indigo-400 hover:text-indigo-300 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-indigo-400 hover:text-indigo-300">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-6">
+                        <div class="text-sm text-gray-400">
+                            Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">12,458,732</span> users
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600 disabled:opacity-50" disabled>
+                                Previous
+                            </button>
+                            <button class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700">
+                                1
+                            </button>
+                            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                2
+                            </button>
+                            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                3
+                            </button>
+                            <span class="px-3 py-1 text-white text-sm">...</span>
+                            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise Account Management -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold text-white mb-4">Enterprise Account Management</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-700 p-5 rounded-lg">
+                            <h4 class="text-md font-medium text-white mb-3">Top Enterprise Accounts</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=AC" alt="Company logo">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-white">Acme Corporation</div>
+                                            <div class="text-xs text-gray-400">1,245 users • Enterprise Plan</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=GI" alt="Company logo">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-white">Global Industries</div>
+                                            <div class="text-xs text-gray-400">987 users • Enterprise Plan</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=TT" alt="Company logo">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-white">TechTron Inc.</div>
+                                            <div class="text-xs text-gray-400">854 users • Enterprise Plan</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=QS" alt="Company logo">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-white">Quantum Systems</div>
+                                            <div class="text-xs text-gray-400">742 users • Enterprise Plan</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=NV" alt="Company logo">
+                                        </div>
+                                        <div class="ml-3">
+                                            <div class="text-sm font-medium text-white">Nova Ventures</div>
+                                            <div class="text-xs text-gray-400">631 users • Enterprise Plan</div>
+                                        </div>
+                                    </div>
+                                    <button class="text-xs text-indigo-400 hover:text-indigo-300">Manage</button>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <button class="text-sm text-indigo-400 hover:text-indigo-300">
+                                    View All Enterprise Accounts
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-5 rounded-lg">
+                            <h4 class="text-md font-medium text-white mb-3">Enterprise Management Tools</h4>
+                            <div class="space-y-3">
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-2">
+                                            <i class="fas fa-building text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Account Provisioning</h5>
+                                            <p class="text-xs text-gray-400">Set up new enterprise accounts and users</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-green-500 rounded-md p-2">
+                                            <i class="fas fa-sitemap text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Organizational Structure</h5>
+                                            <p class="text-xs text-gray-400">Manage departments and hierarchies</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-blue-500 rounded-md p-2">
+                                            <i class="fas fa-user-tie text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Admin Delegation</h5>
+                                            <p class="text-xs text-gray-400">Assign administrative roles and permissions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-purple-500 rounded-md p-2">
+                                            <i class="fas fa-file-contract text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Contract Management</h5>
+                                            <p class="text-xs text-gray-400">Manage enterprise agreements and terms</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-yellow-500 rounded-md p-2">
+                                            <i class="fas fa-chart-line text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Usage Analytics</h5>
+                                            <p class="text-xs text-gray-400">Track enterprise-level usage and trends</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-md hover:bg-gray-750 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 bg-red-500 rounded-md p-2">
+                                            <i class="fas fa-shield-alt text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="text-sm font-medium text-white">Security Policies</h5>
+                                            <p class="text-xs text-gray-400">Configure enterprise security settings</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for charts
+        const userGrowthData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Total Users (millions)',
+                    data: [8.2, 8.7, 9.3, 9.8, 10.4, 10.9, 11.3, 11.7, 12.0, 12.2, 12.3, 12.5],
+                    borderColor: 'rgba(79, 70, 229, 1)',
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: 'rgba(79, 70, 229, 1)'
+                }
+            ]
+        };
+
+        const userDistributionData = {
+            labels: ['Basic', 'Pro', 'Expert', 'Enterprise'],
+            datasets: [
+                {
+                    label: 'Users by Plan',
+                    data: [5842361, 4215890, 2153234, 247247],
+                    backgroundColor: [
+                        'rgba(52, 211, 153, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(139, 92, 246, 0.8)',
+                        'rgba(124, 58, 237, 0.8)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Chart configurations
+        const userGrowthConfig = {
+            type: 'line',
+            data: userGrowthData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { 
+                        beginAtZero: true, 
+                        ticks: { color: '#9CA3AF' } 
+                    }, 
+                    x: { ticks: { color: '#9CA3AF' } } 
+                },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+
+        const userDistributionConfig = {
+            type: 'doughnut',
+            data: userDistributionData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'right',
+                        labels: { color: '#D1D5DB' } 
+                    } 
+                }
+            }
+        };
+
+        // Render charts
+        window.onload = function() {
+            new Chart(document.getElementById('userGrowthChart'), userGrowthConfig);
+            new Chart(document.getElementById('userDistributionChart'), userDistributionConfig);
+        };
+    </script>
+</body>
+</html>

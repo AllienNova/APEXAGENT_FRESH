@@ -1,0 +1,485 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: performance-benchmarks
+  namespace: performance-testing
+data:
+  benchmarks.yaml: |
+    # ApexAgent Performance Benchmarks
+    
+    ## Response Time Thresholds
+    
+    ### API Endpoints
+    - endpoint: /api/v1/health
+      p95_threshold_ms: 100
+      p99_threshold_ms: 200
+      max_threshold_ms: 500
+      
+    - endpoint: /api/v1/auth/login
+      p95_threshold_ms: 300
+      p99_threshold_ms: 500
+      max_threshold_ms: 1000
+      
+    - endpoint: /api/v1/users/me
+      p95_threshold_ms: 200
+      p99_threshold_ms: 400
+      max_threshold_ms: 800
+      
+    - endpoint: /api/v1/resources
+      p95_threshold_ms: 250
+      p99_threshold_ms: 450
+      max_threshold_ms: 900
+      
+    ### Static Assets
+    - asset_type: HTML
+      p95_threshold_ms: 100
+      p99_threshold_ms: 200
+      max_threshold_ms: 500
+      
+    - asset_type: CSS
+      p95_threshold_ms: 80
+      p99_threshold_ms: 150
+      max_threshold_ms: 300
+      
+    - asset_type: JavaScript
+      p95_threshold_ms: 120
+      p99_threshold_ms: 250
+      max_threshold_ms: 500
+      
+    - asset_type: Images
+      p95_threshold_ms: 150
+      p99_threshold_ms: 300
+      max_threshold_ms: 600
+      
+    ## Throughput Requirements
+    
+    ### API Endpoints
+    - endpoint: /api/v1/auth/login
+      min_rps: 100
+      target_rps: 200
+      
+    - endpoint: /api/v1/users/me
+      min_rps: 200
+      target_rps: 400
+      
+    - endpoint: /api/v1/resources
+      min_rps: 150
+      target_rps: 300
+      
+    ### Overall System
+    - metric: total_api_requests
+      min_rps: 500
+      target_rps: 1000
+      
+    - metric: total_static_requests
+      min_rps: 1000
+      target_rps: 2000
+      
+    ## Error Rate Limits
+    
+    - category: API_5xx
+      max_rate: 0.001  # 0.1%
+      
+    - category: API_4xx
+      max_rate: 0.01   # 1%
+      
+    - category: Static_5xx
+      max_rate: 0.0005 # 0.05%
+      
+    - category: Static_4xx
+      max_rate: 0.005  # 0.5%
+      
+    ## Resource Utilization
+    
+    - resource: CPU
+      max_utilization: 0.8  # 80%
+      
+    - resource: Memory
+      max_utilization: 0.8  # 80%
+      
+    - resource: Disk_IO
+      max_utilization: 0.7  # 70%
+      
+    - resource: Network
+      max_utilization: 0.6  # 60%
+      
+    ## Scalability Metrics
+    
+    - metric: user_scaling
+      min_users: 1000
+      target_users: 5000
+      
+    - metric: concurrent_sessions
+      min_sessions: 500
+      target_sessions: 2000
+      
+    ## CDN Performance
+    
+    - metric: cache_hit_ratio
+      min_ratio: 0.9  # 90%
+      
+    - metric: edge_latency
+      p95_threshold_ms: 50
+      p99_threshold_ms: 100
+      
+    ## Database Performance
+    
+    - query_type: read
+      p95_threshold_ms: 50
+      max_qps: 1000
+      
+    - query_type: write
+      p95_threshold_ms: 100
+      max_qps: 500
+      
+    ## Mobile Performance
+    
+    - metric: time_to_interactive
+      p95_threshold_ms: 2000
+      
+    - metric: first_contentful_paint
+      p95_threshold_ms: 1000
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: benchmark-validation-job
+  namespace: performance-testing
+spec:
+  template:
+    spec:
+      containers:
+      - name: benchmark-validator
+        image: loadimpact/k6:latest
+        args:
+        - run
+        - /scripts/benchmark-validation.js
+        - --out
+        - influxdb=http://influxdb.monitoring:8086/k6
+        env:
+        - name: BASE_URL
+          value: "https://api.apexagent.example.com"
+        - name: STATIC_URL
+          value: "https://apexagent.example.com"
+        - name: K6_STATSD_ENABLE_TAGS
+          value: "true"
+        volumeMounts:
+        - name: k6-scripts
+          mountPath: /scripts
+        - name: benchmarks
+          mountPath: /benchmarks
+      volumes:
+      - name: k6-scripts
+        configMap:
+          name: k6-benchmark-script
+      - name: benchmarks
+        configMap:
+          name: performance-benchmarks
+      restartPolicy: Never
+  backoffLimit: 0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-benchmark-script
+  namespace: performance-testing
+data:
+  benchmark-validation.js: |
+    import http from 'k6/http';
+    import { check, group, sleep } from 'k6';
+    import { Rate, Trend } from 'k6/metrics';
+    import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
+    import { parseYaml } from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
+    import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
+
+    // Custom metrics
+    const errorRate = new Rate('error_rate');
+    const authLatency = new Trend('auth_latency');
+    const apiLatency = new Trend('api_latency');
+    const staticLatency = new Trend('static_asset_latency');
+
+    // Test configuration
+    const BASE_URL = __ENV.BASE_URL || 'https://api.apexagent.example.com';
+    const STATIC_URL = __ENV.STATIC_URL || 'https://apexagent.example.com';
+
+    // Load benchmarks from file
+    const benchmarksFile = open('/benchmarks/benchmarks.yaml');
+    const benchmarks = parseYaml(benchmarksFile);
+
+    // Options for the benchmark validation
+    export const options = {
+      scenarios: {
+        api_benchmarks: {
+          executor: 'constant-arrival-rate',
+          rate: 50,
+          timeUnit: '1s',
+          duration: '2m',
+          preAllocatedVUs: 20,
+          maxVUs: 50,
+        },
+        static_benchmarks: {
+          executor: 'constant-arrival-rate',
+          rate: 100,
+          timeUnit: '1s',
+          duration: '2m',
+          preAllocatedVUs: 20,
+          maxVUs: 50,
+          startTime: '2m',
+        },
+      },
+      thresholds: {
+        'http_req_duration{type:api}': [`p(95)<${getApiThreshold('p95_threshold_ms')}`, `p(99)<${getApiThreshold('p99_threshold_ms')}`],
+        'http_req_duration{type:static}': [`p(95)<${getStaticThreshold('p95_threshold_ms')}`, `p(99)<${getStaticThreshold('p99_threshold_ms')}`],
+        'http_req_failed': ['rate<0.01'],
+        'error_rate': ['rate<0.01'],
+      },
+    };
+
+    // Helper function to get API thresholds
+    function getApiThreshold(metric) {
+      const endpoints = benchmarks.filter(item => item.endpoint && item[metric]);
+      if (endpoints.length === 0) return 500; // Default
+      
+      // Calculate average threshold across all endpoints
+      const sum = endpoints.reduce((acc, endpoint) => acc + endpoint[metric], 0);
+      return sum / endpoints.length;
+    }
+
+    // Helper function to get static asset thresholds
+    function getStaticThreshold(metric) {
+      const assets = benchmarks.filter(item => item.asset_type && item[metric]);
+      if (assets.length === 0) return 200; // Default
+      
+      // Calculate average threshold across all asset types
+      const sum = assets.reduce((acc, asset) => acc + asset[metric], 0);
+      return sum / assets.length;
+    }
+
+    // Setup function - runs once per VU
+    export function setup() {
+      console.log('Setting up benchmark validation');
+      
+      // Test the health endpoint to ensure the API is available
+      const healthCheck = http.get(`${BASE_URL}/health`);
+      check(healthCheck, {
+        'health check status is 200': (r) => r.status === 200,
+      });
+      
+      return {
+        authToken: 'dummy-token', // In a real test, you might authenticate here
+      };
+    }
+
+    // Default function - API benchmarks
+    export default function(data) {
+      group('API Benchmarks', function() {
+        // Add tag to all requests in this group
+        const params = {
+          tags: { type: 'api' }
+        };
+        
+        // Health endpoint
+        let response = http.get(`${BASE_URL}/health`, params);
+        check(response, {
+          'health status is 200': (r) => r.status === 200,
+        });
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Authentication
+        response = http.post(`${BASE_URL}/api/v1/auth/login`, JSON.stringify({
+          username: `user_${randomString(8)}@example.com`,
+          password: 'P@ssw0rd123',
+        }), {
+          headers: { 'Content-Type': 'application/json' },
+          tags: { type: 'api', endpoint: 'login' }
+        });
+        
+        const authSuccess = check(response, {
+          'login status is 200': (r) => r.status === 200,
+          'login has token': (r) => r.json('token') !== undefined,
+        });
+        
+        authLatency.add(response.timings.duration);
+        errorRate.add(!authSuccess);
+        
+        if (!authSuccess) {
+          console.log(`Authentication failed: ${response.status} ${response.body}`);
+          return;
+        }
+        
+        const authToken = response.json('token');
+        
+        // User data
+        response = http.get(`${BASE_URL}/api/v1/users/me`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+          tags: { type: 'api', endpoint: 'users' }
+        });
+        
+        check(response, {
+          'user data status is 200': (r) => r.status === 200,
+          'user data has correct structure': (r) => r.json('id') !== undefined,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Resources
+        response = http.get(`${BASE_URL}/api/v1/resources`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+          tags: { type: 'api', endpoint: 'resources' }
+        });
+        
+        check(response, {
+          'resources status is 200': (r) => r.status === 200,
+          'resources returned as array': (r) => Array.isArray(r.json()),
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Create resource
+        response = http.post(`${BASE_URL}/api/v1/resources`, JSON.stringify({
+          name: `Resource ${randomString(8)}`,
+          description: `Benchmark validation resource`,
+          type: 'benchmark',
+        }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+          tags: { type: 'api', endpoint: 'resources_create' }
+        });
+        
+        check(response, {
+          'create resource status is 201': (r) => r.status === 201,
+          'created resource has id': (r) => r.json('id') !== undefined,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 201);
+        
+        // Logout
+        response = http.post(`${BASE_URL}/api/v1/auth/logout`, null, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+          tags: { type: 'api', endpoint: 'logout' }
+        });
+        
+        check(response, {
+          'logout status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+      });
+    }
+
+    // Static assets benchmark
+    export function staticAssets() {
+      group('Static Assets Benchmarks', function() {
+        // Add tag to all requests in this group
+        const params = {
+          tags: { type: 'static' }
+        };
+        
+        // Test loading of various static assets
+        const staticPaths = [
+          { path: '/', type: 'html' },
+          { path: '/static/css/main.css', type: 'css' },
+          { path: '/static/js/bundle.js', type: 'js' },
+          { path: '/static/images/logo.png', type: 'image' },
+          { path: '/static/fonts/roboto.woff2', type: 'font' },
+          { path: '/manifest.json', type: 'json' },
+          { path: '/favicon.ico', type: 'image' },
+        ];
+        
+        staticPaths.forEach(item => {
+          const response = http.get(`${STATIC_URL}${item.path}`, {
+            tags: { type: 'static', asset_type: item.type }
+          });
+          
+          check(response, {
+            [`${item.path} status is 200`]: (r) => r.status === 200,
+          });
+          
+          staticLatency.add(response.timings.duration);
+          errorRate.add(response.status !== 200);
+        });
+      });
+    }
+
+    // Teardown function - runs at the end of the test
+    export function teardown(data) {
+      console.log('Benchmark validation completed');
+    }
+
+    // Custom summary to include benchmark validation results
+    export function handleSummary(data) {
+      const summary = textSummary(data, { indent: ' ', enableColors: false });
+      
+      // Add benchmark validation results
+      let benchmarkResults = '\n\n## Benchmark Validation Results\n\n';
+      
+      // API endpoints
+      benchmarkResults += '### API Endpoints\n\n';
+      benchmarkResults += '| Endpoint | P95 Actual | P95 Threshold | Status |\n';
+      benchmarkResults += '|----------|------------|--------------|--------|\n';
+      
+      const apiMetrics = Object.keys(data.metrics).filter(key => 
+        key.startsWith('http_req_duration') && 
+        key.includes('endpoint:')
+      );
+      
+      apiMetrics.forEach(metric => {
+        const endpoint = metric.match(/endpoint:([^}]+)/)[1];
+        const p95Actual = data.metrics[metric].values.p(95);
+        
+        // Find matching benchmark
+        const benchmark = benchmarks.find(b => b.endpoint === `/api/v1/${endpoint}`);
+        const p95Threshold = benchmark ? benchmark.p95_threshold_ms : 500;
+        const status = p95Actual <= p95Threshold ? '✅ PASS' : '❌ FAIL';
+        
+        benchmarkResults += `| /api/v1/${endpoint} | ${p95Actual.toFixed(2)}ms | ${p95Threshold}ms | ${status} |\n`;
+      });
+      
+      // Static assets
+      benchmarkResults += '\n### Static Assets\n\n';
+      benchmarkResults += '| Asset Type | P95 Actual | P95 Threshold | Status |\n';
+      benchmarkResults += '|------------|------------|--------------|--------|\n';
+      
+      const staticMetrics = Object.keys(data.metrics).filter(key => 
+        key.startsWith('http_req_duration') && 
+        key.includes('asset_type:')
+      );
+      
+      staticMetrics.forEach(metric => {
+        const assetType = metric.match(/asset_type:([^}]+)/)[1];
+        const p95Actual = data.metrics[metric].values.p(95);
+        
+        // Find matching benchmark
+        const benchmark = benchmarks.find(b => b.asset_type === assetType.toUpperCase());
+        const p95Threshold = benchmark ? benchmark.p95_threshold_ms : 200;
+        const status = p95Actual <= p95Threshold ? '✅ PASS' : '❌ FAIL';
+        
+        benchmarkResults += `| ${assetType} | ${p95Actual.toFixed(2)}ms | ${p95Threshold}ms | ${status} |\n`;
+      });
+      
+      // Error rates
+      benchmarkResults += '\n### Error Rates\n\n';
+      const errorRateActual = data.metrics.error_rate ? data.metrics.error_rate.values.rate : 0;
+      const errorRateThreshold = 0.01;
+      const errorRateStatus = errorRateActual <= errorRateThreshold ? '✅ PASS' : '❌ FAIL';
+      
+      benchmarkResults += `Error Rate: ${(errorRateActual * 100).toFixed(2)}% (Threshold: ${(errorRateThreshold * 100).toFixed(2)}%) - ${errorRateStatus}\n`;
+      
+      return {
+        'stdout': summary + benchmarkResults,
+        'benchmark-results.txt': summary + benchmarkResults,
+      };
+    }

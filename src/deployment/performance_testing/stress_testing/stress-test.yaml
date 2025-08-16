@@ -1,0 +1,390 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: stress-test-job
+  namespace: performance-testing
+spec:
+  template:
+    spec:
+      containers:
+      - name: stress-test
+        image: loadimpact/k6:latest
+        args:
+        - run
+        - /scripts/stress-test.js
+        - --out
+        - influxdb=http://influxdb.monitoring:8086/k6
+        env:
+        - name: BASE_URL
+          value: "https://api.apexagent.example.com"
+        - name: STATIC_URL
+          value: "https://apexagent.example.com"
+        - name: K6_STATSD_ENABLE_TAGS
+          value: "true"
+        volumeMounts:
+        - name: k6-scripts
+          mountPath: /scripts
+      volumes:
+      - name: k6-scripts
+        configMap:
+          name: k6-stress-test-script
+      restartPolicy: Never
+  backoffLimit: 0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-stress-test-script
+  namespace: performance-testing
+data:
+  stress-test.js: |
+    import http from 'k6/http';
+    import { check, group, sleep } from 'k6';
+    import { Rate, Trend, Counter } from 'k6/metrics';
+    import { randomString, randomIntBetween } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
+
+    // Custom metrics
+    const errorRate = new Rate('error_rate');
+    const authLatency = new Trend('auth_latency');
+    const apiLatency = new Trend('api_latency');
+    const staticLatency = new Trend('static_asset_latency');
+    const successfulRequests = new Counter('successful_requests');
+    const failedRequests = new Counter('failed_requests');
+
+    // Test configuration - can be overridden with environment variables
+    const BASE_URL = __ENV.BASE_URL || 'https://api.apexagent.example.com';
+    const STATIC_URL = __ENV.STATIC_URL || 'https://apexagent.example.com';
+    const MAX_VUS = parseInt(__ENV.MAX_VUS || '1000');
+    const DURATION = __ENV.DURATION || '10m';
+
+    // Options for the stress test
+    export const options = {
+      scenarios: {
+        // Ramping stress test to find breaking point
+        stress: {
+          executor: 'ramping-vus',
+          startVUs: 0,
+          stages: [
+            { duration: '2m', target: 100 },    // Ramp up to 100 users
+            { duration: '5m', target: 100 },    // Stay at 100 users
+            { duration: '2m', target: 250 },    // Ramp up to 250 users
+            { duration: '5m', target: 250 },    // Stay at 250 users
+            { duration: '2m', target: 500 },    // Ramp up to 500 users
+            { duration: '5m', target: 500 },    // Stay at 500 users
+            { duration: '2m', target: 750 },    // Ramp up to 750 users
+            { duration: '5m', target: 750 },    // Stay at 750 users
+            { duration: '2m', target: MAX_VUS }, // Ramp up to MAX_VUS
+            { duration: '5m', target: MAX_VUS }, // Stay at MAX_VUS
+            { duration: '5m', target: 0 },      // Ramp down to 0 users
+          ],
+          gracefulRampDown: '30s',
+        },
+      },
+      thresholds: {
+        'http_req_duration': ['p(95)<1000', 'p(99)<2000'],
+        'http_req_failed': ['rate<0.05'],
+        'error_rate': ['rate<0.05'],
+      },
+    };
+
+    // Setup function - runs once per VU
+    export function setup() {
+      console.log('Setting up stress test');
+      
+      // Test the health endpoint to ensure the API is available
+      const healthCheck = http.get(`${BASE_URL}/health`);
+      check(healthCheck, {
+        'health check status is 200': (r) => r.status === 200,
+      });
+      
+      return {
+        authToken: 'dummy-token', // In a real test, you might authenticate here
+      };
+    }
+
+    // Default function - main user journey
+    export default function(data) {
+      // Randomize the test path to create more realistic load patterns
+      const testPath = Math.random();
+      
+      if (testPath < 0.3) {
+        // 30% of users do API-heavy operations
+        apiStressTest();
+      } else if (testPath < 0.6) {
+        // 30% of users do static content requests
+        staticContentTest();
+      } else {
+        // 40% of users do mixed operations
+        mixedOperationsTest();
+      }
+    }
+
+    function apiStressTest() {
+      group('API Stress Test', function() {
+        // Authenticate
+        let response = http.post(`${BASE_URL}/api/v1/auth/login`, JSON.stringify({
+          username: `user_${randomString(8)}@example.com`,
+          password: 'P@ssw0rd123',
+        }), {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        const authSuccess = check(response, {
+          'login status is 200': (r) => r.status === 200,
+          'login has token': (r) => r.json('token') !== undefined,
+        });
+        
+        if (!authSuccess) {
+          errorRate.add(1);
+          failedRequests.add(1);
+          return;
+        }
+        
+        successfulRequests.add(1);
+        const authToken = response.json('token');
+        
+        // Create multiple resources in rapid succession
+        for (let i = 0; i < 5; i++) {
+          response = http.post(`${BASE_URL}/api/v1/resources`, JSON.stringify({
+            name: `Resource ${randomString(8)}`,
+            description: `Description for resource created during stress test at ${new Date().toISOString()}`,
+            type: 'test',
+            data: randomString(500), // Add some data payload
+          }), {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`,
+            },
+          });
+          
+          const createSuccess = check(response, {
+            'create resource status is 201': (r) => r.status === 201,
+          });
+          
+          apiLatency.add(response.timings.duration);
+          errorRate.add(!createSuccess);
+          
+          if (createSuccess) {
+            successfulRequests.add(1);
+          } else {
+            failedRequests.add(1);
+          }
+          
+          // Minimal sleep between requests to simulate rapid fire
+          sleep(0.1);
+        }
+        
+        // Fetch resources with complex query
+        response = http.get(`${BASE_URL}/api/v1/resources?limit=100&sort=created_at&order=desc&type=test`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        const fetchSuccess = check(response, {
+          'fetch resources status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(!fetchSuccess);
+        
+        if (fetchSuccess) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+        
+        // Logout
+        response = http.post(`${BASE_URL}/api/v1/auth/logout`, null, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        const logoutSuccess = check(response, {
+          'logout status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(!logoutSuccess);
+        
+        if (logoutSuccess) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+      });
+    }
+
+    function staticContentTest() {
+      group('Static Content Test', function() {
+        // Request multiple static assets in parallel
+        const responses = http.batch([
+          ['GET', `${STATIC_URL}/`, null, {}],
+          ['GET', `${STATIC_URL}/static/css/main.css`, null, {}],
+          ['GET', `${STATIC_URL}/static/js/bundle.js`, null, {}],
+          ['GET', `${STATIC_URL}/static/images/logo.png`, null, {}],
+          ['GET', `${STATIC_URL}/static/fonts/roboto.woff2`, null, {}],
+          ['GET', `${STATIC_URL}/manifest.json`, null, {}],
+          ['GET', `${STATIC_URL}/favicon.ico`, null, {}],
+          ['GET', `${STATIC_URL}/static/images/banner.jpg`, null, {}],
+          ['GET', `${STATIC_URL}/static/js/vendor.js`, null, {}],
+          ['GET', `${STATIC_URL}/static/css/vendor.css`, null, {}],
+        ]);
+        
+        // Check all responses
+        responses.forEach((response, index) => {
+          const success = check(response, {
+            [`static request ${index} status is 200`]: (r) => r.status === 200,
+          });
+          
+          staticLatency.add(response.timings.duration);
+          errorRate.add(!success);
+          
+          if (success) {
+            successfulRequests.add(1);
+          } else {
+            failedRequests.add(1);
+          }
+        });
+        
+        // Small sleep to simulate user behavior
+        sleep(randomIntBetween(1, 3));
+      });
+    }
+
+    function mixedOperationsTest() {
+      group('Mixed Operations Test', function() {
+        // First load the homepage
+        let response = http.get(STATIC_URL);
+        let success = check(response, {
+          'homepage status is 200': (r) => r.status === 200,
+        });
+        
+        staticLatency.add(response.timings.duration);
+        errorRate.add(!success);
+        
+        if (success) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+        
+        // Then authenticate
+        response = http.post(`${BASE_URL}/api/v1/auth/login`, JSON.stringify({
+          username: `user_${randomString(8)}@example.com`,
+          password: 'P@ssw0rd123',
+        }), {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        const authSuccess = check(response, {
+          'login status is 200': (r) => r.status === 200,
+          'login has token': (r) => r.json('token') !== undefined,
+        });
+        
+        authLatency.add(response.timings.duration);
+        errorRate.add(!authSuccess);
+        
+        if (authSuccess) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+          return;
+        }
+        
+        const authToken = response.json('token');
+        
+        // Load some static assets
+        const staticResponses = http.batch([
+          ['GET', `${STATIC_URL}/static/css/main.css`, null, {}],
+          ['GET', `${STATIC_URL}/static/js/bundle.js`, null, {}],
+          ['GET', `${STATIC_URL}/static/images/logo.png`, null, {}],
+        ]);
+        
+        staticResponses.forEach((response, index) => {
+          const success = check(response, {
+            [`static request ${index} status is 200`]: (r) => r.status === 200,
+          });
+          
+          staticLatency.add(response.timings.duration);
+          errorRate.add(!success);
+          
+          if (success) {
+            successfulRequests.add(1);
+          } else {
+            failedRequests.add(1);
+          }
+        });
+        
+        // Make some API calls
+        response = http.get(`${BASE_URL}/api/v1/users/me`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        success = check(response, {
+          'user data status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(!success);
+        
+        if (success) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+        
+        // Create a resource
+        response = http.post(`${BASE_URL}/api/v1/resources`, JSON.stringify({
+          name: `Resource ${randomString(8)}`,
+          description: `Mixed test resource`,
+          type: 'mixed',
+        }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        success = check(response, {
+          'create resource status is 201': (r) => r.status === 201,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(!success);
+        
+        if (success) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+        
+        // Logout
+        response = http.post(`${BASE_URL}/api/v1/auth/logout`, null, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        success = check(response, {
+          'logout status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(!success);
+        
+        if (success) {
+          successfulRequests.add(1);
+        } else {
+          failedRequests.add(1);
+        }
+      });
+    }
+
+    // Teardown function - runs at the end of the test
+    export function teardown(data) {
+      console.log('Stress test completed');
+    }

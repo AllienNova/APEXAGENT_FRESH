@@ -1,0 +1,29 @@
+2025-06-08T01:46:50.3686154Z ##[group]Run npm ci
+2025-06-08T01:46:50.3686439Z [36;1mnpm ci[0m
+2025-06-08T01:46:50.3737327Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:46:50.3737575Z env:
+2025-06-08T01:46:50.3737758Z   NODE_VERSION: 18
+2025-06-08T01:46:50.3737964Z   PYTHON_VERSION: 3.11
+2025-06-08T01:46:50.3738242Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3738680Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:46:50.3739071Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3739432Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3739802Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3740407Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:46:50.3740708Z ##[endgroup]
+2025-06-08T01:46:52.7698867Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T01:46:52.7700488Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T01:46:52.7701735Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T01:46:52.7702911Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T01:46:52.7703926Z npm warn EBADENGINE }
+2025-06-08T01:46:55.7129054Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2025-06-08T01:46:55.9612148Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-06-08T01:46:56.1708143Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-06-08T01:46:56.9739795Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-06-08T01:47:05.5369018Z 
+2025-06-08T01:47:05.5371469Z added 751 packages, and audited 752 packages in 15s
+2025-06-08T01:47:05.5371963Z 
+2025-06-08T01:47:05.5372257Z 89 packages are looking for funding
+2025-06-08T01:47:05.5372814Z   run `npm fund` for details
+2025-06-08T01:47:05.5374525Z 
+2025-06-08T01:47:05.5374776Z found 0 vulnerabilities

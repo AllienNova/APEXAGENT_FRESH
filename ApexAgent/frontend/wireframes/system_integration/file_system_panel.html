@@ -1,0 +1,97 @@
+<!-- File System Integration Panel Wireframe -->
+<div class="file-system-panel">
+  <div class="panel-header border-b border-border p-4 flex items-center justify-between">
+    <h2 class="font-semibold">File System</h2>
+    <div class="flex items-center space-x-2">
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="New Folder">
+        <span class="icon">📁+</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Refresh">
+        <span class="icon">🔄</span>
+      </button>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Options">
+        <span class="icon">⋮</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="panel-content p-2">
+    <div class="location-bar flex items-center bg-background rounded-md border border-input p-2 mb-3">
+      <span class="icon mr-2">📂</span>
+      <input type="text" value="/home/user/projects/website_dev" class="bg-transparent flex-1 text-sm focus:outline-none" />
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground ml-2">
+        <span class="icon">📂</span>
+      </button>
+    </div>
+    
+    <div class="directory-tree">
+      <div class="tree-item">
+        <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+          <span class="icon mr-2">📂</span>
+          <span class="text-sm">Home</span>
+        </div>
+        
+        <div class="pl-6">
+          <div class="tree-item">
+            <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+              <span class="icon mr-2">📂</span>
+              <span class="text-sm">Documents</span>
+            </div>
+          </div>
+          
+          <div class="tree-item">
+            <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer bg-accent">
+              <span class="icon mr-2">📂</span>
+              <span class="text-sm">Projects</span>
+            </div>
+            
+            <div class="pl-6">
+              <div class="tree-item">
+                <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                  <span class="icon mr-2">📂</span>
+                  <span class="text-sm">website_dev</span>
+                </div>
+                
+                <div class="pl-6">
+                  <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                    <span class="icon mr-2">📄</span>
+                    <span class="text-sm">index.html</span>
+                  </div>
+                  <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                    <span class="icon mr-2">📄</span>
+                    <span class="text-sm">styles.css</span>
+                  </div>
+                  <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                    <span class="icon mr-2">📄</span>
+                    <span class="text-sm">script.js</span>
+                  </div>
+                  <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                    <span class="icon mr-2">📁</span>
+                    <span class="text-sm">images</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+                <span class="icon mr-2">📂</span>
+                <span class="text-sm">data_analysis</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center p-2 hover:bg-accent rounded-md cursor-pointer">
+            <span class="icon mr-2">📂</span>
+            <span class="text-sm">Downloads</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel-footer border-t border-border p-3">
+    <div class="flex items-center justify-between text-xs text-muted-foreground">
+      <div>12 items (3 files, 9 folders)</div>
+      <div>4.2 GB free of 512 GB</div>
+    </div>
+  </div>
+</div>

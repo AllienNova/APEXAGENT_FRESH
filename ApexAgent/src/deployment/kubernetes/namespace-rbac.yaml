@@ -1,0 +1,137 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apexagent
+  labels:
+    name: apexagent
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: apexagent
+  namespace: apexagent
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: apexagent-role
+  namespace: apexagent
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets", "pods", "services"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: apexagent-rolebinding
+  namespace: apexagent
+subjects:
+- kind: ServiceAccount
+  name: apexagent
+  namespace: apexagent
+roleRef:
+  kind: Role
+  name: apexagent-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: apexagent-secrets
+  namespace: apexagent
+type: Opaque
+data:
+  database-url: cG9zdGdyZXNxbDovL3VzZXJuYW1lOnBhc3N3b3JkQGRiLmV4YW1wbGUuY29tOjU0MzIvYXBleGFnZW50 # postgresql://username:password@db.example.com:5432/apexagent
+  redis-url: cmVkaXM6Ly9yZWRpcy5leGFtcGxlLmNvbTo2Mzc5LzA= # redis://redis.example.com:6379/0
+  api-key: Y2hhbmdlbWVpbnByb2R1Y3Rpb24= # changmeinproduction
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apexagent-config
+  namespace: apexagent
+data:
+  config.yaml: |
+    app:
+      name: ApexAgent
+      version: 1.0.0
+    logging:
+      level: INFO
+      format: json
+    features:
+      enableMetrics: true
+      enableTracing: true
+  prometheus.yaml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'apexagent'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_label_app]
+            action: keep
+            regex: apexagent
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: apexagent-network-policy
+  namespace: apexagent
+spec:
+  podSelector:
+    matchLabels:
+      app: apexagent
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: apexagent-frontend
+    ports:
+    - protocol: TCP
+      port: 8000
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 8000
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: postgres
+    ports:
+    - protocol: TCP
+      port: 5432
+  - to:
+    - podSelector:
+        matchLabels:
+          app: redis
+    ports:
+    - protocol: TCP
+      port: 6379
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 10.0.0.0/8
+        - 172.16.0.0/12
+        - 192.168.0.0/16
+    ports:
+    - protocol: TCP
+      port: 443

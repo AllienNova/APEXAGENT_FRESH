@@ -1,0 +1,117 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: apexagent-gateway
+  namespace: apexagent
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "apexagent.example.com"
+    tls:
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "apexagent.example.com"
+    tls:
+      mode: SIMPLE
+      credentialName: apexagent-cert
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: apexagent
+  namespace: apexagent
+spec:
+  hosts:
+  - "apexagent.example.com"
+  gateways:
+  - apexagent-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api
+    route:
+    - destination:
+        host: apexagent
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: apexagent-frontend
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: apexagent
+  namespace: apexagent
+spec:
+  host: apexagent
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 1024
+        maxRequestsPerConnection: 10
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 30s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 100
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: apexagent
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: apexagent-policy
+  namespace: apexagent
+spec:
+  selector:
+    matchLabels:
+      app: apexagent
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/apexagent/sa/apexagent-frontend"]
+    to:
+    - operation:
+        methods: ["GET", "POST"]
+        paths: ["/api/*"]
+  - from:
+    - source:
+        namespaces: ["monitoring"]
+    to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/metrics", "/health"]

@@ -1,0 +1,71 @@
+{
+  "name": "CloudStorageManager",
+  "version": "0.1.0",
+  "description": "Manages files and folders in cloud storage services. Supports Google Drive and OneDrive.",
+  "author": "ApexAgent Team",
+  "entry_point": "cloud_storage_manager.CloudStorageManager",
+  "actions": [
+    {
+      "name": "list_files",
+      "description": "Lists files and folders in a specified path on the cloud storage service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service (e.g., \"google_drive\", \"onedrive\")"},
+        {"name": "folder_id", "type": "string", "required": false, "description": "ID of the folder to list. Defaults to root if not provided."},
+        {"name": "max_results", "type": "integer", "required": false, "description": "Maximum number of items to return"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object"}, "description": "List of file/folder objects with details like name, id, type, size, last_modified"}
+    },
+    {
+      "name": "upload_file",
+      "description": "Uploads a local file to the specified cloud storage service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service"},
+        {"name": "local_file_path", "type": "string", "required": true, "description": "Absolute path of the local file to upload"},
+        {"name": "destination_folder_id", "type": "string", "required": false, "description": "ID of the destination folder on cloud storage. Defaults to root if not provided."},
+        {"name": "file_name_on_cloud", "type": "string", "required": false, "description": "Optional name for the file on cloud storage. Defaults to local file name."}
+      ],
+      "returns": {"type": "object", "properties": {"file_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "download_file",
+      "description": "Downloads a file from the cloud storage service to a local path.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service"},
+        {"name": "file_id", "type": "string", "required": true, "description": "ID of the file to download from cloud storage"},
+        {"name": "local_save_path", "type": "string", "required": true, "description": "Absolute local path (including filename) to save the downloaded file"}
+      ],
+      "returns": {"type": "object", "properties": {"local_path": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "delete_file",
+      "description": "Deletes a file or folder from the cloud storage service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service"},
+        {"name": "file_id", "type": "string", "required": true, "description": "ID of the file or folder to delete"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "create_folder",
+      "description": "Creates a new folder on the cloud storage service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service"},
+        {"name": "folder_name", "type": "string", "required": true, "description": "Name of the folder to create"},
+        {"name": "parent_folder_id", "type": "string", "required": false, "description": "ID of the parent folder. Defaults to root if not provided."}
+      ],
+      "returns": {"type": "object", "properties": {"folder_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "get_file_metadata",
+      "description": "Retrieves metadata for a specific file or folder.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Cloud storage service"},
+        {"name": "file_id", "type": "string", "required": true, "description": "ID of the file or folder"}
+      ],
+      "returns": {"type": "object", "description": "File/folder metadata object or null if not found"}
+    }
+  ],
+  "required_api_keys": ["google_drive_api_key", "microsoft_graph_api_key"],
+  "dependencies": []
+}
+

@@ -1,0 +1,1101 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-load-test-script
+  namespace: performance-testing
+data:
+  load-test.js: |
+    import http from 'k6/http';
+    import { check, group, sleep } from 'k6';
+    import { Rate, Trend } from 'k6/metrics';
+    import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
+
+    // Custom metrics
+    const errorRate = new Rate('error_rate');
+    const authLatency = new Trend('auth_latency');
+    const apiLatency = new Trend('api_latency');
+    const staticLatency = new Trend('static_asset_latency');
+
+    // Test configuration - can be overridden with environment variables
+    const BASE_URL = __ENV.BASE_URL || 'https://api.apexagent.example.com';
+    const STATIC_URL = __ENV.STATIC_URL || 'https://apexagent.example.com';
+    const THINK_TIME_MIN = parseInt(__ENV.THINK_TIME_MIN || '1');
+    const THINK_TIME_MAX = parseInt(__ENV.THINK_TIME_MAX || '5');
+
+    // Options for the load test
+    export const options = {
+      scenarios: {
+        // Common user journey simulation
+        user_journey: {
+          executor: 'ramping-vus',
+          startVUs: 0,
+          stages: [
+            { duration: '2m', target: 50 },   // Ramp up to 50 users over 2 minutes
+            { duration: '5m', target: 50 },   // Stay at 50 users for 5 minutes
+            { duration: '2m', target: 100 },  // Ramp up to 100 users over 2 minutes
+            { duration: '5m', target: 100 },  // Stay at 100 users for 5 minutes
+            { duration: '2m', target: 0 },    // Ramp down to 0 users over 2 minutes
+          ],
+          gracefulRampDown: '30s',
+        },
+        // API endpoint stress test
+        api_stress: {
+          executor: 'constant-arrival-rate',
+          rate: 50,                // 50 iterations per timeUnit
+          timeUnit: '1s',          // 1 second
+          duration: '1m',
+          preAllocatedVUs: 50,
+          maxVUs: 100,
+          exec: 'apiEndpoints',    // Function to execute
+          startTime: '16m',        // Start after the user journey scenario
+        },
+        // Static asset performance test
+        static_assets: {
+          executor: 'per-vu-iterations',
+          vus: 20,
+          iterations: 50,
+          exec: 'staticAssets',    // Function to execute
+          startTime: '17m30s',     // Start after the API stress test
+        },
+      },
+      thresholds: {
+        'http_req_duration': ['p(95)<500', 'p(99)<1000'],
+        'http_req_failed': ['rate<0.01'],
+        'error_rate': ['rate<0.02'],
+        'auth_latency': ['p(95)<300'],
+        'api_latency': ['p(95)<400'],
+        'static_latency': ['p(95)<200'],
+      },
+    };
+
+    // Setup function - runs once per VU
+    export function setup() {
+      console.log('Setting up load test');
+      
+      // Test the health endpoint to ensure the API is available
+      const healthCheck = http.get(`${BASE_URL}/health`);
+      check(healthCheck, {
+        'health check status is 200': (r) => r.status === 200,
+      });
+      
+      return {
+        authToken: 'dummy-token', // In a real test, you might authenticate here
+      };
+    }
+
+    // Default function - main user journey
+    export default function(data) {
+      group('User Journey', function() {
+        // Step 1: Visit the homepage
+        let response = http.get(STATIC_URL);
+        check(response, {
+          'homepage status is 200': (r) => r.status === 200,
+          'homepage has correct title': (r) => r.body.includes('ApexAgent'),
+        });
+        staticLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Simulate user think time
+        sleep(randomIntBetween(THINK_TIME_MIN, THINK_TIME_MAX));
+        
+        // Step 2: Authentication
+        const authStartTime = new Date();
+        response = http.post(`${BASE_URL}/api/v1/auth/login`, JSON.stringify({
+          username: `user_${randomString(8)}@example.com`,
+          password: 'P@ssw0rd123',
+        }), {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        const authSuccess = check(response, {
+          'login status is 200': (r) => r.status === 200,
+          'login has token': (r) => r.json('token') !== undefined,
+        });
+        
+        authLatency.add(new Date() - authStartTime);
+        errorRate.add(!authSuccess);
+        
+        if (!authSuccess) {
+          console.log(`Authentication failed: ${response.status} ${response.body}`);
+          return;
+        }
+        
+        const authToken = response.json('token');
+        
+        // Simulate user think time
+        sleep(randomIntBetween(THINK_TIME_MIN, THINK_TIME_MAX));
+        
+        // Step 3: Fetch user data
+        response = http.get(`${BASE_URL}/api/v1/users/me`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        check(response, {
+          'user data status is 200': (r) => r.status === 200,
+          'user data has correct structure': (r) => r.json('id') !== undefined,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Simulate user think time
+        sleep(randomIntBetween(THINK_TIME_MIN, THINK_TIME_MAX));
+        
+        // Step 4: Fetch resources
+        response = http.get(`${BASE_URL}/api/v1/resources`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        check(response, {
+          'resources status is 200': (r) => r.status === 200,
+          'resources returned as array': (r) => Array.isArray(r.json()),
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+        
+        // Simulate user think time
+        sleep(randomIntBetween(THINK_TIME_MIN, THINK_TIME_MAX));
+        
+        // Step 5: Create a new resource
+        response = http.post(`${BASE_URL}/api/v1/resources`, JSON.stringify({
+          name: `Resource ${randomString(8)}`,
+          description: `Description for resource created during load test at ${new Date().toISOString()}`,
+          type: 'test',
+        }), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        check(response, {
+          'create resource status is 201': (r) => r.status === 201,
+          'created resource has id': (r) => r.json('id') !== undefined,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 201);
+        
+        // Simulate user think time
+        sleep(randomIntBetween(THINK_TIME_MIN, THINK_TIME_MAX));
+        
+        // Step 6: Logout
+        response = http.post(`${BASE_URL}/api/v1/auth/logout`, null, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+        
+        check(response, {
+          'logout status is 200': (r) => r.status === 200,
+        });
+        
+        apiLatency.add(response.timings.duration);
+        errorRate.add(response.status !== 200);
+      });
+    }
+
+    // API endpoints stress test
+    export function apiEndpoints(data) {
+      group('API Endpoints', function() {
+        // Test multiple API endpoints in parallel
+        const responses = http.batch([
+          ['GET', `${BASE_URL}/api/v1/health`, null, {}],
+          ['GET', `${BASE_URL}/api/v1/status`, null, {}],
+          ['GET', `${BASE_URL}/api/v1/config`, null, {}],
+          ['GET', `${BASE_URL}/api/v1/resources?limit=10`, null, {}],
+        ]);
+        
+        // Check all responses
+        responses.forEach((response, index) => {
+          check(response, {
+            [`batch request ${index} status is 200`]: (r) => r.status === 200,
+          });
+          apiLatency.add(response.timings.duration);
+          errorRate.add(response.status !== 200);
+        });
+      });
+    }
+
+    // Static assets test
+    export function staticAssets(data) {
+      group('Static Assets', function() {
+        // Test loading of various static assets
+        const staticPaths = [
+          '/',
+          '/static/css/main.css',
+          '/static/js/bundle.js',
+          '/static/images/logo.png',
+          '/static/fonts/roboto.woff2',
+          '/manifest.json',
+          '/favicon.ico',
+        ];
+        
+        staticPaths.forEach(path => {
+          const response = http.get(`${STATIC_URL}${path}`);
+          check(response, {
+            [`${path} status is 200`]: (r) => r.status === 200,
+          });
+          staticLatency.add(response.timings.duration);
+          errorRate.add(response.status !== 200);
+        });
+      });
+    }
+
+    // Helper function for random integer between min and max (inclusive)
+    function randomIntBetween(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    // Teardown function - runs at the end of the test
+    export function teardown(data) {
+      console.log('Load test completed');
+    }
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scheduled-load-test
+  namespace: performance-testing
+spec:
+  schedule: "0 2 * * *"  # Run daily at 2 AM UTC
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: k6
+            image: loadimpact/k6:latest
+            args:
+            - run
+            - /scripts/load-test.js
+            - --out
+            - influxdb=http://influxdb.monitoring:8086/k6
+            env:
+            - name: BASE_URL
+              value: "https://api.apexagent.example.com"
+            - name: STATIC_URL
+              value: "https://apexagent.example.com"
+            - name: K6_STATSD_ENABLE_TAGS
+              value: "true"
+            volumeMounts:
+            - name: k6-scripts
+              mountPath: /scripts
+          volumes:
+          - name: k6-scripts
+            configMap:
+              name: k6-load-test-script
+          restartPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  namespace: monitoring
+  labels:
+    app: influxdb
+spec:
+  ports:
+  - port: 8086
+    targetPort: 8086
+    name: api
+  selector:
+    app: influxdb
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: influxdb
+  namespace: monitoring
+spec:
+  serviceName: influxdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - name: influxdb
+        image: influxdb:1.8
+        ports:
+        - containerPort: 8086
+          name: api
+        volumeMounts:
+        - name: influxdb-storage
+          mountPath: /var/lib/influxdb
+        env:
+        - name: INFLUXDB_DB
+          value: "k6"
+        - name: INFLUXDB_HTTP_AUTH_ENABLED
+          value: "true"
+        - name: INFLUXDB_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-credentials
+              key: username
+        - name: INFLUXDB_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-credentials
+              key: password
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+      volumes:
+      - name: influxdb-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-credentials
+  namespace: monitoring
+type: Opaque
+data:
+  username: YWRtaW4=  # admin
+  password: cGFzc3dvcmQ=  # password
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+        - containerPort: 3000
+          name: http
+        volumeMounts:
+        - name: grafana-storage
+          mountPath: /var/lib/grafana
+        - name: grafana-datasources
+          mountPath: /etc/grafana/provisioning/datasources
+        - name: grafana-dashboards
+          mountPath: /etc/grafana/provisioning/dashboards
+        env:
+        - name: GF_SECURITY_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: grafana-credentials
+              key: username
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: grafana-credentials
+              key: password
+        - name: GF_USERS_ALLOW_SIGN_UP
+          value: "false"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 512Mi
+      volumes:
+      - name: grafana-storage
+        persistentVolumeClaim:
+          claimName: grafana-pvc
+      - name: grafana-datasources
+        configMap:
+          name: grafana-datasources
+      - name: grafana-dashboards
+        configMap:
+          name: grafana-dashboards
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-credentials
+  namespace: monitoring
+type: Opaque
+data:
+  username: YWRtaW4=  # admin
+  password: cGFzc3dvcmQ=  # password
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: monitoring
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+    - name: InfluxDB
+      type: influxdb
+      access: proxy
+      url: http://influxdb:8086
+      database: k6
+      user: admin
+      secureJsonData:
+        password: password
+      isDefault: true
+      editable: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: monitoring
+data:
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+    - name: 'Performance Testing'
+      orgId: 1
+      folder: 'Performance Testing'
+      type: file
+      disableDeletion: false
+      updateIntervalSeconds: 10
+      options:
+        path: /var/lib/grafana/dashboards
+  k6-dashboard.json: |
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "id": 1,
+      "links": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "InfluxDB",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "hiddenSeries": false,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "scenario"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "http_req_duration",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "HTTP Request Duration",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "InfluxDB",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "hiddenSeries": false,
+          "id": 4,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "scenario"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vus",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Virtual Users",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "InfluxDB",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 6,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "scenario"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "http_reqs",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "HTTP Requests Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "InfluxDB",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 8,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "scenario"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "error_rate",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Error Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "refresh": "5s",
+      "schemaVersion": 22,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-1h",
+        "to": "now"
+      },
+      "timepicker": {
+        "refresh_intervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ]
+      },
+      "timezone": "",
+      "title": "K6 Load Testing Dashboard",
+      "uid": "k6-load-testing",
+      "version": 1
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+    name: http
+  selector:
+    app: grafana
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: grafana.apexagent.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              name: http
+  tls:
+  - hosts:
+    - grafana.apexagent.example.com
+    secretName: grafana-tls
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: performance-testing
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring

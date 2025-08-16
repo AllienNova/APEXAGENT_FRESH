@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Agent Orchestration</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --gray-dark: #334155;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 255px;
+            background-color: #1e293b;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .slogan {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 5px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--gray-light);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary);
+        }
+        
+        .nav-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .badge {
+            background-color: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .table th {
+            font-weight: 500;
+            color: var(--gray-light);
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .status-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .status-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--gray-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: white;
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab:hover:not(.active) {
+            color: white;
+            border-bottom-color: var(--gray);
+        }
+        
+        .agent-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        
+        .agent-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .agent-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .agent-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .agent-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .agent-stat {
+            flex: 1;
+        }
+        
+        .agent-stat-label {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-bottom: 5px;
+        }
+        
+        .agent-stat-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .agent-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .agent-description {
+            font-size: 14px;
+            color: var(--gray-light);
+            margin-bottom: 10px;
+        }
+        
+        .agent-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .agent-metric {
+            background-color: #0f172a;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+        
+        .agent-metric-label {
+            color: var(--gray-light);
+            margin-bottom: 3px;
+        }
+        
+        .agent-metric-value {
+            font-weight: 500;
+        }
+        
+        .orchestration-diagram {
+            background-color: #0f172a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+            min-height: 300px;
+        }
+        
+        .diagram-node {
+            position: absolute;
+            width: 120px;
+            height: 60px;
+            background-color: #1e293b;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2;
+        }
+        
+        .diagram-line {
+            position: absolute;
+            background-color: var(--primary);
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        .diagram-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            Aideon AI Lite
+            <div class="slogan">Intelligence Everywhere, Limits Nowhere</div>
+        </div>
+        <a href="#" class="nav-item">
+            <span class="nav-number">1</span>
+            Global Dashboard
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">2</span>
+            Cloud Resources
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">3</span>
+            System Health
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">4</span>
+            User Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">5</span>
+            Security & Compliance
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">6</span>
+            API Key Management
+        </a>
+        <a href="#" class="nav-item active">
+            <span class="nav-number">7</span>
+            Agent Orchestration
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">8</span>
+            Memory Systems
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">9</span>
+            Billing & Subscriptions
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">10</span>
+            System Configuration
+        </a>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="page-title">Agent Orchestration</div>
+            <div class="user-menu">
+                <div class="badge">SUPER ADMIN</div>
+                <div class="user-avatar">U</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">Agent Status</div>
+            <div class="tab">Orchestration Flow</div>
+            <div class="tab">Performance Metrics</div>
+            <div class="tab">Configuration</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Multi-Agent System Overview</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Export Metrics</button>
+                    <button class="btn btn-primary">Deploy New Agent</button>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">Active Agents</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">6</div>
+                    <div class="status status-active">All Systems Operational</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Tasks Processed (24h)</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">1.2M</div>
+                    <div style="color: var(--success);">+12% vs. yesterday</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Avg. Response Time</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">1.8s</div>
+                    <div style="color: var(--success);">-0.3s vs. yesterday</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">Error Rate</div>
+                    <div style="font-size: 32px; font-weight: 600; margin: 10px 0;">0.07%</div>
+                    <div style="color: var(--success);">-0.02% vs. yesterday</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Agent Status</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Filter</button>
+                    <button class="btn btn-outline">Refresh</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">P</div>
+                        Planner Agent
+                    </div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="agent-description">
+                    Advanced reasoning and task decomposition agent responsible for breaking down complex tasks into manageable steps.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Tasks Planned</div>
+                        <div class="agent-metric-value">487,291</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Avg. Planning Time</div>
+                        <div class="agent-metric-value">0.8s</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Planning Accuracy</div>
+                        <div class="agent-metric-value">99.2%</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">12.4%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                    <button class="btn btn-outline">Restart</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">E</div>
+                        Execution Agent
+                    </div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="agent-description">
+                    Task execution agent with 100+ tool integrations, responsible for carrying out planned actions and interacting with external systems.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Tasks Executed</div>
+                        <div class="agent-metric-value">1,245,872</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Avg. Execution Time</div>
+                        <div class="agent-metric-value">2.1s</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Success Rate</div>
+                        <div class="agent-metric-value">99.8%</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">28.7%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                    <button class="btn btn-outline">Restart</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">V</div>
+                        Verification Agent
+                    </div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="agent-description">
+                    Quality control and validation agent that ensures outputs meet quality standards and requirements before delivery.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Tasks Verified</div>
+                        <div class="agent-metric-value">1,198,452</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Avg. Verification Time</div>
+                        <div class="agent-metric-value">0.4s</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Issues Detected</div>
+                        <div class="agent-metric-value">2,487</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">9.2%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                    <button class="btn btn-outline">Restart</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">S</div>
+                        Security Agent
+                    </div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="agent-description">
+                    Real-time threat monitoring and compliance agent that ensures all operations adhere to security policies and regulations.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Requests Monitored</div>
+                        <div class="agent-metric-value">2,487,921</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Threats Detected</div>
+                        <div class="agent-metric-value">47</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Compliance Checks</div>
+                        <div class="agent-metric-value">1,245,872</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">7.8%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                    <button class="btn btn-outline">Restart</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">O</div>
+                        Optimization Agent
+                    </div>
+                    <div class="status status-warning">High Load</div>
+                </div>
+                <div class="agent-description">
+                    Performance tuning and resource management agent that optimizes system resources and ensures efficient operation.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resources Optimized</div>
+                        <div class="agent-metric-value">487</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Cost Savings</div>
+                        <div class="agent-metric-value">$12,487</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Performance Gain</div>
+                        <div class="agent-metric-value">+18.7%</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">87.2%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-primary">Scale Up</button>
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-name">
+                        <div class="agent-icon">L</div>
+                        Learning Agent
+                    </div>
+                    <div class="status status-active">Active</div>
+                </div>
+                <div class="agent-description">
+                    Federated learning and personalization agent that improves system performance based on usage patterns and feedback.
+                </div>
+                <div class="agent-metrics">
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Learning Cycles</div>
+                        <div class="agent-metric-value">487</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Model Improvements</div>
+                        <div class="agent-metric-value">124</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Personalization Score</div>
+                        <div class="agent-metric-value">87.4%</div>
+                    </div>
+                    <div class="agent-metric">
+                        <div class="agent-metric-label">Resource Usage</div>
+                        <div class="agent-metric-value">14.8%</div>
+                    </div>
+                </div>
+                <div class="agent-actions">
+                    <button class="btn btn-outline">View Logs</button>
+                    <button class="btn btn-outline">Configure</button>
+                    <button class="btn btn-outline">Restart</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Orchestration Flow</div>
+            </div>
+            
+            <div class="orchestration-diagram">
+                <!-- Planner Node -->
+                <div class="diagram-node" style="top: 120px; left: 50px;">Planner</div>
+                
+                <!-- Execution Node -->
+                <div class="diagram-node" style="top: 50px; left: 250px;">Execution</div>
+                
+                <!-- Verification Node -->
+                <div class="diagram-node" style="top: 190px; left: 250px;">Verification</div>
+                
+                <!-- Security Node -->
+                <div class="diagram-node" style="top: 120px; left: 450px;">Security</div>
+                
+                <!-- Optimization Node -->
+                <div class="diagram-node" style="top: 50px; left: 650px;">Optimization</div>
+                
+                <!-- Learning Node -->
+                <div class="diagram-node" style="top: 190px; left: 650px;">Learning</div>
+                
+                <!-- Connecting Lines -->
+                <!-- Planner to Execution -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 130px; left: 170px; transform: rotate(-45deg);"></div>
+                
+                <!-- Planner to Verification -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 170px; left: 170px; transform: rotate(45deg);"></div>
+                
+                <!-- Execution to Security -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 80px; left: 370px; transform: rotate(45deg);"></div>
+                
+                <!-- Verification to Security -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 170px; left: 370px; transform: rotate(-45deg);"></div>
+                
+                <!-- Security to Optimization -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 100px; left: 570px; transform: rotate(-45deg);"></div>
+                
+                <!-- Security to Learning -->
+                <div class="diagram-line" style="width: 80px; height: 2px; top: 170px; left: 570px; transform: rotate(45deg);"></div>
+                
+                <!-- Learning to Planner (feedback loop) -->
+                <div class="diagram-line" style="width: 720px; height: 2px; top: 240px; left: 50px;"></div>
+                <div class="diagram-line" style="width: 2px; height: 50px; top: 190px; left: 50px;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

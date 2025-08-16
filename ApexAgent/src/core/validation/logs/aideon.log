@@ -1,0 +1,26 @@
+{"level":"info","message":"LogManager initialized","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"core","level":"info","message":"Initializing Aideon AI Lite vundefined","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"core","level":"info","message":"Intelligence Everywhere, Limits Nowhere","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"agent-manager","level":"info","message":"Agent Manager initialized","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"core","level":"info","message":"Core components initialized","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"core","level":"info","message":"Initializing Aideon AI Lite components...","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"category":"core","level":"error","message":"Failed to initialize Aideon AI Lite","service":"aideon-ai","timestamp":"2025-06-05 10:19:03"}
+{"level":"info","message":"LogManager initialized","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"core","level":"info","message":"Initializing Aideon AI Lite vundefined","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"core","level":"info","message":"Intelligence Everywhere, Limits Nowhere","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"agent-manager","level":"info","message":"Agent Manager initialized","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"core","level":"info","message":"Core components initialized","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"core","level":"info","message":"Initializing Aideon AI Lite components...","service":"aideon-ai","timestamp":"2025-06-05 11:12:33"}
+{"category":"core","level":"info","message":"Aideon AI Lite initialized successfully","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Initializing Tool Validation Framework","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Loaded test suite: general-tool-tests","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Loaded test suite: ide-integration-tests","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Loaded 2 test suites","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Tool Validation Framework initialized with 2 test suites","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Starting validation for all tools","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"error","message":"Validation failed: toolManager.getAllTools is not a function","service":"aideon-ai","timestamp":"2025-06-05 11:12:36"}
+{"category":"validation:framework","level":"info","message":"Validation summary report saved: /home/ubuntu/AideonAILite/src/core/validation/data/validation_reports/validation_summary_2025-06-05T15-12-36-713Z.md","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}
+{"category":"validation:framework","level":"info","message":"Starting validation for all IDE integrations","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}
+{"category":"validation:framework","level":"error","message":"IDE integration validation failed: Cannot read properties of undefined (reading 'getAllIntegrations')","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}
+{"category":"validation:framework","level":"info","message":"Validation summary report saved: /home/ubuntu/AideonAILite/src/core/validation/data/validation_reports/validation_summary_2025-06-05T15-12-37-010Z.md","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}
+{"category":"validation:framework","level":"info","message":"Validation summary report saved: /home/ubuntu/AideonAILite/src/core/validation/data/validation_reports/validation_summary_2025-06-05T15-12-37-012Z.md","service":"aideon-ai","timestamp":"2025-06-05 11:12:37"}

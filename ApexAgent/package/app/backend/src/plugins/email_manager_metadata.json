@@ -1,0 +1,96 @@
+{
+  "name": "EmailManager",
+  "version": "0.1.0",
+  "description": "Manages emails. Supports Gmail and Outlook.",
+  "author": "ApexAgent Team",
+  "entry_point": "email_manager.EmailManager",
+  "actions": [
+    {
+      "name": "send_email",
+      "description": "Sends an email using the specified service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service (e.g., \"gmail\", \"outlook\")"},
+        {"name": "to", "type": "array", "items": {"type": "string"}, "required": true, "description": "List of recipient email addresses"},
+        {"name": "subject", "type": "string", "required": true, "description": "Email subject"},
+        {"name": "body", "type": "string", "required": true, "description": "Email body content (plain text or HTML)"},
+        {"name": "cc", "type": "array", "items": {"type": "string"}, "required": false, "description": "Optional list of CC recipient email addresses"},
+        {"name": "bcc", "type": "array", "items": {"type": "string"}, "required": false, "description": "Optional list of BCC recipient email addresses"},
+        {"name": "attachments", "type": "array", "items": {"type": "string"}, "required": false, "description": "Optional list of absolute file paths for attachments"}
+      ],
+      "returns": {"type": "object", "properties": {"message_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "list_emails",
+      "description": "Lists emails from the specified service and folder.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "folder", "type": "string", "required": false, "default": "inbox", "description": "Folder to list emails from (e.g., \"inbox\", \"sent\")"},
+        {"name": "count", "type": "integer", "required": false, "default": 10, "description": "Maximum number of emails to return"},
+        {"name": "unread_only", "type": "boolean", "required": false, "default": false, "description": "Whether to list only unread emails"},
+        {"name": "sender_filter", "type": "string", "required": false, "description": "Filter emails by sender email address"},
+        {"name": "subject_filter", "type": "string", "required": false, "description": "Filter emails by subject line content"},
+        {"name": "date_after", "type": "string", "required": false, "description": "List emails received after this date (ISO 8601 format)"},
+        {"name": "date_before", "type": "string", "required": false, "description": "List emails received before this date (ISO 8601 format)"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object"}, "description": "List of email objects (summary view)"}
+    },
+    {
+      "name": "get_email",
+      "description": "Retrieves a specific email by its ID.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "email_id", "type": "string", "required": true, "description": "ID of the email to retrieve"}
+      ],
+      "returns": {"type": "object", "description": "Full email object or null if not found"}
+    },
+    {
+      "name": "delete_email",
+      "description": "Deletes a specific email by its ID.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "email_id", "type": "string", "required": true, "description": "ID of the email to delete"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "mark_email_as_read",
+      "description": "Marks a specific email as read.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "email_id", "type": "string", "required": true, "description": "ID of the email to mark as read"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "mark_email_as_unread",
+      "description": "Marks a specific email as unread.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "email_id", "type": "string", "required": true, "description": "ID of the email to mark as unread"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    },
+    {
+      "name": "create_folder",
+      "description": "Creates a new email folder.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "folder_name", "type": "string", "required": true, "description": "Name of the folder to create"}
+      ],
+      "returns": {"type": "object", "properties": {"folder_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "move_email",
+      "description": "Moves an email to a specified folder.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Email service"},
+        {"name": "email_id", "type": "string", "required": true, "description": "ID of the email to move"},
+        {"name": "destination_folder_id", "type": "string", "required": true, "description": "ID of the destination folder"}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}}}
+    }
+  ],
+  "required_api_keys": ["google_gmail_api_key", "microsoft_graph_api_key"],
+  "dependencies": []
+}
+

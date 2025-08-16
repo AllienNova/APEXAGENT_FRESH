@@ -1,0 +1,60 @@
+2025-06-08T02:04:42.0744470Z ##[group]Run npm run build:win
+2025-06-08T02:04:42.0744832Z [36;1mnpm run build:win[0m
+2025-06-08T02:04:42.0780511Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:04:42.0780833Z env:
+2025-06-08T02:04:42.0780980Z   NODE_VERSION: 18
+2025-06-08T02:04:42.0781166Z   PYTHON_VERSION: 3.11
+2025-06-08T02:04:42.0781459Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0782358Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+2025-06-08T02:04:42.0782762Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0783110Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0783463Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0784175Z   GH_TOKEN: ***
+2025-06-08T02:04:42.0784362Z ##[endgroup]
+2025-06-08T02:04:42.7536174Z 
+2025-06-08T02:04:42.7536942Z > aideon-ai-lite@1.0.0 build:win
+2025-06-08T02:04:42.7543872Z > npm run package:win
+2025-06-08T02:04:42.7544902Z 
+2025-06-08T02:04:43.1152179Z 
+2025-06-08T02:04:43.1153076Z > aideon-ai-lite@1.0.0 package:win
+2025-06-08T02:04:43.1153944Z > electron-builder --win
+2025-06-08T02:04:43.1174879Z 
+2025-06-08T02:04:44.1765253Z   • electron-builder  version=24.13.3 os=10.0.20348
+2025-06-08T02:04:44.1772269Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T02:04:44.1774903Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T02:04:44.1777423Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T02:04:44.1841891Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T02:04:44.5265830Z   • packaging       platform=win32 arch=x64 electron=28.3.3 appOutDir=dist\win-unpacked
+2025-06-08T02:04:44.7275945Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-win32-x64.zip size=108 MB parts=4
+2025-06-08T02:04:45.8443985Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-win32-x64.zip duration=1.304s
+2025-06-08T02:04:53.6571328Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z size=5.6 MB parts=1
+2025-06-08T02:04:53.6573492Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z duration=215ms
+2025-06-08T02:04:53.6574792Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:53.6575716Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:53.6577391Z Fatal error: Unable to set icon
+2025-06-08T02:04:53.6579357Z 
+2025-06-08T02:04:53.6586946Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:53.6590485Z                     workingDir=
+2025-06-08T02:04:53.6625019Z   • Above command failed, retrying 3 more times
+2025-06-08T02:04:54.6965667Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:54.6967406Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:54.6971530Z Fatal error: Unable to set icon
+2025-06-08T02:04:54.6978421Z 
+2025-06-08T02:04:54.6985080Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:54.6988760Z                     workingDir=
+2025-06-08T02:04:54.6989692Z   • Above command failed, retrying 2 more times
+2025-06-08T02:04:55.7315052Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:55.7316139Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:55.7318833Z Fatal error: Unable to set icon
+2025-06-08T02:04:55.7321394Z 
+2025-06-08T02:04:55.7326245Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:55.7330635Z                     workingDir=
+2025-06-08T02:04:55.7336813Z   • Above command failed, retrying 1 more times
+2025-06-08T02:04:56.7671350Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:56.7672864Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:56.7675157Z Fatal error: Unable to set icon
+2025-06-08T02:04:56.7690619Z 
+2025-06-08T02:04:56.7701753Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:56.7706034Z                     workingDir=
+2025-06-08T02:04:56.7706979Z   • Above command failed, retrying 0 more times
+2025-06-08T02:04:56.9379567Z ##[error]Process completed with exit code 1.

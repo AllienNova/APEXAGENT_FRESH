@@ -1,0 +1,30 @@
+FROM node:18-alpine AS base
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies for development
+FROM base AS deps
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Development image
+FROM base AS development
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Install development tools
+RUN apk add --no-cache git curl jq
+
+# Install global development dependencies
+RUN npm install -g nodemon typescript ts-node
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Expose development port
+EXPOSE 3000
+
+# Start development server with hot reloading
+CMD ["npm", "run", "dev"]

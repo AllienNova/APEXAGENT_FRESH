@@ -1,0 +1,402 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ApexAgent AWS CloudFormation Template for ECS Deployment'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: production
+    AllowedValues:
+      - development
+      - staging
+      - production
+    Description: Environment type for the deployment
+
+  ContainerImage:
+    Type: String
+    Description: Docker image to deploy (e.g., account.dkr.ecr.region.amazonaws.com/apexagent:latest)
+
+  ContainerPort:
+    Type: Number
+    Default: 8000
+    Description: Port the container exposes
+
+  DesiredCount:
+    Type: Number
+    Default: 2
+    Description: Desired count of tasks in the service
+
+  MaxCapacity:
+    Type: Number
+    Default: 10
+    Description: Maximum capacity for auto scaling
+
+  MinCapacity:
+    Type: Number
+    Default: 2
+    Description: Minimum capacity for auto scaling
+
+  DatabaseSecretArn:
+    Type: String
+    Description: ARN of the secret containing database credentials
+
+  RedisSecretArn:
+    Type: String
+    Description: ARN of the secret containing Redis credentials
+
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC to deploy resources into
+
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: List of subnet IDs for the ECS service
+
+  CertificateArn:
+    Type: String
+    Description: ARN of the SSL certificate for HTTPS
+
+  DomainName:
+    Type: String
+    Description: Domain name for the application (e.g., apexagent.example.com)
+
+Resources:
+  # ECS Cluster
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Sub apexagent-${Environment}
+      ClusterSettings:
+        - Name: containerInsights
+          Value: enabled
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Application
+          Value: ApexAgent
+
+  # Log Group
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /ecs/apexagent-${Environment}
+      RetentionInDays: 30
+
+  # Task Execution Role
+  TaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      Policies:
+        - PolicyName: SecretsAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Ref DatabaseSecretArn
+                  - !Ref RedisSecretArn
+
+  # Task Role
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ApexAgentTaskPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:ListBucket
+                Resource:
+                  - !Sub arn:aws:s3:::apexagent-${Environment}/*
+                  - !Sub arn:aws:s3:::apexagent-${Environment}
+
+  # Task Definition
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Sub apexagent-${Environment}
+      Cpu: '512'
+      Memory: '1024'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      ContainerDefinitions:
+        - Name: apexagent
+          Image: !Ref ContainerImage
+          Essential: true
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+              Protocol: tcp
+          Environment:
+            - Name: ENVIRONMENT
+              Value: !Ref Environment
+            - Name: LOG_LEVEL
+              Value: !If [IsProd, 'INFO', 'DEBUG']
+          Secrets:
+            - Name: DATABASE_URL
+              ValueFrom: !Sub '${DatabaseSecretArn}:url::'
+            - Name: REDIS_URL
+              ValueFrom: !Sub '${RedisSecretArn}:url::'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref LogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+          HealthCheck:
+            Command:
+              - CMD-SHELL
+              - curl -f http://localhost:8000/health || exit 1
+            Interval: 30
+            Timeout: 5
+            Retries: 3
+            StartPeriod: 60
+
+  # Security Group for ECS Service
+  ServiceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for ApexAgent ECS service
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: !Ref ContainerPort
+          ToPort: !Ref ContainerPort
+          SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub apexagent-service-${Environment}
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Security Group for Load Balancer
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for ApexAgent load balancer
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub apexagent-alb-${Environment}
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Application Load Balancer
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub apexagent-${Environment}
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+      Subnets: !Ref SubnetIds
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub apexagent-${Environment}
+        - Key: Environment
+          Value: !Ref Environment
+
+  # HTTPS Listener
+  HttpsListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+      SslPolicy: ELBSecurityPolicy-TLS-1-2-2017-01
+
+  # HTTP Listener (redirects to HTTPS)
+  HttpListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - Type: redirect
+          RedirectConfig:
+            Protocol: HTTPS
+            Port: '443'
+            Host: '#{host}'
+            Path: '/#{path}'
+            Query: '#{query}'
+            StatusCode: HTTP_301
+
+  # Target Group
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Sub apexagent-${Environment}
+      Port: !Ref ContainerPort
+      Protocol: HTTP
+      TargetType: ip
+      VpcId: !Ref VpcId
+      HealthCheckPath: /health
+      HealthCheckIntervalSeconds: 30
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 3
+      UnhealthyThresholdCount: 3
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: '30'
+      Tags:
+        - Key: Name
+          Value: !Sub apexagent-${Environment}
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ECS Service
+  ECSService:
+    Type: AWS::ECS::Service
+    DependsOn: HttpsListener
+    Properties:
+      ServiceName: !Sub apexagent-${Environment}
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref TaskDefinition
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: true
+      DesiredCount: !Ref DesiredCount
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - !Ref ServiceSecurityGroup
+          Subnets: !Ref SubnetIds
+      LoadBalancers:
+        - ContainerName: apexagent
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+      HealthCheckGracePeriodSeconds: 60
+      Tags:
+        - Key: Name
+          Value: !Sub apexagent-${Environment}
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Auto Scaling Target
+  ScalableTarget:
+    Type: AWS::ApplicationAutoScaling::ScalableTarget
+    Properties:
+      MaxCapacity: !Ref MaxCapacity
+      MinCapacity: !Ref MinCapacity
+      ResourceId: !Join
+        - /
+        - - service
+          - !Ref ECSCluster
+          - !GetAtt ECSService.Name
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
+      RoleARN: !Sub arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService
+
+  # CPU Scaling Policy
+  CPUScalingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: !Sub ${AWS::StackName}-cpu-scaling
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref ScalableTarget
+      TargetTrackingScalingPolicyConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageCPUUtilization
+        TargetValue: 70.0
+        ScaleInCooldown: 300
+        ScaleOutCooldown: 60
+
+  # Memory Scaling Policy
+  MemoryScalingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: !Sub ${AWS::StackName}-memory-scaling
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref ScalableTarget
+      TargetTrackingScalingPolicyConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageMemoryUtilization
+        TargetValue: 80.0
+        ScaleInCooldown: 300
+        ScaleOutCooldown: 60
+
+  # Route 53 Record
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: !Join ['', [!Select [1, !Split ['.', !Ref DomainName]], '.', !Select [2, !Split ['.', !Ref DomainName]], '.']]
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt LoadBalancer.DNSName
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        EvaluateTargetHealth: true
+
+Conditions:
+  IsProd: !Equals [!Ref Environment, 'production']
+
+Outputs:
+  ClusterName:
+    Description: ECS Cluster Name
+    Value: !Ref ECSCluster
+    Export:
+      Name: !Sub ${AWS::StackName}-ClusterName
+
+  ServiceName:
+    Description: ECS Service Name
+    Value: !GetAtt ECSService.Name
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceName
+
+  LoadBalancerDNS:
+    Description: Load Balancer DNS Name
+    Value: !GetAtt LoadBalancer.DNSName
+    Export:
+      Name: !Sub ${AWS::StackName}-LoadBalancerDNS
+
+  ServiceURL:
+    Description: URL of the service
+    Value: !Sub https://${DomainName}
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceURL

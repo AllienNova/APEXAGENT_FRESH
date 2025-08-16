@@ -1,0 +1,20 @@
+2025-06-08T02:02:14.5350673Z ##[group]Run actions/setup-node@v4
+2025-06-08T02:02:14.5351100Z with:
+2025-06-08T02:02:14.5351307Z   node-version: 18
+2025-06-08T02:02:14.5351532Z   cache: npm
+2025-06-08T02:02:14.5351733Z   always-auth: false
+2025-06-08T02:02:14.5351970Z   check-latest: false
+2025-06-08T02:02:14.5353027Z   token: ***
+2025-06-08T02:02:14.5353378Z env:
+2025-06-08T02:02:14.5353799Z   NODE_VERSION: 18
+2025-06-08T02:02:14.5354174Z   PYTHON_VERSION: 3.11
+2025-06-08T02:02:14.5354523Z ##[endgroup]
+2025-06-08T02:02:14.8659575Z Found in cache @ C:\hostedtoolcache\windows\node\18.20.8\x64
+2025-06-08T02:02:14.8661844Z ##[group]Environment details
+2025-06-08T02:02:18.2480274Z node: v18.20.8
+2025-06-08T02:02:18.2481094Z npm: 10.8.2
+2025-06-08T02:02:18.2481522Z yarn: 1.22.22
+2025-06-08T02:02:18.2482805Z ##[endgroup]
+2025-06-08T02:02:18.3455044Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\18.20.8\x64\npm.cmd config get cache"
+2025-06-08T02:02:18.9587835Z C:\npm\cache
+2025-06-08T02:02:19.2002613Z npm cache is not found

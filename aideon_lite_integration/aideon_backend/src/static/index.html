@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon Lite AI - Production Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0E27;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #34405A;
+            border-top: 4px solid #6B73FF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-form {
+            background: #1A1F3A;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #34405A;
+            width: 400px;
+            max-width: 90vw;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #6B73FF;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #B0BEC5;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #252B4A;
+            border: 1px solid #34405A;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6B73FF;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(107, 115, 255, 0.3);
+        }
+
+        .demo-credentials {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #252B4A;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #B0BEC5;
+        }
+
+        /* Header */
+        .header {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #B0BEC5;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #252B4A;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+        }
+
+        .credit-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1A1F3A;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #34405A;
+        }
+
+        .credit-balance {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .credit-usage {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6B73FF;
+            font-size: 0.8rem;
+        }
+
+        .status-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.hybrid {
+            background: #6B73FF;
+        }
+
+        .status-indicator.optimal {
+            background: #2ECC71;
+        }
+
+        .status-indicator.protected {
+            background: #E74C3C;
+        }
+
+        .mode-details, .performance-comparison, .privacy-details {
+            font-size: 0.75rem;
+            color: #B0BEC5;
+            margin-left: 0.25rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #E74C3C;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 0 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .tab-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-item:hover {
+            background: #252B4A;
+            color: #6B73FF;
+        }
+
+        .tab-item.active {
+            color: #6B73FF;
+            border-bottom-color: #6B73FF;
+            background: #252B4A;
+        }
+
+        .tab-notification {
+            background: #E74C3C;
+            color: white;
+            border-radius: 10px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Content Area */
+        .content-area {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 140px);
+            background: #1A1F3A;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: calc(100vh - 140px);
+        }
+
+        .sidebar {
+            background: #252B4A;
+            border-right: 1px solid #34405A;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #B0BEC5;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #B0BEC5;
+        }
+
+        .nav-item:hover {
+            background: #1A1F3A;
+            color: #6B73FF;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            color: #FFFFFF;
+        }
+
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .welcome-header {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-header p {
+            font-size: 1.1rem;
+            color: #B0BEC5;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #252B4A;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-card.performance {
+            border-left-color: #2ECC71;
+        }
+
+        .metric-card.security {
+            border-left-color: #3498DB;
+        }
+
+        .metric-card.processing {
+            border-left-color: #F39C12;
+        }
+
+        .metric-card.savings {
+            border-left-color: #E74C3C;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        .metric-icon {
+            font-size: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-description {
+            color: #B0BEC5;
+            font-size: 0.9rem;
+        }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .activity-card, .health-card {
+            background: #252B4A;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #34405A;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .activity-icon.success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ECC71;
+        }
+
+        .activity-icon.info {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498DB;
+        }
+
+        .activity-icon.warning {
+            background: rgba(243, 156, 18, 0.2);
+            color: #F39C12;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #B0BEC5;
+        }
+
+        .health-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .health-metric:last-child {
+            margin-bottom: 0;
+        }
+
+        .health-label {
+            font-weight: 500;
+        }
+
+        .health-value {
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .health-bar {
+            width: 100%;
+            height: 6px;
+            background: #34405A;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .health-fill.cpu {
+            background: #2ECC71;
+        }
+
+        .health-fill.memory {
+            background: #3498DB;
+        }
+
+        .health-fill.storage {
+            background: #F39C12;
+        }
+
+        .health-fill.network {
+            background: #2ECC71;
+        }
+
+        /* Security Tab Styles */
+        .security-command-center {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: calc(100vh - 140px);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+        }
+
+        .security-sidebar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 20px;
+        }
+
+        .security-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .security-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .security-nav-menu {
+            list-style: none;
+        }
+
+        .security-nav-item {
+            margin-bottom: 8px;
+        }
+
+        .security-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #b0b0b0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .security-nav-link:hover, .security-nav-link.active {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            transform: translateX(4px);
+        }
+
+        .security-nav-icon {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .security-main-content {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .security-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .threat-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-secure {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .ai-brain {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .upgrade-banner {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 0, 0, 0.2));
+            border: 1px solid rgba(255, 165, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upgrade-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffa500;
+            margin-bottom: 10px;
+        }
+
+        .upgrade-description {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .upgrade-btn {
+            background: linear-gradient(45deg, #ffa500, #ff6b00);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 165, 0, 0.3);
+        }
+
+        /* Error States */
+        .error-message {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #E74C3C;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .success-message {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ECC71;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container, .security-command-center {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar, .security-sidebar {
+                display: none;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-form">
+            <h2>🚀 Aideon Lite AI Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="demo-credentials">
+                <strong>Demo Credentials:</strong><br>
+                Username: demo<br>
+                Password: demo123
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">A</div>
+                <div class="brand-info">
+                    <h1>Aideon Lite AI</h1>
+                    <div class="tagline">The World's First Hybrid Autonomous AI System</div>
+                </div>
+            </div>
+            
+            <div class="credit-info" id="creditInfo">
+                <div class="credit-balance">
+                    <div class="credit-icon">✨</div>
+                    <span id="creditBalance">Loading...</span>
+                </div>
+                <div class="credit-usage">
+                    <span id="creditUsage">Loading...</span>
+                </div>
+            </div>
+            
+            <div class="system-status" id="systemStatus">
+                <div class="status-group">
+                    <div class="status-indicator hybrid"></div>
+                    <span>Hybrid Processing</span>
+                    <span class="mode-details" id="processingMode">Loading...</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator optimal"></div>
+                    <span>System Optimal</span>
+                    <span class="performance-comparison" id="systemPerformance">Loading...</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator protected"></div>
+                    <span>AI Guardian</span>
+                    <span class="privacy-details" id="aiGuardian">Loading...</span>
+                </div>
+            </div>
+
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="tab-container">
+            <div class="tab-item active" data-tab="dashboard">📊 Dashboard</div>
+            <div class="tab-item" data-tab="chat">💬 Chat</div>
+            <div class="tab-item" data-tab="projects">📁 Projects</div>
+            <div class="tab-item" data-tab="artifacts">🎨 Artifacts <span class="tab-notification">12</span></div>
+            <div class="tab-item" data-tab="files">🗂️ Files</div>
+            <div class="tab-item" data-tab="agents">🤖 Agents</div>
+            <div class="tab-item" data-tab="security">🛡️ Security</div>
+            <div class="tab-item" data-tab="analytics">📈 Analytics</div>
+            <div class="tab-item" data-tab="settings">⚙️ Settings</div>
+            <div class="tab-item" data-tab="tardis">👨‍⚕️ Dr. TARDIS</div>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="content-area" id="content-area">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        // ============================================================================
+        // GLOBAL STATE MANAGEMENT
+        // ============================================================================
+        
+        let currentUser = null;
+        let isAuthenticated = false;
+        let systemData = {};
+        let refreshInterval = null;
+
+        // ============================================================================
+        // API HELPER FUNCTIONS
+        // ============================================================================
+        
+        async function apiCall(endpoint, options = {}) {
+            const defaultOptions = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            };
+
+            const config = { ...defaultOptions, ...options };
+            
+            try {
+                showLoading();
+                const response = await fetch(`/api${endpoint}`, config);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                hideLoading();
+                return data;
+            } catch (error) {
+                hideLoading();
+                console.error('API call failed:', error);
+                showError(`API Error: ${error.message}`);
+                throw error;
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            document.body.appendChild(errorDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(errorDiv);
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(successDiv);
+            }, 3000);
+        }
+
+        // ============================================================================
+        // AUTHENTICATION FUNCTIONS
+        // ============================================================================
+        
+        async function checkAuthStatus() {
+            try {
+                const response = await apiCall('/auth/status');
+                
+                if (response.authenticated) {
+                    isAuthenticated = true;
+                    currentUser = response.user;
+                    showMainInterface();
+                    updateUserInterface();
+                    startDataRefresh();
+                } else {
+                    showLoginModal();
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                showLoginModal();
+            }
+        }
+
+        async function login(username, password) {
+            try {
+                const response = await apiCall('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.success) {
+                    isAuthenticated = true;
+                    currentUser = response.user;
+                    hideLoginModal();
+                    showMainInterface();
+                    updateUserInterface();
+                    startDataRefresh();
+                    showSuccess('Login successful!');
+                } else {
+                    showError('Invalid credentials');
+                }
+            } catch (error) {
+                showError('Login failed. Please try again.');
+            }
+        }
+
+        async function logout() {
+            try {
+                await apiCall('/auth/logout', { method: 'POST' });
+                isAuthenticated = false;
+                currentUser = null;
+                stopDataRefresh();
+                showLoginModal();
+                showSuccess('Logged out successfully');
+            } catch (error) {
+                showError('Logout failed');
+            }
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function hideLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function showMainInterface() {
+            document.querySelector('.header').style.display = 'block';
+            document.querySelector('.nav-tabs').style.display = 'block';
+            document.querySelector('.content-area').style.display = 'block';
+        }
+
+        // ============================================================================
+        // DATA REFRESH FUNCTIONS
+        // ============================================================================
+        
+        function startDataRefresh() {
+            // Refresh data every 30 seconds
+            refreshInterval = setInterval(async () => {
+                await updateSystemStatus();
+                await refreshCurrentTabData();
+            }, 30000);
+            
+            // Initial load
+            updateSystemStatus();
+        }
+
+        function stopDataRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+        }
+
+        async function updateSystemStatus() {
+            try {
+                const status = await apiCall('/system/status');
+                systemData = status;
+                
+                // Update header information
+                document.getElementById('creditBalance').textContent = `${status.credits.balance} Credits`;
+                document.getElementById('creditUsage').textContent = `($${status.credits.used_today} used today)`;
+                document.getElementById('processingMode').textContent = `${status.processing.local_percentage}% Local, ${status.processing.cloud_percentage}% Cloud`;
+                document.getElementById('systemPerformance').textContent = status.processing.efficiency;
+                document.getElementById('aiGuardian').textContent = `${status.ai_guardian.threats_blocked} Threats Blocked`;
+                
+            } catch (error) {
+                console.error('Failed to update system status:', error);
+            }
+        }
+
+        function updateUserInterface() {
+            if (currentUser) {
+                document.getElementById('userMenu').style.display = 'flex';
+                document.getElementById('userAvatar').textContent = currentUser.username.charAt(0).toUpperCase();
+            }
+        }
+
+        async function refreshCurrentTabData() {
+            const activeTab = document.querySelector('.tab-item.active');
+            if (activeTab) {
+                const tabName = activeTab.getAttribute('data-tab');
+                await loadTabContent(tabName, true); // true for refresh
+            }
+        }
+
+        // ============================================================================
+        // TAB CONTENT LOADING
+        // ============================================================================
+        
+        async function loadTabContent(tabName, isRefresh = false) {
+            const contentArea = document.getElementById('content-area');
+            
+            try {
+                let content = '';
+
+                switch (tabName) {
+                    case 'dashboard':
+                        content = await loadDashboardContent();
+                        break;
+                    case 'security':
+                        content = await loadSecurityContent();
+                        break;
+                    case 'chat':
+                        content = await loadChatContent();
+                        break;
+                    case 'projects':
+                        content = await loadProjectsContent();
+                        break;
+                    case 'agents':
+                        content = await loadAgentsContent();
+                        break;
+                    case 'analytics':
+                        content = await loadAnalyticsContent();
+                        break;
+                    case 'files':
+                        content = await loadFilesContent();
+                        break;
+                    case 'settings':
+                        content = await loadSettingsContent();
+                        break;
+                    default:
+                        content = `<div style="padding: 2rem;"><h1>${tabName.charAt(0).toUpperCase() + tabName.slice(1)}</h1><p>Content for ${tabName} coming soon...</p></div>`;
+                }
+
+                contentArea.innerHTML = content;
+                
+                // Initialize any interactive elements
+                initializeTabInteractions(tabName);
+                
+            } catch (error) {
+                console.error(`Failed to load ${tabName} content:`, error);
+                contentArea.innerHTML = `<div class="error-message">Failed to load ${tabName} content. Please try again.</div>`;
+            }
+        }
+
+        async function loadDashboardContent() {
+            const [metrics, activity, health] = await Promise.all([
+                apiCall('/dashboard/metrics'),
+                apiCall('/dashboard/activity'),
+                apiCall('/system/status')
+            ]);
+
+            return `
+                <div class="dashboard-container">
+                    <div class="sidebar">
+                        <div class="sidebar-section">
+                            <div class="section-title">CORE FEATURES</div>
+                            <div class="nav-item active">
+                                <span class="nav-icon">📊</span>
+                                <span>Dashboard</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">💬</span>
+                                <span>AI Chat</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">🤖</span>
+                                <span>Multi-Agents</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">👨‍⚕️</span>
+                                <span>Dr. TARDIS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <div class="section-title">SECURITY & TOOLS</div>
+                            <div class="nav-item">
+                                <span class="nav-icon">🛡️</span>
+                                <span>Security Center</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">🔧</span>
+                                <span>AI Tools PRO</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">📈</span>
+                                <span>Analytics PRO</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <div class="section-title">SYSTEM</div>
+                            <div class="nav-item">
+                                <span class="nav-icon">⚙️</span>
+                                <span>Settings</span>
+                            </div>
+                            <div class="nav-item">
+                                <span class="nav-icon">❓</span>
+                                <span>Help & Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="main-content">
+                        <div class="welcome-header">
+                            <h1>Welcome to Aideon Lite AI</h1>
+                            <p>The world's first hybrid autonomous AI system</p>
+                        </div>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric-card performance">
+                                <div class="metric-header">
+                                    <div class="metric-title">🎯 AI Performance</div>
+                                    <div class="metric-icon">📈</div>
+                                </div>
+                                <div class="metric-value" style="color: #2ECC71;">${metrics.ai_performance.value}%</div>
+                                <div class="metric-description">System Efficiency (${metrics.ai_performance.change})</div>
+                            </div>
+                            
+                            <div class="metric-card security">
+                                <div class="metric-header">
+                                    <div class="metric-title">🛡️ Security Status</div>
+                                    <div class="metric-icon">🔒</div>
+                                </div>
+                                <div class="metric-value" style="color: #3498DB;">${metrics.security_status.threats_blocked}</div>
+                                <div class="metric-description">Threats Blocked Today</div>
+                            </div>
+                            
+                            <div class="metric-card processing">
+                                <div class="metric-header">
+                                    <div class="metric-title">⚡ Hybrid Processing</div>
+                                    <div class="metric-icon">🔄</div>
+                                </div>
+                                <div class="metric-value" style="color: #F39C12;">${metrics.hybrid_processing.efficiency}</div>
+                                <div class="metric-description">Faster than Cloud-Only</div>
+                            </div>
+                            
+                            <div class="metric-card savings">
+                                <div class="metric-header">
+                                    <div class="metric-title">💰 Cost Savings</div>
+                                    <div class="metric-icon">💵</div>
+                                </div>
+                                <div class="metric-value" style="color: #E74C3C;">${metrics.cost_savings.percentage}%</div>
+                                <div class="metric-description">vs Cloud-Only Solutions</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-section">
+                            <div class="activity-card">
+                                <div class="card-title">Recent Activity</div>
+                                ${activity.map(item => `
+                                    <div class="activity-item">
+                                        <div class="activity-icon ${item.status}">
+                                            ${item.type === 'security' ? '🛡️' : item.type === 'system' ? '🔄' : '📁'}
+                                        </div>
+                                        <div class="activity-details">
+                                            <div class="activity-title">${item.title}</div>
+                                            <div class="activity-time">${new Date(item.time).toLocaleString()}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="health-card">
+                                <div class="card-title">System Health</div>
+                                <div class="health-metric">
+                                    <div class="health-label">CPU Usage</div>
+                                    <div class="health-value">${health.system?.cpu_usage || 15}%</div>
+                                </div>
+                                <div class="health-bar">
+                                    <div class="health-fill cpu" style="width: ${health.system?.cpu_usage || 15}%"></div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="health-label">Memory</div>
+                                    <div class="health-value">2.1GB / 16GB</div>
+                                </div>
+                                <div class="health-bar">
+                                    <div class="health-fill memory" style="width: 13%"></div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="health-label">Storage</div>
+                                    <div class="health-value">847GB Free</div>
+                                </div>
+                                <div class="health-bar">
+                                    <div class="health-fill storage" style="width: 52%"></div>
+                                </div>
+                                
+                                <div class="health-metric">
+                                    <div class="health-label">Network</div>
+                                    <div class="health-value">Optimal</div>
+                                </div>
+                                <div class="health-bar">
+                                    <div class="health-fill network" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadSecurityContent() {
+            const [status, logs] = await Promise.all([
+                apiCall('/security/status'),
+                apiCall('/security/logs')
+            ]);
+
+            return `
+                <div class="security-command-center">
+                    <nav class="security-sidebar">
+                        <div class="security-logo">
+                            <div class="security-logo-icon">A</div>
+                            <div>
+                                <div style="font-weight: bold; font-size: 16px;">Aideon AI</div>
+                                <div style="font-size: 12px; color: #888;">Cybersecurity Command</div>
+                            </div>
+                        </div>
+                        
+                        <ul class="security-nav-menu">
+                            <li class="security-nav-item">
+                                <a href="#" class="security-nav-link active" onclick="showSecuritySection('dashboard')">
+                                    <span class="security-nav-icon">🛡️</span>
+                                    <span>Security Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="security-nav-item">
+                                <a href="#" class="security-nav-link" onclick="showSecuritySection('ai-analysis')">
+                                    <span class="security-nav-icon">🧠</span>
+                                    <span>AI Analysis</span>
+                                </a>
+                            </li>
+                            <li class="security-nav-item">
+                                <a href="#" class="security-nav-link" onclick="showSecuritySection('threat-hunting')">
+                                    <span class="security-nav-icon">🎯</span>
+                                    <span>Threat Hunting</span>
+                                </a>
+                            </li>
+                            <li class="security-nav-item">
+                                <a href="#" class="security-nav-link" onclick="showSecuritySection('tools')">
+                                    <span class="security-nav-icon">🔧</span>
+                                    <span>Security Tools</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <main class="security-main-content">
+                        <header class="security-header">
+                            <div class="threat-status">
+                                <div class="status-secure">
+                                    <span>🛡️</span>
+                                    <span>${status.overall_status.toUpperCase()}</span>
+                                </div>
+                                <div style="color: #b0b0b0; font-size: 14px;">
+                                    Last scan: ${new Date(status.last_scan).toLocaleString()} | Next scan: ${new Date(status.next_scan).toLocaleString()}
+                                </div>
+                            </div>
+                            
+                            <div class="ai-status">
+                                <div class="ai-brain">🧠</div>
+                                <div>
+                                    <div style="font-weight: 600; color: #00ffff;">AI Guardian ${status.ai_guardian.active ? 'Active' : 'Inactive'}</div>
+                                    <div style="font-size: 12px; color: #888;">Advanced Threat Detection</div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div id="security-dashboard-section">
+                            <div class="upgrade-banner">
+                                <div class="upgrade-title">🚀 Upgrade to Aideon Pro Security</div>
+                                <div class="upgrade-description">Unlock advanced threat hunting, AI-powered forensics, and enterprise compliance tools</div>
+                                <button class="upgrade-btn" onclick="showUpgradeModal()">Upgrade Now - $49/month</button>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                                <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 12px; padding: 20px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                        <h3 style="color: #00ffff;">Threat Detection</h3>
+                                        <span style="font-size: 24px; color: #00ffff;">🎯</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.threat_detection.active_threats}</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">ACTIVE THREATS</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.threat_detection.threats_blocked}</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">THREATS BLOCKED</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.threat_detection.success_rate}%</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">SUCCESS RATE</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.threat_detection.avg_response_time}s</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">AVG RESPONSE</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 12px; padding: 20px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                        <h3 style="color: #00ffff;">Network Security</h3>
+                                        <span style="font-size: 24px; color: #00ffff;">🌐</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.network_security.active_connections}</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">ACTIVE CONNECTIONS</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.network_security.data_scanned}</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">DATA SCANNED</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.network_security.firewall_status}%</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">FIREWALL STATUS</div>
+                                        </div>
+                                        <div style="text-align: center; padding: 15px; background: rgba(0, 255, 255, 0.05); border-radius: 8px;">
+                                            <div style="font-size: 24px; font-weight: bold; color: #00ffff;">${status.metrics.network_security.rules_active}</div>
+                                            <div style="font-size: 12px; color: #b0b0b0;">RULES ACTIVE</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 12px; padding: 20px;">
+                                <h3 style="color: #00ffff; margin-bottom: 15px;">Real-Time Security Logs</h3>
+                                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 15px; font-family: 'Courier New', monospace; font-size: 12px; max-height: 200px; overflow-y: auto;">
+                                    ${logs.map(log => `
+                                        <div style="margin-bottom: 8px; display: flex; gap: 12px;">
+                                            <span style="color: #888;">${log.timestamp}</span>
+                                            <span style="color: ${log.level === 'INFO' ? '#00ff00' : log.level === 'WARN' ? '#ffa500' : log.level === 'CRITICAL' ? '#ff0000' : '#00ffff'}; font-weight: 600;">[${log.level}]</span>
+                                            <span style="color: #e0e0e0;">${log.message}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            `;
+        }
+
+        async function loadChatContent() {
+            const conversations = await apiCall('/chat/conversations');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <h1>💬 AI Chat Interface</h1>
+                    <p>Real-time conversations with Aideon AI</p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3>Recent Conversations</h3>
+                        <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                            ${conversations.map(conv => `
+                                <div style="background: #252B4A; padding: 1rem; border-radius: 8px; cursor: pointer;" onclick="openConversation(${conv.id})">
+                                    <h4>${conv.title}</h4>
+                                    <p style="color: #B0BEC5; margin: 0.5rem 0;">${conv.last_message}</p>
+                                    <small style="color: #6B73FF;">${new Date(conv.timestamp).toLocaleString()}</small>
+                                    ${conv.unread > 0 ? `<span style="background: #E74C3C; color: white; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.7rem; margin-left: 1rem;">${conv.unread}</span>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="margin-top: 2rem;">
+                            <button onclick="startNewChat()" style="background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer;">Start New Chat</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadProjectsContent() {
+            const projects = await apiCall('/projects');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <div>
+                            <h1>📁 Projects</h1>
+                            <p>Manage your AI projects and collaborations</p>
+                        </div>
+                        <button onclick="createNewProject()" style="background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer;">+ New Project</button>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        ${projects.map(project => `
+                            <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid ${project.status === 'active' ? '#2ECC71' : project.status === 'completed' ? '#3498DB' : '#F39C12'};">
+                                <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0; color: #FFFFFF;">${project.name}</h3>
+                                    <span style="background: ${project.status === 'active' ? '#2ECC71' : project.status === 'completed' ? '#3498DB' : '#F39C12'}; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; text-transform: uppercase;">${project.status}</span>
+                                </div>
+                                <p style="color: #B0BEC5; margin-bottom: 1rem;">${project.description}</p>
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="color: #B0BEC5;">Progress</span>
+                                        <span style="color: #FFFFFF; font-weight: 600;">${project.progress}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: #34405A; border-radius: 3px; overflow: hidden;">
+                                        <div style="height: 100%; width: ${project.progress}%; background: ${project.status === 'active' ? '#2ECC71' : project.status === 'completed' ? '#3498DB' : '#F39C12'}; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="color: #B0BEC5; font-size: 0.85rem;">👥 ${project.team_members} members</span>
+                                    <span style="color: #B0BEC5; font-size: 0.85rem;">${new Date(project.created_at).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadAgentsContent() {
+            const agents = await apiCall('/agents');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <h1>🤖 AI Agents</h1>
+                    <p>Monitor and deploy specialized AI agents</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                        ${agents.map(agent => `
+                            <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3 style="margin: 0; color: #FFFFFF;">${agent.name}</h3>
+                                    <span style="background: ${agent.status === 'active' ? '#2ECC71' : agent.status === 'monitoring' ? '#F39C12' : '#6B73FF'}; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; text-transform: uppercase;">${agent.status}</span>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <p style="color: #B0BEC5; margin-bottom: 0.5rem;">Current Task:</p>
+                                    <p style="color: #FFFFFF; font-weight: 500;">${agent.current_task || 'No active task'}</p>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                    <div>
+                                        <p style="color: #B0BEC5; margin: 0; font-size: 0.85rem;">Efficiency</p>
+                                        <p style="color: #2ECC71; font-weight: 600; margin: 0; font-size: 1.2rem;">${agent.efficiency}%</p>
+                                    </div>
+                                    <div>
+                                        <p style="color: #B0BEC5; margin: 0; font-size: 0.85rem;">Tasks Completed</p>
+                                        <p style="color: #3498DB; font-weight: 600; margin: 0; font-size: 1.2rem;">${agent.tasks_completed}</p>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="deployAgent(${agent.id})" style="width: 100%; background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">Deploy Agent</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadAnalyticsContent() {
+            const analytics = await apiCall('/analytics/performance');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <div>
+                            <h1>📈 Advanced Analytics</h1>
+                            <p>Real-time insights and performance metrics with AI-powered predictions</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>Last 90 days</option>
+                                <option>Custom Range</option>
+                            </select>
+                            <button style="background: #3498DB; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">📊 Export Report</button>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #2ECC71;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="color: #2ECC71; margin: 0;">System Performance</h3>
+                                <span style="color: #2ECC71;">↗️ ${analytics.system_performance.change}</span>
+                            </div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #2ECC71; margin-bottom: 0.5rem;">${analytics.system_performance.value}%</div>
+                            <div style="color: #B0BEC5;">Average uptime this week</div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3498DB;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="color: #3498DB; margin: 0;">Task Completion</h3>
+                                <span style="color: #3498DB;">↗️ ${analytics.task_completion.change}</span>
+                            </div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #3498DB; margin-bottom: 0.5rem;">${analytics.task_completion.value}</div>
+                            <div style="color: #B0BEC5;">Tasks completed this week</div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #F39C12;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="color: #F39C12; margin: 0;">Cost Efficiency</h3>
+                                <span style="color: #F39C12;">↗️ ${analytics.cost_efficiency.change}</span>
+                            </div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #F39C12; margin-bottom: 0.5rem;">${analytics.cost_efficiency.value}%</div>
+                            <div style="color: #B0BEC5;">Savings vs cloud-only</div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #E74C3C;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="color: #E74C3C; margin: 0;">Security Score</h3>
+                                <span style="color: #E74C3C;">↗️ ${analytics.security_score.change}</span>
+                            </div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #E74C3C; margin-bottom: 0.5rem;">${analytics.security_score.value}%</div>
+                            <div style="color: #B0BEC5;">Overall security rating</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">Performance Trends</h3>
+                            <div style="height: 200px; background: #1A1F3A; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #B0BEC5;">
+                                Performance Chart (${analytics.performance_trend.length} data points)
+                            </div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">Resource Usage</h3>
+                            <div style="space-y: 1rem;">
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span>CPU Usage</span>
+                                        <span style="color: #2ECC71; font-weight: 600;">${analytics.resource_usage.cpu}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: #34405A; border-radius: 3px;">
+                                        <div style="height: 100%; width: ${analytics.resource_usage.cpu}%; background: #2ECC71; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span>Memory</span>
+                                        <span style="color: #3498DB; font-weight: 600;">${analytics.resource_usage.memory}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: #34405A; border-radius: 3px;">
+                                        <div style="height: 100%; width: ${analytics.resource_usage.memory}%; background: #3498DB; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span>Storage</span>
+                                        <span style="color: #F39C12; font-weight: 600;">${analytics.resource_usage.storage}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: #34405A; border-radius: 3px;">
+                                        <div style="height: 100%; width: ${analytics.resource_usage.storage}%; background: #F39C12; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span>Network</span>
+                                        <span style="color: #2ECC71; font-weight: 600;">${analytics.resource_usage.network}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 6px; background: #34405A; border-radius: 3px;">
+                                        <div style="height: 100%; width: ${analytics.resource_usage.network}%; background: #2ECC71; border-radius: 3px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadFilesContent() {
+            const files = await apiCall('/files');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <div>
+                            <h1>🗂️ Files</h1>
+                            <p>Intelligent file management with AI-powered search</p>
+                        </div>
+                        <button style="background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer;">📤 Upload Files</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <input type="text" placeholder="🔍 Search files..." style="width: 100%; padding: 0.75rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white; font-size: 1rem;">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;">
+                        ${files.map(file => `
+                            <div style="background: #252B4A; border-radius: 8px; padding: 1rem; border: 1px solid #34405A; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#6B73FF'" onmouseout="this.style.borderColor='#34405A'">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                                    <span style="font-size: 1.5rem; margin-right: 0.75rem;">
+                                        ${file.type === 'python' ? '🐍' : file.type === 'pdf' ? '📄' : file.type === 'csv' ? '📊' : '📁'}
+                                    </span>
+                                    <div style="flex: 1;">
+                                        <h4 style="margin: 0; color: #FFFFFF; font-size: 0.9rem;">${file.name}</h4>
+                                        <p style="margin: 0; color: #B0BEC5; font-size: 0.75rem; text-transform: uppercase;">${file.category}</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #B0BEC5;">
+                                    <span>${file.size}</span>
+                                    <span>${new Date(file.modified).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadSettingsContent() {
+            const settings = await apiCall('/settings');
+            
+            return `
+                <div style="padding: 2rem;">
+                    <h1>⚙️ System Settings</h1>
+                    <p>Configure and customize your Aideon Lite AI experience</p>
+                    
+                    <div style="display: grid; gap: 2rem; margin-top: 2rem;">
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem; color: #6B73FF;">🤖 AI Configuration</h3>
+                            <div style="display: grid; gap: 1rem;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; color: #B0BEC5;">AI Model</label>
+                                    <select style="width: 100%; padding: 0.75rem; background: #1A1F3A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                        <option value="gpt-4-turbo" ${settings.ai_configuration.model === 'GPT-4 Turbo' ? 'selected' : ''}>GPT-4 Turbo</option>
+                                        <option value="gpt-4">GPT-4</option>
+                                        <option value="claude-3">Claude 3</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; color: #B0BEC5;">Temperature: ${settings.ai_configuration.temperature}</label>
+                                    <input type="range" min="0" max="1" step="0.1" value="${settings.ai_configuration.temperature}" style="width: 100%;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; color: #B0BEC5;">Max Tokens</label>
+                                    <input type="number" value="${settings.ai_configuration.max_tokens}" style="width: 100%; padding: 0.75rem; background: #1A1F3A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem; color: #6B73FF;">⚡ Processing Mode</h3>
+                            <div style="display: grid; gap: 0.75rem;">
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="radio" name="processing" value="hybrid" ${settings.processing_mode === 'hybrid' ? 'checked' : ''} style="margin-right: 0.75rem;">
+                                    <span>Hybrid Processing (Recommended)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="radio" name="processing" value="local" style="margin-right: 0.75rem;">
+                                    <span>Local Only</span>
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="radio" name="processing" value="cloud" style="margin-right: 0.75rem;">
+                                    <span>Cloud Only</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem; color: #6B73FF;">🔔 Notifications</h3>
+                            <div style="display: grid; gap: 0.75rem;">
+                                <label style="display: flex; align-items: center; justify-content: space-between;">
+                                    <span>Email Notifications</span>
+                                    <input type="checkbox" ${settings.notifications.email ? 'checked' : ''}>
+                                </label>
+                                <label style="display: flex; align-items: center; justify-content: space-between;">
+                                    <span>Push Notifications</span>
+                                    <input type="checkbox" ${settings.notifications.push ? 'checked' : ''}>
+                                </label>
+                                <label style="display: flex; align-items: center; justify-content: space-between;">
+                                    <span>Security Alerts</span>
+                                    <input type="checkbox" ${settings.notifications.security_alerts ? 'checked' : ''}>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button onclick="saveSettings()" style="background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Save Settings</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============================================================================
+        // INTERACTIVE FUNCTIONS
+        // ============================================================================
+        
+        function initializeTabInteractions(tabName) {
+            // Initialize any tab-specific interactive elements
+            if (tabName === 'security') {
+                window.showSecuritySection = function(sectionName) {
+                    // Hide all sections
+                    const sections = ['dashboard', 'ai-analysis', 'threat-hunting', 'tools'];
+                    sections.forEach(section => {
+                        const element = document.getElementById('security-' + section + '-section');
+                        if (element) element.style.display = 'none';
+                    });
+                    
+                    // Show selected section
+                    const selectedSection = document.getElementById('security-' + sectionName + '-section');
+                    if (selectedSection) selectedSection.style.display = 'block';
+                    
+                    // Update navigation active state
+                    document.querySelectorAll('.security-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    const activeLink = document.querySelector(`[onclick="showSecuritySection('${sectionName}')"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                };
+            }
+        }
+
+        // Global functions for UI interactions
+        window.openConversation = function(id) {
+            showSuccess(`Opening conversation ${id}`);
+        };
+
+        window.startNewChat = function() {
+            showSuccess('Starting new chat...');
+        };
+
+        window.createNewProject = function() {
+            const name = prompt('Project name:');
+            if (name) {
+                apiCall('/projects', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: name,
+                        description: 'New project description'
+                    })
+                }).then(() => {
+                    showSuccess('Project created successfully!');
+                    loadTabContent('projects');
+                });
+            }
+        };
+
+        window.deployAgent = function(agentId) {
+            const task = prompt('Enter task for agent:');
+            if (task) {
+                apiCall(`/agents/${agentId}/deploy`, {
+                    method: 'POST',
+                    body: JSON.stringify({ task })
+                }).then(() => {
+                    showSuccess('Agent deployed successfully!');
+                    loadTabContent('agents');
+                });
+            }
+        };
+
+        window.saveSettings = function() {
+            showSuccess('Settings saved successfully!');
+        };
+
+        window.showUpgradeModal = function() {
+            alert('Upgrade to Aideon Pro Security for $49/month\n\nFeatures:\n- Advanced threat hunting\n- AI-powered forensics\n- Enterprise compliance tools\n- 24/7 security monitoring');
+        };
+
+        // ============================================================================
+        // INITIALIZATION
+        // ============================================================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                login(username, password);
+            });
+
+            // Initialize tab switching
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabName = tab.getAttribute('data-tab');
+                    loadTabContent(tabName);
+                });
+            });
+
+            // Check authentication status
+            checkAuthStatus();
+        });
+    </script>
+</body>
+</html>
+

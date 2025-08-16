@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApexAgent Project Management UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.js" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .animate-fade-in-right {
+            animation: fadeInRight 0.3s ease-out;
+        }
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .animate-progress {
+            animation: progress 2s infinite linear;
+        }
+        @keyframes progress {
+            0% { width: 10%; }
+            50% { width: 60%; }
+            100% { width: 10%; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="flex h-screen w-full overflow-hidden">
+        <!-- Left Sidebar - Project Navigation -->
+        <div class="w-64 h-full bg-white border-r border-gray-100 flex flex-col">
+            <div class="p-4 flex items-center justify-between border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold">A</div>
+                    <h1 class="text-lg font-bold">ApexAgent</h1>
+                </div>
+                <button class="p-1 rounded-md hover:bg-gray-100">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-4">
+                <div class="px-3 mb-2">
+                    <div class="text-xs uppercase font-semibold mb-2 ml-2 text-gray-500">
+                        Projects
+                    </div>
+                    <div class="space-y-1">
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors bg-blue-100 text-blue-700">
+                            <i data-lucide="folder-open" class="w-4 h-4 mr-3"></i>
+                            <span>Marketing Website</span>
+                        </button>
+                        
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="folder" class="w-4 h-4 mr-3"></i>
+                            <span>Data Analysis</span>
+                        </button>
+                        
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="folder" class="w-4 h-4 mr-3"></i>
+                            <span>Research Paper</span>
+                        </button>
+                        
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="folder-plus" class="w-4 h-4 mr-3"></i>
+                            <span>New Project</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="px-3 mt-6">
+                    <div class="text-xs uppercase font-semibold mb-2 ml-2 text-gray-500">
+                        Recent Conversations
+                    </div>
+                    <div class="space-y-1">
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="message-square" class="w-4 h-4 mr-3"></i>
+                            <span>Homepage Design</span>
+                        </button>
+                        
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="message-square" class="w-4 h-4 mr-3"></i>
+                            <span>CSS Animations</span>
+                        </button>
+                        
+                        <button class="flex items-center w-full py-2 px-2 rounded transition-colors text-gray-600 hover:bg-gray-100">
+                            <i data-lucide="message-square" class="w-4 h-4 mr-3"></i>
+                            <span>Responsive Layout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+                        <div class="ml-2">
+                            <div class="text-sm font-medium">John Doe</div>
+                            <div class="text-xs text-gray-500">Pro Plan</div>
+                        </div>
+                    </div>
+                    <button class="text-gray-500 hover:text-blue-500">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header with search and context panel toggle -->
+            <div class="h-16 px-6 flex items-center justify-between border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="text-lg font-medium mr-4">
+                        Marketing Website
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        Last updated: 2 hours ago
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="w-64 h-9 bg-gray-50 rounded-full flex items-center px-3 border border-gray-100">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-500 mr-2"></i>
+                        <input 
+                            type="text" 
+                            placeholder="Search project..." 
+                            class="bg-transparent border-none outline-none text-sm w-full" 
+                        />
+                    </div>
+                    
+                    <button class="p-1.5 rounded hover:bg-gray-100 text-gray-500">
+                        <i data-lucide="bell" class="w-4 h-4"></i>
+                    </button>
+                    
+                    <button class="p-1.5 rounded hover:bg-gray-100 text-gray-500">
+                        <i data-lucide="panel-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Horizontal Tab Navigation -->
+            <div class="border-b border-gray-100 bg-white">
+                <div class="flex">
+                    <button class="px-4 py-3 text-sm font-medium text-blue-600 border-b-2 border-blue-600">
+                        <div class="flex items-center">
+                            <i data-lucide="message-square" class="w-4 h-4 mr-2"></i>
+                            <span>Chat</span>
+                        </div>
+                    </button>
+                    
+                    <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-200">
+                        <div class="flex items-center">
+                            <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
+                            <span>Artifacts</span>
+                        </div>
+                    </button>
+                    
+                    <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-200">
+                        <div class="flex items-center">
+                            <i data-lucide="folder" class="w-4 h-4 mr-2"></i>
+                            <span>Project Files</span>
+                        </div>
+                    </button>
+                    
+                    <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-200">
+                        <div class="flex items-center">
+                            <i data-lucide="git-branch" class="w-4 h-4 mr-2"></i>
+                            <span>LLM Orchestration</span>
+                        </div>
+                    </button>
+                    
+                    <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-200">
+                        <div class="flex items-center">
+                            <i data-lucide="activity" class="w-4 h-4 mr-2"></i>
+                            <span>Agent Monitoring</span>
+                        </div>
+                    </button>
+                    
+                    <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-gray-200">
+                        <div class="flex items-center">
+                            <i data-lucide="bar-chart-2" class="w-4 h-4 mr-2"></i>
+                            <span>LLM Performance</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Content area with optional right panel -->
+            <div class="flex-1 flex overflow-hidden">
+                <!-- Main content -->
+                <div class="flex-1 flex flex-col overflow-hidden">
+                    <!-- Chat messages area -->
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <!-- System message -->
+                        <div class="mb-6">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-md bg-blue-600 flex-shrink-0 flex items-center justify-center text-white font-bold">A</div>
+                                <div class="ml-4 bg-white rounded-lg p-4 shadow-sm max-w-3xl">
+                                    <p class="text-gray-800">
+                                        I'll help you design the marketing website for your new product. Let's start by discussing the key features and target audience.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- User message -->
+                        <div class="mb-6">
+                            <div class="flex items-start justify-end">
+                                <div class="mr-4 bg-blue-50 rounded-lg p-4 shadow-sm max-w-3xl">
+                                    <p class="text-gray-800">
+                                        We're targeting small business owners who need an easy-to-use CRM. The key features are contact management, email marketing, and sales pipeline tracking. I'd like a modern, clean design that emphasizes ease of use.
+                                    </p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- System message with artifact reference -->
+                        <div class="mb-6">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-md bg-blue-600 flex-shrink-0 flex items-center justify-center text-white font-bold">A</div>
+                                <div class="ml-4 space-y-4 max-w-3xl">
+                                    <div class="bg-white rounded-lg p-4 shadow-sm">
+                                        <p class="text-gray-800 mb-4">
+                                            Based on your requirements, I've created a wireframe for the homepage. It highlights the key features while maintaining a clean, modern aesthetic that emphasizes ease of use.
+                                        </p>
+                                        
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                            <div class="bg-gray-50 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i data-lucide="file-image" class="w-4 h-4 text-blue-500 mr-2"></i>
+                                                    <span class="text-sm font-medium">homepage_wireframe.png</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs text-gray-500">v1 • 2 hours ago</span>
+                                                    <button class="p-1 rounded hover:bg-gray-200">
+                                                        <i data-lucide="download" class="w-3.5 h-3.5 text-gray-500"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-white">
+                                                <div class="w-full h-48 bg-gray-200 rounded flex items-center justify-center">
+                                                    <i data-lucide="image" class="w-12 h-12 text-gray-400"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- User message -->
+                        <div class="mb-6">
+                            <div class="flex items-start justify-end">
+                                <div class="mr-4 bg-blue-50 rounded-lg p-4 shadow-sm max-w-3xl">
+                                    <p class="text-gray-800">
+                                        I like the overall layout, but can we make the call-to-action button more prominent? Also, I'd like to see more emphasis on the testimonials section.
+                                    </p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- System message with version history reference -->
+                        <div class="mb-6">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-md bg-blue-600 flex-shrink-0 flex items-center justify-center text-white font-bold">A</div>
+                                <div class="ml-4 space-y-4 max-w-3xl">
+                                    <div class="bg-white rounded-lg p-4 shadow-sm">
+                                        <p class="text-gray-800 mb-4">
+                                            I've updated the wireframe with a more prominent call-to-action button and an enhanced testimonials section. Here's the revised version:
+                                        </p>
+                                        
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                            <div class="bg-gray-50 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <i data-lucide="file-image" class="w-4 h-4 text-blue-500 mr-2"></i>
+                                                    <span class="text-sm font-medium">homepage_wireframe.png</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs text-gray-500">v2 • Just now</span>
+                                                    <button class="p-1 rounded hover:bg-gray-200">
+                                                        <i data-lucide="git-branch" class="w-3.5 h-3.5 text-gray-500"></i>
+                                                    </button>
+                                                    <button class="p-1 rounded hover:bg-gray-200">
+                                                        <i data-lucide="download" class="w-3.5 h-3.5 text-gray-500"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-white">
+                                                <div class="w-full h-48 bg-gray-200 rounded flex items-center justify-center">
+                                                    <i data-lucide="image" class="w-12 h-12 text-gray-400"></i>
+                                                </div>
+                                            </div>
+                                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-200">
+                                                <div class="flex items-center text-xs text-gray-500">
+                                                    <i data-lucide="git-commit" class="w-3.5 h-3.5 mr-1"></i>
+                                                    <span>Changes: Enlarged CTA button, Expanded testimonials section, Adjusted color scheme</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat input area -->
+                    <div class="border-t border-gray-100 p-4 bg-white">
+                        <div class="flex items-end">
+                            <div class="flex-1 bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                <textarea 
+                                    placeholder="Type your message..." 
+                                    class="w-full bg-transparent border-none outline-none resize-none text-sm h-10"
+                                ></textarea>
+                                <div class="flex items-center justify-between mt-2">
+                                    <div class="flex items-center space-x-2">
+                                        <button class="p-1.5 rounded hover:bg-gray-200">
+                                            <i data-lucide="paperclip" class="w-4 h-4 text-gray-500"></i>
+                                        </button>
+                                        <button class="p-1.5 rounded hover:bg-gray-200">
+                                            <i data-lucide="code" class="w-4 h-4 text-gray-500"></i>
+                                        </button>
+                                        <button class="p-1.5 rounded hover:bg-gray-200">
+                                            <i data-lucide="image" class="w-4 h-4 text-gray-500"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                        Pro Plan: 3,245 credits remaining
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="ml-3 p-3 bg-blue-600 text-white rounded-lg">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right context panel -->
+                <div class="w-80 h-full bg-white border-l border-gray-100 flex flex-col">
+                    <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+                        <h2 class="text-sm font-medium">Project Memory</h2>
+                        <button class="p-1 rounded hover:bg-gray-100 text-gray-500">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto">
+                        <!-- Artifact Version History -->
+                        <div class="p-4 border-b border-gray-100">
+                            <h3 class="text-xs font-semibold uppercase text-gray-500 mb-3">Current Artifact</h3>
+                            
+                            <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden mb-3">
+                                <div class="p-3 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i data-lucide="file-image" class="w-4 h-4 text-blue-500 mr-2"></i>
+                                        <span class="text-sm font-medium">homepage_wireframe.png</span>
+                                    </div>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">v2</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-xs font-semibold uppercase text-gray-500 mb-3">Version History</h3>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-blue-50 rounded-lg border border-blue-100 p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-medium">Version 2</span>
+                                        <span class="text-xs text-gray-500">Just now</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mb-2">
+                                        Enlarged CTA button, expanded testimonials section, adjusted color scheme
+                                    </div>
+                                    <div class="flex items-center text-xs">
+                                        <span class="text-gray-500">Current version</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-medium">Version 1</span>
+                                        <span class="text-xs text-gray-500">2 hours ago</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mb-2">
+                                        Initial wireframe design with basic layout and structure
+                                    </div>
+                                    <div class="flex items-center text-xs">
+                                        <button class="text-blue-600 hover:text-blue-700">Restore</button>
+                                        <span class="mx-2 text-gray-300">|</span>
+                                        <button class="text-blue-600 hover:text-blue-700">Compare</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Memory -->
+                        <div class="p-4 border-b border-gray-100">
+                            <h3 class="text-xs font-semibold uppercase text-gray-500 mb-3">Project Context</h3>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center mb-1">
+                                        <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 mr-1.5"></i>
+                                        <span class="text-xs font-medium">Target Audience</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600">
+                                        Small business owners who need an easy-to-use CRM
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center mb-1">
+                                        <i data-lucide="list" class="w-3.5 h-3.5 text-blue-500 mr-1.5"></i>
+                                        <span class="text-xs font-medium">Key Features</span>
+                                    </div>
+                                    <ul class="text-xs text-gray-600 space-y-1 pl-5 list-disc">
+                                        <li>Contact management</li>
+                                        <li>Email marketing</li>
+                                        <li>Sales pipeline tracking</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center mb-1">
+                                        <i data-lucide="palette" class="w-3.5 h-3.5 text-blue-500 mr-1.5"></i>
+                                        <span class="text-xs font-medium">Design Preferences</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600">
+                                        Modern, clean design that emphasizes ease of use
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Conversations -->
+                        <div class="p-4">
+                            <h3 class="text-xs font-semibold uppercase text-gray-500 mb-3">Related Conversations</h3>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs font-medium">Brand Guidelines</span>
+                                        <span class="text-xs text-gray-500">Yesterday</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        Discussion about brand colors, typography, and logo usage
+                                    </p>
+                                    <button class="text-xs text-blue-600 hover:text-blue-700">
+                                        View Conversation
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-xs font-medium">Competitor Analysis</span>
+                                        <span class="text-xs text-gray-500">3 days ago</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        Review of competing CRM websites and their design approaches
+                                    </p>
+                                    <button class="text-xs text-blue-600 hover:text-blue-700">
+                                        View Conversation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Tab Navigation (Alternative) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 hidden">
+        <div class="flex justify-between max-w-lg mx-auto">
+            <button class="flex flex-col items-center px-3 py-1 text-blue-600">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+                <span class="text-xs mt-1">Chat</span>
+            </button>
+            
+            <button class="flex flex-col items-center px-3 py-1 text-gray-500">
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+                <span class="text-xs mt-1">Artifacts</span>
+            </button>
+            
+            <button class="flex flex-col items-center px-3 py-1 text-gray-500">
+                <i data-lucide="folder" class="w-5 h-5"></i>
+                <span class="text-xs mt-1">Files</span>
+            </button>
+            
+            <button class="flex flex-col items-center px-3 py-1 text-gray-500">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+                <span class="text-xs mt-1">Monitor</span>
+            </button>
+            
+            <button class="flex flex-col items-center px-3 py-1 text-gray-500">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-xs mt-1">More</span>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

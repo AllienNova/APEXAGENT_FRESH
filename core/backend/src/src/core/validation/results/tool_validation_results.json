@@ -1,0 +1,8 @@
+{
+  "validationId": "63096078-2c99-4dba-9966-5ffee0a629e5",
+  "startTime": 1749136356710,
+  "endTime": 1749136356711,
+  "duration": 1,
+  "error": "toolManager.getAllTools is not a function",
+  "success": false
+}

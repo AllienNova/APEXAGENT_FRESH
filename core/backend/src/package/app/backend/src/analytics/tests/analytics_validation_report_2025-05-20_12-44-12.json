@@ -1,0 +1,150 @@
+{
+  "functionality": {
+    "category": "functionality",
+    "tests": [
+      {
+        "name": "usage_tracking",
+        "description": "Track resource usage",
+        "status": "FAIL",
+        "details": "Error: 'SubscriptionIntegration' object has no attribute 'check_usage_limits'"
+      },
+      {
+        "name": "performance_tracking",
+        "description": "Track performance metrics",
+        "status": "PASS",
+        "details": "Generated performance ID: 708167e0-7a26-44d5-94f2-c6f6eed1dab2"
+      },
+      {
+        "name": "business_metrics",
+        "description": "Track business metrics",
+        "status": "PASS",
+        "details": "Generated metric ID: 6235f895-2caa-4221-bb5a-88245027e7a4"
+      },
+      {
+        "name": "event_recording",
+        "description": "Record application events",
+        "status": "PASS",
+        "details": "Generated event ID: 9c2e52a5-a378-4764-8000-8bf28189358e"
+      },
+      {
+        "name": "dashboard_generation",
+        "description": "Generate analytics dashboards",
+        "status": "PASS",
+        "details": "Dashboard contains 0 widgets"
+      },
+      {
+        "name": "report_generation",
+        "description": "Generate analytics reports",
+        "status": "PASS",
+        "details": "Report contains 0 sections"
+      }
+    ],
+    "passed": 5,
+    "total": 6,
+    "success_rate": 0.8333333333333334
+  },
+  "performance": {
+    "category": "performance",
+    "tests": [
+      {
+        "name": "usage_tracking_performance",
+        "description": "Measure performance of usage tracking",
+        "status": "FAIL",
+        "details": "Error: 'SubscriptionIntegration' object has no attribute 'check_usage_limits'"
+      },
+      {
+        "name": "event_search_performance",
+        "description": "Measure performance of event search",
+        "status": "PASS",
+        "details": "Duration: 0.000005s for searching events"
+      },
+      {
+        "name": "dashboard_generation_performance",
+        "description": "Measure performance of dashboard generation",
+        "status": "PASS",
+        "details": "Duration: 0.000080s for generating dashboard"
+      }
+    ],
+    "passed": 2,
+    "total": 3,
+    "success_rate": 0.6666666666666666
+  },
+  "security": {
+    "category": "security",
+    "tests": [
+      {
+        "name": "authentication_integration",
+        "description": "Verify authentication integration",
+        "status": "PASS",
+        "details": "Authentication correctly rejected invalid user"
+      },
+      {
+        "name": "authorization_integration",
+        "description": "Verify authorization integration",
+        "status": "PASS",
+        "details": "Authorization correctly rejected unauthorized access"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration",
+        "status": "FAIL",
+        "details": "PII data not properly protected"
+      }
+    ],
+    "passed": 2,
+    "total": 3,
+    "success_rate": 0.6666666666666666
+  },
+  "integration": {
+    "category": "integration",
+    "tests": [
+      {
+        "name": "subscription_integration",
+        "description": "Verify subscription system integration",
+        "status": "FAIL",
+        "details": "Error: SubscriptionIntegration.get_subscription_analytics() got an unexpected keyword argument 'user_id'"
+      },
+      {
+        "name": "llm_integration",
+        "description": "Verify LLM providers integration",
+        "status": "FAIL",
+        "details": "Error: LLMIntegration.get_usage_analytics() got an unexpected keyword argument 'provider_id'"
+      },
+      {
+        "name": "data_protection_integration",
+        "description": "Verify data protection integration for sensitive data",
+        "status": "FAIL",
+        "details": "Sensitive payment data not properly protected"
+      }
+    ],
+    "passed": 0,
+    "total": 3,
+    "success_rate": 0.0
+  },
+  "data_quality": {
+    "category": "data_quality",
+    "tests": [
+      {
+        "name": "data_consistency",
+        "description": "Verify data consistency between recording and retrieval",
+        "status": "FAIL",
+        "details": "Error: 'SubscriptionIntegration' object has no attribute 'check_usage_limits'"
+      },
+      {
+        "name": "data_aggregation",
+        "description": "Verify correct data aggregation",
+        "status": "PASS",
+        "details": "Data correctly aggregated"
+      }
+    ],
+    "passed": 1,
+    "total": 2,
+    "success_rate": 0.5
+  },
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 10,
+    "success_rate": 0.5882352941176471,
+    "status": "FAIL"
+  }
+}

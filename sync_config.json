@@ -1,0 +1,44 @@
+{
+  "sync_interval": 30,
+  "auto_commit": true,
+  "auto_push": true,
+  "file_patterns": {
+    "include": [
+      "*.py",
+      "*.md",
+      "*.sh",
+      "*.json",
+      "*.yaml",
+      "*.yml",
+      "*.txt",
+      "*.html",
+      "*.css",
+      "*.js"
+    ],
+    "exclude": [
+      "*.pyc",
+      "*.log",
+      "__pycache__",
+      ".git",
+      "node_modules",
+      ".cache"
+    ]
+  },
+  "directory_mapping": {
+    "*.py": "src/",
+    "*.md": "docs/",
+    "*.sh": "scripts/",
+    "*.json": "config/",
+    "*.yaml": "config/",
+    "*.yml": "config/",
+    "*.html": "frontend/",
+    "*.css": "frontend/assets/",
+    "*.js": "frontend/assets/"
+  },
+  "commit_message_templates": {
+    "new_file": "feat: Add {filename} - {description}",
+    "modified_file": "update: Modify {filename} - {description}",
+    "multiple_files": "feat: Add/update {count} files - {description}",
+    "automated": "chore: Automated sync - {timestamp}"
+  }
+}

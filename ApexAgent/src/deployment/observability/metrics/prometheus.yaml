@@ -1,0 +1,162 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: observability
+spec:
+  replicas: 2
+  serviceAccountName: prometheus
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceMonitorSelector:
+    matchLabels:
+      app: apexagent
+  ruleSelector:
+    matchLabels:
+      role: alert-rules
+      app: apexagent
+  alerting:
+    alertmanagers:
+      - namespace: observability
+        name: alertmanager
+        port: web
+  resources:
+    requests:
+      memory: 400Mi
+      cpu: 200m
+    limits:
+      memory: 2Gi
+      cpu: 1
+  retention: 15d
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 50Gi
+  additionalScrapeConfigs:
+    name: additional-scrape-configs
+    key: prometheus-additional.yaml
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: observability
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: observability
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: observability
+  labels:
+    app: prometheus
+spec:
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  selector:
+    app: prometheus
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: apexagent
+  namespace: observability
+  labels:
+    app: apexagent
+spec:
+  selector:
+    matchLabels:
+      app: apexagent
+  namespaceSelector:
+    matchNames:
+      - apexagent
+  endpoints:
+  - port: metrics
+    interval: 15s
+    path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: apexagent-alerts
+  namespace: observability
+  labels:
+    role: alert-rules
+    app: apexagent
+spec:
+  groups:
+  - name: apexagent.rules
+    rules:
+    - alert: HighErrorRate
+      expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m])) > 0.05
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High error rate detected"
+        description: "Error rate is above 5% for the last 5 minutes (current value: {{ $value }})"
+    - alert: HighLatency
+      expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) > 0.5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High latency detected"
+        description: "95th percentile latency is above 500ms for the last 5 minutes (current value: {{ $value }}s)"
+    - alert: HighCPUUsage
+      expr: sum(rate(container_cpu_usage_seconds_total{namespace="apexagent"}[5m])) by (pod) / sum(kube_pod_container_resource_limits_cpu_cores{namespace="apexagent"}) by (pod) > 0.8
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High CPU usage detected"
+        description: "Pod {{ $labels.pod }} is using more than 80% of its CPU limit for the last 15 minutes"
+    - alert: HighMemoryUsage
+      expr: sum(container_memory_usage_bytes{namespace="apexagent"}) by (pod) / sum(kube_pod_container_resource_limits_memory_bytes{namespace="apexagent"}) by (pod) > 0.8
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage detected"
+        description: "Pod {{ $labels.pod }} is using more than 80% of its memory limit for the last 15 minutes"

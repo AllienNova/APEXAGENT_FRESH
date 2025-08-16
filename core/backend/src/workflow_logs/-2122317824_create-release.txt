@@ -1,0 +1,5 @@
+2025-06-08T01:41:21.7553200Z ##[section]Starting: Prepare job create-release
+2025-06-08T01:41:21.7608243Z Evaluating strategy
+2025-06-08T01:41:21.7614026Z Creating job '__default'
+2025-06-08T01:41:21.7616860Z Skip evaluating job properties
+2025-06-08T01:41:21.7618037Z ##[section]Finishing: Prepare job create-release

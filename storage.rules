@@ -1,0 +1,26 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // User uploads - authenticated users can upload to their own folder
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Public assets - read-only for all users
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Analytics exports - admin only
+    match /analytics/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Temporary files - authenticated users only, auto-delete after 24 hours
+    match /temp/{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+

@@ -1,0 +1,234 @@
+name: ApexAgent CI/CD Pipeline
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install --with dev,test
+
+      - name: Run linting
+        run: |
+          poetry run flake8 src tests
+          poetry run black --check src tests
+          poetry run isort --check-only src tests
+
+      - name: Run tests
+        run: |
+          poetry run pytest --cov=src tests/
+          poetry run pytest --cov=src --cov-report=xml tests/
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: true
+
+  build:
+    name: Build and Push Docker Image
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,format=long
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./src/deployment/docker/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          target: production
+
+  deploy-dev:
+    name: Deploy to Development
+    needs: build
+    if: github.ref == 'refs/heads/develop' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev')
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Initialize Terraform
+        run: |
+          cd src/deployment/terraform
+          terraform init -backend-config=backend-dev.hcl
+
+      - name: Terraform Plan
+        run: |
+          cd src/deployment/terraform
+          terraform plan -var="environment=dev" -var="image_tag=${{ needs.build.outputs.image_tag }}" -out=tfplan
+
+      - name: Terraform Apply
+        run: |
+          cd src/deployment/terraform
+          terraform apply -auto-approve tfplan
+
+      - name: Update Kubernetes deployment
+        run: |
+          aws eks update-kubeconfig --name apexagent-dev --region us-west-2
+          kubectl set image deployment/apexagent apexagent=${{ needs.build.outputs.image_tag }} -n apexagent
+          kubectl rollout status deployment/apexagent -n apexagent --timeout=300s
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Initialize Terraform
+        run: |
+          cd src/deployment/terraform
+          terraform init -backend-config=backend-staging.hcl
+
+      - name: Terraform Plan
+        run: |
+          cd src/deployment/terraform
+          terraform plan -var="environment=staging" -var="image_tag=${{ needs.build.outputs.image_tag }}" -out=tfplan
+
+      - name: Terraform Apply
+        run: |
+          cd src/deployment/terraform
+          terraform apply -auto-approve tfplan
+
+      - name: Update Kubernetes deployment
+        run: |
+          aws eks update-kubeconfig --name apexagent-staging --region us-west-2
+          kubectl set image deployment/apexagent apexagent=${{ needs.build.outputs.image_tag }} -n apexagent
+          kubectl rollout status deployment/apexagent -n apexagent --timeout=300s
+
+  deploy-production:
+    name: Deploy to Production
+    needs: [build, deploy-staging]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Initialize Terraform
+        run: |
+          cd src/deployment/terraform
+          terraform init -backend-config=backend-production.hcl
+
+      - name: Terraform Plan
+        run: |
+          cd src/deployment/terraform
+          terraform plan -var="environment=production" -var="image_tag=${{ needs.build.outputs.image_tag }}" -out=tfplan
+
+      - name: Terraform Apply
+        run: |
+          cd src/deployment/terraform
+          terraform apply -auto-approve tfplan
+
+      - name: Update Kubernetes deployment
+        run: |
+          aws eks update-kubeconfig --name apexagent-production --region us-west-2
+          kubectl set image deployment/apexagent apexagent=${{ needs.build.outputs.image_tag }} -n apexagent
+          kubectl rollout status deployment/apexagent -n apexagent --timeout=300s

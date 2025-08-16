@@ -1,0 +1,72 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.apexagent.desktop
+productName: ApexAgent
+files:
+  - filter:
+      - src/**/*
+      - assets/**/*
+      - backend/**/*
+      - node_modules/**/*
+      - package.json
+extraResources:
+  - from: backend
+    to: backend
+    filter:
+      - '**/*'
+      - '!**/*.pyc'
+      - '!**/__pycache__'
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - ia32
+    - target: portable
+      arch:
+        - x64
+  icon: assets/icon.ico
+  requestedExecutionLevel: asInvoker
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
+  icon: assets/icon.icns
+  category: public.app-category.productivity
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+    - target: rpm
+      arch:
+        - x64
+  icon: assets/icon.png
+  category: Office
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: ApexAgent
+dmg:
+  title: ApexAgent Installer
+  background: assets/dmg-background.png
+  window:
+    width: 600
+    height: 400
+publish:
+  provider: github
+  owner: AllienNova
+  repo: ApexAgent
+electronVersion: 27.3.11
