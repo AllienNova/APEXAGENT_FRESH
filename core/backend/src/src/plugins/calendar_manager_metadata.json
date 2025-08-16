@@ -1,0 +1,46 @@
+{
+  "name": "CalendarManager",
+  "version": "0.1.0",
+  "description": "Manages calendar events and tasks. Supports Google Calendar and Outlook Calendar.",
+  "author": "ApexAgent Team",
+  "entry_point": "calendar_manager.CalendarManager",
+  "actions": [
+    {
+      "name": "create_event",
+      "description": "Creates a new event on the specified calendar service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Calendar service (e.g., \"google\", \"outlook\")"},
+        {"name": "summary", "type": "string", "required": true, "description": "Event summary"},
+        {"name": "start_time", "type": "string", "required": true, "description": "Event start time (ISO 8601 format)"},
+        {"name": "end_time", "type": "string", "required": true, "description": "Event end time (ISO 8601 format)"},
+        {"name": "description", "type": "string", "required": false, "description": "Optional event description"},
+        {"name": "location", "type": "string", "required": false, "description": "Optional event location"},
+        {"name": "attendees", "type": "array", "items": {"type": "string"}, "required": false, "description": "Optional list of attendee email addresses"}
+      ],
+      "returns": {"type": "object", "properties": {"event_id": {"type": "string"}, "status": {"type": "string"}}}
+    },
+    {
+      "name": "get_event",
+      "description": "Retrieves an event from the specified calendar service.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Calendar service"},
+        {"name": "event_id", "type": "string", "required": true, "description": "ID of the event to retrieve"}
+      ],
+      "returns": {"type": "object", "description": "Event details or null if not found"}
+    },
+    {
+      "name": "list_events",
+      "description": "Lists events from the specified calendar service within a time range.",
+      "parameters": [
+        {"name": "service", "type": "string", "required": true, "description": "Calendar service"},
+        {"name": "start_time", "type": "string", "required": true, "description": "Start of the time range (ISO 8601 format)"},
+        {"name": "end_time", "type": "string", "required": true, "description": "End of the time range (ISO 8601 format)"},
+        {"name": "max_results", "type": "integer", "required": false, "description": "Maximum number of events to return"}
+      ],
+      "returns": {"type": "array", "items": {"type": "object"}, "description": "List of event objects"}
+    }
+  ],
+  "required_api_keys": ["google_calendar_api_key", "outlook_calendar_api_key"],
+  "dependencies": []
+}
+

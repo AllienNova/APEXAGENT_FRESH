@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - System Configuration</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --gray-dark: #334155;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 255px;
+            background-color: #1e293b;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .slogan {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 5px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--gray-light);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary);
+        }
+        
+        .nav-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .badge {
+            background-color: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .table th {
+            font-weight: 500;
+            color: var(--gray-light);
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .status-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+        
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .status-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--gray-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: white;
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab:hover:not(.active) {
+            color: white;
+            border-bottom-color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .form-check-input {
+            margin-right: 10px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .config-section {
+            margin-bottom: 30px;
+        }
+        
+        .config-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #334155;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-weight: 500;
+        }
+        
+        .setting-description {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 4px;
+        }
+        
+        .setting-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .setting-value {
+            margin-right: 10px;
+            font-size: 14px;
+            color: var(--gray-light);
+        }
+        
+        .region-card {
+            background-color: #0f172a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+        }
+        
+        .region-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: rgba(79, 70, 229, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .region-info {
+            flex: 1;
+        }
+        
+        .region-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .region-status {
+            font-size: 12px;
+        }
+        
+        .region-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .backup-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #0f172a;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .backup-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .backup-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .backup-date {
+            font-size: 12px;
+            color: var(--gray-light);
+        }
+        
+        .backup-size {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-top: 3px;
+        }
+        
+        .backup-actions {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            Aideon AI Lite
+            <div class="slogan">Intelligence Everywhere, Limits Nowhere</div>
+        </div>
+        <a href="#" class="nav-item">
+            <span class="nav-number">1</span>
+            Global Dashboard
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">2</span>
+            Cloud Resources
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">3</span>
+            System Health
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">4</span>
+            User Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">5</span>
+            Security & Compliance
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">6</span>
+            API Key Management
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">7</span>
+            Agent Orchestration
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">8</span>
+            Memory Systems
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-number">9</span>
+            Billing & Subscriptions
+        </a>
+        <a href="#" class="nav-item active">
+            <span class="nav-number">10</span>
+            System Configuration
+        </a>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="page-title">System Configuration</div>
+            <div class="user-menu">
+                <div class="badge">SUPER ADMIN</div>
+                <div class="user-avatar">U</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">General Settings</div>
+            <div class="tab">Regional Configuration</div>
+            <div class="tab">Backup & Recovery</div>
+            <div class="tab">Advanced Settings</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">System Settings</div>
+                <div class="card-actions">
+                    <button class="btn btn-outline">Reset to Defaults</button>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">Performance Settings</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Maximum Concurrent Users</div>
+                        <div class="setting-description">Maximum number of concurrent users allowed on the system</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">1,000,000</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Request Timeout</div>
+                        <div class="setting-description">Maximum time in seconds before a request times out</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">30 seconds</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Rate Limiting</div>
+                        <div class="setting-description">Maximum number of requests per minute per user</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">120 requests/min</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Dynamic Resource Allocation</div>
+                        <div class="setting-description">Automatically allocate resources based on demand</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">Memory Configuration</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Maximum Project Duration</div>
+                        <div class="setting-description">Maximum duration for long-term memory preservation</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">10 years</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Memory Compression Ratio</div>
+                        <div class="setting-description">Target compression ratio for memory storage</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">87:1</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Automatic Memory Optimization</div>
+                        <div class="setting-description">Periodically optimize memory storage for efficiency</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Memory Tier Transition</div>
+                        <div class="setting-description">Days before moving data from hot to warm storage</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">30 days</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">Security Settings</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Two-Factor Authentication</div>
+                        <div class="setting-description">Require 2FA for all admin accounts</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Session Timeout</div>
+                        <div class="setting-description">Automatically log out inactive users after specified time</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">30 minutes</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">IP Whitelisting</div>
+                        <div class="setting-description">Restrict admin access to specific IP addresses</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Audit Logging</div>
+                        <div class="setting-description">Log all administrative actions for security review</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Regional Configuration</div>
+            </div>
+            
+            <div class="region-card">
+                <div class="region-icon">NA</div>
+                <div class="region-info">
+                    <div class="region-name">North America (US-East)</div>
+                    <div class="region-status">
+                        <span class="status status-active">Active</span>
+                        <span style="font-size: 12px; color: var(--gray-light); margin-left: 10px;">Primary Region</span>
+                    </div>
+                </div>
+                <div class="region-actions">
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div class="region-card">
+                <div class="region-icon">EU</div>
+                <div class="region-info">
+                    <div class="region-name">Europe (Frankfurt)</div>
+                    <div class="region-status">
+                        <span class="status status-active">Active</span>
+                    </div>
+                </div>
+                <div class="region-actions">
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div class="region-card">
+                <div class="region-icon">AS</div>
+                <div class="region-info">
+                    <div class="region-name">Asia Pacific (Singapore)</div>
+                    <div class="region-status">
+                        <span class="status status-active">Active</span>
+                    </div>
+                </div>
+                <div class="region-actions">
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div class="region-card">
+                <div class="region-icon">AU</div>
+                <div class="region-info">
+                    <div class="region-name">Australia (Sydney)</div>
+                    <div class="region-status">
+                        <span class="status status-active">Active</span>
+                    </div>
+                </div>
+                <div class="region-actions">
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div class="region-card">
+                <div class="region-icon">SA</div>
+                <div class="region-info">
+                    <div class="region-name">South America (São Paulo)</div>
+                    <div class="region-status">
+                        <span class="status status-warning">Maintenance</span>
+                    </div>
+                </div>
+                <div class="region-actions">
+                    <button class="btn btn-outline">Configure</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button class="btn btn-primary">Add New Region</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Backup & Recovery</div>
+                <div class="card-actions">
+                    <button class="btn btn-primary">Create Backup</button>
+                </div>
+            </div>
+            
+            <div>
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <div class="backup-name">Full System Backup</div>
+                        <div class="backup-date">June 8, 2025 - 12:00 AM UTC</div>
+                        <div class="backup-size">47.8 TB</div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="btn btn-outline">Restore</button>
+                        <button class="btn btn-outline">Download</button>
+                        <button class="btn btn-outline">Delete</button>
+                    </div>
+                </div>
+                
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <div class="backup-name">Full System Backup</div>
+                        <div class="backup-date">June 7, 2025 - 12:00 AM UTC</div>
+                        <div class="backup-size">47.2 TB</div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="btn btn-outline">Restore</button>
+                        <button class="btn btn-outline">Download</button>
+                        <button class="btn btn-outline">Delete</button>
+                    </div>
+                </div>
+                
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <div class="backup-name">Full System Backup</div>
+                        <div class="backup-date">June 6, 2025 - 12:00 AM UTC</div>
+                        <div class="backup-size">46.9 TB</div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="btn btn-outline">Restore</button>
+                        <button class="btn btn-outline">Download</button>
+                        <button class="btn btn-outline">Delete</button>
+                    </div>
+                </div>
+                
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <div class="backup-name">Configuration Backup</div>
+                        <div class="backup-date">June 8, 2025 - 6:00 AM UTC</div>
+                        <div class="backup-size">2.4 GB</div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="btn btn-outline">Restore</button>
+                        <button class="btn btn-outline">Download</button>
+                        <button class="btn btn-outline">Delete</button>
+                    </div>
+                </div>
+                
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <div class="backup-name">Database Backup</div>
+                        <div class="backup-date">June 8, 2025 - 6:00 AM UTC</div>
+                        <div class="backup-size">8.7 TB</div>
+                    </div>
+                    <div class="backup-actions">
+                        <button class="btn btn-outline">Restore</button>
+                        <button class="btn btn-outline">Download</button>
+                        <button class="btn btn-outline">Delete</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">Backup Settings</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Automatic Backups</div>
+                        <div class="setting-description">Automatically create system backups on schedule</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Backup Frequency</div>
+                        <div class="setting-description">How often automatic backups are created</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">Daily</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Backup Retention</div>
+                        <div class="setting-description">How long backups are kept before automatic deletion</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">30 days</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Backup Encryption</div>
+                        <div class="setting-description">Encrypt backup data for additional security</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Advanced Settings</div>
+                <div class="card-actions">
+                    <button class="btn btn-danger">Reset System</button>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">System Maintenance</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Maintenance Mode</div>
+                        <div class="setting-description">Temporarily disable user access for maintenance</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Scheduled Maintenance</div>
+                        <div class="setting-description">Automatically enter maintenance mode at specified times</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">Sundays, 2:00 AM UTC</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Database Optimization</div>
+                        <div class="setting-description">Periodically optimize database performance</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Log Rotation</div>
+                        <div class="setting-description">Automatically archive and compress old log files</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="setting-value">7 days</div>
+                        <button class="btn btn-outline">Edit</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <div class="config-section-title">Experimental Features</div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Predictive Scaling</div>
+                        <div class="setting-description">Use AI to predict and prepare for traffic spikes</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Advanced Memory Compression</div>
+                        <div class="setting-description">Use experimental algorithms for higher compression ratios</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Self-Healing Infrastructure</div>
+                        <div class="setting-description">Automatically detect and repair system issues</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Federated Learning</div>
+                        <div class="setting-description">Improve system performance through distributed learning</div>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

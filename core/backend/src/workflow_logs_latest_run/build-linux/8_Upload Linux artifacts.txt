@@ -1,0 +1,53 @@
+2025-06-08T02:03:14.5791277Z ##[group]Run actions/upload-artifact@v4
+2025-06-08T02:03:14.5791604Z with:
+2025-06-08T02:03:14.5791800Z   name: linux-installer
+2025-06-08T02:03:14.5792031Z   path: dist/*.AppImage
+dist/*.deb
+
+2025-06-08T02:03:14.5792294Z   retention-days: 30
+2025-06-08T02:03:14.5792509Z   if-no-files-found: warn
+2025-06-08T02:03:14.5792751Z   compression-level: 6
+2025-06-08T02:03:14.5792957Z   overwrite: false
+2025-06-08T02:03:14.5793159Z   include-hidden-files: false
+2025-06-08T02:03:14.5793377Z env:
+2025-06-08T02:03:14.5793547Z   NODE_VERSION: 18
+2025-06-08T02:03:14.5793738Z   PYTHON_VERSION: 3.11
+2025-06-08T02:03:14.5794228Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T02:03:14.5794753Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T02:03:14.5795165Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T02:03:14.5795539Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T02:03:14.5795909Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T02:03:14.5796321Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T02:03:14.5796625Z ##[endgroup]
+2025-06-08T02:03:14.8139195Z With the provided path, there will be 2 files uploaded
+2025-06-08T02:03:14.8143953Z Artifact name is valid!
+2025-06-08T02:03:14.8146876Z Root directory input is valid!
+2025-06-08T02:03:15.0018806Z Beginning upload of artifact content to blob storage
+2025-06-08T02:03:16.0136169Z Uploaded bytes 8388608
+2025-06-08T02:03:16.1748804Z Uploaded bytes 16777216
+2025-06-08T02:03:16.5011691Z Uploaded bytes 25165824
+2025-06-08T02:03:16.5727786Z Uploaded bytes 33554432
+2025-06-08T02:03:16.7846556Z Uploaded bytes 41943040
+2025-06-08T02:03:17.0843138Z Uploaded bytes 50331648
+2025-06-08T02:03:17.4332038Z Uploaded bytes 58720256
+2025-06-08T02:03:17.6998417Z Uploaded bytes 67108864
+2025-06-08T02:03:18.0430375Z Uploaded bytes 75497472
+2025-06-08T02:03:18.4815016Z Uploaded bytes 83886080
+2025-06-08T02:03:18.7562672Z Uploaded bytes 92274688
+2025-06-08T02:03:19.1431330Z Uploaded bytes 100663296
+2025-06-08T02:03:19.5874401Z Uploaded bytes 109051904
+2025-06-08T02:03:20.0708280Z Uploaded bytes 117440512
+2025-06-08T02:03:20.1458361Z Uploaded bytes 125829120
+2025-06-08T02:03:20.6015640Z Uploaded bytes 134217728
+2025-06-08T02:03:20.8466018Z Uploaded bytes 142606336
+2025-06-08T02:03:21.3022630Z Uploaded bytes 150994944
+2025-06-08T02:03:21.5934609Z Uploaded bytes 159383552
+2025-06-08T02:03:21.7606811Z Uploaded bytes 167772160
+2025-06-08T02:03:22.0286356Z Uploaded bytes 176160768
+2025-06-08T02:03:22.2463856Z Uploaded bytes 184323420
+2025-06-08T02:03:22.2880231Z Finished uploading artifact content to blob storage!
+2025-06-08T02:03:22.2885270Z SHA256 digest of uploaded artifact zip is f45d732fbe45d6e23191cde92bd8e152780f6f302fa44a4be53e2eb3db013caf
+2025-06-08T02:03:22.2890189Z Finalizing artifact upload
+2025-06-08T02:03:22.4618612Z Artifact linux-installer.zip successfully finalized. Artifact ID 3282506710
+2025-06-08T02:03:22.4621471Z Artifact linux-installer has been successfully uploaded! Final size is 184323420 bytes. Artifact ID is 3282506710
+2025-06-08T02:03:22.4629815Z Artifact download URL: https://github.com/AllienNova/ApexAgent/actions/runs/15513789182/artifacts/3282506710

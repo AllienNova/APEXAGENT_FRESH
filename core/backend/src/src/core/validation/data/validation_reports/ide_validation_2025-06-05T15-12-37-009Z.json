@@ -1,0 +1,8 @@
+{
+  "validationId": "0bf3df19-be11-4faf-8b0d-6e568c2632b9",
+  "startTime": 1749136357009,
+  "endTime": 1749136357009,
+  "duration": 0,
+  "error": "Cannot read properties of undefined (reading 'getAllIntegrations')",
+  "success": false
+}

@@ -1,0 +1,45 @@
+2025-06-08T01:40:48.5539970Z Current runner version: '2.325.0'
+2025-06-08T01:40:48.5557040Z ##[group]Operating System
+2025-06-08T01:40:48.5557540Z macOS
+2025-06-08T01:40:48.5557830Z 14.7.6
+2025-06-08T01:40:48.5558120Z 23H626
+2025-06-08T01:40:48.5558420Z ##[endgroup]
+2025-06-08T01:40:48.5558720Z ##[group]Runner Image
+2025-06-08T01:40:48.5559060Z Image: macos-14-arm64
+2025-06-08T01:40:48.5559390Z Version: 20250602.1561
+2025-06-08T01:40:48.5560080Z Included Software: https://github.com/actions/runner-images/blob/macos-14-arm64/20250602.1561/images/macos/macos-14-arm64-Readme.md
+2025-06-08T01:40:48.5561040Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-14-arm64%2F20250602.1561
+2025-06-08T01:40:48.5561630Z ##[endgroup]
+2025-06-08T01:40:48.5561960Z ##[group]Runner Image Provisioner
+2025-06-08T01:40:48.5562360Z 2.0.437.1+b8a73daf41ec39b19236c1d542c9f2348c5b7c2d
+2025-06-08T01:40:48.5562770Z ##[endgroup]
+2025-06-08T01:40:48.5563460Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:40:48.5564390Z Contents: read
+2025-06-08T01:40:48.5564790Z Metadata: read
+2025-06-08T01:40:48.5565110Z Packages: read
+2025-06-08T01:40:48.5565430Z ##[endgroup]
+2025-06-08T01:40:48.5567260Z Secret source: Actions
+2025-06-08T01:40:48.5567650Z Prepare workflow directory
+2025-06-08T01:40:48.5797540Z Prepare all required actions
+2025-06-08T01:40:48.5825510Z Getting action download info
+2025-06-08T01:40:48.7729140Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:40:48.7729770Z Version: 4.2.2
+2025-06-08T01:40:48.7730340Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:40:48.7731040Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:40:48.7731500Z ##[endgroup]
+2025-06-08T01:40:49.0815400Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:40:49.0816120Z Version: 4.4.0
+2025-06-08T01:40:49.0816620Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:40:49.0817430Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:40:49.0818170Z ##[endgroup]
+2025-06-08T01:40:49.2046520Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:40:49.2047090Z Version: 4.9.1
+2025-06-08T01:40:49.2047590Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:40:49.2048240Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:40:49.2048700Z ##[endgroup]
+2025-06-08T01:40:49.7745640Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:40:49.7746210Z Version: 4.6.2
+2025-06-08T01:40:49.7746680Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:40:49.7747300Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:40:49.7747760Z ##[endgroup]
+2025-06-08T01:40:49.9202680Z Complete job name: build-macos

@@ -1,0 +1,190 @@
+<!-- System Resource Dashboard Wireframe -->
+<div class="system-resource-dashboard">
+  <div class="panel-header border-b border-border p-4 flex items-center justify-between">
+    <h2 class="font-semibold">System Resources</h2>
+    <div class="flex items-center space-x-2">
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Refresh">
+        <span class="icon">🔄</span>
+      </button>
+      <div class="text-xs text-muted-foreground">Auto-refresh: 5s</div>
+      <button class="p-1 rounded-md hover:bg-accent text-muted-foreground" title="Options">
+        <span class="icon">⋮</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="panel-content p-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- CPU Usage -->
+      <div class="bg-card border border-border rounded-lg p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-medium">CPU Usage</h3>
+          <span class="text-lg font-bold">32%</span>
+        </div>
+        <div class="h-2 bg-muted rounded-full overflow-hidden mb-2">
+          <div class="h-full bg-blue-500 rounded-full" style="width: 32%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-muted-foreground">
+          <span>ApexAgent: 18%</span>
+          <span>Other processes: 14%</span>
+        </div>
+      </div>
+      
+      <!-- Memory Usage -->
+      <div class="bg-card border border-border rounded-lg p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-medium">Memory Usage</h3>
+          <span class="text-lg font-bold">4.2 GB / 16 GB</span>
+        </div>
+        <div class="h-2 bg-muted rounded-full overflow-hidden mb-2">
+          <div class="h-full bg-purple-500 rounded-full" style="width: 26%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-muted-foreground">
+          <span>ApexAgent: 1.8 GB</span>
+          <span>Available: 11.8 GB</span>
+        </div>
+      </div>
+      
+      <!-- Disk Usage -->
+      <div class="bg-card border border-border rounded-lg p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-medium">Disk Usage</h3>
+          <span class="text-lg font-bold">392 GB / 512 GB</span>
+        </div>
+        <div class="h-2 bg-muted rounded-full overflow-hidden mb-2">
+          <div class="h-full bg-green-500 rounded-full" style="width: 76%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-muted-foreground">
+          <span>ApexAgent: 2.4 GB</span>
+          <span>Free: 120 GB</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-semibold">Resource Usage History</h3>
+        <div class="flex items-center space-x-2">
+          <button class="px-2 py-1 text-xs bg-primary text-primary-foreground rounded-md">1 Hour</button>
+          <button class="px-2 py-1 text-xs hover:bg-accent rounded-md">24 Hours</button>
+          <button class="px-2 py-1 text-xs hover:bg-accent rounded-md">7 Days</button>
+        </div>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg p-4 h-64">
+        <!-- Resource usage graph would be here -->
+        <div class="flex items-center justify-center h-full text-muted-foreground">
+          [CPU, Memory, and Disk usage graph over time]
+        </div>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Active Processes -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-semibold">Active Processes</h3>
+          <button class="text-xs text-primary hover:underline">View All</button>
+        </div>
+        
+        <div class="bg-card border border-border rounded-lg overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-muted/50">
+              <tr>
+                <th class="text-left p-3 font-medium">Process</th>
+                <th class="text-left p-3 font-medium">CPU</th>
+                <th class="text-left p-3 font-medium">Memory</th>
+                <th class="text-left p-3 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-border">
+                <td class="p-3">
+                  <div class="flex items-center">
+                    <span class="icon mr-2">⚙️</span>
+                    <span>ApexAgent Core</span>
+                  </div>
+                </td>
+                <td class="p-3">12%</td>
+                <td class="p-3">1.2 GB</td>
+                <td class="p-3">
+                  <button class="text-xs text-primary hover:underline">Details</button>
+                </td>
+              </tr>
+              <tr class="border-t border-border">
+                <td class="p-3">
+                  <div class="flex items-center">
+                    <span class="icon mr-2">🌐</span>
+                    <span>Web Browser Plugin</span>
+                  </div>
+                </td>
+                <td class="p-3">4%</td>
+                <td class="p-3">380 MB</td>
+                <td class="p-3">
+                  <button class="text-xs text-primary hover:underline">Details</button>
+                </td>
+              </tr>
+              <tr class="border-t border-border">
+                <td class="p-3">
+                  <div class="flex items-center">
+                    <span class="icon mr-2">💻</span>
+                    <span>Python Interpreter</span>
+                  </div>
+                </td>
+                <td class="p-3">2%</td>
+                <td class="p-3">220 MB</td>
+                <td class="p-3">
+                  <button class="text-xs text-primary hover:underline">Details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Storage Analysis -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-semibold">Storage Analysis</h3>
+          <button class="text-xs text-primary hover:underline">Manage Storage</button>
+        </div>
+        
+        <div class="bg-card border border-border rounded-lg p-4">
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">Projects</span>
+              <span class="text-sm font-medium">1.8 GB</span>
+            </div>
+            <div class="h-2 bg-muted rounded-full overflow-hidden">
+              <div class="h-full bg-blue-500 rounded-full" style="width: 75%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">Cache</span>
+              <span class="text-sm font-medium">420 MB</span>
+            </div>
+            <div class="h-2 bg-muted rounded-full overflow-hidden">
+              <div class="h-full bg-amber-500 rounded-full" style="width: 17%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">Plugins</span>
+              <span class="text-sm font-medium">180 MB</span>
+            </div>
+            <div class="h-2 bg-muted rounded-full overflow-hidden">
+              <div class="h-full bg-green-500 rounded-full" style="width: 8%"></div>
+            </div>
+          </div>
+          
+          <div>
+            <button class="w-full text-center text-sm text-primary hover:underline">Clean Up Unused Files</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

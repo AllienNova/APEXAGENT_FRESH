@@ -1,0 +1,466 @@
+2025-06-08T02:00:26.3829210Z Requested labels: windows-latest
+2025-06-08T02:00:26.3829357Z Job defined at: AllienNova/ApexAgent/.github/workflows/build-release.yml@refs/pull/1/merge
+2025-06-08T02:00:26.3829495Z Waiting for a runner to pick up this job...
+2025-06-08T02:00:26.7316092Z Job is waiting for a hosted runner to come online.
+2025-06-08T02:00:30.7073372Z Job is about to start running on the hosted runner: GitHub Actions 175 (hosted)
+2025-06-08T02:00:32.3228189Z Current runner version: '2.325.0'
+2025-06-08T02:00:32.3259910Z ##[group]Runner Image Provisioner
+2025-06-08T02:00:32.3261111Z Hosted Compute Agent
+2025-06-08T02:00:32.3261966Z Version: 20250508.323
+2025-06-08T02:00:32.3262902Z Commit: 81b259f29879f73b4213d199e42d8c3465dae986
+2025-06-08T02:00:32.3263962Z Build Date: 2025-05-08T19:40:08Z
+2025-06-08T02:00:32.3264859Z ##[endgroup]
+2025-06-08T02:00:32.3265611Z ##[group]Operating System
+2025-06-08T02:00:32.3266498Z Microsoft Windows Server 2022
+2025-06-08T02:00:32.3267420Z 10.0.20348
+2025-06-08T02:00:32.3268097Z Datacenter
+2025-06-08T02:00:32.3268793Z ##[endgroup]
+2025-06-08T02:00:32.3269553Z ##[group]Runner Image
+2025-06-08T02:00:32.3270393Z Image: windows-2022
+2025-06-08T02:00:32.3271149Z Version: 20250511.1.0
+2025-06-08T02:00:32.3272855Z Included Software: https://github.com/actions/runner-images/blob/win22/20250511.1/images/windows/Windows2022-Readme.md
+2025-06-08T02:00:32.3275734Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20250511.1
+2025-06-08T02:00:32.3277524Z ##[endgroup]
+2025-06-08T02:00:32.3279302Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T02:00:32.3281617Z Contents: read
+2025-06-08T02:00:32.3282430Z Metadata: read
+2025-06-08T02:00:32.3283240Z Packages: read
+2025-06-08T02:00:32.3283989Z ##[endgroup]
+2025-06-08T02:00:32.3287810Z Secret source: Actions
+2025-06-08T02:00:32.3288860Z Prepare workflow directory
+2025-06-08T02:00:32.3801463Z Prepare all required actions
+2025-06-08T02:00:32.3857464Z Getting action download info
+2025-06-08T02:00:32.5940203Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T02:00:32.5941872Z Version: 4.2.2
+2025-06-08T02:00:32.5943475Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T02:00:32.5945460Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T02:00:32.5946632Z ##[endgroup]
+2025-06-08T02:00:32.8842134Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T02:00:32.8843322Z Version: 4.4.0
+2025-06-08T02:00:32.8844397Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T02:00:32.8845878Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T02:00:32.8846885Z ##[endgroup]
+2025-06-08T02:00:33.2888681Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T02:00:33.2889447Z Version: 4.9.1
+2025-06-08T02:00:33.2890100Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T02:00:33.2891002Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T02:00:33.2891622Z ##[endgroup]
+2025-06-08T02:00:33.7974411Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T02:00:33.7975366Z Version: 4.6.2
+2025-06-08T02:00:33.7976189Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T02:00:33.7977305Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T02:00:33.7978064Z ##[endgroup]
+2025-06-08T02:00:34.5421469Z Complete job name: build-windows
+2025-06-08T02:00:34.7246967Z ##[group]Run git config --system core.longpaths true
+2025-06-08T02:00:34.7248848Z [36;1mgit config --system core.longpaths true[0m
+2025-06-08T02:00:34.7491894Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:00:34.7493545Z env:
+2025-06-08T02:00:34.7494232Z   NODE_VERSION: 18
+2025-06-08T02:00:34.7495001Z   PYTHON_VERSION: 3.11
+2025-06-08T02:00:34.7495802Z ##[endgroup]
+2025-06-08T02:00:41.0008521Z ##[group]Run actions/checkout@v4
+2025-06-08T02:00:41.0008897Z with:
+2025-06-08T02:00:41.0009103Z   fetch-depth: 0
+2025-06-08T02:00:41.0009338Z   repository: AllienNova/ApexAgent
+2025-06-08T02:00:41.0009750Z   token: ***
+2025-06-08T02:00:41.0009964Z   ssh-strict: true
+2025-06-08T02:00:41.0010180Z   ssh-user: git
+2025-06-08T02:00:41.0010399Z   persist-credentials: true
+2025-06-08T02:00:41.0010640Z   clean: true
+2025-06-08T02:00:41.0010852Z   sparse-checkout-cone-mode: true
+2025-06-08T02:00:41.0013016Z   fetch-tags: false
+2025-06-08T02:00:41.0013289Z   show-progress: true
+2025-06-08T02:00:41.0013550Z   lfs: false
+2025-06-08T02:00:41.0013750Z   submodules: false
+2025-06-08T02:00:41.0013971Z   set-safe-directory: true
+2025-06-08T02:00:41.0014236Z env:
+2025-06-08T02:00:41.0014428Z   NODE_VERSION: 18
+2025-06-08T02:00:41.0014637Z   PYTHON_VERSION: 3.11
+2025-06-08T02:00:41.0014844Z ##[endgroup]
+2025-06-08T02:00:41.1755551Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T02:00:41.1759076Z ##[group]Getting Git version info
+2025-06-08T02:00:41.1760394Z Working directory is 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T02:00:41.2788303Z [command]"C:\Program Files\Git\bin\git.exe" version
+2025-06-08T02:00:41.3011297Z git version 2.49.0.windows.1
+2025-06-08T02:00:41.3138240Z ##[endgroup]
+2025-06-08T02:00:41.3158727Z Temporarily overriding HOME='C:\a\_temp\5a305402-b38b-49cb-9e67-e0e2138e0045' before making global git config changes
+2025-06-08T02:00:41.3160233Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T02:00:41.3169004Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\ApexAgent\ApexAgent
+2025-06-08T02:00:41.3369305Z Deleting the contents of 'C:\a\ApexAgent\ApexAgent'
+2025-06-08T02:00:41.3375236Z ##[group]Initializing the repository
+2025-06-08T02:00:41.3385086Z [command]"C:\Program Files\Git\bin\git.exe" init C:\a\ApexAgent\ApexAgent
+2025-06-08T02:00:41.4098394Z Initialized empty Git repository in C:/a/ApexAgent/ApexAgent/.git/
+2025-06-08T02:00:41.4146702Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T02:00:41.4673612Z ##[endgroup]
+2025-06-08T02:00:41.4674503Z ##[group]Disabling automatic garbage collection
+2025-06-08T02:00:41.4684430Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2025-06-08T02:00:41.4928101Z ##[endgroup]
+2025-06-08T02:00:41.4928921Z ##[group]Setting up auth
+2025-06-08T02:00:41.4943053Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T02:00:41.5177795Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-06-08T02:00:42.6681255Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T02:00:42.6921634Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-06-08T02:00:43.1549947Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-06-08T02:00:43.1784948Z ##[endgroup]
+2025-06-08T02:00:43.1785922Z ##[group]Fetching the repository
+2025-06-08T02:00:43.1805609Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +0d5351708dd7a9b47204c61aa9a258a9537cfebb:refs/remotes/pull/1/merge
+2025-06-08T02:00:48.5020282Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T02:00:48.5021601Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T02:00:48.5027450Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T02:00:48.5031089Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T02:00:48.5032274Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T02:00:48.5033524Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T02:00:48.5035734Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T02:00:48.5036631Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T02:00:48.5037604Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T02:00:48.5038800Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T02:00:48.5040290Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T02:00:48.5041193Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T02:00:48.5064643Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T02:00:48.5070875Z  * [new branch]        main                                     -> origin/main
+2025-06-08T02:00:48.5072403Z  * [new branch]        master                                   -> origin/master
+2025-06-08T02:00:48.5097769Z  * [new ref]           0d5351708dd7a9b47204c61aa9a258a9537cfebb -> pull/1/merge
+2025-06-08T02:00:48.5394446Z ##[endgroup]
+2025-06-08T02:00:48.5464946Z ##[group]Determining the checkout info
+2025-06-08T02:00:48.5480720Z ##[endgroup]
+2025-06-08T02:00:48.5487551Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2025-06-08T02:00:48.5900183Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-06-08T02:00:48.6125429Z ##[group]Checking out the ref
+2025-06-08T02:00:48.6138308Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T02:00:50.3508315Z Updating files:   4% (995/24378)
+2025-06-08T02:00:50.6833532Z Updating files:   5% (1219/24378)
+2025-06-08T02:00:51.0447652Z Updating files:   5% (1321/24378)
+2025-06-08T02:00:51.7127706Z Updating files:   6% (1463/24378)
+2025-06-08T02:00:52.0751399Z Updating files:   6% (1596/24378)
+2025-06-08T02:00:52.5809459Z Updating files:   7% (1707/24378)
+2025-06-08T02:00:52.6939749Z Updating files:   8% (1951/24378)
+2025-06-08T02:00:53.7024238Z Updating files:   8% (1979/24378)
+2025-06-08T02:00:53.7536465Z Updating files:   8% (2188/24378)
+2025-06-08T02:00:54.6973454Z Updating files:   9% (2195/24378)
+2025-06-08T02:00:54.7629354Z Updating files:   9% (2425/24378)
+2025-06-08T02:00:55.9536097Z Updating files:  10% (2438/24378)
+2025-06-08T02:00:56.7053804Z Updating files:  10% (2545/24378)
+2025-06-08T02:00:56.9734879Z Updating files:  10% (2623/24378)
+2025-06-08T02:00:58.0723051Z Updating files:  11% (2682/24378)
+2025-06-08T02:00:58.6989331Z Updating files:  11% (2732/24378)
+2025-06-08T02:00:59.0404125Z Updating files:  11% (2852/24378)
+2025-06-08T02:00:59.7101831Z Updating files:  12% (2926/24378)
+2025-06-08T02:01:00.2442626Z Updating files:  12% (3070/24378)
+2025-06-08T02:01:00.7086759Z Updating files:  13% (3170/24378)
+2025-06-08T02:01:01.7447123Z Updating files:  13% (3233/24378)
+2025-06-08T02:01:02.4231896Z Updating files:  13% (3328/24378)
+2025-06-08T02:01:02.9744270Z Updating files:  14% (3413/24378)
+2025-06-08T02:01:03.4754005Z Updating files:  14% (3451/24378)
+2025-06-08T02:01:03.6737219Z Updating files:  15% (3657/24378)
+2025-06-08T02:01:03.7057981Z Updating files:  16% (3901/24378)
+2025-06-08T02:01:04.4528894Z Updating files:  16% (3918/24378)
+2025-06-08T02:01:04.7061506Z Updating files:  17% (4145/24378)
+2025-06-08T02:01:04.9153077Z Updating files:  17% (4312/24378)
+2025-06-08T02:01:05.8811714Z Updating files:  18% (4389/24378)
+2025-06-08T02:01:06.6179529Z Updating files:  18% (4498/24378)
+2025-06-08T02:01:06.7079351Z Updating files:  19% (4632/24378)
+2025-06-08T02:01:07.0802852Z Updating files:  19% (4693/24378)
+2025-06-08T02:01:07.7119195Z Updating files:  20% (4876/24378)
+2025-06-08T02:01:08.0694936Z Updating files:  20% (5037/24378)
+2025-06-08T02:01:09.3954770Z Updating files:  21% (5120/24378)
+2025-06-08T02:01:09.3955632Z Updating files:  21% (5230/24378)
+2025-06-08T02:01:10.3984393Z Updating files:  22% (5364/24378)
+2025-06-08T02:01:10.4340132Z Updating files:  22% (5445/24378)
+2025-06-08T02:01:10.7139553Z Updating files:  23% (5607/24378)
+2025-06-08T02:01:11.0317910Z Updating files:  23% (5736/24378)
+2025-06-08T02:01:11.7154544Z Updating files:  24% (5851/24378)
+2025-06-08T02:01:12.4019089Z Updating files:  24% (6056/24378)
+2025-06-08T02:01:13.1706097Z Updating files:  25% (6095/24378)
+2025-06-08T02:01:13.5537184Z Updating files:  25% (6233/24378)
+2025-06-08T02:01:13.7388524Z Updating files:  26% (6339/24378)
+2025-06-08T02:01:14.8070800Z Updating files:  26% (6409/24378)
+2025-06-08T02:01:15.7405623Z Updating files:  26% (6503/24378)
+2025-06-08T02:01:15.7926958Z Updating files:  26% (6579/24378)
+2025-06-08T02:01:16.7338381Z Updating files:  27% (6583/24378)
+2025-06-08T02:01:17.4845611Z Updating files:  27% (6717/24378)
+2025-06-08T02:01:17.7360712Z Updating files:  28% (6826/24378)
+2025-06-08T02:01:18.0026115Z Updating files:  28% (6877/24378)
+2025-06-08T02:01:18.1852137Z Updating files:  29% (7070/24378)
+2025-06-08T02:01:18.8370599Z Updating files:  30% (7314/24378)
+2025-06-08T02:01:18.8657260Z Updating files:  30% (7505/24378)
+2025-06-08T02:01:18.9991632Z Updating files:  31% (7558/24378)
+2025-06-08T02:01:19.1988871Z Updating files:  32% (7801/24378)
+2025-06-08T02:01:19.4262416Z Updating files:  33% (8045/24378)
+2025-06-08T02:01:19.5360386Z Updating files:  34% (8289/24378)
+2025-06-08T02:01:19.6774610Z Updating files:  35% (8533/24378)
+2025-06-08T02:01:19.7597905Z Updating files:  36% (8777/24378)
+2025-06-08T02:01:20.8416539Z Updating files:  36% (8853/24378)
+2025-06-08T02:01:20.8686467Z Updating files:  36% (9001/24378)
+2025-06-08T02:01:21.7324196Z Updating files:  37% (9020/24378)
+2025-06-08T02:01:22.5815393Z Updating files:  37% (9208/24378)
+2025-06-08T02:01:22.7527208Z Updating files:  38% (9264/24378)
+2025-06-08T02:01:23.1841731Z Updating files:  38% (9292/24378)
+2025-06-08T02:01:23.6217882Z Updating files:  39% (9508/24378)
+2025-06-08T02:01:23.7415917Z Updating files:  40% (9752/24378)
+2025-06-08T02:01:24.1116132Z Updating files:  40% (9810/24378)
+2025-06-08T02:01:24.7372924Z Updating files:  41% (9995/24378)
+2025-06-08T02:01:24.7677419Z Updating files:  41% (10227/24378)
+2025-06-08T02:01:25.1511516Z Updating files:  42% (10239/24378)
+2025-06-08T02:01:25.6319760Z Updating files:  43% (10483/24378)
+2025-06-08T02:01:25.7491446Z Updating files:  44% (10727/24378)
+2025-06-08T02:01:25.9888571Z Updating files:  44% (10802/24378)
+2025-06-08T02:01:26.3373337Z Updating files:  45% (10971/24378)
+2025-06-08T02:01:26.6944968Z Updating files:  46% (11214/24378)
+2025-06-08T02:01:26.7394749Z Updating files:  47% (11458/24378)
+2025-06-08T02:01:27.3849865Z Updating files:  47% (11492/24378)
+2025-06-08T02:01:27.7183925Z Updating files:  48% (11702/24378)
+2025-06-08T02:01:27.7412506Z Updating files:  49% (11946/24378)
+2025-06-08T02:01:28.6879562Z Updating files:  49% (11962/24378)
+2025-06-08T02:01:28.8204934Z Updating files:  50% (12189/24378)
+2025-06-08T02:01:29.7477708Z Updating files:  50% (12227/24378)
+2025-06-08T02:01:29.7657913Z Updating files:  50% (12418/24378)
+2025-06-08T02:01:30.7749677Z Updating files:  51% (12433/24378)
+2025-06-08T02:01:30.9090580Z Updating files:  51% (12611/24378)
+2025-06-08T02:01:31.7568324Z Updating files:  52% (12677/24378)
+2025-06-08T02:01:32.5290230Z Updating files:  52% (12824/24378)
+2025-06-08T02:01:32.7534999Z Updating files:  53% (12921/24378)
+2025-06-08T02:01:32.9586936Z Updating files:  53% (13057/24378)
+2025-06-08T02:01:33.8774387Z Updating files:  54% (13165/24378)
+2025-06-08T02:01:34.1140127Z Updating files:  54% (13346/24378)
+2025-06-08T02:01:34.7841435Z Updating files:  55% (13408/24378)
+2025-06-08T02:01:35.2752707Z Updating files:  55% (13570/24378)
+2025-06-08T02:01:35.7855438Z Updating files:  56% (13652/24378)
+2025-06-08T02:01:36.7960234Z Updating files:  56% (13767/24378)
+2025-06-08T02:01:36.8583332Z Updating files:  56% (13889/24378)
+2025-06-08T02:01:37.7980223Z Updating files:  57% (13896/24378)
+2025-06-08T02:01:38.2055215Z Updating files:  57% (14039/24378)
+2025-06-08T02:01:38.5233537Z Updating files:  58% (14140/24378)
+2025-06-08T02:01:38.7782620Z Updating files:  59% (14384/24378)
+2025-06-08T02:01:38.8631136Z Updating files:  59% (14564/24378)
+2025-06-08T02:01:39.4309232Z Updating files:  60% (14627/24378)
+2025-06-08T02:01:39.7877322Z Updating files:  61% (14871/24378)
+2025-06-08T02:01:40.3668487Z Updating files:  62% (15115/24378)
+2025-06-08T02:01:40.7475817Z Updating files:  63% (15359/24378)
+2025-06-08T02:01:40.7922789Z Updating files:  64% (15602/24378)
+2025-06-08T02:01:41.0478656Z Updating files:  64% (15634/24378)
+2025-06-08T02:01:41.3481494Z Updating files:  65% (15846/24378)
+2025-06-08T02:01:41.6453370Z Updating files:  66% (16090/24378)
+2025-06-08T02:01:41.7912067Z Updating files:  67% (16334/24378)
+2025-06-08T02:01:42.1506292Z Updating files:  67% (16454/24378)
+2025-06-08T02:01:42.4682065Z Updating files:  68% (16578/24378)
+2025-06-08T02:01:42.7827190Z Updating files:  69% (16821/24378)
+2025-06-08T02:01:42.7903222Z Updating files:  70% (17065/24378)
+2025-06-08T02:01:43.1220111Z Updating files:  70% (17068/24378)
+2025-06-08T02:01:43.8107616Z Updating files:  71% (17309/24378)
+2025-06-08T02:01:43.8163557Z Updating files:  71% (17549/24378)
+2025-06-08T02:01:44.1189534Z Updating files:  72% (17553/24378)
+2025-06-08T02:01:44.4284938Z Updating files:  73% (17796/24378)
+2025-06-08T02:01:44.7921373Z Updating files:  74% (18040/24378)
+2025-06-08T02:01:44.8028124Z Updating files:  74% (18276/24378)
+2025-06-08T02:01:45.6802648Z Updating files:  75% (18284/24378)
+2025-06-08T02:01:45.8237604Z Updating files:  76% (18528/24378)
+2025-06-08T02:01:46.7977016Z Updating files:  76% (18547/24378)
+2025-06-08T02:01:47.8097013Z Updating files:  76% (18614/24378)
+2025-06-08T02:01:48.9031027Z Updating files:  76% (18682/24378)
+2025-06-08T02:01:49.0916268Z Updating files:  76% (18757/24378)
+2025-06-08T02:01:49.8152082Z Updating files:  77% (18772/24378)
+2025-06-08T02:01:50.8177046Z Updating files:  77% (18897/24378)
+2025-06-08T02:01:51.0997073Z Updating files:  77% (18981/24378)
+2025-06-08T02:01:51.8263123Z Updating files:  78% (19015/24378)
+2025-06-08T02:01:52.4701783Z Updating files:  78% (19107/24378)
+2025-06-08T02:01:52.8154556Z Updating files:  79% (19259/24378)
+2025-06-08T02:01:54.0832774Z Updating files:  79% (19317/24378)
+2025-06-08T02:01:54.1677136Z Updating files:  79% (19480/24378)
+2025-06-08T02:01:54.6929634Z Updating files:  80% (19503/24378)
+2025-06-08T02:01:54.8173425Z Updating files:  81% (19747/24378)
+2025-06-08T02:01:56.2733502Z Updating files:  81% (19761/24378)
+2025-06-08T02:01:56.2936118Z Updating files:  81% (19976/24378)
+2025-06-08T02:01:56.8203183Z Updating files:  82% (19990/24378)
+2025-06-08T02:01:57.8197945Z Updating files:  82% (20082/24378)
+2025-06-08T02:01:58.0056640Z Updating files:  82% (20174/24378)
+2025-06-08T02:01:58.8296567Z Updating files:  83% (20234/24378)
+2025-06-08T02:01:58.9003845Z Updating files:  83% (20469/24378)
+2025-06-08T02:01:59.8244450Z Updating files:  84% (20478/24378)
+2025-06-08T02:02:00.4867116Z Updating files:  84% (20594/24378)
+2025-06-08T02:02:00.8342334Z Updating files:  85% (20722/24378)
+2025-06-08T02:02:01.6569584Z Updating files:  85% (20787/24378)
+2025-06-08T02:02:01.8315752Z Updating files:  86% (20966/24378)
+2025-06-08T02:02:02.6341126Z Updating files:  86% (21010/24378)
+2025-06-08T02:02:02.8248868Z Updating files:  87% (21209/24378)
+2025-06-08T02:02:03.7209692Z Updating files:  87% (21260/24378)
+2025-06-08T02:02:03.9727637Z Updating files:  88% (21453/24378)
+2025-06-08T02:02:04.6246378Z Updating files:  88% (21512/24378)
+2025-06-08T02:02:04.8341170Z Updating files:  89% (21697/24378)
+2025-06-08T02:02:05.7740447Z Updating files:  89% (21776/24378)
+2025-06-08T02:02:05.8337198Z Updating files:  90% (21941/24378)
+2025-06-08T02:02:06.5290488Z Updating files:  90% (21961/24378)
+2025-06-08T02:02:06.8503446Z Updating files:  91% (22184/24378)
+2025-06-08T02:02:07.2933479Z Updating files:  91% (22216/24378)
+2025-06-08T02:02:07.7892387Z Updating files:  92% (22428/24378)
+2025-06-08T02:02:07.8502788Z Updating files:  93% (22672/24378)
+2025-06-08T02:02:08.3955061Z Updating files:  93% (22695/24378)
+2025-06-08T02:02:08.8521910Z Updating files:  94% (22916/24378)
+2025-06-08T02:02:09.4245276Z Updating files:  94% (23087/24378)
+2025-06-08T02:02:09.8452799Z Updating files:  95% (23160/24378)
+2025-06-08T02:02:10.3225235Z Updating files:  95% (23281/24378)
+2025-06-08T02:02:10.8462375Z Updating files:  96% (23403/24378)
+2025-06-08T02:02:11.3424953Z Updating files:  96% (23494/24378)
+2025-06-08T02:02:11.8506003Z Updating files:  97% (23647/24378)
+2025-06-08T02:02:12.2409551Z Updating files:  97% (23775/24378)
+2025-06-08T02:02:12.8602368Z Updating files:  98% (23891/24378)
+2025-06-08T02:02:13.7232441Z Updating files:  98% (23948/24378)
+2025-06-08T02:02:13.8513800Z Updating files:  99% (24135/24378)
+2025-06-08T02:02:14.3934364Z Updating files:  99% (24171/24378)
+2025-06-08T02:02:14.3935486Z Updating files: 100% (24378/24378)
+2025-06-08T02:02:14.3935897Z Updating files: 100% (24378/24378), done.
+2025-06-08T02:02:14.4419447Z Note: switching to 'refs/remotes/pull/1/merge'.
+2025-06-08T02:02:14.4420097Z 
+2025-06-08T02:02:14.4421384Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-06-08T02:02:14.4423210Z changes and commit them, and you can discard any commits you make in this
+2025-06-08T02:02:14.4424114Z state without impacting any branches by switching back to a branch.
+2025-06-08T02:02:14.4424654Z 
+2025-06-08T02:02:14.4425039Z If you want to create a new branch to retain commits you create, you may
+2025-06-08T02:02:14.4425753Z do so (now or later) by using -c with the switch command. Example:
+2025-06-08T02:02:14.4426240Z 
+2025-06-08T02:02:14.4426494Z   git switch -c <new-branch-name>
+2025-06-08T02:02:14.4426880Z 
+2025-06-08T02:02:14.4427120Z Or undo this operation with:
+2025-06-08T02:02:14.4427471Z 
+2025-06-08T02:02:14.4427678Z   git switch -
+2025-06-08T02:02:14.4427955Z 
+2025-06-08T02:02:14.4428339Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-06-08T02:02:14.4428875Z 
+2025-06-08T02:02:14.4429505Z HEAD is now at 0d535170 Merge 5729a672b7db3ea98e11e7889385aa6c4095a2ef into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T02:02:14.4518573Z ##[endgroup]
+2025-06-08T02:02:14.4781579Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2025-06-08T02:02:14.4980000Z 0d5351708dd7a9b47204c61aa9a258a9537cfebb
+2025-06-08T02:02:14.5350698Z ##[group]Run actions/setup-node@v4
+2025-06-08T02:02:14.5351104Z with:
+2025-06-08T02:02:14.5351310Z   node-version: 18
+2025-06-08T02:02:14.5351535Z   cache: npm
+2025-06-08T02:02:14.5351735Z   always-auth: false
+2025-06-08T02:02:14.5351972Z   check-latest: false
+2025-06-08T02:02:14.5353038Z   token: ***
+2025-06-08T02:02:14.5353387Z env:
+2025-06-08T02:02:14.5353808Z   NODE_VERSION: 18
+2025-06-08T02:02:14.5354180Z   PYTHON_VERSION: 3.11
+2025-06-08T02:02:14.5354527Z ##[endgroup]
+2025-06-08T02:02:14.8659604Z Found in cache @ C:\hostedtoolcache\windows\node\18.20.8\x64
+2025-06-08T02:02:14.8661859Z ##[group]Environment details
+2025-06-08T02:02:18.2480326Z node: v18.20.8
+2025-06-08T02:02:18.2481105Z npm: 10.8.2
+2025-06-08T02:02:18.2481537Z yarn: 1.22.22
+2025-06-08T02:02:18.2482816Z ##[endgroup]
+2025-06-08T02:02:18.3455066Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\18.20.8\x64\npm.cmd config get cache"
+2025-06-08T02:02:18.9587956Z C:\npm\cache
+2025-06-08T02:02:19.2002648Z npm cache is not found
+2025-06-08T02:02:19.2306107Z ##[group]Run actions/setup-python@v4
+2025-06-08T02:02:19.2306446Z with:
+2025-06-08T02:02:19.2306624Z   python-version: 3.11
+2025-06-08T02:02:19.2306819Z   check-latest: false
+2025-06-08T02:02:19.2307145Z   token: ***
+2025-06-08T02:02:19.2307325Z   update-environment: true
+2025-06-08T02:02:19.2307537Z   allow-prereleases: false
+2025-06-08T02:02:19.2307904Z env:
+2025-06-08T02:02:19.2308046Z   NODE_VERSION: 18
+2025-06-08T02:02:19.2308222Z   PYTHON_VERSION: 3.11
+2025-06-08T02:02:19.2308401Z ##[endgroup]
+2025-06-08T02:02:19.4749057Z ##[group]Installed versions
+2025-06-08T02:02:19.4960748Z Successfully set up CPython (3.11.9)
+2025-06-08T02:02:19.4961678Z ##[endgroup]
+2025-06-08T02:02:19.5248739Z ##[group]Run npm ci
+2025-06-08T02:02:19.5249056Z [36;1mnpm ci[0m
+2025-06-08T02:02:19.5320681Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:02:19.5320982Z env:
+2025-06-08T02:02:19.5321156Z   NODE_VERSION: 18
+2025-06-08T02:02:19.5321342Z   PYTHON_VERSION: 3.11
+2025-06-08T02:02:19.5321604Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5322013Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+2025-06-08T02:02:19.5322398Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5322747Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5323108Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:02:19.5323379Z ##[endgroup]
+2025-06-08T02:02:22.0027465Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T02:02:22.0028287Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T02:02:22.0033120Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T02:02:22.0034111Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T02:02:22.0037197Z npm warn EBADENGINE }
+2025-06-08T02:02:54.7926921Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-06-08T02:02:56.7983438Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2025-06-08T02:03:10.3380372Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-06-08T02:03:34.1230156Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-06-08T02:04:41.9561943Z 
+2025-06-08T02:04:41.9564718Z added 751 packages, and audited 752 packages in 2m
+2025-06-08T02:04:41.9565551Z 
+2025-06-08T02:04:41.9566924Z 89 packages are looking for funding
+2025-06-08T02:04:41.9568481Z   run `npm fund` for details
+2025-06-08T02:04:41.9576104Z 
+2025-06-08T02:04:41.9576460Z found 0 vulnerabilities
+2025-06-08T02:04:42.0744493Z ##[group]Run npm run build:win
+2025-06-08T02:04:42.0744835Z [36;1mnpm run build:win[0m
+2025-06-08T02:04:42.0780519Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2025-06-08T02:04:42.0780835Z env:
+2025-06-08T02:04:42.0780982Z   NODE_VERSION: 18
+2025-06-08T02:04:42.0781168Z   PYTHON_VERSION: 3.11
+2025-06-08T02:04:42.0781462Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0782363Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+2025-06-08T02:04:42.0782764Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0783112Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0783466Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+2025-06-08T02:04:42.0784178Z   GH_TOKEN: ***
+2025-06-08T02:04:42.0784364Z ##[endgroup]
+2025-06-08T02:04:42.7536219Z 
+2025-06-08T02:04:42.7536949Z > aideon-ai-lite@1.0.0 build:win
+2025-06-08T02:04:42.7543956Z > npm run package:win
+2025-06-08T02:04:42.7544910Z 
+2025-06-08T02:04:43.1152231Z 
+2025-06-08T02:04:43.1153086Z > aideon-ai-lite@1.0.0 package:win
+2025-06-08T02:04:43.1153952Z > electron-builder --win
+2025-06-08T02:04:43.1174900Z 
+2025-06-08T02:04:44.1765298Z   • electron-builder  version=24.13.3 os=10.0.20348
+2025-06-08T02:04:44.1772291Z   • publishing will be skipped  reason=current build is a part of pull request solution=set env PUBLISH_FOR_PULL_REQUEST to true to force code signing
+2025-06-08T02:04:44.1774919Z There are serious security concerns with PUBLISH_FOR_PULL_REQUEST=true (see the  CircleCI documentation (https://circleci.com/docs/1.0/fork-pr-builds/) for details)
+2025-06-08T02:04:44.1777438Z If you have SSH keys, sensitive env vars or AWS credentials stored in your project settings and untrusted forks can make pull requests against your repo, then this option isn't for you.
+2025-06-08T02:04:44.1841934Z   • loaded configuration  file=package.json ("build" field)
+2025-06-08T02:04:44.5265866Z   • packaging       platform=win32 arch=x64 electron=28.3.3 appOutDir=dist\win-unpacked
+2025-06-08T02:04:44.7275990Z   • downloading     url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-win32-x64.zip size=108 MB parts=4
+2025-06-08T02:04:45.8444030Z   • downloaded      url=https://github.com/electron/electron/releases/download/v28.3.3/electron-v28.3.3-win32-x64.zip duration=1.304s
+2025-06-08T02:04:53.6571376Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z size=5.6 MB parts=1
+2025-06-08T02:04:53.6573501Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z duration=215ms
+2025-06-08T02:04:53.6574799Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:53.6575763Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:53.6577401Z Fatal error: Unable to set icon
+2025-06-08T02:04:53.6579371Z 
+2025-06-08T02:04:53.6586968Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:53.6590494Z                     workingDir=
+2025-06-08T02:04:53.6625036Z   • Above command failed, retrying 3 more times
+2025-06-08T02:04:54.6965716Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:54.6969916Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:54.6971540Z Fatal error: Unable to set icon
+2025-06-08T02:04:54.6978437Z 
+2025-06-08T02:04:54.6985097Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:54.6988774Z                     workingDir=
+2025-06-08T02:04:54.6989717Z   • Above command failed, retrying 2 more times
+2025-06-08T02:04:55.7315100Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:55.7316145Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:55.7318850Z Fatal error: Unable to set icon
+2025-06-08T02:04:55.7321409Z 
+2025-06-08T02:04:55.7326269Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:55.7330664Z                     workingDir=
+2025-06-08T02:04:55.7336829Z   • Above command failed, retrying 1 more times
+2025-06-08T02:04:56.7671400Z   ⨯ cannot execute  cause=exit status 1
+2025-06-08T02:04:56.7672886Z                     errorOut=Reserved header is not 0 or image type is not icon for 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:56.7675168Z Fatal error: Unable to set icon
+2025-06-08T02:04:56.7690634Z 
+2025-06-08T02:04:56.7701808Z                     command='C:\Users\runneradmin\AppData\Local\electron-builder\Cache\winCodeSign\winCodeSign-2.6.0\rcedit-x64.exe' 'C:\a\ApexAgent\ApexAgent\dist\win-unpacked\Aideon AI Lite.exe' --set-version-string FileDescription 'Aideon AI Lite' --set-version-string ProductName 'Aideon AI Lite' --set-version-string LegalCopyright 'Copyright © 2025 Aideon AI' --set-file-version 1.0.0 --set-product-version 1.0.0.0 --set-version-string InternalName 'Aideon AI Lite' --set-version-string OriginalFilename '' --set-version-string CompanyName 'Aideon AI Team' --set-icon 'C:\a\ApexAgent\ApexAgent\assets\icons\win\icon.ico'
+2025-06-08T02:04:56.7706047Z                     workingDir=
+2025-06-08T02:04:56.7706988Z   • Above command failed, retrying 0 more times
+2025-06-08T02:04:56.9379591Z ##[error]Process completed with exit code 1.
+2025-06-08T02:04:56.9651825Z Post job cleanup.
+2025-06-08T02:04:57.2338939Z [command]"C:\Program Files\Git\bin\git.exe" version
+2025-06-08T02:04:57.2609725Z git version 2.49.0.windows.1
+2025-06-08T02:04:57.2698977Z Temporarily overriding HOME='C:\a\_temp\0d221da2-4b92-4cd7-8290-c0d7a8ab0061' before making global git config changes
+2025-06-08T02:04:57.2700521Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T02:04:57.2714199Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\ApexAgent\ApexAgent
+2025-06-08T02:04:57.3008252Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T02:04:57.3253493Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-06-08T02:04:57.8382421Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T02:04:57.8617783Z http.https://github.com/.extraheader
+2025-06-08T02:04:57.8665993Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-06-08T02:04:57.8921857Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-06-08T02:04:58.3768919Z Cleaning up orphan processes

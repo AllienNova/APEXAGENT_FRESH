@@ -1,0 +1,40 @@
+{
+  "name": "CodeAnalysisPlugin",
+  "version": "0.1.0",
+  "description": "Provides tools for code linting, formatting, and complexity analysis.",
+  "author": "ApexAgent Team",
+  "entry_point": "code_analysis_plugin.CodeAnalysisPlugin",
+  "actions": [
+    {
+      "name": "lint_code",
+      "description": "Lints the provided code content using a specified linter.",
+      "parameters": [
+        {"name": "code_content", "type": "string", "required": true, "description": "The source code content to lint."},
+        {"name": "linter", "type": "string", "required": true, "description": "The linter to use (e.g., \"flake8\", \"pylint\")."},
+        {"name": "language", "type": "string", "required": false, "default": "python", "description": "The programming language of the code (e.g., \"python\", \"javascript\"). Helps select appropriate linter behavior."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "issues_found": {"type": "integer"}, "report": {"type": "string"}, "linter_used": {"type": "string"}}}
+    },
+    {
+      "name": "format_code",
+      "description": "Formats the provided code content using a specified formatter.",
+      "parameters": [
+        {"name": "code_content", "type": "string", "required": true, "description": "The source code content to format."},
+        {"name": "formatter", "type": "string", "required": true, "description": "The formatter to use (e.g., \"black\", \"autopep8\", \"prettier\")."},
+        {"name": "language", "type": "string", "required": false, "default": "python", "description": "The programming language of the code."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "formatted_code": {"type": "string"}, "formatter_used": {"type": "string"}, "errors": {"type": "string", "required": false}}}
+    },
+    {
+      "name": "analyze_complexity",
+      "description": "Analyzes the cyclomatic complexity and other metrics of the provided Python code.",
+      "parameters": [
+        {"name": "code_content", "type": "string", "required": true, "description": "The Python source code content to analyze."}
+      ],
+      "returns": {"type": "object", "properties": {"status": {"type": "string"}, "complexity_report": {"type": "object"}, "message": {"type": "string"}}}
+    }
+  ],
+  "required_api_keys": [],
+  "dependencies": ["flake8", "pylint", "black", "autopep8", "radon"] 
+}
+
