@@ -1,0 +1,25 @@
+2025-06-08T02:00:41.0809677Z ##[group]Run actions/setup-node@v4
+2025-06-08T02:00:41.0809961Z with:
+2025-06-08T02:00:41.0810140Z   node-version: 18
+2025-06-08T02:00:41.0810332Z   cache: npm
+2025-06-08T02:00:41.0810517Z   always-auth: false
+2025-06-08T02:00:41.0810719Z   check-latest: false
+2025-06-08T02:00:41.0811036Z   token: ***
+2025-06-08T02:00:41.0811213Z env:
+2025-06-08T02:00:41.0811385Z   NODE_VERSION: 18
+2025-06-08T02:00:41.0811584Z   PYTHON_VERSION: 3.11
+2025-06-08T02:00:41.0811787Z ##[endgroup]
+2025-06-08T02:00:41.2584541Z Found in cache @ /opt/hostedtoolcache/node/18.20.8/x64
+2025-06-08T02:00:41.2590941Z ##[group]Environment details
+2025-06-08T02:00:42.8642644Z node: v18.20.8
+2025-06-08T02:00:42.8643552Z npm: 10.8.2
+2025-06-08T02:00:42.8646225Z yarn: 1.22.22
+2025-06-08T02:00:42.8647589Z ##[endgroup]
+2025-06-08T02:00:42.8671744Z [command]/opt/hostedtoolcache/node/18.20.8/x64/bin/npm config get cache
+2025-06-08T02:00:43.1297301Z /home/runner/.npm
+2025-06-08T02:00:43.2944834Z Cache hit for: node-cache-Linux-x64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621
+2025-06-08T02:00:44.5035108Z Received 77593575 of 77593575 (100.0%), 71.1 MBs/sec
+2025-06-08T02:00:44.5036166Z Cache Size: ~74 MB (77593575 B)
+2025-06-08T02:00:44.5215219Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f493c346-b55d-4fae-8607-f0f3f76e9fdc/cache.tzst -P -C /home/runner/work/ApexAgent/ApexAgent --use-compress-program unzstd
+2025-06-08T02:00:44.7676183Z Cache restored successfully
+2025-06-08T02:00:44.7835493Z Cache restored from key: node-cache-Linux-x64-npm-c6cb0da915ce3cfbe58b0816291a9709583c11ac9c1e082b01e1bb5d530e3621

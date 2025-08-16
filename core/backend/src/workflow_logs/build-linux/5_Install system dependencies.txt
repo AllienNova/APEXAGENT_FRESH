@@ -1,0 +1,62 @@
+2025-06-08T01:41:00.3376888Z ##[group]Run sudo apt-get update
+2025-06-08T01:41:00.3377235Z [36;1msudo apt-get update[0m
+2025-06-08T01:41:00.3377725Z [36;1msudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2 libxkbcommon0 libxss1 libasound2[0m
+2025-06-08T01:41:00.3653202Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:41:00.3653486Z env:
+2025-06-08T01:41:00.3653677Z   NODE_VERSION: 18
+2025-06-08T01:41:00.3653896Z   PYTHON_VERSION: 3.11
+2025-06-08T01:41:00.3654199Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3654669Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:41:00.3655134Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3655539Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3656223Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:41:00.3656631Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:41:00.3656969Z ##[endgroup]
+2025-06-08T01:41:00.5517477Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2025-06-08T01:41:00.6117639Z Get:3 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+2025-06-08T01:41:00.6514443Z Get:4 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2025-06-08T01:41:00.6559724Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2025-06-08T01:41:00.6573109Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2025-06-08T01:41:00.6654491Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2025-06-08T01:41:00.6774370Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2025-06-08T01:41:00.8164191Z Get:8 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [1377 B]
+2025-06-08T01:41:00.8987186Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [33.7 kB]
+2025-06-08T01:41:00.9007942Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [20.9 kB]
+2025-06-08T01:41:00.9040017Z Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [8426 B]
+2025-06-08T01:41:01.0637468Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1113 kB]
+2025-06-08T01:41:01.0964017Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [237 kB]
+2025-06-08T01:41:01.1123978Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [161 kB]
+2025-06-08T01:41:01.1173414Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1078 kB]
+2025-06-08T01:41:01.1407243Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [274 kB]
+2025-06-08T01:41:01.1440974Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [376 kB]
+2025-06-08T01:41:01.1545365Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1172 kB]
+2025-06-08T01:41:01.1706741Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [243 kB]
+2025-06-08T01:41:01.1731485Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+2025-06-08T01:41:01.1762615Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+2025-06-08T01:41:01.2240618Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [39.2 kB]
+2025-06-08T01:41:01.2281320Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7092 B]
+2025-06-08T01:41:01.2372387Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [27.1 kB]
+2025-06-08T01:41:01.2379305Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [16.4 kB]
+2025-06-08T01:41:01.2385271Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+2025-06-08T01:41:01.2391155Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+2025-06-08T01:41:01.2432427Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [864 kB]
+2025-06-08T01:41:01.2565416Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [159 kB]
+2025-06-08T01:41:01.2610963Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.6 kB]
+2025-06-08T01:41:01.2661784Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [846 kB]
+2025-06-08T01:41:01.2764653Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [185 kB]
+2025-06-08T01:41:01.2823233Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.2 kB]
+2025-06-08T01:41:01.2868485Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1138 kB]
+2025-06-08T01:41:01.3014291Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [236 kB]
+2025-06-08T01:41:01.3472302Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+2025-06-08T01:41:01.3485053Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+2025-06-08T01:41:05.8853944Z Fetched 8699 kB in 2s (5347 kB/s)
+2025-06-08T01:41:06.5864757Z Reading package lists...
+2025-06-08T01:41:06.6192714Z Reading package lists...
+2025-06-08T01:41:06.7727363Z Building dependency tree...
+2025-06-08T01:41:06.7735570Z Reading state information...
+2025-06-08T01:41:06.7864218Z Package libasound2 is a virtual package provided by:
+2025-06-08T01:41:06.7865255Z   liboss4-salsa-asound2 4.2-build2020-1ubuntu3
+2025-06-08T01:41:06.7867090Z   libasound2t64 1.2.11-1build2 (= 1.2.11-1build2)
+2025-06-08T01:41:06.7867454Z 
+2025-06-08T01:41:06.7892330Z E: Package 'libasound2' has no installation candidate
+2025-06-08T01:41:06.7925127Z ##[error]Process completed with exit code 100.

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-indigo-800">
+                <div class="flex items-center h-16 px-4 bg-indigo-900">
+                    <span class="text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-white bg-indigo-700 rounded-md">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-key mr-3"></i>
+                            API Keys
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            Monitoring
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-users mr-3"></i>
+                            User Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-puzzle-piece mr-3"></i>
+                            Integrations
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-shield-alt mr-3"></i>
+                            Compliance
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700 rounded-md">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-white shadow">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <button class="md:hidden px-4 text-gray-500 focus:outline-none">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <h1 class="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                </span>
+                                <input class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Search...">
+                            </div>
+                            <div class="ml-4 relative">
+                                <button class="flex items-center text-sm font-medium text-gray-700 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="User avatar">
+                                    <span class="ml-2">Admin User</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Horizontal tabs -->
+                    <div class="mt-2 border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8">
+                            <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                System Overview
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                API Key Management
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Monitoring
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Compliance
+                            </a>
+                            <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                Logs
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <!-- System health overview -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold mb-4">System Health</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                                    <i class="fas fa-server text-green-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">System Uptime</h3>
+                                    <p class="text-2xl font-semibold">99.99%</p>
+                                    <p class="text-sm text-gray-500">Last 30 days</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
+                                    <i class="fas fa-tachometer-alt text-blue-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Avg Response Time</h3>
+                                    <p class="text-2xl font-semibold">1.2s</p>
+                                    <p class="text-sm text-gray-500">Last 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-purple-500">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-purple-100 rounded-full p-3">
+                                    <i class="fas fa-plug text-purple-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Active Integrations</h3>
+                                    <p class="text-2xl font-semibold">124</p>
+                                    <p class="text-sm text-gray-500">Of 150 available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-yellow-100 rounded-full p-3">
+                                    <i class="fas fa-shield-alt text-yellow-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Compliance Status</h3>
+                                    <p class="text-2xl font-semibold">3/3</p>
+                                    <p class="text-sm text-gray-500">SOC2, HIPAA, GDPR</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Key Management -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">API Key Management</h2>
+                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                            <i class="fas fa-plus mr-2"></i> Add New Key
+                        </button>
+                    </div>
+                    <div class="bg-white shadow overflow-hidden rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Provider
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Key Type
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Usage
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Last Rotated
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 rounded-full">
+                                                <i class="fab fa-openai text-blue-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">OpenAI</div>
+                                                <div class="text-sm text-gray-500">GPT-4 & DALL-E</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">System Default</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">65% of quota</div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        14 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3">Rotate</button>
+                                        <button class="text-red-600 hover:text-red-900">Revoke</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-purple-100 rounded-full">
+                                                <i class="fab fa-google text-purple-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Google AI</div>
+                                                <div class="text-sm text-gray-500">Gemini Pro</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">System Default</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">42% of quota</div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-purple-600 h-2.5 rounded-full" style="width: 42%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        7 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3">Rotate</button>
+                                        <button class="text-red-600 hover:text-red-900">Revoke</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-green-100 rounded-full">
+                                                <i class="fas fa-database text-green-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Anthropic</div>
+                                                <div class="text-sm text-gray-500">Claude 3</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">User Provided</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Expiring Soon
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">78% of quota</div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        28 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3">Rotate</button>
+                                        <button class="text-red-600 hover:text-red-900">Revoke</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Real-time Monitoring -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold mb-4">Real-time System Monitoring</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow p-4">
+                            <h3 class="text-md font-medium mb-4">Response Time (ms)</h3>
+                            <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <!-- Placeholder for chart -->
+                                <div class="text-center">
+                                    <i class="fas fa-chart-line text-5xl text-indigo-300 mb-2"></i>
+                                    <p class="text-gray-500">Response Time Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4">
+                            <h3 class="text-md font-medium mb-4">Error Rate (%)</h3>
+                            <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <!-- Placeholder for chart -->
+                                <div class="text-center">
+                                    <i class="fas fa-chart-bar text-5xl text-indigo-300 mb-2"></i>
+                                    <p class="text-gray-500">Error Rate Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Dashboard -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">Compliance Status</h2>
+                    <div class="bg-white shadow overflow-hidden rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Standard
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Last Audit
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Next Audit
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 rounded-full">
+                                                <i class="fas fa-shield-alt text-blue-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">SOC2 Type II</div>
+                                                <div class="text-sm text-gray-500">Security & Availability</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Compliant
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        March 15, 2025
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        March 15, 2026
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900">View Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-red-100 rounded-full">
+                                                <i class="fas fa-heartbeat text-red-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">HIPAA</div>
+                                                <div class="text-sm text-gray-500">Health Information Privacy</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Compliant
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        April 10, 2025
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        April 10, 2026
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900">View Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-green-100 rounded-full">
+                                                <i class="fas fa-lock text-green-600"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">GDPR</div>
+                                                <div class="text-sm text-gray-500">Data Protection</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Compliant
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        May 25, 2025
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        May 25, 2026
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900">View Report</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

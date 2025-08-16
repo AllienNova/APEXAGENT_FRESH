@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon AI Lite - Enterprise Admin Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bg-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7e22ce 100%);
+        }
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-gray-800">
+                <div class="flex items-center h-16 px-4 bg-gray-900 border-b border-gray-700">
+                    <span class="text-xl font-bold text-white">Aideon AI Lite</span>
+                </div>
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <div class="px-4 py-2 bg-gray-700">
+                        <p class="text-sm text-gray-400 italic">Intelligence Everywhere, Limits Nowhere</p>
+                    </div>
+                    <nav class="flex-1 px-2 py-4 space-y-1">
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-white bg-indigo-600">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            Global Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-cloud mr-3"></i>
+                            Cloud Resources
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-heartbeat mr-3"></i>
+                            System Health
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-users-cog mr-3"></i>
+                            User Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-shield-alt mr-3"></i>
+                            Security & Compliance
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-key mr-3"></i>
+                            API Key Management
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-robot mr-3"></i>
+                            Agent Orchestration
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-memory mr-3"></i>
+                            Memory Systems
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-file-invoice-dollar mr-3"></i>
+                            Billing & Subscriptions
+                        </a>
+                        <a href="#" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <i class="fas fa-cogs mr-3"></i>
+                            System Configuration
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <header class="bg-gray-800 shadow-md border-b border-gray-700">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <h1 class="text-xl font-semibold text-white">Enterprise Admin Control</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-600 text-white">
+                                SUPER ADMIN
+                            </span>
+                            <button class="p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <div class="relative">
+                                <button class="flex items-center text-sm font-medium text-gray-300 focus:outline-none">
+                                    <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150/FFFFFF/808080?Text=Admin" alt="Admin avatar" />
+                                    <span class="ml-2 hidden md:inline">Admin User</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-900">
+                <!-- Global Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                <i class="fas fa-users text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Total Users</p>
+                                <p class="text-2xl font-bold text-white">12,345,678</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                                <i class="fas fa-server text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Active Servers</p>
+                                <p class="text-2xl font-bold text-white">1,520</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
+                                <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Critical Alerts</p>
+                                <p class="text-2xl font-bold text-white">3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-red-500 rounded-md p-3">
+                                <i class="fas fa-shield-virus text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-400">Threats Detected (24h)</p>
+                                <p class="text-2xl font-bold text-white">17</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Health & Cloud Resources -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">System Uptime & Performance</h3>
+                        <div class="h-64">
+                            <canvas id="systemUptimeChart"></canvas>
+                        </div>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <p class="text-sm text-gray-400">Avg Response Time</p>
+                                <p class="text-xl font-bold text-green-400">1.2s</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">99th Percentile</p>
+                                <p class="text-xl font-bold text-yellow-400">3.5s</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Error Rate</p>
+                                <p class="text-xl font-bold text-red-400">0.02%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-white mb-4">Cloud Resource Distribution (5 Regions)</h3>
+                        <div class="h-64">
+                            <canvas id="cloudResourceChart"></canvas>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-400">Total CPU Cores</p>
+                                <p class="text-xl font-bold text-white">128,000</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Total Memory</p>
+                                <p class="text-xl font-bold text-white">512 TB</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Total Storage</p>
+                                <p class="text-xl font-bold text-white">25 PB</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Network Egress (24h)</p>
+                                <p class="text-xl font-bold text-white">1.2 PB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictive Failure & Self-Healing -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <h3 class="text-lg font-semibold text-white mb-4">Predictive Failure Detection & Self-Healing</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-700 p-4 rounded-md">
+                            <p class="text-sm text-gray-400">Potential Failures Identified</p>
+                            <p class="text-2xl font-bold text-yellow-400">8</p>
+                            <p class="text-xs text-gray-500">In next 7 days</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-md">
+                            <p class="text-sm text-gray-400">Automated Mitigations</p>
+                            <p class="text-2xl font-bold text-green-400">5</p>
+                            <p class="text-xs text-gray-500">Successfully applied</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-md">
+                            <p class="text-sm text-gray-400">Manual Intervention Required</p>
+                            <p class="text-2xl font-bold text-red-400">3</p>
+                            <p class="text-xs text-gray-500">See alerts for details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Activity & Growth -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                    <h3 class="text-lg font-semibold text-white mb-4">User Activity & Growth (Last 30 Days)</h3>
+                    <div class="h-72">
+                        <canvas id="userActivityChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i> Deploy Update
+                        </button>
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools mr-2"></i> Run Diagnostics
+                        </button>
+                        <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-power-off mr-2"></i> Initiate System Halt
+                        </button>
+                        <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-file-alt mr-2"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for charts
+        const systemUptimeData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'System Uptime (%)',
+                data: [99.98, 99.99, 100, 99.97, 99.99, 100, 99.99],
+                borderColor: 'rgba(79, 70, 229, 1)',
+                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                tension: 0.4,
+                fill: true
+            }]
+        };
+        const cloudResourceData = {
+            labels: ['US-East', 'US-West', 'EU-Central', 'Asia-Pacific', 'South America'],
+            datasets: [{
+                label: 'Active Servers',
+                data: [450, 380, 320, 250, 120],
+                backgroundColor: [
+                    'rgba(79, 70, 229, 0.7)',
+                    'rgba(52, 211, 153, 0.7)',
+                    'rgba(234, 179, 8, 0.7)',
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(168, 85, 247, 0.7)'
+                ]
+            }]
+        };
+        const userActivityData = {
+            labels: Array.from({length: 30}, (_, i) => `Day ${i + 1}`),
+            datasets: [
+                {
+                    label: 'New Users',
+                    data: Array.from({length: 30}, () => Math.floor(Math.random() * 50000 + 100000)),
+                    borderColor: 'rgba(79, 70, 229, 1)',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Active Users',
+                    data: Array.from({length: 30}, () => Math.floor(Math.random() * 1000000 + 8000000)),
+                    borderColor: 'rgba(52, 211, 153, 1)',
+                    tension: 0.3,
+                    fill: false
+                }
+            ]
+        };
+
+        // Chart configurations
+        const uptimeConfig = {
+            type: 'line',
+            data: systemUptimeData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: false, min: 99.9, suggestedMax: 100, ticks: { color: '#9CA3AF' } }, x: { ticks: { color: '#9CA3AF' } } },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+        const resourceConfig = {
+            type: 'doughnut',
+            data: cloudResourceData,
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#D1D5DB' } } } }
+        };
+        const activityConfig = {
+            type: 'line',
+            data: userActivityData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, ticks: { color: '#9CA3AF' } }, x: { ticks: { color: '#9CA3AF', autoSkip: true, maxTicksLimit: 10 } } },
+                plugins: { legend: { labels: { color: '#D1D5DB' } } }
+            }
+        };
+
+        // Render charts
+        window.onload = function() {
+            new Chart(document.getElementById('systemUptimeChart'), uptimeConfig);
+            new Chart(document.getElementById('cloudResourceChart'), resourceConfig);
+            new Chart(document.getElementById('userActivityChart'), activityConfig);
+        };
+    </script>
+</body>
+</html>

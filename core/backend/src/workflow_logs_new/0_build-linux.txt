@@ -1,0 +1,591 @@
+2025-06-08T01:45:30.6980279Z Requested labels: ubuntu-latest
+2025-06-08T01:45:30.6980505Z Job defined at: AllienNova/ApexAgent/.github/workflows/build-release.yml@refs/pull/1/merge
+2025-06-08T01:45:30.6980591Z Waiting for a runner to pick up this job...
+2025-06-08T01:45:31.1150695Z Job is waiting for a hosted runner to come online.
+2025-06-08T01:45:36.1172890Z Job is about to start running on the hosted runner: GitHub Actions 168 (hosted)
+2025-06-08T01:45:38.0922083Z Current runner version: '2.325.0'
+2025-06-08T01:45:38.0947462Z ##[group]Runner Image Provisioner
+2025-06-08T01:45:38.0948402Z Hosted Compute Agent
+2025-06-08T01:45:38.0949058Z Version: 20250508.323
+2025-06-08T01:45:38.0949815Z Commit: 81b259f29879f73b4213d199e42d8c3465dae986
+2025-06-08T01:45:38.0950815Z Build Date: 2025-05-08T19:40:08Z
+2025-06-08T01:45:38.0951554Z ##[endgroup]
+2025-06-08T01:45:38.0952180Z ##[group]Operating System
+2025-06-08T01:45:38.0952881Z Ubuntu
+2025-06-08T01:45:38.0953457Z 24.04.2
+2025-06-08T01:45:38.0954062Z LTS
+2025-06-08T01:45:38.0954614Z ##[endgroup]
+2025-06-08T01:45:38.0955200Z ##[group]Runner Image
+2025-06-08T01:45:38.0955912Z Image: ubuntu-24.04
+2025-06-08T01:45:38.0956531Z Version: 20250511.1.0
+2025-06-08T01:45:38.0957714Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250511.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-06-08T01:45:38.0959539Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250511.1
+2025-06-08T01:45:38.0960962Z ##[endgroup]
+2025-06-08T01:45:38.0962241Z ##[group]GITHUB_TOKEN Permissions
+2025-06-08T01:45:38.0964171Z Contents: read
+2025-06-08T01:45:38.0964940Z Metadata: read
+2025-06-08T01:45:38.0965588Z Packages: read
+2025-06-08T01:45:38.0966226Z ##[endgroup]
+2025-06-08T01:45:38.0969189Z Secret source: Actions
+2025-06-08T01:45:38.0970314Z Prepare workflow directory
+2025-06-08T01:45:38.1341974Z Prepare all required actions
+2025-06-08T01:45:38.1378207Z Getting action download info
+2025-06-08T01:45:38.3441993Z ##[group]Download immutable action package 'actions/checkout@v4'
+2025-06-08T01:45:38.3442950Z Version: 4.2.2
+2025-06-08T01:45:38.3443859Z Digest: sha256:ccb2698953eaebd21c7bf6268a94f9c26518a7e38e27e0b83c1fe1ad049819b1
+2025-06-08T01:45:38.3444972Z Source commit SHA: 11bd71901bbe5b1630ceea73d27597364c9af683
+2025-06-08T01:45:38.3445659Z ##[endgroup]
+2025-06-08T01:45:38.4129834Z ##[group]Download immutable action package 'actions/setup-node@v4'
+2025-06-08T01:45:38.4130917Z Version: 4.4.0
+2025-06-08T01:45:38.4131632Z Digest: sha256:9427cefe82346e992fb5b949e3569b39d537ae41aa3086483b14eceebfc16bc1
+2025-06-08T01:45:38.4132567Z Source commit SHA: 49933ea5288caeca8642d1e84afbd3f7d6820020
+2025-06-08T01:45:38.4133233Z ##[endgroup]
+2025-06-08T01:45:38.5571243Z ##[group]Download immutable action package 'actions/setup-python@v4'
+2025-06-08T01:45:38.5572035Z Version: 4.9.1
+2025-06-08T01:45:38.5572734Z Digest: sha256:f03e505388af670b5a108629e0ba26befc08d5c62b41f46146a45fe29ae509a5
+2025-06-08T01:45:38.5573659Z Source commit SHA: 7f4fc3e22c37d6ff65e88745f38bd3157c663f7c
+2025-06-08T01:45:38.5574333Z ##[endgroup]
+2025-06-08T01:45:38.7969260Z ##[group]Download immutable action package 'actions/upload-artifact@v4'
+2025-06-08T01:45:38.7970331Z Version: 4.6.2
+2025-06-08T01:45:38.7971052Z Digest: sha256:290722aa3281d5caf23d0acdc3dbeb3424786a1a01a9cc97e72f147225e37c38
+2025-06-08T01:45:38.7971987Z Source commit SHA: ea165f8d65b6e75b540449e92b4886f43607fa02
+2025-06-08T01:45:38.7972641Z ##[endgroup]
+2025-06-08T01:45:38.9974059Z Complete job name: build-linux
+2025-06-08T01:45:39.0811652Z ##[group]Run actions/checkout@v4
+2025-06-08T01:45:39.0813178Z with:
+2025-06-08T01:45:39.0813952Z   fetch-depth: 0
+2025-06-08T01:45:39.0814766Z   repository: AllienNova/ApexAgent
+2025-06-08T01:45:39.0815995Z   token: ***
+2025-06-08T01:45:39.0816776Z   ssh-strict: true
+2025-06-08T01:45:39.0817624Z   ssh-user: git
+2025-06-08T01:45:39.0818469Z   persist-credentials: true
+2025-06-08T01:45:39.0819400Z   clean: true
+2025-06-08T01:45:39.0820468Z   sparse-checkout-cone-mode: true
+2025-06-08T01:45:39.0821525Z   fetch-tags: false
+2025-06-08T01:45:39.0822357Z   show-progress: true
+2025-06-08T01:45:39.0823192Z   lfs: false
+2025-06-08T01:45:39.0823944Z   submodules: false
+2025-06-08T01:45:39.0824796Z   set-safe-directory: true
+2025-06-08T01:45:39.0826047Z env:
+2025-06-08T01:45:39.0826811Z   NODE_VERSION: 18
+2025-06-08T01:45:39.0827627Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:39.0828446Z ##[endgroup]
+2025-06-08T01:45:39.2528368Z Syncing repository: AllienNova/ApexAgent
+2025-06-08T01:45:39.2531656Z ##[group]Getting Git version info
+2025-06-08T01:45:39.2532958Z Working directory is '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:39.2534847Z [command]/usr/bin/git version
+2025-06-08T01:45:39.2573692Z git version 2.49.0
+2025-06-08T01:45:39.2577753Z ##[endgroup]
+2025-06-08T01:45:39.2588605Z Temporarily overriding HOME='/home/runner/work/_temp/b8cc8d0b-ebf2-4a19-b878-b6df922b934f' before making global git config changes
+2025-06-08T01:45:39.2595746Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:45:39.2597919Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:39.2645178Z Deleting the contents of '/home/runner/work/ApexAgent/ApexAgent'
+2025-06-08T01:45:39.2649692Z ##[group]Initializing the repository
+2025-06-08T01:45:39.2655258Z [command]/usr/bin/git init /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:45:39.2761308Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-06-08T01:45:39.2764343Z hint: is subject to change. To configure the initial branch name to use in all
+2025-06-08T01:45:39.2766575Z hint: of your new repositories, which will suppress this warning, call:
+2025-06-08T01:45:39.2768285Z hint:
+2025-06-08T01:45:39.2769241Z hint: 	git config --global init.defaultBranch <name>
+2025-06-08T01:45:39.2770440Z hint:
+2025-06-08T01:45:39.2771444Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-06-08T01:45:39.2773109Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-06-08T01:45:39.2774399Z hint:
+2025-06-08T01:45:39.2775083Z hint: 	git branch -m <name>
+2025-06-08T01:45:39.2776324Z Initialized empty Git repository in /home/runner/work/ApexAgent/ApexAgent/.git/
+2025-06-08T01:45:39.2781339Z [command]/usr/bin/git remote add origin https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:39.2812088Z ##[endgroup]
+2025-06-08T01:45:39.2814598Z ##[group]Disabling automatic garbage collection
+2025-06-08T01:45:39.2816534Z [command]/usr/bin/git config --local gc.auto 0
+2025-06-08T01:45:39.2851468Z ##[endgroup]
+2025-06-08T01:45:39.2852859Z ##[group]Setting up auth
+2025-06-08T01:45:39.2882543Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:45:39.2899628Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:45:39.3183195Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:45:39.3215069Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:45:39.3443556Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-06-08T01:45:39.3485670Z ##[endgroup]
+2025-06-08T01:45:39.3488452Z ##[group]Fetching the repository
+2025-06-08T01:45:39.3496693Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6bc44e2bef6c601be80ba6cdc5bd9974091c084e:refs/remotes/pull/1/merge
+2025-06-08T01:45:42.8776168Z From https://github.com/AllienNova/ApexAgent
+2025-06-08T01:45:42.8778725Z  * [new branch]        cicd-pipeline                            -> origin/cicd-pipeline
+2025-06-08T01:45:42.8788408Z  * [new branch]        cicd-pipeline-synced                     -> origin/cicd-pipeline-synced
+2025-06-08T01:45:42.8789725Z  * [new branch]        dr-tardis-architecture                   -> origin/dr-tardis-architecture
+2025-06-08T01:45:42.8791286Z  * [new branch]        dr-tardis-context-management             -> origin/dr-tardis-context-management
+2025-06-08T01:45:42.8792784Z  * [new branch]        dr-tardis-conversation-handling          -> origin/dr-tardis-conversation-handling
+2025-06-08T01:45:42.8794480Z  * [new branch]        dr-tardis-core-agent                     -> origin/dr-tardis-core-agent
+2025-06-08T01:45:42.8809805Z  * [new branch]        dr-tardis-kb                             -> origin/dr-tardis-kb
+2025-06-08T01:45:42.8811300Z  * [new branch]        dr-tardis-knowledge-retrieval            -> origin/dr-tardis-knowledge-retrieval
+2025-06-08T01:45:42.8812772Z  * [new branch]        dr-tardis-multi-agent-orchestration      -> origin/dr-tardis-multi-agent-orchestration
+2025-06-08T01:45:42.8814060Z  * [new branch]        dr-tardis-research                       -> origin/dr-tardis-research
+2025-06-08T01:45:42.8815220Z  * [new branch]        gemini-live-voice-audio                  -> origin/gemini-live-voice-audio
+2025-06-08T01:45:42.8816210Z  * [new branch]        integration-branch                       -> origin/integration-branch
+2025-06-08T01:45:42.8817188Z  * [new branch]        main                                     -> origin/main
+2025-06-08T01:45:42.8818197Z  * [new branch]        master                                   -> origin/master
+2025-06-08T01:45:42.8819381Z  * [new ref]           6bc44e2bef6c601be80ba6cdc5bd9974091c084e -> pull/1/merge
+2025-06-08T01:45:42.9019419Z ##[endgroup]
+2025-06-08T01:45:42.9020590Z ##[group]Determining the checkout info
+2025-06-08T01:45:42.9021593Z ##[endgroup]
+2025-06-08T01:45:42.9028848Z [command]/usr/bin/git sparse-checkout disable
+2025-06-08T01:45:42.9075061Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-06-08T01:45:42.9116130Z ##[group]Checking out the ref
+2025-06-08T01:45:42.9123758Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2025-06-08T01:45:43.9390969Z Updating files:  62% (15322/24378)
+2025-06-08T01:45:43.9537190Z Updating files:  63% (15359/24378)
+2025-06-08T01:45:43.9650572Z Updating files:  64% (15602/24378)
+2025-06-08T01:45:43.9759455Z Updating files:  65% (15846/24378)
+2025-06-08T01:45:43.9865624Z Updating files:  66% (16090/24378)
+2025-06-08T01:45:44.0004425Z Updating files:  67% (16334/24378)
+2025-06-08T01:45:44.0125689Z Updating files:  68% (16578/24378)
+2025-06-08T01:45:44.0256142Z Updating files:  69% (16821/24378)
+2025-06-08T01:45:44.0359034Z Updating files:  70% (17065/24378)
+2025-06-08T01:45:44.0462537Z Updating files:  71% (17309/24378)
+2025-06-08T01:45:44.0570215Z Updating files:  72% (17553/24378)
+2025-06-08T01:45:44.0684561Z Updating files:  73% (17796/24378)
+2025-06-08T01:45:44.0786152Z Updating files:  74% (18040/24378)
+2025-06-08T01:45:44.1125411Z Updating files:  75% (18284/24378)
+2025-06-08T01:45:44.1201555Z Updating files:  76% (18528/24378)
+2025-06-08T01:45:44.1334501Z Updating files:  77% (18772/24378)
+2025-06-08T01:45:44.1525845Z Updating files:  78% (19015/24378)
+2025-06-08T01:45:44.1811006Z Updating files:  79% (19259/24378)
+2025-06-08T01:45:44.2011399Z Updating files:  80% (19503/24378)
+2025-06-08T01:45:44.2118128Z Updating files:  81% (19747/24378)
+2025-06-08T01:45:44.2289398Z Updating files:  82% (19990/24378)
+2025-06-08T01:45:44.2499006Z Updating files:  83% (20234/24378)
+2025-06-08T01:45:44.2712073Z Updating files:  84% (20478/24378)
+2025-06-08T01:45:44.2859326Z Updating files:  85% (20722/24378)
+2025-06-08T01:45:44.3109814Z Updating files:  86% (20966/24378)
+2025-06-08T01:45:44.3368896Z Updating files:  87% (21209/24378)
+2025-06-08T01:45:44.4042635Z Updating files:  88% (21453/24378)
+2025-06-08T01:45:44.4135071Z Updating files:  89% (21697/24378)
+2025-06-08T01:45:44.4316720Z Updating files:  90% (21941/24378)
+2025-06-08T01:45:44.4420130Z Updating files:  91% (22184/24378)
+2025-06-08T01:45:44.4550577Z Updating files:  92% (22428/24378)
+2025-06-08T01:45:44.4680567Z Updating files:  93% (22672/24378)
+2025-06-08T01:45:44.4860747Z Updating files:  94% (22916/24378)
+2025-06-08T01:45:44.5099449Z Updating files:  95% (23160/24378)
+2025-06-08T01:45:44.5278107Z Updating files:  96% (23403/24378)
+2025-06-08T01:45:44.5518426Z Updating files:  97% (23647/24378)
+2025-06-08T01:45:44.5751678Z Updating files:  98% (23891/24378)
+2025-06-08T01:45:44.6076030Z Updating files:  99% (24135/24378)
+2025-06-08T01:45:44.6082770Z Updating files: 100% (24378/24378)
+2025-06-08T01:45:44.6083235Z Updating files: 100% (24378/24378), done.
+2025-06-08T01:45:44.6382917Z Note: switching to 'refs/remotes/pull/1/merge'.
+2025-06-08T01:45:44.6384680Z 
+2025-06-08T01:45:44.6385264Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-06-08T01:45:44.6386315Z changes and commit them, and you can discard any commits you make in this
+2025-06-08T01:45:44.6387270Z state without impacting any branches by switching back to a branch.
+2025-06-08T01:45:44.6387914Z 
+2025-06-08T01:45:44.6388487Z If you want to create a new branch to retain commits you create, you may
+2025-06-08T01:45:44.6389358Z do so (now or later) by using -c with the switch command. Example:
+2025-06-08T01:45:44.6390217Z 
+2025-06-08T01:45:44.6390582Z   git switch -c <new-branch-name>
+2025-06-08T01:45:44.6391077Z 
+2025-06-08T01:45:44.6391397Z Or undo this operation with:
+2025-06-08T01:45:44.6391927Z 
+2025-06-08T01:45:44.6396041Z   git switch -
+2025-06-08T01:45:44.6396254Z 
+2025-06-08T01:45:44.6396596Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-06-08T01:45:44.6397112Z 
+2025-06-08T01:45:44.6397683Z HEAD is now at 6bc44e2b Merge 81743423c8dbf9d3e86a0d8ef2367c46fd8459ab into 6a3ec63168d17ca96c8982c803d63dde5874e09e
+2025-06-08T01:45:44.6459547Z ##[endgroup]
+2025-06-08T01:45:44.6517806Z [command]/usr/bin/git log -1 --format=%H
+2025-06-08T01:45:44.6541555Z 6bc44e2bef6c601be80ba6cdc5bd9974091c084e
+2025-06-08T01:45:44.6765699Z ##[group]Run actions/setup-node@v4
+2025-06-08T01:45:44.6765984Z with:
+2025-06-08T01:45:44.6766173Z   node-version: 18
+2025-06-08T01:45:44.6766374Z   cache: npm
+2025-06-08T01:45:44.6766564Z   always-auth: false
+2025-06-08T01:45:44.6766764Z   check-latest: false
+2025-06-08T01:45:44.6767095Z   token: ***
+2025-06-08T01:45:44.6767284Z env:
+2025-06-08T01:45:44.6767457Z   NODE_VERSION: 18
+2025-06-08T01:45:44.6767656Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:44.6767871Z ##[endgroup]
+2025-06-08T01:45:44.8554465Z Found in cache @ /opt/hostedtoolcache/node/18.20.8/x64
+2025-06-08T01:45:44.8558410Z ##[group]Environment details
+2025-06-08T01:45:46.7770462Z node: v18.20.8
+2025-06-08T01:45:46.7771716Z npm: 10.8.2
+2025-06-08T01:45:46.7772304Z yarn: 1.22.22
+2025-06-08T01:45:46.7774772Z ##[endgroup]
+2025-06-08T01:45:46.7798609Z [command]/opt/hostedtoolcache/node/18.20.8/x64/bin/npm config get cache
+2025-06-08T01:45:47.0484731Z /home/runner/.npm
+2025-06-08T01:45:47.1319796Z npm cache is not found
+2025-06-08T01:45:47.1493284Z ##[group]Run actions/setup-python@v4
+2025-06-08T01:45:47.1493574Z with:
+2025-06-08T01:45:47.1493767Z   python-version: 3.11
+2025-06-08T01:45:47.1493980Z   check-latest: false
+2025-06-08T01:45:47.1494311Z   token: ***
+2025-06-08T01:45:47.1494521Z   update-environment: true
+2025-06-08T01:45:47.1494760Z   allow-prereleases: false
+2025-06-08T01:45:47.1494973Z env:
+2025-06-08T01:45:47.1495152Z   NODE_VERSION: 18
+2025-06-08T01:45:47.1495364Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:47.1495570Z ##[endgroup]
+2025-06-08T01:45:47.3206569Z ##[group]Installed versions
+2025-06-08T01:45:47.3577084Z Successfully set up CPython (3.11.12)
+2025-06-08T01:45:47.3577845Z ##[endgroup]
+2025-06-08T01:45:47.3780215Z ##[group]Run sudo apt-get update
+2025-06-08T01:45:47.3780753Z [36;1msudo apt-get update[0m
+2025-06-08T01:45:47.3781600Z [36;1msudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2 libxkbcommon0 libxss1 libasound2t64[0m
+2025-06-08T01:45:47.4137054Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:45:47.4137472Z env:
+2025-06-08T01:45:47.4137779Z   NODE_VERSION: 18
+2025-06-08T01:45:47.4138132Z   PYTHON_VERSION: 3.11
+2025-06-08T01:45:47.4138620Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:45:47.4139362Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:45:47.4140377Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:45:47.4141035Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:45:47.4141954Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:45:47.4142607Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:45:47.4143183Z ##[endgroup]
+2025-06-08T01:45:47.5441763Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2025-06-08T01:45:47.5835302Z Get:6 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+2025-06-08T01:45:47.6155102Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2025-06-08T01:45:47.6211641Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2025-06-08T01:45:47.6221153Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2025-06-08T01:45:47.6315638Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2025-06-08T01:45:47.6520930Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2025-06-08T01:45:47.7988287Z Get:8 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [1377 B]
+2025-06-08T01:45:47.9487535Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [8426 B]
+2025-06-08T01:45:47.9507420Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [20.9 kB]
+2025-06-08T01:45:47.9636404Z Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [33.7 kB]
+2025-06-08T01:45:48.0402449Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1113 kB]
+2025-06-08T01:45:48.0516827Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [237 kB]
+2025-06-08T01:45:48.0591929Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [161 kB]
+2025-06-08T01:45:48.0626312Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1078 kB]
+2025-06-08T01:45:48.0832121Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [274 kB]
+2025-06-08T01:45:48.0874195Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [376 kB]
+2025-06-08T01:45:48.0968690Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1172 kB]
+2025-06-08T01:45:48.1208839Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [243 kB]
+2025-06-08T01:45:48.1248135Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+2025-06-08T01:45:48.1254532Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+2025-06-08T01:45:48.2825144Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [39.2 kB]
+2025-06-08T01:45:48.2886045Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7092 B]
+2025-06-08T01:45:48.2897451Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [27.1 kB]
+2025-06-08T01:45:48.2907144Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [16.4 kB]
+2025-06-08T01:45:48.2942168Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+2025-06-08T01:45:48.2960446Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+2025-06-08T01:45:48.3530978Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [864 kB]
+2025-06-08T01:45:48.3586617Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [159 kB]
+2025-06-08T01:45:48.3607343Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.6 kB]
+2025-06-08T01:45:48.3640965Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [846 kB]
+2025-06-08T01:45:48.3676839Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [185 kB]
+2025-06-08T01:45:48.3707469Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.2 kB]
+2025-06-08T01:45:48.3732687Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1138 kB]
+2025-06-08T01:45:48.3791722Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [236 kB]
+2025-06-08T01:45:48.4263420Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+2025-06-08T01:45:48.4284938Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+2025-06-08T01:45:52.5051732Z Fetched 8699 kB in 2s (5123 kB/s)
+2025-06-08T01:45:53.2813788Z Reading package lists...
+2025-06-08T01:45:53.3138359Z Reading package lists...
+2025-06-08T01:45:53.4505692Z Building dependency tree...
+2025-06-08T01:45:53.4514149Z Reading state information...
+2025-06-08T01:45:53.5957403Z libdrm2 is already the newest version (2.4.122-1~ubuntu0.24.04.1).
+2025-06-08T01:45:53.5958157Z libdrm2 set to manually installed.
+2025-06-08T01:45:53.5958909Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2025-06-08T01:45:53.5959651Z libxkbcommon0 set to manually installed.
+2025-06-08T01:45:53.5960607Z libxss1 is already the newest version (1:1.2.3-1build3).
+2025-06-08T01:45:53.5961262Z libxss1 set to manually installed.
+2025-06-08T01:45:53.5961962Z libasound2t64 is already the newest version (1.2.11-1build2).
+2025-06-08T01:45:53.5962635Z libasound2t64 set to manually installed.
+2025-06-08T01:45:53.5963283Z The following additional packages will be installed:
+2025-06-08T01:45:53.5964080Z   gir1.2-atk-1.0 gir1.2-atspi-2.0 gir1.2-freedesktop gir1.2-freedesktop-dev
+2025-06-08T01:45:53.5971948Z   gir1.2-glib-2.0 gir1.2-glib-2.0-dev libatk1.0-dev libatspi2.0-dev
+2025-06-08T01:45:53.5973338Z   libblkid-dev libdbus-1-dev libgirepository-2.0-0 libglib2.0-0t64
+2025-06-08T01:45:53.5974344Z   libglib2.0-bin libglib2.0-data libglib2.0-dev libglib2.0-dev-bin
+2025-06-08T01:45:53.5975475Z   libmount-dev libnspr4-dev libpthread-stubs0-dev libselinux1-dev libsepol-dev
+2025-06-08T01:45:53.5976473Z   libx11-dev libxau-dev libxcb1-dev libxdmcp-dev libxext-dev libxfixes-dev
+2025-06-08T01:45:53.5977356Z   libxi-dev libxtst-dev uuid-dev x11proto-dev xorg-sgml-doctools xtrans-dev
+2025-06-08T01:45:53.5978048Z Suggested packages:
+2025-06-08T01:45:53.5978688Z   low-memory-monitor libglib2.0-doc libgdk-pixbuf2.0-bin libxml2-utils
+2025-06-08T01:45:53.5979402Z   libx11-doc libxcb-doc libxext-doc
+2025-06-08T01:45:53.6239525Z The following NEW packages will be installed:
+2025-06-08T01:45:53.6251280Z   gir1.2-atk-1.0 gir1.2-atspi-2.0 gir1.2-freedesktop gir1.2-freedesktop-dev
+2025-06-08T01:45:53.6252186Z   gir1.2-glib-2.0-dev libatk-bridge2.0-dev libatk1.0-dev libatspi2.0-dev
+2025-06-08T01:45:53.6253075Z   libblkid-dev libdbus-1-dev libgirepository-2.0-0 libglib2.0-dev
+2025-06-08T01:45:53.6254029Z   libglib2.0-dev-bin libmount-dev libnspr4-dev libnss3-dev
+2025-06-08T01:45:53.6255156Z   libpthread-stubs0-dev libselinux1-dev libsepol-dev libx11-dev libxau-dev
+2025-06-08T01:45:53.6256141Z   libxcb1-dev libxdmcp-dev libxext-dev libxfixes-dev libxi-dev libxtst-dev
+2025-06-08T01:45:53.6256938Z   uuid-dev x11proto-dev xorg-sgml-doctools xtrans-dev
+2025-06-08T01:45:53.6271004Z The following packages will be upgraded:
+2025-06-08T01:45:53.6271729Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data
+2025-06-08T01:45:53.6447010Z 4 upgraded, 31 newly installed, 0 to remove and 56 not upgraded.
+2025-06-08T01:45:53.6450435Z Need to get 8404 kB of archives.
+2025-06-08T01:45:53.6456501Z After this operation, 40.6 MB of additional disk space will be used.
+2025-06-08T01:45:53.6457346Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2025-06-08T01:45:53.6763404Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.4 [48.7 kB]
+2025-06-08T01:45:53.6931606Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.4 [97.9 kB]
+2025-06-08T01:45:53.7108513Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.4 [183 kB]
+2025-06-08T01:45:53.7264206Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.4 [1544 kB]
+2025-06-08T01:45:53.7547278Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 gir1.2-atk-1.0 amd64 2.52.0-1build1 [23.1 kB]
+2025-06-08T01:45:53.7705825Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 gir1.2-freedesktop amd64 1.80.1-1 [49.7 kB]
+2025-06-08T01:45:53.7867830Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 gir1.2-atspi-2.0 amd64 2.52.0-1build1 [19.8 kB]
+2025-06-08T01:45:53.8023600Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0-dev amd64 2.80.0-6ubuntu3.4 [848 kB]
+2025-06-08T01:45:53.8247205Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 gir1.2-freedesktop-dev amd64 1.80.1-1 [28.8 kB]
+2025-06-08T01:45:53.8424522Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-dev-bin amd64 2.80.0-6ubuntu3.4 [138 kB]
+2025-06-08T01:45:53.8583904Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 uuid-dev amd64 2.39.3-9ubuntu6.2 [33.5 kB]
+2025-06-08T01:45:53.8737939Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libblkid-dev amd64 2.39.3-9ubuntu6.2 [204 kB]
+2025-06-08T01:45:53.8911540Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsepol-dev amd64 3.5-2build1 [384 kB]
+2025-06-08T01:45:53.9089136Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libselinux1-dev amd64 3.5-2ubuntu2.1 [164 kB]
+2025-06-08T01:45:53.9248154Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libmount-dev amd64 2.39.3-9ubuntu6.2 [14.9 kB]
+2025-06-08T01:45:53.9401235Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgirepository-2.0-0 amd64 2.80.0-6ubuntu3.4 [73.6 kB]
+2025-06-08T01:45:53.9559543Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-dev amd64 2.80.0-6ubuntu3.4 [1860 kB]
+2025-06-08T01:45:53.9984963Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libatk1.0-dev amd64 2.52.0-1build1 [100 kB]
+2025-06-08T01:45:54.0599232Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdbus-1-dev amd64 1.14.10-4ubuntu4.1 [190 kB]
+2025-06-08T01:45:54.0791217Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xorg-sgml-doctools all 1:1.11-1.1 [10.9 kB]
+2025-06-08T01:45:54.0943165Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 x11proto-dev all 2023.2-1 [602 kB]
+2025-06-08T01:45:54.1182780Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxau-dev amd64 1:1.0.9-1build6 [9570 B]
+2025-06-08T01:45:54.1375049Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp-dev amd64 1:1.1.3-0ubuntu6 [26.5 kB]
+2025-06-08T01:45:54.1514742Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xtrans-dev all 1.4.0-1 [68.9 kB]
+2025-06-08T01:45:54.1663356Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpthread-stubs0-dev amd64 0.4-1build3 [4746 B]
+2025-06-08T01:45:54.1798514Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxcb1-dev amd64 1.15-1ubuntu2 [85.8 kB]
+2025-06-08T01:45:54.2051925Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libx11-dev amd64 2:1.8.7-1build1 [732 kB]
+2025-06-08T01:45:54.2305160Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxext-dev amd64 2:1.3.4-1build2 [83.5 kB]
+2025-06-08T01:45:54.2464416Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxfixes-dev amd64 1:6.0.0-2build1 [12.1 kB]
+2025-06-08T01:45:54.2601629Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxi-dev amd64 2:1.8.1-1build1 [194 kB]
+2025-06-08T01:45:54.2757611Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libxtst-dev amd64 2:1.2.3-1.1build1 [15.9 kB]
+2025-06-08T01:45:54.2901998Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libatspi2.0-dev amd64 2.52.0-1build1 [76.2 kB]
+2025-06-08T01:45:54.3097852Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libatk-bridge2.0-dev amd64 2.52.0-1build1 [4284 B]
+2025-06-08T01:45:54.3253385Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libnspr4-dev amd64 2:4.35-1.1build1 [219 kB]
+2025-06-08T01:45:54.3408774Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libnss3-dev amd64 2:3.98-1build1 [253 kB]
+2025-06-08T01:45:54.6220478Z Fetched 8404 kB in 1s (11.9 MB/s)
+2025-06-08T01:45:54.6846711Z (Reading database ... 
+2025-06-08T01:45:54.6847249Z (Reading database ... 5%
+2025-06-08T01:45:54.6847707Z (Reading database ... 10%
+2025-06-08T01:45:54.6848133Z (Reading database ... 15%
+2025-06-08T01:45:54.6848534Z (Reading database ... 20%
+2025-06-08T01:45:54.6848923Z (Reading database ... 25%
+2025-06-08T01:45:54.6849322Z (Reading database ... 30%
+2025-06-08T01:45:54.6849719Z (Reading database ... 35%
+2025-06-08T01:45:54.6850291Z (Reading database ... 40%
+2025-06-08T01:45:54.6850742Z (Reading database ... 45%
+2025-06-08T01:45:54.6851166Z (Reading database ... 50%
+2025-06-08T01:45:54.7638681Z (Reading database ... 55%
+2025-06-08T01:45:54.9430774Z (Reading database ... 60%
+2025-06-08T01:45:55.0513911Z (Reading database ... 65%
+2025-06-08T01:45:55.1365730Z (Reading database ... 70%
+2025-06-08T01:45:55.3163158Z (Reading database ... 75%
+2025-06-08T01:45:55.7334575Z (Reading database ... 80%
+2025-06-08T01:45:56.3140215Z (Reading database ... 85%
+2025-06-08T01:45:56.9825609Z (Reading database ... 90%
+2025-06-08T01:45:57.5505219Z (Reading database ... 95%
+2025-06-08T01:45:57.5506221Z (Reading database ... 100%
+2025-06-08T01:45:57.5507888Z (Reading database ... 222694 files and directories currently installed.)
+2025-06-08T01:45:57.5552868Z Preparing to unpack .../00-libglib2.0-data_2.80.0-6ubuntu3.4_all.deb ...
+2025-06-08T01:45:57.5613937Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.4) over (2.80.0-6ubuntu3.2) ...
+2025-06-08T01:45:57.6010330Z Preparing to unpack .../01-libglib2.0-bin_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:57.6057029Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.4) over (2.80.0-6ubuntu3.2) ...
+2025-06-08T01:45:57.6548550Z Preparing to unpack .../02-gir1.2-glib-2.0_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:57.6583341Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.4) over (2.80.0-6ubuntu3.2) ...
+2025-06-08T01:45:57.7051585Z Preparing to unpack .../03-libglib2.0-0t64_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:57.7169028Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.4) over (2.80.0-6ubuntu3.2) ...
+2025-06-08T01:45:57.7666308Z Selecting previously unselected package gir1.2-atk-1.0:amd64.
+2025-06-08T01:45:57.7802406Z Preparing to unpack .../04-gir1.2-atk-1.0_2.52.0-1build1_amd64.deb ...
+2025-06-08T01:45:57.7816335Z Unpacking gir1.2-atk-1.0:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:57.8139536Z Selecting previously unselected package gir1.2-freedesktop:amd64.
+2025-06-08T01:45:57.8276079Z Preparing to unpack .../05-gir1.2-freedesktop_1.80.1-1_amd64.deb ...
+2025-06-08T01:45:57.8285135Z Unpacking gir1.2-freedesktop:amd64 (1.80.1-1) ...
+2025-06-08T01:45:57.8527543Z Selecting previously unselected package gir1.2-atspi-2.0:amd64.
+2025-06-08T01:45:57.8651158Z Preparing to unpack .../06-gir1.2-atspi-2.0_2.52.0-1build1_amd64.deb ...
+2025-06-08T01:45:57.8661880Z Unpacking gir1.2-atspi-2.0:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:57.8876030Z Selecting previously unselected package gir1.2-glib-2.0-dev:amd64.
+2025-06-08T01:45:57.9008640Z Preparing to unpack .../07-gir1.2-glib-2.0-dev_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:57.9018500Z Unpacking gir1.2-glib-2.0-dev:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:57.9605775Z Selecting previously unselected package gir1.2-freedesktop-dev:amd64.
+2025-06-08T01:45:57.9745346Z Preparing to unpack .../08-gir1.2-freedesktop-dev_1.80.1-1_amd64.deb ...
+2025-06-08T01:45:57.9752974Z Unpacking gir1.2-freedesktop-dev:amd64 (1.80.1-1) ...
+2025-06-08T01:45:58.0002218Z Selecting previously unselected package libglib2.0-dev-bin.
+2025-06-08T01:45:58.0135286Z Preparing to unpack .../09-libglib2.0-dev-bin_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:58.0148072Z Unpacking libglib2.0-dev-bin (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:58.0566844Z Selecting previously unselected package uuid-dev:amd64.
+2025-06-08T01:45:58.0702780Z Preparing to unpack .../10-uuid-dev_2.39.3-9ubuntu6.2_amd64.deb ...
+2025-06-08T01:45:58.0713624Z Unpacking uuid-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:58.0993120Z Selecting previously unselected package libblkid-dev:amd64.
+2025-06-08T01:45:58.1128306Z Preparing to unpack .../11-libblkid-dev_2.39.3-9ubuntu6.2_amd64.deb ...
+2025-06-08T01:45:58.1137754Z Unpacking libblkid-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:58.1399724Z Selecting previously unselected package libsepol-dev:amd64.
+2025-06-08T01:45:58.1533437Z Preparing to unpack .../12-libsepol-dev_3.5-2build1_amd64.deb ...
+2025-06-08T01:45:58.1542015Z Unpacking libsepol-dev:amd64 (3.5-2build1) ...
+2025-06-08T01:45:58.1894723Z Selecting previously unselected package libselinux1-dev:amd64.
+2025-06-08T01:45:58.2027601Z Preparing to unpack .../13-libselinux1-dev_3.5-2ubuntu2.1_amd64.deb ...
+2025-06-08T01:45:58.2037068Z Unpacking libselinux1-dev:amd64 (3.5-2ubuntu2.1) ...
+2025-06-08T01:45:58.2514522Z Selecting previously unselected package libmount-dev:amd64.
+2025-06-08T01:45:58.2636942Z Preparing to unpack .../14-libmount-dev_2.39.3-9ubuntu6.2_amd64.deb ...
+2025-06-08T01:45:58.2649829Z Unpacking libmount-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:58.2879818Z Selecting previously unselected package libgirepository-2.0-0:amd64.
+2025-06-08T01:45:58.3013656Z Preparing to unpack .../15-libgirepository-2.0-0_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:58.3027467Z Unpacking libgirepository-2.0-0:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:58.3266623Z Selecting previously unselected package libglib2.0-dev:amd64.
+2025-06-08T01:45:58.3402519Z Preparing to unpack .../16-libglib2.0-dev_2.80.0-6ubuntu3.4_amd64.deb ...
+2025-06-08T01:45:58.3413702Z Unpacking libglib2.0-dev:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:58.4534798Z Selecting previously unselected package libatk1.0-dev:amd64.
+2025-06-08T01:45:58.4675288Z Preparing to unpack .../17-libatk1.0-dev_2.52.0-1build1_amd64.deb ...
+2025-06-08T01:45:58.4683305Z Unpacking libatk1.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:58.4998261Z Selecting previously unselected package libdbus-1-dev:amd64.
+2025-06-08T01:45:58.5139380Z Preparing to unpack .../18-libdbus-1-dev_1.14.10-4ubuntu4.1_amd64.deb ...
+2025-06-08T01:45:58.5144058Z Unpacking libdbus-1-dev:amd64 (1.14.10-4ubuntu4.1) ...
+2025-06-08T01:45:58.5452950Z Selecting previously unselected package xorg-sgml-doctools.
+2025-06-08T01:45:58.5595434Z Preparing to unpack .../19-xorg-sgml-doctools_1%3a1.11-1.1_all.deb ...
+2025-06-08T01:45:58.5603481Z Unpacking xorg-sgml-doctools (1:1.11-1.1) ...
+2025-06-08T01:45:58.5856697Z Selecting previously unselected package x11proto-dev.
+2025-06-08T01:45:58.6014519Z Preparing to unpack .../20-x11proto-dev_2023.2-1_all.deb ...
+2025-06-08T01:45:58.6042074Z Unpacking x11proto-dev (2023.2-1) ...
+2025-06-08T01:45:58.6603925Z Selecting previously unselected package libxau-dev:amd64.
+2025-06-08T01:45:58.6740565Z Preparing to unpack .../21-libxau-dev_1%3a1.0.9-1build6_amd64.deb ...
+2025-06-08T01:45:58.6748706Z Unpacking libxau-dev:amd64 (1:1.0.9-1build6) ...
+2025-06-08T01:45:58.6953921Z Selecting previously unselected package libxdmcp-dev:amd64.
+2025-06-08T01:45:58.7090351Z Preparing to unpack .../22-libxdmcp-dev_1%3a1.1.3-0ubuntu6_amd64.deb ...
+2025-06-08T01:45:58.7098350Z Unpacking libxdmcp-dev:amd64 (1:1.1.3-0ubuntu6) ...
+2025-06-08T01:45:58.7302823Z Selecting previously unselected package xtrans-dev.
+2025-06-08T01:45:58.7436066Z Preparing to unpack .../23-xtrans-dev_1.4.0-1_all.deb ...
+2025-06-08T01:45:58.7444671Z Unpacking xtrans-dev (1.4.0-1) ...
+2025-06-08T01:45:58.7693771Z Selecting previously unselected package libpthread-stubs0-dev:amd64.
+2025-06-08T01:45:58.7825316Z Preparing to unpack .../24-libpthread-stubs0-dev_0.4-1build3_amd64.deb ...
+2025-06-08T01:45:58.7834902Z Unpacking libpthread-stubs0-dev:amd64 (0.4-1build3) ...
+2025-06-08T01:45:58.8030270Z Selecting previously unselected package libxcb1-dev:amd64.
+2025-06-08T01:45:58.8163778Z Preparing to unpack .../25-libxcb1-dev_1.15-1ubuntu2_amd64.deb ...
+2025-06-08T01:45:58.8171101Z Unpacking libxcb1-dev:amd64 (1.15-1ubuntu2) ...
+2025-06-08T01:45:58.8423545Z Selecting previously unselected package libx11-dev:amd64.
+2025-06-08T01:45:58.8554766Z Preparing to unpack .../26-libx11-dev_2%3a1.8.7-1build1_amd64.deb ...
+2025-06-08T01:45:58.8563146Z Unpacking libx11-dev:amd64 (2:1.8.7-1build1) ...
+2025-06-08T01:45:58.8874875Z Selecting previously unselected package libxext-dev:amd64.
+2025-06-08T01:45:58.9009344Z Preparing to unpack .../27-libxext-dev_2%3a1.3.4-1build2_amd64.deb ...
+2025-06-08T01:45:58.9015791Z Unpacking libxext-dev:amd64 (2:1.3.4-1build2) ...
+2025-06-08T01:45:58.9330315Z Selecting previously unselected package libxfixes-dev:amd64.
+2025-06-08T01:45:58.9462715Z Preparing to unpack .../28-libxfixes-dev_1%3a6.0.0-2build1_amd64.deb ...
+2025-06-08T01:45:58.9471025Z Unpacking libxfixes-dev:amd64 (1:6.0.0-2build1) ...
+2025-06-08T01:45:58.9671778Z Selecting previously unselected package libxi-dev:amd64.
+2025-06-08T01:45:58.9804659Z Preparing to unpack .../29-libxi-dev_2%3a1.8.1-1build1_amd64.deb ...
+2025-06-08T01:45:58.9812761Z Unpacking libxi-dev:amd64 (2:1.8.1-1build1) ...
+2025-06-08T01:45:59.0132103Z Selecting previously unselected package libxtst-dev:amd64.
+2025-06-08T01:45:59.0274760Z Preparing to unpack .../30-libxtst-dev_2%3a1.2.3-1.1build1_amd64.deb ...
+2025-06-08T01:45:59.0276939Z Unpacking libxtst-dev:amd64 (2:1.2.3-1.1build1) ...
+2025-06-08T01:45:59.0487787Z Selecting previously unselected package libatspi2.0-dev:amd64.
+2025-06-08T01:45:59.0624271Z Preparing to unpack .../31-libatspi2.0-dev_2.52.0-1build1_amd64.deb ...
+2025-06-08T01:45:59.0638405Z Unpacking libatspi2.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:59.0911299Z Selecting previously unselected package libatk-bridge2.0-dev:amd64.
+2025-06-08T01:45:59.1044592Z Preparing to unpack .../32-libatk-bridge2.0-dev_2.52.0-1build1_amd64.deb ...
+2025-06-08T01:45:59.1051864Z Unpacking libatk-bridge2.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:59.1249516Z Selecting previously unselected package libnspr4-dev.
+2025-06-08T01:45:59.1382135Z Preparing to unpack .../33-libnspr4-dev_2%3a4.35-1.1build1_amd64.deb ...
+2025-06-08T01:45:59.1391384Z Unpacking libnspr4-dev (2:4.35-1.1build1) ...
+2025-06-08T01:45:59.1748476Z Selecting previously unselected package libnss3-dev:amd64.
+2025-06-08T01:45:59.1883222Z Preparing to unpack .../34-libnss3-dev_2%3a3.98-1build1_amd64.deb ...
+2025-06-08T01:45:59.1891658Z Unpacking libnss3-dev:amd64 (2:3.98-1build1) ...
+2025-06-08T01:45:59.2532134Z Setting up libnspr4-dev (2:4.35-1.1build1) ...
+2025-06-08T01:45:59.2575756Z Setting up libpthread-stubs0-dev:amd64 (0.4-1build3) ...
+2025-06-08T01:45:59.2597440Z Setting up xtrans-dev (1.4.0-1) ...
+2025-06-08T01:45:59.2619354Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.2952535Z Setting up libglib2.0-data (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.2973965Z Setting up libdbus-1-dev:amd64 (1.14.10-4ubuntu4.1) ...
+2025-06-08T01:45:59.4433283Z Setting up uuid-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:59.4454903Z Setting up libsepol-dev:amd64 (3.5-2build1) ...
+2025-06-08T01:45:59.4480759Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.4502489Z Setting up libnss3-dev:amd64 (2:3.98-1build1) ...
+2025-06-08T01:45:59.4525740Z Setting up gir1.2-glib-2.0-dev:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.4547124Z Setting up xorg-sgml-doctools (1:1.11-1.1) ...
+2025-06-08T01:45:59.4570085Z Setting up libglib2.0-dev-bin (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.6075160Z Setting up libblkid-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:59.6096723Z Setting up gir1.2-freedesktop:amd64 (1.80.1-1) ...
+2025-06-08T01:45:59.6118391Z Setting up libgirepository-2.0-0:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.6139030Z Setting up gir1.2-atk-1.0:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:59.6159270Z Setting up libselinux1-dev:amd64 (3.5-2ubuntu2.1) ...
+2025-06-08T01:45:59.6180536Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.6202651Z Setting up gir1.2-atspi-2.0:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:59.6222138Z Setting up gir1.2-freedesktop-dev:amd64 (1.80.1-1) ...
+2025-06-08T01:45:59.6244089Z Setting up libmount-dev:amd64 (2.39.3-9ubuntu6.2) ...
+2025-06-08T01:45:59.6264448Z Setting up libglib2.0-dev:amd64 (2.80.0-6ubuntu3.4) ...
+2025-06-08T01:45:59.6284553Z Setting up libatk1.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:45:59.6364245Z Processing triggers for libc-bin (2.39-0ubuntu8.4) ...
+2025-06-08T01:45:59.6885309Z Processing triggers for man-db (2.12.0-4build2) ...
+2025-06-08T01:46:48.3470299Z Processing triggers for sgml-base (1.31) ...
+2025-06-08T01:46:48.3645118Z Setting up x11proto-dev (2023.2-1) ...
+2025-06-08T01:46:48.3685213Z Setting up libxau-dev:amd64 (1:1.0.9-1build6) ...
+2025-06-08T01:46:48.3745733Z Setting up libxdmcp-dev:amd64 (1:1.1.3-0ubuntu6) ...
+2025-06-08T01:46:48.3787304Z Setting up libxcb1-dev:amd64 (1.15-1ubuntu2) ...
+2025-06-08T01:46:48.3823535Z Setting up libx11-dev:amd64 (2:1.8.7-1build1) ...
+2025-06-08T01:46:48.3862660Z Setting up libxfixes-dev:amd64 (1:6.0.0-2build1) ...
+2025-06-08T01:46:48.3897905Z Setting up libxext-dev:amd64 (2:1.3.4-1build2) ...
+2025-06-08T01:46:48.3926528Z Setting up libxi-dev:amd64 (2:1.8.1-1build1) ...
+2025-06-08T01:46:48.3957508Z Setting up libxtst-dev:amd64 (2:1.2.3-1.1build1) ...
+2025-06-08T01:46:48.3995932Z Setting up libatspi2.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:46:48.4028042Z Setting up libatk-bridge2.0-dev:amd64 (2.52.0-1build1) ...
+2025-06-08T01:46:49.3276334Z 
+2025-06-08T01:46:49.3277294Z Running kernel seems to be up-to-date.
+2025-06-08T01:46:49.3278025Z 
+2025-06-08T01:46:49.3283418Z Restarting services...
+2025-06-08T01:46:49.3780312Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+2025-06-08T01:46:49.5733063Z 
+2025-06-08T01:46:49.5739838Z Service restarts being deferred:
+2025-06-08T01:46:49.5745863Z  systemctl restart ModemManager.service
+2025-06-08T01:46:49.5748783Z  systemctl restart hosted-compute-agent.service
+2025-06-08T01:46:49.5770515Z  systemctl restart networkd-dispatcher.service
+2025-06-08T01:46:49.5771450Z 
+2025-06-08T01:46:49.5772019Z No containers need to be restarted.
+2025-06-08T01:46:49.5772681Z 
+2025-06-08T01:46:49.5773162Z No user sessions are running outdated binaries.
+2025-06-08T01:46:49.5773781Z 
+2025-06-08T01:46:49.5774478Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2025-06-08T01:46:50.3686167Z ##[group]Run npm ci
+2025-06-08T01:46:50.3686441Z [36;1mnpm ci[0m
+2025-06-08T01:46:50.3737333Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:46:50.3737577Z env:
+2025-06-08T01:46:50.3737760Z   NODE_VERSION: 18
+2025-06-08T01:46:50.3737966Z   PYTHON_VERSION: 3.11
+2025-06-08T01:46:50.3738245Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3738683Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:46:50.3739074Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3739434Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3739804Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:46:50.3740410Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:46:50.3740711Z ##[endgroup]
+2025-06-08T01:46:52.7698913Z npm warn EBADENGINE Unsupported engine {
+2025-06-08T01:46:52.7700581Z npm warn EBADENGINE   package: 'commander@14.0.0',
+2025-06-08T01:46:52.7701743Z npm warn EBADENGINE   required: { node: '>=20' },
+2025-06-08T01:46:52.7702920Z npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+2025-06-08T01:46:52.7703933Z npm warn EBADENGINE }
+2025-06-08T01:46:55.7129099Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2025-06-08T01:46:55.9612180Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-06-08T01:46:56.1708184Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-06-08T01:46:56.9739837Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2025-06-08T01:47:05.5369062Z 
+2025-06-08T01:47:05.5371512Z added 751 packages, and audited 752 packages in 15s
+2025-06-08T01:47:05.5371969Z 
+2025-06-08T01:47:05.5372264Z 89 packages are looking for funding
+2025-06-08T01:47:05.5372822Z   run `npm fund` for details
+2025-06-08T01:47:05.5374535Z 
+2025-06-08T01:47:05.5374782Z found 0 vulnerabilities
+2025-06-08T01:47:05.5675106Z ##[group]Run npm run build:linux
+2025-06-08T01:47:05.5675426Z [36;1mnpm run build:linux[0m
+2025-06-08T01:47:05.5726470Z shell: /usr/bin/bash -e {0}
+2025-06-08T01:47:05.5726720Z env:
+2025-06-08T01:47:05.5726893Z   NODE_VERSION: 18
+2025-06-08T01:47:05.5727098Z   PYTHON_VERSION: 3.11
+2025-06-08T01:47:05.5727390Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5727810Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib/pkgconfig
+2025-06-08T01:47:05.5728210Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5728561Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5728939Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.12/x64
+2025-06-08T01:47:05.5729309Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.12/x64/lib
+2025-06-08T01:47:05.5729797Z   GH_TOKEN: ***
+2025-06-08T01:47:05.5730210Z ##[endgroup]
+2025-06-08T01:47:05.7226074Z npm error Missing script: "build:linux"
+2025-06-08T01:47:05.7237636Z npm error
+2025-06-08T01:47:05.7238201Z npm error To see a list of scripts, run:
+2025-06-08T01:47:05.7238761Z npm error   npm run
+2025-06-08T01:47:05.7245769Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-06-08T01_47_05_648Z-debug-0.log
+2025-06-08T01:47:05.7299742Z ##[error]Process completed with exit code 1.
+2025-06-08T01:47:05.7377952Z Post job cleanup.
+2025-06-08T01:47:05.8348340Z [command]/usr/bin/git version
+2025-06-08T01:47:05.8392099Z git version 2.49.0
+2025-06-08T01:47:05.8439450Z Temporarily overriding HOME='/home/runner/work/_temp/2674ced1-94f5-4220-9b35-f90124dcd00a' before making global git config changes
+2025-06-08T01:47:05.8442541Z Adding repository directory to the temporary git global config as a safe directory
+2025-06-08T01:47:05.8461854Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ApexAgent/ApexAgent
+2025-06-08T01:47:05.8504690Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-06-08T01:47:05.8543482Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-06-08T01:47:05.8887004Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-06-08T01:47:05.8930392Z http.https://github.com/.extraheader
+2025-06-08T01:47:05.8958842Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-06-08T01:47:05.9010494Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-06-08T01:47:05.9553863Z Cleaning up orphan processes

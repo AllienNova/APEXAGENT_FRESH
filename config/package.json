@@ -1,0 +1,129 @@
+{
+  "name": "apexagent-desktop",
+  "version": "1.0.0",
+  "description": "ApexAgent - World's First Hybrid Autonomous AI System",
+  "main": "src/main.js",
+  "author": "ApexAgent Team",
+  "license": "MIT",
+  "homepage": "https://github.com/AllienNova/ApexAgent",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "build-all": "electron-builder --win --mac --linux",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.apexagent.desktop",
+    "productName": "ApexAgent",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "backend/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": ["**/*", "!**/*.pyc", "!**/__pycache__"]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        },
+        {
+          "target": "rpm",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "category": "Office"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "ApexAgent"
+    },
+    "dmg": {
+      "title": "ApexAgent Installer",
+      "background": "assets/dmg-background.png",
+      "window": {
+        "width": 600,
+        "height": 400
+      }
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "AllienNova",
+      "repo": "ApexAgent"
+    }
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.4",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "axios": "^1.5.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "keywords": [
+    "ai",
+    "artificial-intelligence",
+    "hybrid-ai",
+    "desktop-app",
+    "electron",
+    "productivity",
+    "automation"
+  ]
+}
+

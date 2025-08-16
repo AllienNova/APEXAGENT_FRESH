@@ -1,0 +1,127 @@
+apiVersion: install.linkerd.io/v1alpha1
+kind: ControlPlaneConfig
+metadata:
+  name: linkerd-control-plane
+  namespace: linkerd
+spec:
+  proxy:
+    resources:
+      cpu:
+        limit: "1"
+        request: "100m"
+      memory:
+        limit: "512Mi"
+        request: "128Mi"
+  proxyInit:
+    resources:
+      cpu:
+        limit: "100m"
+        request: "10m"
+      memory:
+        limit: "50Mi"
+        request: "10Mi"
+  identityTrustAnchorsPEM: |
+    -----BEGIN CERTIFICATE-----
+    # This is a placeholder for the actual certificate
+    # In production, this would be your actual trust anchor certificate
+    -----END CERTIFICATE-----
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linkerd
+  labels:
+    linkerd.io/control-plane-ns: linkerd
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: linkerd-controller
+  namespace: linkerd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: linkerd-controller
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints", "namespaces", "nodes"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions", "apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["linkerd.io"]
+  resources: ["serviceprofiles"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: linkerd-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: linkerd-controller
+subjects:
+- kind: ServiceAccount
+  name: linkerd-controller
+  namespace: linkerd
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: apexagent.apexagent.svc.cluster.local
+  namespace: apexagent
+spec:
+  routes:
+  - name: GET /api/v1/health
+    condition:
+      method: GET
+      pathRegex: /api/v1/health
+    responseClasses:
+    - condition:
+        status:
+          min: 200
+          max: 299
+      isSuccess: true
+    - condition:
+        status:
+          min: 500
+          max: 599
+      isSuccess: false
+    isRetryable: true
+    timeout: 500ms
+  - name: GET /api/v1/users
+    condition:
+      method: GET
+      pathRegex: /api/v1/users
+    responseClasses:
+    - condition:
+        status:
+          min: 200
+          max: 299
+      isSuccess: true
+    - condition:
+        status:
+          min: 500
+          max: 599
+      isSuccess: false
+    isRetryable: false
+    timeout: 2s
+  - name: POST /api/v1/users
+    condition:
+      method: POST
+      pathRegex: /api/v1/users
+    responseClasses:
+    - condition:
+        status:
+          min: 200
+          max: 299
+      isSuccess: true
+    - condition:
+        status:
+          min: 500
+          max: 599
+      isSuccess: false
+    isRetryable: false
+    timeout: 5s

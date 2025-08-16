@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aideon Lite AI - Production Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0E27;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            color: #B0BEC5;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #252B4A;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+        }
+
+        .credit-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1A1F3A;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #34405A;
+        }
+
+        .credit-balance {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2ECC71;
+            font-weight: 600;
+        }
+
+        .credit-usage {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6B73FF;
+            font-size: 0.8rem;
+        }
+
+        .credit-icon {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .status-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.hybrid {
+            background: #6B73FF;
+        }
+
+        .status-indicator.optimal {
+            background: #2ECC71;
+        }
+
+        .status-indicator.secure {
+            background: #F39C12;
+        }
+
+        .status-indicator.protected {
+            background: #E74C3C;
+        }
+
+        .mode-details, .performance-comparison, .privacy-details {
+            font-size: 0.75rem;
+            color: #B0BEC5;
+            margin-left: 0.25rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            background: #1A1F3A;
+            border-bottom: 1px solid #34405A;
+            padding: 0 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .tab-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-item:hover {
+            background: #252B4A;
+            color: #6B73FF;
+        }
+
+        .tab-item.active {
+            color: #6B73FF;
+            border-bottom-color: #6B73FF;
+            background: #252B4A;
+        }
+
+        .tab-notification {
+            background: #E74C3C;
+            color: white;
+            border-radius: 10px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            height: calc(100vh - 140px);
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 1px;
+            background: #34405A;
+        }
+
+        /* Panels */
+        .panel {
+            background: #1A1F3A;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 1rem;
+            border-bottom: 1px solid #34405A;
+            background: #252B4A;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        /* Left Panel - Project Navigator */
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #B0BEC5;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-item:hover {
+            background: #252B4A;
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            color: #FFFFFF;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Center Panel - Chat */
+        .chat-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #34405A;
+            background: #252B4A;
+        }
+
+        .content-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-header p {
+            color: #B0BEC5;
+        }
+
+        .background-work {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(52, 152, 219, 0.1));
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #34405A;
+        }
+
+        .processing-mode-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mode-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mode-icon.active {
+            background: #2ECC71;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+
+        .routing-line {
+            width: 30px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .routing-line.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2ECC71;
+            animation: dataFlow 2s ease-in-out infinite;
+        }
+
+        @keyframes dataFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .work-info {
+            flex: 1;
+        }
+
+        .work-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .work-progress {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .efficiency-indicator {
+            font-size: 0.75rem;
+            color: #2ECC71;
+            margin-top: 0.25rem;
+        }
+
+        .performance-metrics {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .performance-metrics .metric {
+            text-align: center;
+        }
+
+        .performance-metrics .metric-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .performance-metrics .metric-label {
+            font-size: 0.7rem;
+            color: #B0BEC5;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            color: white;
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+            background: #252B4A;
+            border: 1px solid #34405A;
+        }
+
+        .message.autonomous {
+            align-self: flex-start;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(52, 152, 219, 0.2));
+            border: 1px solid #2ECC71;
+            border-left: 4px solid #2ECC71;
+        }
+
+        .message.system {
+            align-self: center;
+            background: #2C3554;
+            max-width: 90%;
+            text-align: center;
+            font-style: italic;
+            color: #B0BEC5;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .autonomous-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2ECC71;
+            font-weight: 500;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #34405A;
+            background: #252B4A;
+        }
+
+        .context-info {
+            background: #2C3554;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #B0BEC5;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            background: #1A1F3A;
+            border: 1px solid #34405A;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            resize: none;
+            min-height: 24px;
+            max-height: 120px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+        }
+
+        .input-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 8px;
+            background: #252B4A;
+            color: #B0BEC5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-btn:hover {
+            background: #6B73FF;
+            color: white;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #6B73FF, #4A90E2);
+            color: white;
+        }
+
+        /* Right Panel - Context */
+        .context-tabs {
+            display: flex;
+            border-bottom: 1px solid #34405A;
+        }
+
+        .context-tab {
+            flex: 1;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .context-tab:hover {
+            background: #252B4A;
+        }
+
+        /* Cybersecurity Command Center Styles */
+        .cybersecurity-command-center {
+            padding: 1rem;
+        }
+
+        .security-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .threat-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-secure {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .ai-brain {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .security-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .security-dashboard-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .security-dashboard-card:hover {
+            border-color: rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00ffff;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: #00ffff;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+        }
+
+        .ai-analysis-content {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .ai-analysis-content h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+
+        .ai-analysis-content p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .real-time-logs {
+            background: #000;
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .log-entry {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .log-timestamp {
+            color: #888;
+        }
+
+        .log-level-info {
+            color: #00ffff;
+        }
+
+        .log-level-warning {
+            color: #ffc107;
+        }
+
+        .log-level-critical {
+            color: #ff4d4d;
+        }
+
+        .log-message {
+            color: #e0e0e0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 250px 1fr;
+            }
+            .right-panel {
+                display: none; /* Hide on smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .left-panel {
+                display: none; /* Hide on smaller screens */
+            }
+            .header {
+                padding: 1rem;
+            }
+            .nav-tabs {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">A</div>
+                <div class="brand-info">
+                    <h1>Aideon Lite AI</h1>
+                    <p class="tagline">The World's First Hybrid Autonomous AI System</p>
+                </div>
+            </div>
+            <div class="system-status">
+                <div class="credit-info">
+                    <div class="credit-balance">✨ 2,847 Credits</div>
+                    <div class="credit-usage">($0.42 used today)</div>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator hybrid"></div>
+                    <span>Hybrid Processing</span>
+                    <span class="mode-details">67% Local, 33% Cloud</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator optimal"></div>
+                    <span>System Optimal</span>
+                    <span class="performance-comparison">2.3x Faster</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-indicator secure"></div>
+                    <span>AI Guardian</span>
+                    <span class="privacy-details">1,247 Threats Blocked</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs">
+        <div class="tab-container">
+            <div class="tab-item active" data-tab="dashboard">📊 Dashboard</div>
+            <div class="tab-item" data-tab="chat">💬 Chat</div>
+            <div class="tab-item" data-tab="projects">📁 Projects</div>
+            <div class="tab-item" data-tab="artifacts">🎨 Artifacts <span class="tab-notification">12</span></div>
+            <div class="tab-item" data-tab="files">🗂️ Files</div>
+            <div class="tab-item" data-tab="agents">🤖 Agents</div>
+            <div class="tab-item" data-tab="security">🛡️ Security</div>
+            <div class="tab-item" data-tab="analytics">📈 Analytics</div>
+            <div class="tab-item" data-tab="settings">⚙️ Settings</div>
+            <div class="tab-item" data-tab="tardis">👨‍⚕️ Dr. TARDIS</div>
+        </div>
+    </nav>
+
+    <main class="content-area">
+        <!-- Tab Content will be dynamically loaded here -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-item');
+            const contentArea = document.querySelector('.content-area');
+
+            // Function to load tab content
+            function loadTabContent(tabName) {
+                // For this example, we'll just show a placeholder.
+                // In a real app, you would fetch and display the actual content.
+                let content = '';
+                if (tabName === 'dashboard') {
+                    content = `
+                        <div style="display: grid; grid-template-columns: 280px 1fr; height: calc(100vh - 140px); background: #34405A; gap: 1px;">
+                            <!-- Left Sidebar -->
+                            <div style="background: #1A1F3A; padding: 1.5rem;">
+                                <h3 style="color: #B0BEC5; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem;">CORE FEATURES</h3>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; display: flex; align-items: center; gap: 0.75rem;">
+                                    <span>📊</span> Dashboard
+                                </div>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>💬</span> AI Chat
+                                </div>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>🤖</span> Multi-Agents
+                                </div>
+                                <div style="margin-bottom: 1.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>👨‍⚕️</span> Dr. TARDIS
+                                </div>
+                                
+                                <h3 style="color: #B0BEC5; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem;">SECURITY & TOOLS</h3>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>🛡️</span> Security Center
+                                </div>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>🔧</span> AI Tools PRO
+                                </div>
+                                <div style="margin-bottom: 1.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>📈</span> Analytics PRO
+                                </div>
+                                
+                                <h3 style="color: #B0BEC5; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem;">SYSTEM</h3>
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>⚙️</span> Settings
+                                </div>
+                                <div style="margin-bottom: 2rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='transparent'">
+                                    <span>❓</span> Help & Support
+                                </div>
+                                
+                                <button style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                    Unlock Premium
+                                </button>
+                            </div>
+                            
+                            <!-- Main Dashboard Content -->
+                            <div style="background: #1A1F3A; padding: 2rem; overflow-y: auto;">
+                                <!-- Welcome Header -->
+                                <div style="margin-bottom: 2rem;">
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Welcome to Aideon Lite AI</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">The world's first hybrid autonomous AI system</p>
+                                </div>
+                                
+                                <!-- Key Metrics Cards -->
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                    <div style="background: #252B4A; border: 2px solid #2ECC71; border-radius: 12px; padding: 1.5rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                            <h3 style="color: #2ECC71; font-weight: 600;">🎯 AI Performance</h3>
+                                        </div>
+                                        <div style="font-size: 2rem; font-weight: bold; color: #2ECC71; margin-bottom: 0.5rem;">98.7%</div>
+                                        <p style="color: #B0BEC5; font-size: 0.9rem;">System Efficiency</p>
+                                    </div>
+                                    
+                                    <div style="background: #252B4A; border: 2px solid #3498DB; border-radius: 12px; padding: 1.5rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                            <h3 style="color: #3498DB; font-weight: 600;">🛡️ Security Status</h3>
+                                        </div>
+                                        <div style="font-size: 2rem; font-weight: bold; color: #3498DB; margin-bottom: 0.5rem;">1,247</div>
+                                        <p style="color: #B0BEC5; font-size: 0.9rem;">Threats Blocked Today</p>
+                                    </div>
+                                    
+                                    <div style="background: #252B4A; border: 2px solid #F39C12; border-radius: 12px; padding: 1.5rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                            <h3 style="color: #F39C12; font-weight: 600;">⚡ Hybrid Processing</h3>
+                                        </div>
+                                        <div style="font-size: 2rem; font-weight: bold; color: #F39C12; margin-bottom: 0.5rem;">2.3x</div>
+                                        <p style="color: #B0BEC5; font-size: 0.9rem;">Faster than Cloud-Only</p>
+                                    </div>
+                                    
+                                    <div style="background: #252B4A; border: 2px solid #E74C3C; border-radius: 12px; padding: 1.5rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                            <h3 style="color: #E74C3C; font-weight: 600;">💰 Cost Savings</h3>
+                                        </div>
+                                        <div style="font-size: 2rem; font-weight: bold; color: #E74C3C; margin-bottom: 0.5rem;">45%</div>
+                                        <p style="color: #B0BEC5; font-size: 0.9rem;">vs Cloud-Only Solutions</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Bottom Section -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                                    <!-- Recent Activity -->
+                                    <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem; color: #FFFFFF;">Recent Activity</h3>
+                                        <div style="space-y: 1rem;">
+                                            <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                                <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                                <div style="flex: 1;">
+                                                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">Security scan completed</p>
+                                                    <p style="font-size: 0.75rem; color: #B0BEC5;">2 minutes ago</p>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                                <div style="width: 8px; height: 8px; background: #3498DB; border-radius: 50%;"></div>
+                                                <div style="flex: 1;">
+                                                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">AI model updated</p>
+                                                    <p style="font-size: 0.75rem; color: #B0BEC5;">15 minutes ago</p>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                                <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%;"></div>
+                                                <div style="flex: 1;">
+                                                    <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">New project created</p>
+                                                    <p style="font-size: 0.75rem; color: #B0BEC5;">1 hour ago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- System Health -->
+                                    <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem; color: #FFFFFF;">System Health</h3>
+                                        <div style="space-y: 1rem;">
+                                            <div style="margin-bottom: 1rem;">
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                    <span style="font-size: 0.9rem;">CPU Usage</span>
+                                                    <span style="font-size: 0.9rem; color: #2ECC71;">15%</span>
+                                                </div>
+                                                <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                    <div style="width: 15%; height: 100%; background: #2ECC71; border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-bottom: 1rem;">
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                    <span style="font-size: 0.9rem;">Memory</span>
+                                                    <span style="font-size: 0.9rem; color: #3498DB;">2.1GB / 16GB</span>
+                                                </div>
+                                                <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                    <div style="width: 13%; height: 100%; background: #3498DB; border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-bottom: 1rem;">
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                    <span style="font-size: 0.9rem;">Storage</span>
+                                                    <span style="font-size: 0.9rem; color: #F39C12;">847GB Free</span>
+                                                </div>
+                                                <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                    <div style="width: 85%; height: 100%; background: #F39C12; border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                    <span style="font-size: 0.9rem;">Network</span>
+                                                    <span style="font-size: 0.9rem; color: #2ECC71;">Optimal</span>
+                                                </div>
+                                                <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                    <div style="width: 95%; height: 100%; background: #2ECC71; border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'chat') {
+                    content = `
+                        <div class="main-layout">
+                            <div class="panel left-panel">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Project Navigator</h2>
+                                    <button style="background: none; border: none; color: #B0BEC5; cursor: pointer;">⚙️</button>
+                                </div>
+                                <div class="panel-content">
+                                    <h3 class="section-title">Active Projects</h3>
+                                    <div class="nav-item active">
+                                        <span class="nav-icon">📊</span>
+                                        <div style="flex: 1;">
+                                            <div>Market Research</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">75% complete</div>
+                                        </div>
+                                        <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🔍</span>
+                                        <div style="flex: 1;">
+                                            <div>Competitor Analysis</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">45% complete</div>
+                                        </div>
+                                        <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%;"></div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📈</span>
+                                        <div style="flex: 1;">
+                                            <div>Data Analysis</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">20% complete</div>
+                                        </div>
+                                        <div style="width: 8px; height: 8px; background: #E74C3C; border-radius: 50%;"></div>
+                                    </div>
+                                    
+                                    <h3 class="section-title">Security Scans</h3>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🛡️</span>
+                                        <div style="flex: 1;">
+                                            <div>System Scan</div>
+                                            <div style="font-size: 0.75rem; color: #2ECC71;">Completed</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🔒</span>
+                                        <div style="flex: 1;">
+                                            <div>Vulnerability Check</div>
+                                            <div style="font-size: 0.75rem; color: #F39C12;">Running</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 class="section-title">External Services</h3>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🐙</span>
+                                        <div style="flex: 1;">
+                                            <div>GitHub</div>
+                                            <div style="font-size: 0.75rem; color: #2ECC71;">Syncing</div>
+                                        </div>
+                                        <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📧</span>
+                                        <div style="flex: 1;">
+                                            <div>Gmail</div>
+                                            <div style="font-size: 0.75rem; color: #3498DB;">Connected</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">💾</span>
+                                        <div style="flex: 1;">
+                                            <div>Google Drive</div>
+                                            <div style="font-size: 0.75rem; color: #2ECC71;">Syncing</div>
+                                        </div>
+                                        <div style="width: 8px; height: 8px; background: #3498DB; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📦</span>
+                                        <div style="flex: 1;">
+                                            <div>Dropbox</div>
+                                            <div style="font-size: 0.75rem; color: #3498DB;">Connected</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">💬</span>
+                                        <div style="flex: 1;">
+                                            <div>Slack</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">Available</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📋</span>
+                                        <div style="flex: 1;">
+                                            <div>Notion</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">Available</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">🗂️</span>
+                                        <div style="flex: 1;">
+                                            <div>Airtable</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">Available</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item">
+                                        <span class="nav-icon">📊</span>
+                                        <div style="flex: 1;">
+                                            <div>Google Sheets</div>
+                                            <div style="font-size: 0.75rem; color: #3498DB;">Connected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel center-panel chat-container">
+                                <div class="content-header">
+                                    <h1>AI Chat Interface</h1>
+                                    <p>Intelligent conversation with hybrid AI processing</p>
+                                </div>
+                                <div class="background-work">
+                                    <div class="processing-mode-indicator">
+                                        <div class="mode-icon active">🖥️</div>
+                                        <div class="routing-line active"></div>
+                                        <div class="mode-icon active">☁️</div>
+                                        <div class="routing-line active"></div>
+                                        <div class="mode-icon active">🧠</div>
+                                    </div>
+                                    <div class="work-info">
+                                        <div class="work-title">Hybrid Processing Active</div>
+                                        <div class="work-progress">Optimizing between local and cloud resources</div>
+                                        <div class="efficiency-indicator">45% cost savings vs cloud-only</div>
+                                    </div>
+                                    <div class="performance-metrics">
+                                        <div class="metric">
+                                            <div class="metric-value">67%</div>
+                                            <div class="metric-label">Local</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">33%</div>
+                                            <div class="metric-label">Cloud</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">45%</div>
+                                            <div class="metric-label">Savings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-messages">
+                                    <div class="message system">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                                            <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                            Aideon AI is ready. Hybrid processing enabled.
+                                        </div>
+                                    </div>
+                                    <div class="message user">
+                                        Can you help me analyze the current market trends for Q4 2024? I need insights on consumer behavior and emerging opportunities.
+                                    </div>
+                                    <div class="message autonomous">
+                                        <div class="message-header">
+                                            <div class="autonomous-indicator">
+                                                <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                                Autonomous Research Agent
+                                            </div>
+                                            <span style="font-size: 0.75rem; color: #B0BEC5;">2 min ago</span>
+                                        </div>
+                                        <p>I'll analyze Q4 2024 market trends for you. Let me gather data from multiple sources including financial reports, consumer surveys, and social media sentiment analysis.</p>
+                                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(46, 204, 113, 0.1); border-radius: 8px; border-left: 3px solid #2ECC71;">
+                                            <strong>Research Progress:</strong><br>
+                                            ✅ Financial data collected (NYSE, NASDAQ)<br>
+                                            ✅ Consumer behavior reports analyzed<br>
+                                            🔄 Social media sentiment analysis in progress<br>
+                                            ⏳ Competitive landscape mapping
+                                        </div>
+                                    </div>
+                                    <div class="message assistant">
+                                        <div class="message-header">
+                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                <span>🤖</span>
+                                                Aideon AI Assistant
+                                            </div>
+                                            <span style="font-size: 0.75rem; color: #B0BEC5;">1 min ago</span>
+                                        </div>
+                                        <p>Based on the research data collected, here are the key Q4 2024 market trends:</p>
+                                        <div style="margin-top: 1rem;">
+                                            <strong>🎯 Key Opportunities:</strong>
+                                            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                                                <li>AI-powered personalization (+34% consumer interest)</li>
+                                                <li>Sustainable products (+28% market growth)</li>
+                                                <li>Remote work solutions (+22% demand increase)</li>
+                                            </ul>
+                                        </div>
+                                        <div style="margin-top: 1rem; padding: 1rem; background: #252B4A; border-radius: 8px;">
+                                            <strong>📊 Consumer Behavior Insights:</strong><br>
+                                            • 67% prefer hybrid shopping experiences<br>
+                                            • 45% prioritize sustainability in purchasing decisions<br>
+                                            • 58% willing to pay premium for AI-enhanced services
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-input-container">
+                                    <div class="context-info">
+                                        <strong>Context:</strong> Market Research Project • Processing Mode: Hybrid (67% Local, 33% Cloud) • Active Agents: Research, Analysis
+                                    </div>
+                                    <div class="input-wrapper">
+                                        <textarea class="chat-input" placeholder="Ask Aideon anything about your projects, data analysis, or get AI assistance..."></textarea>
+                                        <div class="input-controls">
+                                            <button class="input-btn" title="Attach file">📎</button>
+                                            <button class="input-btn" title="Voice input">🎤</button>
+                                            <button class="input-btn" title="Add image">🖼️</button>
+                                            <button class="input-btn send-btn" title="Send message">▶</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel right-panel">
+                                <div class="context-tabs">
+                                    <div class="context-tab" style="background: #252B4A; border-bottom-color: #6B73FF; color: #6B73FF;">Context</div>
+                                    <div class="context-tab">Agents</div>
+                                </div>
+                                <div class="panel-content">
+                                    <h3 class="section-title">Project Context</h3>
+                                    <div style="background: #252B4A; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                        <p><strong>Project:</strong> Market Research Project</p>
+                                        <p><strong>Objective:</strong> Q4 2024 trend analysis</p>
+                                        <p><strong>Status:</strong> Data collection phase</p>
+                                        <p><strong>Priority:</strong> High</p>
+                                    </div>
+                                    
+                                    <h3 class="section-title">Data Sources</h3>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                            <span style="font-size: 0.9rem;">Financial Markets</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                            <span style="font-size: 0.9rem;">Consumer Reports</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%;"></div>
+                                            <span style="font-size: 0.9rem;">Social Media</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <div style="width: 8px; height: 8px; background: #E74C3C; border-radius: 50%;"></div>
+                                            <span style="font-size: 0.9rem;">Competitive Analysis</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 class="section-title">Processing Mode</h3>
+                                    <div style="background: #252B4A; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span>Local Processing</span>
+                                            <span style="color: #2ECC71;">67%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: #1A1F3A; border-radius: 3px; margin-bottom: 0.5rem;">
+                                            <div style="width: 67%; height: 100%; background: #2ECC71; border-radius: 3px;"></div>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span>Cloud Processing</span>
+                                            <span style="color: #3498DB;">33%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 6px; background: #1A1F3A; border-radius: 3px;">
+                                            <div style="width: 33%; height: 100%; background: #3498DB; border-radius: 3px;"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 class="section-title">Active Agents</h3>
+                                    <div style="margin-bottom: 0.5rem; padding: 0.75rem; background: #252B4A; border-radius: 8px; border-left: 3px solid #2ECC71;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600;">Research Agent</div>
+                                                <div style="font-size: 0.75rem; color: #B0BEC5;">Data collection</div>
+                                            </div>
+                                            <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 0.5rem; padding: 0.75rem; background: #252B4A; border-radius: 8px; border-left: 3px solid #3498DB;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600;">Analysis Agent</div>
+                                                <div style="font-size: 0.75rem; color: #B0BEC5;">Processing data</div>
+                                            </div>
+                                            <div style="width: 8px; height: 8px; background: #3498DB; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 0.5rem; padding: 0.75rem; background: #252B4A; border-radius: 8px; border-left: 3px solid #F39C12;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600;">Security Agent</div>
+                                                <div style="font-size: 0.75rem; color: #B0BEC5;">Monitoring</div>
+                                            </div>
+                                            <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'projects') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Project Management</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Comprehensive project tracking with AI-powered assistance</p>
+                                </div>
+                                <button style="background: linear-gradient(135deg, #6B73FF, #4A90E2); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span>➕</span> New Project
+                                </button>
+                            </div>
+                            
+                            <!-- Project Stats -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #2ECC71;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #2ECC71; margin-bottom: 0.5rem;">12</div>
+                                    <div style="color: #B0BEC5;">Active Projects</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3498DB;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #3498DB; margin-bottom: 0.5rem;">8</div>
+                                    <div style="color: #B0BEC5;">In Progress</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #F39C12;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #F39C12; margin-bottom: 0.5rem;">3</div>
+                                    <div style="color: #B0BEC5;">Under Review</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #E74C3C;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #E74C3C; margin-bottom: 0.5rem;">1</div>
+                                    <div style="color: #B0BEC5;">Overdue</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Filter and Search -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center;">
+                                <div style="flex: 1; position: relative;">
+                                    <input type="text" placeholder="Search projects..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white; font-size: 1rem;">
+                                    <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #B0BEC5;">🔍</span>
+                                </div>
+                                <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                    <option>All Status</option>
+                                    <option>Active</option>
+                                    <option>In Progress</option>
+                                    <option>Review</option>
+                                    <option>Completed</option>
+                                </select>
+                                <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                    <option>All Categories</option>
+                                    <option>Research</option>
+                                    <option>Development</option>
+                                    <option>Security</option>
+                                    <option>Analysis</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Projects Grid -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
+                                <!-- Project Card 1 -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#6B73FF'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                                📊 Market Research Analysis
+                                            </h3>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="background: #2ECC71; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">ACTIVE</span>
+                                                <span style="color: #B0BEC5; font-size: 0.85rem;">Research & Analysis</span>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Comprehensive analysis of Q4 2024 market trends, consumer behavior patterns, and emerging opportunities in the AI sector.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #2ECC71;">75%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 75%; height: 100%; background: linear-gradient(90deg, #2ECC71, #27AE60); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Started:</span>
+                                            <span style="font-size: 0.85rem;">2 days ago</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Due:</span>
+                                            <span style="font-size: 0.85rem; color: #F39C12;">Tomorrow</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <div style="display: flex; align-items: center; gap: -0.5rem;">
+                                                <div style="width: 24px; height: 24px; background: #6B73FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A;">🤖</div>
+                                                <div style="width: 24px; height: 24px; background: #2ECC71; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A; margin-left: -8px;">📊</div>
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">2 agents active</span>
+                                        </div>
+                                        <button style="background: #6B73FF; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">View Details</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Project Card 2 -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#6B73FF'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                                🛡️ Security Audit
+                                            </h3>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="background: #3498DB; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">PLANNING</span>
+                                                <span style="color: #B0BEC5; font-size: 0.85rem;">Security & Compliance</span>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Comprehensive security assessment of all systems, including vulnerability scanning, penetration testing, and compliance verification.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #3498DB;">25%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 25%; height: 100%; background: linear-gradient(90deg, #3498DB, #2980B9); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Started:</span>
+                                            <span style="font-size: 0.85rem;">Today</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Due:</span>
+                                            <span style="font-size: 0.85rem;">Next week</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <div style="display: flex; align-items: center; gap: -0.5rem;">
+                                                <div style="width: 24px; height: 24px; background: #E74C3C; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A;">🛡️</div>
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">1 agent active</span>
+                                        </div>
+                                        <button style="background: #6B73FF; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">View Details</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Project Card 3 -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#6B73FF'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                                💻 Website Development
+                                            </h3>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="background: #F39C12; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">REVIEW</span>
+                                                <span style="color: #B0BEC5; font-size: 0.85rem;">Development</span>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Complete redesign and development of the company website with modern UI/UX, responsive design, and enhanced performance.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #F39C12;">90%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 90%; height: 100%; background: linear-gradient(90deg, #F39C12, #E67E22); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Started:</span>
+                                            <span style="font-size: 0.85rem;">1 week ago</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Due:</span>
+                                            <span style="font-size: 0.85rem;">Friday</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <div style="display: flex; align-items: center; gap: -0.5rem;">
+                                                <div style="width: 24px; height: 24px; background: #9B59B6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A;">💻</div>
+                                                <div style="width: 24px; height: 24px; background: #1ABC9C; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A; margin-left: -8px;">🎨</div>
+                                                <div style="width: 24px; height: 24px; background: #F1C40F; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A; margin-left: -8px;">⚡</div>
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">3 agents active</span>
+                                        </div>
+                                        <button style="background: #6B73FF; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">View Details</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Project Card 4 -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#6B73FF'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div>
+                                            <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                                📈 Data Analytics Platform
+                                            </h3>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="background: #2ECC71; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">ACTIVE</span>
+                                                <span style="color: #B0BEC5; font-size: 0.85rem;">Data & Analytics</span>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Building a comprehensive analytics platform for real-time data processing, visualization, and AI-powered insights generation.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #2ECC71;">60%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 60%; height: 100%; background: linear-gradient(90deg, #2ECC71, #27AE60); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Started:</span>
+                                            <span style="font-size: 0.85rem;">5 days ago</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">Due:</span>
+                                            <span style="font-size: 0.85rem;">Next month</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <div style="display: flex; align-items: center; gap: -0.5rem;">
+                                                <div style="width: 24px; height: 24px; background: #3498DB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A;">📊</div>
+                                                <div style="width: 24px; height: 24px; background: #E67E22; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid #1A1F3A; margin-left: -8px;">🔍</div>
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: #B0BEC5;">2 agents active</span>
+                                        </div>
+                                        <button style="background: #6B73FF; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    content = `
+                        <div class="cybersecurity-command-center">
+                            <div class="security-header">
+                                <div class="threat-status">
+                                    <div class="status-indicator status-secure">System Secure</div>
+                                    <span>|</span>
+                                    <span>Last Scan: 2 min ago</span>
+                                </div>
+                                <div class="ai-status">
+                                    <div class="ai-brain">🧠</div>
+                                    <div>
+                                        <div><strong>AI Guardian:</strong> Active Protection</div>
+                                        <div style="font-size: 12px; color: #b0b0b0;">1,247 threats blocked today</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="security-dashboard-grid">
+                                <div class="security-dashboard-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title">Threat Analysis</h3>
+                                        <div class="card-icon">🔬</div>
+                                    </div>
+                                    <p style="color: #b0b0b0; margin-top: 0.5rem;">Real-time threat detection and analysis.</p>
+                                    <div class="metric-grid">
+                                        <div class="metric">
+                                            <div class="metric-value">96%</div>
+                                            <div class="metric-label">Confidence</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">1.2K</div>
+                                            <div class="metric-label">Blocked</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="security-dashboard-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title">Network Monitor</h3>
+                                        <div class="card-icon">🌐</div>
+                                    </div>
+                                    <p style="color: #b0b0b0; margin-top: 0.5rem;">Monitoring all incoming and outgoing traffic.</p>
+                                    <div class="metric-grid">
+                                        <div class="metric">
+                                            <div class="metric-value">23</div>
+                                            <div class="metric-label">Active Connections</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">4.7GB</div>
+                                            <div class="metric-label">Data Scanned</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="real-time-logs">
+                                <div class="log-entry">
+                                    <span class="log-timestamp">14:32:15</span>
+                                    <span class="log-level-info">[INFO]</span>
+                                    <span class="log-message">System scan initiated.</span>
+                                </div>
+                                <div class="log-entry">
+                                    <span class="log-timestamp">14:32:18</span>
+                                    <span class="log-level-warning">[WARN]</span>
+                                    <span class="log-message">Unusual traffic pattern detected from IP 192.168.1.101.</span>
+                                </div>
+                                <div class="log-entry">
+                                    <span class="log-timestamp">14:32:20</span>
+                                    <span class="log-level-critical">[CRITICAL]</span>
+                                    <span class="log-message">Malicious payload detected and blocked.</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'artifacts') {
+                    content = `
+                        <div style="padding: 1rem; background: #1A1F3A; height: calc(100vh - 140px); display: flex; flex-direction: column;">
+                            <!-- Header -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 1rem; background: #252B4A; border-radius: 8px;">
+                                <div>
+                                    <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">🎨 Aideon Artifact Studio</h1>
+                                    <p style="color: #B0BEC5; font-size: 0.9rem;">Advanced live preview with hybrid AI code execution and real-time rendering</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <select style="padding: 0.5rem; background: #1A1F3A; border: 1px solid #34405A; border-radius: 6px; color: white; font-size: 0.85rem;">
+                                        <option>Landing Page Website</option>
+                                        <option>Data Visualization</option>
+                                        <option>Python Script</option>
+                                        <option>API Documentation</option>
+                                    </select>
+                                    <button style="background: #2ECC71; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.25rem;">⚡ Run</button>
+                                    <button style="background: #3498DB; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.25rem;">💾 Save</button>
+                                    <button style="background: #6B73FF; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.25rem;">📋 Copy</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Content Area -->
+                            <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; min-height: 0;">
+                                <!-- Code Editor Panel -->
+                                <div style="background: #252B4A; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #34405A;">
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <div style="background: #1A1F3A; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; border-bottom: 2px solid #6B73FF; color: #6B73FF;">index.html</div>
+                                            <div style="background: #1A1F3A; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; color: #B0BEC5; cursor: pointer;">style.css</div>
+                                            <div style="background: #1A1F3A; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; color: #B0BEC5; cursor: pointer;">script.js</div>
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1rem; padding: 0.25rem;">⛶</button>
+                                            <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1rem; padding: 0.25rem;">🔄</button>
+                                            <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1rem; padding: 0.25rem;">⚙️</button>
+                                        </div>
+                                    </div>
+                                    <div style="flex: 1; padding: 1rem; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.4; overflow-y: auto; background: #1A1F3A;">
+                                        <div style="display: flex;">
+                                            <div style="color: #666; margin-right: 1rem; user-select: none;">
+                                                <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div>
+                                            </div>
+                                            <div style="flex: 1;">
+                                                <div><span style="color: #E74C3C;">&lt;!DOCTYPE</span> <span style="color: #F39C12;">html</span><span style="color: #E74C3C;">&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;html</span> <span style="color: #1ABC9C;">lang</span>=<span style="color: #2ECC71;">"en"</span><span style="color: #E74C3C;">&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;head&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;meta</span> <span style="color: #1ABC9C;">charset</span>=<span style="color: #2ECC71;">"UTF-8"</span><span style="color: #E74C3C;">&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;meta</span> <span style="color: #1ABC9C;">name</span>=<span style="color: #2ECC71;">"viewport"</span> <span style="color: #1ABC9C;">content</span>=<span style="color: #2ECC71;">"width=device-width, initial-scale=1.0"</span><span style="color: #E74C3C;">&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;title&gt;</span>AI Future<span style="color: #E74C3C;">&lt;/title&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;style&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F39C12;">body</span> { <span style="color: #1ABC9C;">background</span>: <span style="color: #2ECC71;">linear-gradient(135deg, #667eea 0%, #764ba2 100%)</span>; }</div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F39C12;">.container</span> { <span style="color: #1ABC9C;">text-align</span>: <span style="color: #2ECC71;">center</span>; <span style="color: #1ABC9C;">padding</span>: <span style="color: #2ECC71;">50px</span>; }</div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F39C12;">h1</span> { <span style="color: #1ABC9C;">color</span>: <span style="color: #2ECC71;">white</span>; <span style="color: #1ABC9C;">font-size</span>: <span style="color: #2ECC71;">3rem</span>; }</div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;/style&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;/head&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;body&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;div</span> <span style="color: #1ABC9C;">class</span>=<span style="color: #2ECC71;">"container"</span><span style="color: #E74C3C;">&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;h1&gt;</span>Welcome to AI Future<span style="color: #E74C3C;">&lt;/h1&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;p&gt;</span>The future is now<span style="color: #E74C3C;">&lt;/p&gt;</span></div>
+                                                <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E74C3C;">&lt;/div&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;/body&gt;</span></div>
+                                                <div><span style="color: #E74C3C;">&lt;/html&gt;</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Preview Panel -->
+                                <div style="background: #252B4A; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #34405A;">
+                                        <div style="font-weight: 600;">Live Preview</div>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button style="background: #1A1F3A; border: 1px solid #34405A; color: #B0BEC5; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">🖥️ Desktop</button>
+                                            <button style="background: none; border: 1px solid #34405A; color: #B0BEC5; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">📱 Mobile</button>
+                                            <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1rem; padding: 0.25rem;">⛶</button>
+                                            <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1rem; padding: 0.25rem;">🔄</button>
+                                        </div>
+                                    </div>
+                                    <div style="flex: 1; background: white; margin: 1rem; border-radius: 6px; overflow: hidden; position: relative;">
+                                        <iframe style="width: 100%; height: 100%; border: none;" srcdoc="<!DOCTYPE html><html><head><style>body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);margin:0;font-family:Arial,sans-serif}.container{text-align:center;padding:50px}h1{color:white;font-size:3rem;margin-bottom:1rem}p{color:white;font-size:1.2rem}</style></head><body><div class='container'><h1>Welcome to AI Future</h1><p>The future is now</p></div></body></html>"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Console Output -->
+                            <div style="background: #252B4A; border-radius: 8px; margin-top: 1rem; padding: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <div style="font-weight: 600; font-size: 0.9rem;">Console Output</div>
+                                    <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 0.8rem;">Clear</button>
+                                </div>
+                                <div style="background: #1A1F3A; padding: 0.75rem; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #2ECC71;">
+                                    <div style="margin-bottom: 0.25rem;">[14:32:15] HTML parsed successfully</div>
+                                    <div style="margin-bottom: 0.25rem;">[14:32:15] CSS styles applied</div>
+                                    <div style="color: #3498DB;">[14:32:15] Page rendered in 0.23s</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Artifacts -->
+                            <div style="background: #252B4A; border-radius: 8px; margin-top: 1rem; padding: 1rem;">
+                                <div style="font-weight: 600; margin-bottom: 1rem;">Recent Artifacts</div>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                    <div style="background: #1A1F3A; padding: 1rem; border-radius: 6px; border-left: 3px solid #6B73FF; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='#1A1F3A'">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                            <div style="font-weight: 600; font-size: 0.9rem;">🌐 Landing Page Website</div>
+                                            <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                        </div>
+                                        <div style="color: #B0BEC5; font-size: 0.8rem; margin-bottom: 0.25rem;">HTML/CSS • 2 minutes ago</div>
+                                        <div style="color: #B0BEC5; font-size: 0.75rem;">156 lines</div>
+                                    </div>
+                                    <div style="background: #1A1F3A; padding: 1rem; border-radius: 6px; border-left: 3px solid #2ECC71; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='#1A1F3A'">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                            <div style="font-weight: 600; font-size: 0.9rem;">📊 Sales Dashboard</div>
+                                        </div>
+                                        <div style="color: #B0BEC5; font-size: 0.8rem; margin-bottom: 0.25rem;">React/Chart.js • 1 hour ago</div>
+                                        <div style="color: #B0BEC5; font-size: 0.75rem;">324 lines</div>
+                                    </div>
+                                    <div style="background: #1A1F3A; padding: 1rem; border-radius: 6px; border-left: 3px solid #F39C12; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#252B4A'" onmouseout="this.style.background='#1A1F3A'">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                            <div style="font-weight: 600; font-size: 0.9rem;">🐍 Data Analysis Script</div>
+                                        </div>
+                                        <div style="color: #B0BEC5; font-size: 0.8rem; margin-bottom: 0.25rem;">Python • 3 hours ago</div>
+                                        <div style="color: #B0BEC5; font-size: 0.75rem;">89 lines</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'files') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">📁 File Management</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Intelligent file organization with AI-powered search and categorization</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button style="background: #2ECC71; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>📤</span> Upload Files
+                                    </button>
+                                    <button style="background: #3498DB; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>📁</span> New Folder
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- File Stats -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #2ECC71;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #2ECC71; margin-bottom: 0.5rem;">2.4TB</div>
+                                    <div style="color: #B0BEC5;">Total Storage</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3498DB;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #3498DB; margin-bottom: 0.5rem;">1,247</div>
+                                    <div style="color: #B0BEC5;">Total Files</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #F39C12;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #F39C12; margin-bottom: 0.5rem;">89</div>
+                                    <div style="color: #B0BEC5;">Shared Files</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #E74C3C;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #E74C3C; margin-bottom: 0.5rem;">15</div>
+                                    <div style="color: #B0BEC5;">Recent Uploads</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Search and Filter -->
+                            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center;">
+                                <div style="flex: 1; position: relative;">
+                                    <input type="text" placeholder="Search files with AI..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white; font-size: 1rem;">
+                                    <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #B0BEC5;">🔍</span>
+                                </div>
+                                <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                    <option>All Types</option>
+                                    <option>Documents</option>
+                                    <option>Images</option>
+                                    <option>Videos</option>
+                                    <option>Code</option>
+                                </select>
+                                <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                    <option>All Folders</option>
+                                    <option>Projects</option>
+                                    <option>Documents</option>
+                                    <option>Media</option>
+                                    <option>Archive</option>
+                                </select>
+                            </div>
+                            
+                            <!-- File Browser -->
+                            <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <div style="font-weight: 600; font-size: 1.1rem;">Recent Files</div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="background: #1A1F3A; border: 1px solid #34405A; color: #B0BEC5; padding: 0.5rem; border-radius: 6px; cursor: pointer;">📋</button>
+                                        <button style="background: #1A1F3A; border: 1px solid #34405A; color: #B0BEC5; padding: 0.5rem; border-radius: 6px; cursor: pointer;">🔲</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- File List -->
+                                <div style="display: grid; gap: 0.5rem;">
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.5rem;">📄</span>
+                                            <div>
+                                                <div style="font-weight: 600;">Market_Research_Report.pdf</div>
+                                                <div style="font-size: 0.85rem; color: #B0BEC5;">Research document with AI analysis</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #B0BEC5;">2.4 MB</div>
+                                        <div style="color: #B0BEC5;">2 hours ago</div>
+                                        <div style="color: #B0BEC5;">John Doe</div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer;">⋮</button>
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.5rem;">🖼️</span>
+                                            <div>
+                                                <div style="font-weight: 600;">Dashboard_Mockup.png</div>
+                                                <div style="font-size: 0.85rem; color: #B0BEC5;">UI design for new dashboard</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #B0BEC5;">1.8 MB</div>
+                                        <div style="color: #B0BEC5;">5 hours ago</div>
+                                        <div style="color: #B0BEC5;">Sarah Smith</div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer;">⋮</button>
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.5rem;">💻</span>
+                                            <div>
+                                                <div style="font-weight: 600;">ai_model_training.py</div>
+                                                <div style="font-size: 0.85rem; color: #B0BEC5;">Machine learning training script</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #B0BEC5;">45 KB</div>
+                                        <div style="color: #B0BEC5;">1 day ago</div>
+                                        <div style="color: #B0BEC5;">Alex Chen</div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer;">⋮</button>
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.5rem;">📊</span>
+                                            <div>
+                                                <div style="font-weight: 600;">Q4_Analytics_Data.xlsx</div>
+                                                <div style="font-size: 0.85rem; color: #B0BEC5;">Quarterly performance metrics</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #B0BEC5;">3.2 MB</div>
+                                        <div style="color: #B0BEC5;">2 days ago</div>
+                                        <div style="color: #B0BEC5;">Mike Johnson</div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer;">⋮</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'agents') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">🤖 AI Agent Orchestration</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Multi-agent coordination with autonomous task execution and real-time monitoring</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button style="background: #2ECC71; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>➕</span> Deploy Agent
+                                    </button>
+                                    <button style="background: #3498DB; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>⚙️</span> Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Agent Stats -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #2ECC71;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #2ECC71; margin-bottom: 0.5rem;">8</div>
+                                    <div style="color: #B0BEC5;">Active Agents</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3498DB;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #3498DB; margin-bottom: 0.5rem;">247</div>
+                                    <div style="color: #B0BEC5;">Tasks Completed</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #F39C12;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #F39C12; margin-bottom: 0.5rem;">98.7%</div>
+                                    <div style="color: #B0BEC5;">Success Rate</div>
+                                </div>
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #E74C3C;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #E74C3C; margin-bottom: 0.5rem;">12</div>
+                                    <div style="color: #B0BEC5;">Queued Tasks</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Agent Grid -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                                <!-- Research Agent -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#2ECC71'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #2ECC71, #27AE60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔍</div>
+                                            <div>
+                                                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;">Research Agent</h3>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <span style="background: #2ECC71; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">ACTIVE</span>
+                                                    <span style="color: #B0BEC5; font-size: 0.85rem;">Data Collection</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Autonomous research and data collection from multiple sources including web scraping, API integration, and document analysis.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Current Task Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #2ECC71;">85%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 85%; height: 100%; background: linear-gradient(90deg, #2ECC71, #27AE60); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>Tasks Completed: <span style="color: white;">47</span></div>
+                                            <div>Uptime: <span style="color: white;">99.2%</span></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>CPU: <span style="color: #2ECC71;">23%</span></div>
+                                            <div>Memory: <span style="color: #2ECC71;">1.2GB</span></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="background: #2ECC71; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; flex: 1;">Monitor</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⏸️</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⚙️</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Analysis Agent -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#3498DB'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #3498DB, #2980B9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📊</div>
+                                            <div>
+                                                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;">Analysis Agent</h3>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <span style="background: #3498DB; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">PROCESSING</span>
+                                                    <span style="color: #B0BEC5; font-size: 0.85rem;">Data Analysis</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Advanced data analysis, pattern recognition, and insight generation using machine learning algorithms and statistical models.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Current Task Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #3498DB;">62%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 62%; height: 100%; background: linear-gradient(90deg, #3498DB, #2980B9); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>Tasks Completed: <span style="color: white;">32</span></div>
+                                            <div>Uptime: <span style="color: white;">97.8%</span></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>CPU: <span style="color: #3498DB;">67%</span></div>
+                                            <div>Memory: <span style="color: #3498DB;">2.8GB</span></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="background: #3498DB; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; flex: 1;">Monitor</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⏸️</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⚙️</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Security Agent -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#E74C3C'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #E74C3C, #C0392B); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🛡️</div>
+                                            <div>
+                                                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;">Security Agent</h3>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <span style="background: #E74C3C; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">MONITORING</span>
+                                                    <span style="color: #B0BEC5; font-size: 0.85rem;">Threat Detection</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Real-time security monitoring, threat detection, and automated response to protect system integrity and data security.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Threat Scan Progress</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #E74C3C;">100%</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #E74C3C, #C0392B); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>Threats Blocked: <span style="color: white;">1,247</span></div>
+                                            <div>Uptime: <span style="color: white;">100%</span></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>CPU: <span style="color: #E74C3C;">15%</span></div>
+                                            <div>Memory: <span style="color: #E74C3C;">0.8GB</span></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="background: #E74C3C; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; flex: 1;">Monitor</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⏸️</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⚙️</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Automation Agent -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border: 1px solid #34405A; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#F39C12'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#34405A'; this.style.transform='translateY(0)'">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #F39C12, #E67E22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⚡</div>
+                                            <div>
+                                                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;">Automation Agent</h3>
+                                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <span style="background: #F39C12; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">IDLE</span>
+                                                    <span style="color: #B0BEC5; font-size: 0.85rem;">Task Automation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button style="background: none; border: none; color: #B0BEC5; cursor: pointer; font-size: 1.2rem;">⋮</button>
+                                    </div>
+                                    <p style="color: #B0BEC5; margin-bottom: 1rem; line-height: 1.5;">Workflow automation, task scheduling, and process optimization to streamline repetitive operations and improve efficiency.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.9rem;">Queue Status</span>
+                                            <span style="font-size: 0.9rem; font-weight: 600; color: #F39C12;">Ready</span>
+                                        </div>
+                                        <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                            <div style="width: 0%; height: 100%; background: linear-gradient(90deg, #F39C12, #E67E22); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div style="font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>Tasks Automated: <span style="color: white;">156</span></div>
+                                            <div>Uptime: <span style="color: white;">98.5%</span></div>
+                                        </div>
+                                        <div style="text-align: right; font-size: 0.85rem; color: #B0BEC5;">
+                                            <div>CPU: <span style="color: #F39C12;">5%</span></div>
+                                            <div>Memory: <span style="color: #F39C12;">0.3GB</span></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button style="background: #F39C12; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; flex: 1;">Monitor</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⏸️</button>
+                                        <button style="background: #34405A; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">⚙️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'analytics') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">📈 Advanced Analytics</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Real-time insights and performance metrics with AI-powered predictions</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <select style="padding: 0.75rem 1rem; background: #252B4A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                        <option>Last 7 days</option>
+                                        <option>Last 30 days</option>
+                                        <option>Last 90 days</option>
+                                        <option>Custom Range</option>
+                                    </select>
+                                    <button style="background: #3498DB; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>📊</span> Export Report
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Metrics -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #2ECC71;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h3 style="color: #2ECC71; font-weight: 600;">System Performance</h3>
+                                        <span style="color: #2ECC71;">↗️ +12%</span>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: bold; color: #2ECC71; margin-bottom: 0.5rem;">98.7%</div>
+                                    <div style="color: #B0BEC5; font-size: 0.9rem;">Average uptime this week</div>
+                                </div>
+                                
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #3498DB;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h3 style="color: #3498DB; font-weight: 600;">Task Completion</h3>
+                                        <span style="color: #3498DB;">↗️ +8%</span>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: bold; color: #3498DB; margin-bottom: 0.5rem;">1,247</div>
+                                    <div style="color: #B0BEC5; font-size: 0.9rem;">Tasks completed this week</div>
+                                </div>
+                                
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #F39C12;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h3 style="color: #F39C12; font-weight: 600;">Cost Efficiency</h3>
+                                        <span style="color: #F39C12;">↗️ +15%</span>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: bold; color: #F39C12; margin-bottom: 0.5rem;">45%</div>
+                                    <div style="color: #B0BEC5; font-size: 0.9rem;">Savings vs cloud-only</div>
+                                </div>
+                                
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; border-left: 4px solid #E74C3C;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h3 style="color: #E74C3C; font-weight: 600;">Security Score</h3>
+                                        <span style="color: #2ECC71;">↗️ +3%</span>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: bold; color: #E74C3C; margin-bottom: 0.5rem;">96%</div>
+                                    <div style="color: #B0BEC5; font-size: 0.9rem;">Overall security rating</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Charts Section -->
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                                <!-- Performance Chart -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                    <h3 style="font-weight: 600; margin-bottom: 1rem;">Performance Trends</h3>
+                                    <div style="height: 300px; background: #1A1F3A; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative;">
+                                        <!-- Simulated Chart -->
+                                        <svg width="100%" height="100%" style="position: absolute;">
+                                            <defs>
+                                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#2ECC71;stop-opacity:0.3" />
+                                                    <stop offset="100%" style="stop-color:#2ECC71;stop-opacity:0" />
+                                                </linearGradient>
+                                            </defs>
+                                            <polyline fill="none" stroke="#2ECC71" stroke-width="3" points="50,250 100,200 150,180 200,160 250,140 300,120 350,100 400,90 450,85 500,80"/>
+                                            <polyline fill="url(#gradient1)" points="50,250 100,200 150,180 200,160 250,140 300,120 350,100 400,90 450,85 500,80 500,280 50,280"/>
+                                        </svg>
+                                        <div style="position: absolute; bottom: 1rem; left: 1rem; color: #B0BEC5; font-size: 0.8rem;">
+                                            Performance improving by 12% this week
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Resource Usage -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                    <h3 style="font-weight: 600; margin-bottom: 1rem;">Resource Usage</h3>
+                                    <div style="space-y: 1rem;">
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem;">CPU Usage</span>
+                                                <span style="font-size: 0.9rem; color: #2ECC71;">23%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                <div style="width: 23%; height: 100%; background: #2ECC71; border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem;">Memory</span>
+                                                <span style="font-size: 0.9rem; color: #3498DB;">67%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                <div style="width: 67%; height: 100%; background: #3498DB; border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem;">Storage</span>
+                                                <span style="font-size: 0.9rem; color: #F39C12;">45%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                <div style="width: 45%; height: 100%; background: #F39C12; border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem;">Network</span>
+                                                <span style="font-size: 0.9rem; color: #2ECC71;">12%</span>
+                                            </div>
+                                            <div style="width: 100%; height: 8px; background: #1A1F3A; border-radius: 4px;">
+                                                <div style="width: 12%; height: 100%; background: #2ECC71; border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Activity -->
+                            <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                <h3 style="font-weight: 600; margin-bottom: 1rem;">Recent Analytics Events</h3>
+                                <div style="space-y: 0.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                        <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%;"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 0.9rem; margin-bottom: 0.25rem;">Performance optimization completed</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">System performance improved by 12% - 2 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                        <div style="width: 8px; height: 8px; background: #3498DB; border-radius: 50%;"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 0.9rem; margin-bottom: 0.25rem;">Weekly report generated</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">Analytics report for week 47 - 15 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.5rem;">
+                                        <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%;"></div>
+                                        <div style="flex: 1;">
+                                            <div style="font-size: 0.9rem; margin-bottom: 0.25rem;">Cost optimization alert</div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5;">Potential 8% cost reduction identified - 1 hour ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'settings') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">⚙️ System Settings</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Configure and customize your Aideon Lite AI experience</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button style="background: #2ECC71; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>💾</span> Save Changes
+                                    </button>
+                                    <button style="background: #34405A; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>🔄</span> Reset
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Settings Categories -->
+                            <div style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+                                <!-- Settings Navigation -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                    <h3 style="font-weight: 600; margin-bottom: 1rem;">Categories</h3>
+                                    <div style="space-y: 0.5rem;">
+                                        <div style="padding: 0.75rem; background: #6B73FF; border-radius: 8px; color: white; cursor: pointer;">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>🤖</span> AI Configuration
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>🛡️</span> Security & Privacy
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>🎨</span> Interface & Theme
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>📊</span> Performance
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>🔗</span> Integrations
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>📧</span> Notifications
+                                            </div>
+                                        </div>
+                                        <div style="padding: 0.75rem; border-radius: 8px; color: #B0BEC5; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#1A1F3A'" onmouseout="this.style.background='transparent'">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                                <span>💳</span> Billing & Usage
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Settings Content -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 2rem;">
+                                    <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                                        🤖 AI Configuration
+                                    </h2>
+                                    
+                                    <!-- Processing Mode -->
+                                    <div style="margin-bottom: 2rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem;">Processing Mode</h3>
+                                        <div style="background: #1A1F3A; padding: 1.5rem; border-radius: 8px;">
+                                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                                    <input type="radio" name="processing" checked style="accent-color: #6B73FF;">
+                                                    <span>Hybrid Processing (Recommended)</span>
+                                                </label>
+                                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                                    <input type="radio" name="processing" style="accent-color: #6B73FF;">
+                                                    <span>Cloud Only</span>
+                                                </label>
+                                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                                    <input type="radio" name="processing" style="accent-color: #6B73FF;">
+                                                    <span>Local Only</span>
+                                                </label>
+                                            </div>
+                                            <div style="color: #B0BEC5; font-size: 0.9rem;">
+                                                Hybrid processing optimizes between local and cloud resources for best performance and cost efficiency.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI Model Selection -->
+                                    <div style="margin-bottom: 2rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem;">AI Model Configuration</h3>
+                                        <div style="background: #1A1F3A; padding: 1.5rem; border-radius: 8px;">
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                                <div>
+                                                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">Primary Model</label>
+                                                    <select style="width: 100%; padding: 0.75rem; background: #252B4A; border: 1px solid #34405A; border-radius: 6px; color: white;">
+                                                        <option>GPT-4 Turbo</option>
+                                                        <option>Claude 3.5 Sonnet</option>
+                                                        <option>Gemini Pro</option>
+                                                        <option>Custom Model</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">Fallback Model</label>
+                                                    <select style="width: 100%; padding: 0.75rem; background: #252B4A; border: 1px solid #34405A; border-radius: 6px; color: white;">
+                                                        <option>GPT-3.5 Turbo</option>
+                                                        <option>Claude 3 Haiku</option>
+                                                        <option>Gemini Flash</option>
+                                                        <option>None</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="margin-bottom: 1rem;">
+                                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">Temperature: <span style="color: white;">0.7</span></label>
+                                                <input type="range" min="0" max="1" step="0.1" value="0.7" style="width: 100%; accent-color: #6B73FF;">
+                                            </div>
+                                            <div>
+                                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">Max Tokens: <span style="color: white;">4096</span></label>
+                                                <input type="range" min="512" max="8192" step="512" value="4096" style="width: 100%; accent-color: #6B73FF;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Agent Configuration -->
+                                    <div style="margin-bottom: 2rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem;">Agent Behavior</h3>
+                                        <div style="background: #1A1F3A; padding: 1.5rem; border-radius: 8px;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                                <div>
+                                                    <div style="font-weight: 600;">Autonomous Mode</div>
+                                                    <div style="font-size: 0.85rem; color: #B0BEC5;">Allow agents to work independently</div>
+                                                </div>
+                                                <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                                    <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #6B73FF; transition: .4s; border-radius: 34px;"></span>
+                                                    <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 30px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                                                </label>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                                <div>
+                                                    <div style="font-weight: 600;">Real-time Learning</div>
+                                                    <div style="font-size: 0.85rem; color: #B0BEC5;">Continuously improve from interactions</div>
+                                                </div>
+                                                <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                                    <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #6B73FF; transition: .4s; border-radius: 34px;"></span>
+                                                    <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 30px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                                                </label>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <div>
+                                                    <div style="font-weight: 600;">Multi-Agent Collaboration</div>
+                                                    <div style="font-size: 0.85rem; color: #B0BEC5;">Enable agents to work together</div>
+                                                </div>
+                                                <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
+                                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                                                    <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #6B73FF; transition: .4s; border-radius: 34px;"></span>
+                                                    <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 30px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- API Keys -->
+                                    <div>
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem;">API Configuration</h3>
+                                        <div style="background: #1A1F3A; padding: 1.5rem; border-radius: 8px;">
+                                            <div style="margin-bottom: 1rem;">
+                                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">OpenAI API Key</label>
+                                                <input type="password" placeholder="sk-..." style="width: 100%; padding: 0.75rem; background: #252B4A; border: 1px solid #34405A; border-radius: 6px; color: white;">
+                                            </div>
+                                            <div style="margin-bottom: 1rem;">
+                                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #B0BEC5;">Anthropic API Key</label>
+                                                <input type="password" placeholder="sk-ant-..." style="width: 100%; padding: 0.75rem; background: #252B4A; border: 1px solid #34405A; border-radius: 6px; color: white;">
+                                            </div>
+                                            <div style="color: #B0BEC5; font-size: 0.85rem;">
+                                                API keys are encrypted and stored securely. Leave blank to use system defaults.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (tabName === 'tardis') {
+                    content = `
+                        <div style="padding: 2rem; background: #1A1F3A; min-height: calc(100vh - 140px);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">👨‍⚕️ Dr. TARDIS</h1>
+                                    <p style="color: #B0BEC5; font-size: 1.1rem;">Your AI companion for system monitoring, explanations, and intelligent assistance</p>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button style="background: #2ECC71; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>🎤</span> Voice Chat
+                                    </button>
+                                    <button style="background: #3498DB; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>📺</span> Screen Share
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Dr. TARDIS Interface -->
+                            <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem;">
+                                <!-- Main Chat Area -->
+                                <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; height: 600px;">
+                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #34405A;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #6B73FF, #4A90E2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">👨‍⚕️</div>
+                                        <div>
+                                            <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;">Dr. TARDIS</h3>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                                <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                                <span style="color: #2ECC71; font-size: 0.9rem;">Online & Ready</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Chat Messages -->
+                                    <div style="flex: 1; overflow-y: auto; margin-bottom: 1rem;">
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; align-items: start; gap: 1rem;">
+                                                <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #6B73FF, #4A90E2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;">👨‍⚕️</div>
+                                                <div style="background: #1A1F3A; padding: 1rem; border-radius: 12px; border-top-left-radius: 4px; flex: 1;">
+                                                    <p style="margin-bottom: 0.5rem;">Hello! I'm Dr. TARDIS, your AI companion. I can help you understand what's happening in your system, explain complex concepts, and provide intelligent assistance.</p>
+                                                    <p style="margin-bottom: 0.5rem;">Currently, I'm monitoring:</p>
+                                                    <ul style="margin-left: 1rem; color: #B0BEC5;">
+                                                        <li>8 active AI agents working on various tasks</li>
+                                                        <li>System performance at 98.7% efficiency</li>
+                                                        <li>1,247 threats blocked by security systems</li>
+                                                        <li>12 projects in active development</li>
+                                                    </ul>
+                                                    <p>What would you like to know about?</p>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5; margin-top: 0.5rem; margin-left: 3rem;">2 minutes ago</div>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; align-items: start; gap: 1rem; justify-content: flex-end;">
+                                                <div style="background: #6B73FF; padding: 1rem; border-radius: 12px; border-top-right-radius: 4px; max-width: 70%;">
+                                                    <p>Can you explain how the hybrid processing system works and why it's more efficient?</p>
+                                                </div>
+                                                <div style="width: 32px; height: 32px; background: #34405A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;">👤</div>
+                                            </div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5; margin-top: 0.5rem; text-align: right; margin-right: 3rem;">1 minute ago</div>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 1rem;">
+                                            <div style="display: flex; align-items: start; gap: 1rem;">
+                                                <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #6B73FF, #4A90E2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;">👨‍⚕️</div>
+                                                <div style="background: #1A1F3A; padding: 1rem; border-radius: 12px; border-top-left-radius: 4px; flex: 1;">
+                                                    <p style="margin-bottom: 0.5rem;">Excellent question! Our hybrid processing system is like having the best of both worlds:</p>
+                                                    <div style="background: #252B4A; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                                        <h4 style="color: #6B73FF; margin-bottom: 0.5rem;">🖥️ Local Processing (67%)</h4>
+                                                        <p style="font-size: 0.9rem; color: #B0BEC5;">Handles routine tasks, provides instant responses, and maintains privacy for sensitive data.</p>
+                                                    </div>
+                                                    <div style="background: #252B4A; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                                        <h4 style="color: #3498DB; margin-bottom: 0.5rem;">☁️ Cloud Processing (33%)</h4>
+                                                        <p style="font-size: 0.9rem; color: #B0BEC5;">Handles complex computations, accesses latest models, and provides unlimited scalability.</p>
+                                                    </div>
+                                                    <p>This results in <strong style="color: #2ECC71;">45% cost savings</strong> compared to cloud-only solutions while maintaining superior performance!</p>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 0.75rem; color: #B0BEC5; margin-top: 0.5rem; margin-left: 3rem;">Just now</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Chat Input -->
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <input type="text" placeholder="Ask Dr. TARDIS anything about your system..." style="flex: 1; padding: 0.75rem; background: #1A1F3A; border: 1px solid #34405A; border-radius: 8px; color: white;">
+                                        <button style="background: #6B73FF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">Send</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- System Status Panel -->
+                                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                    <!-- Current Activity -->
+                                    <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                            <span>👁️</span> What I'm Watching
+                                        </h3>
+                                        <div style="space-y: 0.75rem;">
+                                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.75rem;">
+                                                <div style="width: 8px; height: 8px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                                <div style="flex: 1;">
+                                                    <div style="font-size: 0.9rem; font-weight: 600;">Research Agent</div>
+                                                    <div style="font-size: 0.75rem; color: #B0BEC5;">Collecting market data</div>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.75rem;">
+                                                <div style="width: 8px; height: 8px; background: #3498DB; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                                <div style="flex: 1;">
+                                                    <div style="font-size: 0.9rem; font-weight: 600;">Security Scan</div>
+                                                    <div style="font-size: 0.75rem; color: #B0BEC5;">Monitoring threats</div>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: #1A1F3A; border-radius: 8px; margin-bottom: 0.75rem;">
+                                                <div style="width: 8px; height: 8px; background: #F39C12; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                                                <div style="flex: 1;">
+                                                    <div style="font-size: 0.9rem; font-weight: 600;">Code Generation</div>
+                                                    <div style="font-size: 0.75rem; color: #B0BEC5;">Building website</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Quick Stats -->
+                                    <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                            <span>📊</span> Quick Stats
+                                        </h3>
+                                        <div style="space-y: 0.5rem;">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem; color: #B0BEC5;">System Health</span>
+                                                <span style="font-size: 0.9rem; color: #2ECC71;">98.7%</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem; color: #B0BEC5;">Active Agents</span>
+                                                <span style="font-size: 0.9rem; color: #3498DB;">8</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem; color: #B0BEC5;">Tasks Today</span>
+                                                <span style="font-size: 0.9rem; color: #F39C12;">247</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                                <span style="font-size: 0.9rem; color: #B0BEC5;">Threats Blocked</span>
+                                                <span style="font-size: 0.9rem; color: #E74C3C;">1,247</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Dr. TARDIS Capabilities -->
+                                    <div style="background: #252B4A; border-radius: 12px; padding: 1.5rem;">
+                                        <h3 style="font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                            <span>🎯</span> My Capabilities
+                                        </h3>
+                                        <div style="space-y: 0.5rem;">
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">System Monitoring</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">Concept Explanation</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">Voice Interaction</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">Screen Sharing</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">Project Guidance</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                                <span style="color: #2ECC71;">✓</span>
+                                                <span style="font-size: 0.85rem;">Agent Coordination</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                contentArea.innerHTML = content;
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabName = tab.getAttribute('data-tab');
+                    loadTabContent(tabName);
+                });
+            });
+
+            // Load the default tab content
+            loadTabContent('dashboard');
+        });
+    </script>
+</body>
+</html>
+
+
