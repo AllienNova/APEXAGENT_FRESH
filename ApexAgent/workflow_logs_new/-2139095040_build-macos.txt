@@ -1,0 +1,8 @@
+2025-06-08T01:45:30.3771142Z ##[section]Starting: Prepare job build-macos
+2025-06-08T01:45:30.3773297Z Evaluating strategy
+2025-06-08T01:45:30.3777652Z Creating job '__default'
+2025-06-08T01:45:30.3779680Z Evaluating timeout
+2025-06-08T01:45:30.3779723Z Evaluating cancel timeout
+2025-06-08T01:45:30.3779769Z Evaluating continue on error
+2025-06-08T01:45:30.3779822Z Evaluating target
+2025-06-08T01:45:30.3781687Z ##[section]Finishing: Prepare job build-macos

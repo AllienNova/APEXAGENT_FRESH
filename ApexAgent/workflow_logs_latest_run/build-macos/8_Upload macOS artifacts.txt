@@ -1,0 +1,42 @@
+2025-06-08T02:01:11.9043090Z ##[group]Run actions/upload-artifact@v4
+2025-06-08T02:01:11.9043330Z with:
+2025-06-08T02:01:11.9043560Z   name: macos-installer
+2025-06-08T02:01:11.9043710Z   path: dist/*.dmg
+dist/*.zip
+
+2025-06-08T02:01:11.9043910Z   retention-days: 30
+2025-06-08T02:01:11.9044100Z   if-no-files-found: warn
+2025-06-08T02:01:11.9044250Z   compression-level: 6
+2025-06-08T02:01:11.9044460Z   overwrite: false
+2025-06-08T02:01:11.9044600Z   include-hidden-files: false
+2025-06-08T02:01:11.9044840Z env:
+2025-06-08T02:01:11.9044990Z   NODE_VERSION: 18
+2025-06-08T02:01:11.9045240Z   PYTHON_VERSION: 3.11
+2025-06-08T02:01:11.9045510Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T02:01:11.9045950Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T02:01:11.9049890Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T02:01:11.9050240Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T02:01:11.9050570Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T02:01:11.9050900Z ##[endgroup]
+2025-06-08T02:01:12.1496270Z With the provided path, there will be 4 files uploaded
+2025-06-08T02:01:12.1497220Z Artifact name is valid!
+2025-06-08T02:01:12.1497650Z Root directory input is valid!
+2025-06-08T02:01:12.4074020Z Beginning upload of artifact content to blob storage
+2025-06-08T02:01:13.4657210Z Uploaded bytes 8388608
+2025-06-08T02:01:13.5131360Z Uploaded bytes 16777216
+2025-06-08T02:01:13.7352280Z Uploaded bytes 25165824
+2025-06-08T02:01:13.7563520Z Uploaded bytes 33554432
+2025-06-08T02:01:13.9709950Z Uploaded bytes 41943040
+2025-06-08T02:01:13.9713960Z Uploaded bytes 50331648
+2025-06-08T02:01:14.0681180Z Uploaded bytes 58720256
+2025-06-08T02:01:14.3755920Z Uploaded bytes 67108864
+2025-06-08T02:01:14.5228530Z Uploaded bytes 75497472
+2025-06-08T02:01:14.7915660Z Uploaded bytes 83886080
+2025-06-08T02:01:15.0230740Z Uploaded bytes 92274688
+2025-06-08T02:01:15.3350810Z Uploaded bytes 99785359
+2025-06-08T02:01:15.3825610Z Finished uploading artifact content to blob storage!
+2025-06-08T02:01:15.3826420Z SHA256 digest of uploaded artifact zip is 43e43d8864f954074fe909fd1e9d5dfbd3c540445b913a0d81fc98dcec1fae94
+2025-06-08T02:01:15.3827590Z Finalizing artifact upload
+2025-06-08T02:01:15.5019520Z Artifact macos-installer.zip successfully finalized. Artifact ID 3282503865
+2025-06-08T02:01:15.5020500Z Artifact macos-installer has been successfully uploaded! Final size is 99785359 bytes. Artifact ID is 3282503865
+2025-06-08T02:01:15.5029540Z Artifact download URL: https://github.com/AllienNova/ApexAgent/actions/runs/15513789182/artifacts/3282503865

@@ -1,0 +1,15 @@
+{
+  "validationId": "combined_1749136357011",
+  "startTime": 1749136356710,
+  "endTime": 1749136357009,
+  "duration": 1,
+  "totalTools": 0,
+  "totalIntegrations": 0,
+  "totalTests": 0,
+  "passedTests": 0,
+  "failedTests": 0,
+  "skippedTests": 0,
+  "success": false,
+  "toolResults": [],
+  "integrationResults": []
+}

@@ -1,0 +1,20 @@
+2025-06-08T01:41:06.7135370Z ##[group]Run npm run build:mac
+2025-06-08T01:41:06.7135590Z [36;1mnpm run build:mac[0m
+2025-06-08T01:41:06.7183750Z shell: /bin/bash -e {0}
+2025-06-08T01:41:06.7183900Z env:
+2025-06-08T01:41:06.7184020Z   NODE_VERSION: 18
+2025-06-08T01:41:06.7184230Z   PYTHON_VERSION: 3.11
+2025-06-08T01:41:06.7184580Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:41:06.7185120Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.11.9/arm64/lib/pkgconfig
+2025-06-08T01:41:06.7185870Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:41:06.7186280Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:41:06.7186710Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.11.9/arm64
+2025-06-08T01:41:06.7187280Z   GH_TOKEN: ***
+2025-06-08T01:41:06.7187500Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+2025-06-08T01:41:06.7187770Z ##[endgroup]
+2025-06-08T01:41:06.8544530Z npm error Missing script: "build:mac"
+2025-06-08T01:41:06.8646440Z npm error
+2025-06-08T01:41:06.8716810Z npm error To see a list of scripts, run:
+2025-06-08T01:41:06.8717360Z npm error   npm run
+2025-06-08T01:41:06.8718330Z npm error A complete log of this run can be found in: /Users/runner/.npm/_logs/2025-06-08T01_41_06_811Z-debug-0.log
+2025-06-08T01:41:06.8729520Z ##[error]Process completed with exit code 1.

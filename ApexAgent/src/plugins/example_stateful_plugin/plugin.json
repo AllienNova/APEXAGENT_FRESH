@@ -1,0 +1,38 @@
+{
+    "id": "com.example.stateful_plugin",
+    "name": "Example Stateful Plugin",
+    "version": "1.0.0",
+    "description": "A plugin that demonstrates saving and loading state.",
+    "author": "ApexAgent Development Team",
+    "entry_point": "example_stateful_plugin.StatefulPlugin",
+    "actions": [
+        {
+            "name": "get_counter",
+            "description": "Gets the current value of the persistent counter.",
+            "parameters_schema": {},
+            "returns_schema": {
+                "type": "object",
+                "properties": {
+                    "counter": {"type": "integer"}
+                }
+            }
+        },
+        {
+            "name": "increment_counter",
+            "description": "Increments the persistent counter by a given amount.",
+            "parameters_schema": {
+                "type": "object",
+                "properties": {
+                    "amount": {"type": "integer", "default": 1}
+                }
+            },
+            "returns_schema": {
+                "type": "object",
+                "properties": {
+                    "new_counter": {"type": "integer"}
+                }
+            }
+        }
+    ],
+    "default_enabled": true
+}
